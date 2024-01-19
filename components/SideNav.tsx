@@ -6,11 +6,14 @@ import dataLoad from "@ui5/webcomponents-icons/dist/upload-to-cloud.js";
 import control from "@ui5/webcomponents-icons/dist/settings.js";
 import group from "@ui5/webcomponents-icons/dist/group-2.js";
 
-const SideNav = () => {
+const SideNav = ({ showSideNav }: { showSideNav: boolean }) => {
 	return (
-		<>
-			<SideNavigation>
+		<div className="">
+			<SideNavigation
+				collapsed={showSideNav}
+				className="h-[87.50vh] overflow-hidden sticky top-0 left-0 p-1  -mt-1 ml-3 mr-3 rounded-lg">
 				<SideNavigationItem
+					className="text-red-700 "
 					icon={dashboard}
 					text="Dashboard"
 				/>
@@ -28,7 +31,7 @@ const SideNav = () => {
 					text="Control Familiy"
 				/>
 			</SideNavigation>
-		</>
+		</div>
 	);
 };
 
