@@ -7,11 +7,11 @@ import {
 	Button,
 	Icon,
 	TableGrowingMode,
-	// Input,
+	Input,
 } from "@ui5/webcomponents-react";
 import { simulateData } from "../lib/simulateData";
 import { useState } from "react";
-import { getTheme } from "@ui5/webcomponents-base/dist/config/Theme.js";
+// import { getTheme } from "@ui5/webcomponents-base/dist/config/Theme.js";
 type SimulationDataProps = {
 	id: string | number;
 	controlAttributeName: string;
@@ -25,9 +25,9 @@ type SimulationDataProps = {
 
 const SimulationDetails = () => {
 	const [searchQuery, setSearchQuery] = useState("");
-	const currentTheme = getTheme();
-	const isDarkTheme =
-		currentTheme === "sap_horizon_dark" || currentTheme === "sap_horizon_hcb";
+	// const currentTheme = getTheme();
+	// const isDarkTheme =
+	// 	currentTheme === "sap_horizon_dark" || currentTheme === "sap_horizon_hcb";
 
 	const filteredData: SimulationDataProps[] = simulateData.filter((data) => {
 		const searchData: (string | undefined)[] = [
@@ -46,7 +46,8 @@ const SimulationDetails = () => {
 	return (
 		<>
 			<div className="mb-1">
-				{/* <Input
+				{/* ui5 searchBox */}
+				<Input
 					onChange={(e) => {
 						const searchTerm = e.target.value;
 						console.log(searchTerm);
@@ -63,8 +64,10 @@ const SimulationDetails = () => {
 						/>
 					}
 					placeholder="Search"
-				/> */}
-				<input
+				/>
+
+				{/* normal input */}
+				{/* <input
 					className={`{${isDarkTheme} ? "bg-[#12171C] text-green-400 border " : "text-black bg-gray-300 border-blue-300 text-black"} `}
 					type="text"
 					onChange={(e) => {
@@ -73,7 +76,7 @@ const SimulationDetails = () => {
 
 						setSearchQuery(searchTerm);
 					}}
-				/>
+				/> */}
 			</div>
 			<div
 				style={{

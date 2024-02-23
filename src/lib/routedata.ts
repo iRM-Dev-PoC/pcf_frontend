@@ -41,6 +41,18 @@ const routes = [
 			},
 		],
 	},
+	{
+		text: "Configuration",
+		icon: "wrench",
+		path: "/config",
+		subItems: [
+			{
+				text: "Add Roles",
+				icon: "role",
+				path: "/roles",
+			},
+		],
+	},
 ];
 
 export default routes;
