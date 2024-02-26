@@ -1,4 +1,4 @@
-import { StrictMode } from "react";
+import { StrictMode, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
@@ -7,15 +7,21 @@ import { BrowserRouter } from "react-router-dom";
 import { SidebarProvider } from "./context/SidebarContext.tsx";
 import { ThemeProvider } from "@ui5/webcomponents-react";
 import ErrorBoundary from "./components/ErrorBoundary.tsx";
+import ErrorPage from "./components/ErrorPage.tsx";
 import Loading from "./components/Loading.tsx";
+import { PathProvider } from "./context/currentPathContext.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
 	<StrictMode>
-		<ErrorBoundary fallback={<Loading />}>
+		<ErrorBoundary fallback={<ErrorPage />}>
 			<ThemeProvider>
 				<BrowserRouter>
 					<SidebarProvider>
-						<App />
+						<PathProvider>
+							<Suspense fallback={<Loading />}>
+								<App />
+							</Suspense>
+						</PathProvider>
 					</SidebarProvider>
 				</BrowserRouter>
 			</ThemeProvider>

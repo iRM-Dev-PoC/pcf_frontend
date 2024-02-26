@@ -1,12 +1,13 @@
+import AddRoles from "../components/AddRoles";
 import Breadcrumb from "../components/Breadcrumb";
 
-const Report = () => {
+const Role = () => {
 	return (
 		<div>
 			<Breadcrumb />
-			Report
+			<AddRoles />
 		</div>
 	);
 };
 
-export default Report;
+export default Role;

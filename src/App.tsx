@@ -6,7 +6,7 @@ import companyLogo from "./assets/images/irm.png";
 import userImage from "./assets/images/userImages/user1.jpg";
 import Navbar from "./components/Navbar";
 import SideNavbar from "./components/SideNavbar";
-import routes from "./lib/data";
+import routes from "./lib/routedata";
 import ControlAttribute from "./pages/controlAttribute";
 import ControlFamily from "./pages/controlFamily";
 import ControlLogic from "./pages/controlLogic";
@@ -16,6 +16,7 @@ import TypeOfControl from "./pages/typeOfControl";
 import DataLoad from "./pages/dataLoad";
 import { Route, Routes } from "react-router-dom";
 import Loading from "./components/Loading";
+import Role from "./pages/Roles";
 
 function App() {
 	const [theme, setTheme] = useState("sap_horizon");
@@ -98,6 +99,12 @@ function App() {
 								<Route
 									path="/dataLoad"
 									element={<DataLoad />}
+								/>
+
+								{/* Configuration routes */}
+								<Route
+									path="/config/roles"
+									element={<Role />}
 								/>
 							</Routes>
 						</Suspense>
