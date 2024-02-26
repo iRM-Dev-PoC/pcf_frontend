@@ -51,6 +51,11 @@ const routes = [
 				icon: "role",
 				path: "/roles",
 			},
+			{
+				text: "Add Users",
+				icon: "addUser",
+				path: "/addUsers",
+			},
 		],
 	},
 ];

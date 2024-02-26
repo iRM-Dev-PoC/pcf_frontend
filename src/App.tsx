@@ -17,6 +17,7 @@ import DataLoad from "./pages/dataLoad";
 import { Route, Routes } from "react-router-dom";
 import Loading from "./components/Loading";
 import Role from "./pages/Roles";
+import AddUsers from "./pages/users";
 
 function App() {
 	const [theme, setTheme] = useState("sap_horizon");
@@ -105,6 +106,10 @@ function App() {
 								<Route
 									path="/config/roles"
 									element={<Role />}
+								/>
+								<Route
+									path="/config/addUsers"
+									element={<AddUsers />}
 								/>
 							</Routes>
 						</Suspense>
