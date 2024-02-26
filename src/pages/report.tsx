@@ -1,5 +1,12 @@
+import Breadcrumb from "../components/Breadcrumb";
+
 const Report = () => {
-	return <div>Report</div>;
+	return (
+		<div>
+			<Breadcrumb />
+			Report
+		</div>
+	);
 };
 
 export default Report;
