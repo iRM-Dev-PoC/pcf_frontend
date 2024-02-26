@@ -16,11 +16,14 @@ import {
 	FlexibleColumnLayout,
 	ButtonDesign,
 	FlexBoxDirection,
+	Table,
+	TableGrowingMode,
+	TableColumn,
 } from "@ui5/webcomponents-react";
 import { userData } from "../lib/userList";
 import { User } from "../utils/types";
 
-const AddRole = () => {
+const Users = () => {
 	const [layout, setLayout] = useState<FCLLayout>(FCLLayout.OneColumn);
 	const [selectedUser, setSelectedUser] = useState<User>(userData[0]);
 
@@ -36,18 +39,19 @@ const AddRole = () => {
 			style={{ height: "100%", marginTop: "0.5rem", marginBottom: "0.5rem" }}
 			layout={layout}
 			startColumn={
-				<List
-					headerText="Users"
-					onItemClick={onStartColumnClick}>
-					{userData.map((user) => (
-						<StandardListItem
-							description={user.email}
-							data-user-id={user.id}
-							key={user.id}>
-							{user.name}
-						</StandardListItem>
-					))}
-				</List>
+				<Table
+					onClick={onStartColumnClick}
+					growing={TableGrowingMode.Scroll}
+					columns={
+						<>
+							<TableColumn>
+								<Label>Column 1</Label>
+							</TableColumn>
+							<TableColumn>
+								<Label>Column 2</Label>
+							</TableColumn>
+						</>
+					}></Table>
 			}
 			midColumn={
 				<>
@@ -101,4 +105,4 @@ const AddRole = () => {
 	);
 };
 
-export default AddRole;
+export default Users;
