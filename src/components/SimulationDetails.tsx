@@ -56,7 +56,7 @@ const SimulationDetails = () => {
 					}}
 					type="Text"
 					value={searchQuery}
-					style={{ height: "2rem", width: "50%", position: "relative" }}
+					style={{ height: "2rem", width: "50%", position: "relative",}}
 					icon={
 						<Icon
 							name="search"
