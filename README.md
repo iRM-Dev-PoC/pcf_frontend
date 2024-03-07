@@ -35,10 +35,12 @@ applications:
     path: ./dist/
 ```
 
-**Step 3 :**
+**Optional Step (Only if you get an error saying `missing Staticfile`) :**
+
+
 Now we need to add a file in the root of the `dist` called `Staticfile` and we need to add this `pushstate: enabled` in this file.
 
-**Step 4 :**
+**Step 3 :**
 Now we need to login into your cloud foundary account. Open your terminal and run the following commands
 
 ```bash
