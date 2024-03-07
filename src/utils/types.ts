@@ -1,13 +1,13 @@
 import { Dispatch, SetStateAction } from "react";
 
-export type SidebarContextType = {
+type SidebarContextType = {
 	isSidebarCollapsed: boolean;
 	setSidebarCollapsed: Dispatch<SetStateAction<boolean>>;
 };
 
-export type PathContextType = string;
+type PathContextType = string;
 
-export type User = {
+type User = {
 	id: number;
 	name: string;
 	email: string;
@@ -15,7 +15,7 @@ export type User = {
 	permissions: Permission;
 };
 
-export type Permission = {
+type Permission = {
 	controlAttribute: boolean;
 	controlFamily: boolean;
 	controlLogic: boolean;
@@ -24,4 +24,31 @@ export type Permission = {
 	report: boolean;
 	roles: boolean;
 	typeOfcontrol: boolean;
+};
+
+type SignInProps = {
+	setIsLoggedIn: (isLoggedIn: boolean) => void;
+};
+
+type SignInFormData = {
+	username: string;
+	password: string;
+};
+
+type logInFuncProps = {
+	loginValues: { username: string; password: string };
+	setError: (error: string | null) => void;
+	setLoading: (loading: boolean) => void;
+};
+
+
+
+export type {
+	SignInProps,
+	SignInFormData,
+	logInFuncProps,
+	User,
+	Permission,
+	PathContextType,
+	SidebarContextType,
 };
