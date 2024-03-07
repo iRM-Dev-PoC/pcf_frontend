@@ -3,6 +3,7 @@ export const userData = [
 		id: 75,
 		name: "Adam Waters",
 		email: "leriblah@bimvigiwi.ec",
+		password: "123456",
 		role: "USER",
 		permissions: {
 			controlAttribute: true,
@@ -19,6 +20,7 @@ export const userData = [
 		id: 1,
 		name: "Blanche McDaniel",
 		email: "keriplar@konid.bh",
+		password: "123456",
 		role: "USER",
 		permissions: {
 			controlAttribute: true,
@@ -34,6 +36,7 @@ export const userData = [
 	{
 		id: 12,
 		name: "Dylan Hopkins",
+		password: "123456",
 		email: "if@pehkoza.co",
 		role: "USER",
 		permissions: {
@@ -50,6 +53,7 @@ export const userData = [
 	{
 		id: 58,
 		name: "Cody Fletcher",
+		password: "123456",
 		email: "nigta@azfodci.tt",
 		role: "ADMIN",
 		permissions: {
@@ -66,6 +70,7 @@ export const userData = [
 	{
 		id: 87,
 		name: "Josephine Graves",
+		password: "123456",
 		email: "zaugu@mava.gm",
 		role: "USER",
 		permissions: {
@@ -82,6 +87,7 @@ export const userData = [
 	{
 		id: 31,
 		name: "Isabelle Hunter",
+		password: "123456",
 		email: "bauv@imidaho.py",
 		role: "ADMIN",
 		permissions: {
@@ -98,6 +104,7 @@ export const userData = [
 	{
 		id: 1,
 		name: "Inez Roberson",
+		password: "123456",
 		email: "ha@ubfi.ie",
 		role: "ADMIN",
 		permissions: {
@@ -114,6 +121,7 @@ export const userData = [
 	{
 		id: 72,
 		name: "Fanny Wilkins",
+		password: "123456",
 		email: "hi@mo.cc",
 		role: "USER",
 		permissions: {
@@ -125,6 +133,23 @@ export const userData = [
 			report: false,
 			roles: false,
 			typeOfcontrol: false,
+		},
+	},
+	{
+		id: 964,
+		name: "Suman Mondal",
+		password: "123456",
+		email: "suman@dev.com",
+		role: "ADMIN",
+		permissions: {
+			controlAttribute: true,
+			controlFamily: true,
+			controlLogic: true,
+			dashboard: true,
+			dataLoad: true,
+			report: true,
+			roles: true,
+			typeOfcontrol: true,
 		},
 	},
 ];

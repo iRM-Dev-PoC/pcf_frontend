@@ -9,13 +9,7 @@ export default defineConfig({
 			name: "processControlFlow",
 			filename: "remoteEntry.js",
 			exposes: {},
-			shared: [
-				"react",
-				"react-dom",
-				"tailwindcss",
-				"react-router-dom",
-				"@ui5/webcomponents-react",
-			],
+			shared: [],
 		}),
 	],
 	optimizeDeps: {

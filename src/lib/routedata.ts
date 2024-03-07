@@ -53,7 +53,7 @@ const routes = [
 			},
 			{
 				text: "Add Users",
-				icon: "addUser",
+				icon: "add-employee",
 				path: "/addUsers",
 			},
 		],
