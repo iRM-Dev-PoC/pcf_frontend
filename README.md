@@ -35,7 +35,9 @@ applications:
     path: ./dist/
 ```
 
-**Optional (Only if you get an error saying `missing Staticfile`)**
+**Optional Step (Only if you get an error saying `missing Staticfile`) :**
+
+
 Now we need to add a file in the root of the `dist` called `Staticfile` and we need to add this `pushstate: enabled` in this file.
 
 **Step 3 :**
