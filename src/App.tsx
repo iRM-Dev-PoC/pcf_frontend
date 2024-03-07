@@ -1,6 +1,4 @@
 import { Suspense, useState } from "react";
-
-import { Page } from "@ui5/webcomponents-react";
 import { FlexBox } from "@ui5/webcomponents-react";
 import companyLogo from "./assets/images/irm.png";
 import userImage from "./assets/images/userImages/user1.jpg";
@@ -18,7 +16,8 @@ import { Route, Routes } from "react-router-dom";
 import Loading from "./components/Loading";
 import Role from "./pages/Roles";
 import AddUsers from "./pages/users";
-
+import SignIn from "./components/LoginPage.tsx/SignIn";
+// import { ThemingParameters, spacing } from "@ui5/webcomponents-react-base";
 function App() {
 	const [theme, setTheme] = useState("sap_horizon");
 
@@ -29,9 +28,23 @@ function App() {
 	} else {
 		bg = "bg-gray-300";
 	}
+
+ {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    const handleSetIsLoggedIn = () => {
+        setIsLoggedIn(true);
+    };
+	
 	return (
 		<div
-			className={`overflow-hidden ${bg} relative transition-all p-0 min-h-screen`}>
+			className={`overflow-hidden`}
+			style={{
+        // background: ThemingParameters.sapBackgroundColor,
+        backgroundColor: `color-mix(in srgb, black 4%, var(--sapBackgroundColor))`,
+        gridTemplateRows: "auto 1fr",
+        gridTemplateColumns: "auto 1fr",
+      }}>
 			<Suspense fallback={<Loading />}>
 				<Navbar
 					companyName="TRP Global"
@@ -52,72 +65,37 @@ function App() {
 						marginRight: "0.50rem",
 						marginBottom: "0.3rem",
 						borderRadius: "0.5rem",
+					  
 					}}>
 					<SideNavbar items={routes} />
 
-					<Page
-						backgroundDesign="Solid"
-						style={{ paddingInline: "0", borderRadius: "0.5rem" }}>
+					
 						<Suspense fallback={<Loading />}>
 							<Routes>
-								{/* Dashboard routes */}
-								<Route
-									path="/dashboard"
-									element={<Dashboard />}
-								/>
-
-								<Route
-									path="/"
-									element={<Dashboard />}
-								/>
-
-								{/* Master routes */}
-								<Route
-									path="master/controlAttribute"
-									element={<ControlAttribute />}
-								/>
-
-								<Route
-									path="master/controlFamily"
-									element={<ControlFamily />}
-								/>
-
-								<Route
-									path="master/controlLogic"
-									element={<ControlLogic />}
-								/>
-
-								<Route
-									path="master/report"
-									element={<Report />}
-								/>
-								<Route
-									path="master/typeOfControl"
-									element={<TypeOfControl />}
-								/>
-
+							<Route
+                    path="/signin"
+                    element={<SignIn setIsLoggedIn={handleSetIsLoggedIn} />}
+                />
+								<Route path="/dashboard" element={<Dashboard />}/>
+								{/* <Route path="/" element={<Dashboard />}/> */}
+                {/* Master routes */}
+								<Route path="master/controlAttribute" element={<ControlAttribute />}/>
+                <Route path="master/controlFamily"	element={<ControlFamily />}/>
+								<Route	path="master/controlLogic"	element={<ControlLogic />} />
+							  <Route	path="master/report"	element={<Report />} />
+								<Route	path="master/typeOfControl"	element={<TypeOfControl />}/>
 								{/* Dataload routes */}
-								<Route
-									path="/dataLoad"
-									element={<DataLoad />}
-								/>
-
+								<Route	path="/dataLoad"	element={<DataLoad />}/>
 								{/* Configuration routes */}
-								<Route
-									path="/config/roles"
-									element={<Role />}
-								/>
-								<Route
-									path="/config/addUsers"
-									element={<AddUsers />}
-								/>
+								<Route	path="/config/roles"	element={<Role />}/>
+								<Route	path="/config/addUsers"	element={<AddUsers />}/>
 							</Routes>
 						</Suspense>
-					</Page>
 				</FlexBox>
 			</Suspense>
 		</div>
 	);
+				}
 }
 
 export default App;

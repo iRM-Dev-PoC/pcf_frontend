@@ -10,15 +10,26 @@ import ErrorBoundary from "./components/ErrorBoundary.tsx";
 import ErrorPage from "./components/ErrorPage.tsx";
 import Loading from "./components/Loading.tsx";
 import { PathProvider } from "./context/currentPathContext.tsx";
+// import Auth from "./pages/auth";
+// import ResetPassword from "./components/ResetPassword";
+// import SignIn from "./components/Sign-In";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-	<StrictMode>
+	
 		<ErrorBoundary fallback={<ErrorPage />}>
-			<ThemeProvider>
+				<ThemeProvider>
 				<BrowserRouter>
 					<SidebarProvider>
 						<PathProvider>
 							<Suspense fallback={<Loading />}>
+							{/* <Auth
+                  onSignInSuccess={() => {
+                    // Once sign-in is successful, render the main application (App)
+                    ReactDOM.createRoot(document.getElementById("root")!).render(
+                      <App />
+                    );
+                  }}
+                /> */}
 								<App />
 							</Suspense>
 						</PathProvider>
@@ -26,5 +37,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 				</BrowserRouter>
 			</ThemeProvider>
 		</ErrorBoundary>
-	</StrictMode>
+	
+	 
 );
