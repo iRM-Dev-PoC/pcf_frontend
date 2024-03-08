@@ -68,6 +68,7 @@ function App() {
 							<Suspense fallback={<Loading />}>
 								<Routes>
 									<Route
+<<<<<<< Updated upstream
 										path="/dashboard"
 										element={<Dashboard />}
 									/>
@@ -75,41 +76,23 @@ function App() {
 										path="/"
 										element={<Home />}
 									/>
+=======
+										path="/signin"	element={<SignIn setIsLoggedIn={setIsLoggedIn} />}
+											/>
+									<Route path="/dashboard"	element={<Dashboard />}/>
+									<Route path="/"	element={<Dashboard />}/>
+>>>>>>> Stashed changes
 									{/* Master routes */}
-									<Route
-										path="master/controlAttribute"
-										element={<ControlAttribute />}
-									/>
-									<Route
-										path="master/controlFamily"
-										element={<ControlFamily />}
-									/>
-									<Route
-										path="master/controlLogic"
-										element={<ControlLogic />}
-									/>
-									<Route
-										path="master/report"
-										element={<Report />}
-									/>
-									<Route
-										path="master/typeOfControl"
-										element={<TypeOfControl />}
-									/>
+									<Route path="master/controlAttribute"	element={<ControlAttribute />}/>
+									<Route path="master/controlFamily"	element={<ControlFamily />}/>
+									<Route path="master/controlLogic"	element={<ControlLogic />}/>
+									<Route path="master/report"element={<Report />}/>
+									<Route path="master/typeOfControl"	element={<TypeOfControl />}	/>
 									{/* Dataload routes */}
-									<Route
-										path="/dataLoad"
-										element={<DataLoad />}
-									/>
+									<Route path="/dataLoad"element={<DataLoad />}/>
 									{/* Configuration routes */}
-									<Route
-										path="/config/roles"
-										element={<Role />}
-									/>
-									<Route
-										path="/config/addUsers"
-										element={<AddUsers />}
-									/>
+									<Route path="/config/roles"element={<Role />}/>
+									<Route path="/config/addUsers"element={<AddUsers />}/>
 								</Routes>
 							</Suspense>
 						</FlexBox>
