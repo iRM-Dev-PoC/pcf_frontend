@@ -2,7 +2,6 @@ import {
 	DynamicPage,
 	DynamicPageHeader,
 	DynamicPageTitle,
-	MessageStrip,
 	DatePicker,
 } from "@ui5/webcomponents-react";
 import RiskCard from "../components/RiskCard";
@@ -10,7 +9,7 @@ import cardData from "../lib/cardData";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
 import FilterBarComponent from "../components/FilterBarComponent";
 
-const Dashboard = () => {
+const Home = () => {
 	return (
 		<DynamicPage
 			headerContent={
@@ -20,12 +19,6 @@ const Dashboard = () => {
 			}
 			headerTitle={
 				<DynamicPageTitle
-					expandedContent={
-						<MessageStrip>
-							Information (You can see all the controls with their Risk
-							Percentage.)
-						</MessageStrip>
-					}
 					actions={
 						<>
 							<DatePicker
@@ -70,4 +63,4 @@ const Dashboard = () => {
 	);
 };
 
-export default Dashboard;
+export default Home;

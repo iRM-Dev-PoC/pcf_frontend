@@ -17,6 +17,7 @@ import Loading from "./components/Loading";
 import Role from "./pages/Roles";
 import AddUsers from "./pages/users";
 import SignIn from "./pages/signIn";
+import Home from "./pages/home";
 function App() {
 	const [, setTheme] = useState("sap_horizon");
 
@@ -67,16 +68,12 @@ function App() {
 							<Suspense fallback={<Loading />}>
 								<Routes>
 									<Route
-										path="/signin"
-										element={<SignIn setIsLoggedIn={setIsLoggedIn} />}
-									/>
-									<Route
 										path="/dashboard"
 										element={<Dashboard />}
 									/>
 									<Route
 										path="/"
-										element={<Dashboard />}
+										element={<Home />}
 									/>
 									{/* Master routes */}
 									<Route
