@@ -24,4 +24,16 @@ const logIn = async ({ loginValues, setError, setLoading }: logInFuncProps) => {
 	}
 };
 
-export default logIn;
+const logOut = async () => {
+	try {
+		const userData = localStorage.getItem("userData");
+		if (userData) {
+			localStorage.removeItem("userData");
+			window.location.reload();
+		}
+	} catch (error) {
+		console.error("An error occurred during logout");
+	}
+};
+
+export { logIn, logOut };

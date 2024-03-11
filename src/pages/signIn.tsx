@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { Eye, EyeOff } from "lucide-react";
 import {
 	Button,
 	CheckBox,
@@ -13,22 +14,27 @@ import {
 } from "@ui5/webcomponents-react";
 import "@ui5/webcomponents/dist/features/InputElementsFormSupport.js";
 import { SignInFormData, SignInProps } from "../utils/types";
-import logIn from "../lib/login";
+import { logIn } from "../lib/auth";
 
 const SignIn = ({ setIsLoggedIn }: SignInProps) => {
 	const [rememberMe, setRememberMe] = useState<boolean>(false);
 	const [error, setError] = useState<string | null>(null);
 	const [loading, setLoading] = useState<boolean>(false);
+	const [showPassword, setShowPassword] = useState(false);
 
 	const signInSchema = z.object({
 		username: z
 			.string()
-			.min(3, { message: "Username must be at least 3 characters" }),
+			.min(3, { message: "Username must be at least 3 characters long" }),
 		password: z.string().min(1, { message: "Please enter your Password" }),
 		rememberMe: z.boolean().optional(),
 	});
 
 	type ValidationSchemaType = z.infer<typeof signInSchema>;
+
+	const handlePasswordVisibility = () => {
+		setShowPassword(!showPassword);
+	};
 
 	const {
 		register,
@@ -88,14 +94,26 @@ const SignIn = ({ setIsLoggedIn }: SignInProps) => {
 
 						<FormItem label="Password">
 							<Input
-								className="mb-6 w-[50%]"
-								type="Password"
+								className="mb-6 w-[50%] relative"
+								type={showPassword ? "Text" : "Password"}
 								{...register("password")}
 							/>
+							<button
+								type="button"
+								aria-name="show-password"
+								onClick={handlePasswordVisibility}
+								className="absolute z-50 left-[32.50rem] text-center">
+								{showPassword ? (
+									<EyeOff className="h-8 w-8 text-black/70 text-center" />
+								) : (
+									<Eye className="h-8 w-8 text-black/70 text-center" />
+								)}
+							</button>
 							{errors.password && (
 								<span className="text-red-500">{errors.password.message}</span>
 							)}
 						</FormItem>
+
 						<FormItem label="Remember me">
 							<CheckBox
 								checked={rememberMe}
