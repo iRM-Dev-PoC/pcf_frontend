@@ -4,6 +4,7 @@ import { dasboardCardData } from "../lib/dashboardCardData";
 import DashboardDatePicker from "../components/DashboardDatePicker";
 
 import ActivityCard from "../components/ActivityCard";
+import RiskFactor from "../components/RiskFactor";
 
 const Dashboard = () => {
 	return (
@@ -18,7 +19,6 @@ const Dashboard = () => {
 						description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, molestiae."
 					/>
 				</FlexBox>
-
 				<FlexBox
 					direction="Row"
 					className="mt-4 flex-grow gap-x-3"
@@ -34,6 +34,7 @@ const Dashboard = () => {
 						);
 					})}
 				</FlexBox>
+				<RiskFactor/>
 			</FlexBox>
 		</DynamicPage>
 	);
