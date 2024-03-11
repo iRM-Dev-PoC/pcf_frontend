@@ -1,12 +1,13 @@
-import {  DynamicPage } from "@ui5/webcomponents-react";
+import { DynamicPage } from "@ui5/webcomponents-react";
 import DashboardCards from "../components/DashboardCards";
 import { dasboardCardData } from "../lib/dashboardCardData";
 import DashboardDatePicker from "../components/DashboardDatePicker";
-import { dasboardCardDataType } from "../utils/types";
+
+import ActivityCard from "../components/ActivityCard";
+
 const Dashboard = () => {
 	const dashboardCardData:dasboardCardDataType[] = dasboardCardData;
 	return (
-	
 		<DynamicPage
 		headerContentPinnable={false}
 		showHideHeaderButton={false}
@@ -15,8 +16,10 @@ const Dashboard = () => {
 		}
 		>
 		
-
-			{dashboardCardData.map((card, index) => {
+			headerContentPinnable={false}
+			showHideHeaderButton={false}
+			headerContent={<DashboardDatePicker />}>
+			{dasboardCardData.map((card, index) => {
 				return (
 					<DashboardCards
 						key={index}
@@ -28,12 +31,13 @@ const Dashboard = () => {
 					 		/>
 				);
 			})}
-			
-      
-		</DynamicPage>
-		
 
-		)
+			<ActivityCard
+				title="Incomplete Customer Master"
+				description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, molestiae."
+			/>
+		</DynamicPage>
+	);
 };
 
 export default Dashboard;
