@@ -102,11 +102,11 @@ const SignIn = ({ setIsLoggedIn }: SignInProps) => {
 								type="button"
 								aria-name="show-password"
 								onClick={handlePasswordVisibility}
-								className="absolute z-50 left-[32.50rem] text-center">
+								className="absolute z-50 left-[32.70rem] text-center top-[14.20rem]">
 								{showPassword ? (
-									<EyeOff className="h-8 w-8 text-black/70 text-center" />
+									<EyeOff className="h-6 w-6 text-black/70 text-center" />
 								) : (
-									<Eye className="h-8 w-8 text-black/70 text-center" />
+									<Eye className="h-6 w-6 text-black/70 text-center" />
 								)}
 							</button>
 							{errors.password && (
