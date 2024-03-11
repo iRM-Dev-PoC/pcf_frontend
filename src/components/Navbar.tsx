@@ -18,7 +18,11 @@ import { useEffect, useRef, useState } from "react";
 import ThemeSwitchPopover from "./ThemeSwitchPopover";
 import { useSidebar } from "../hooks/useSidebar";
 import NotificationPopover from "./NotificationPopover";
-import { ShellBarNotificationsClickEventDetail } from "@ui5/webcomponents-fiori/dist/ShellBar.js";
+import {
+	ShellBarNotificationsClickEventDetail,
+	ShellBarProfileClickEventDetail,
+} from "@ui5/webcomponents-fiori/dist/ShellBar.js";
+import ProfilePopover from "./ProfilePopover";
 
 type NavbarProps = {
 	companyName: string;
@@ -44,6 +48,7 @@ const Navbar = ({
 	const [currentTheme, setCurrentTheme] = useState(getTheme);
 	const popoverRef = useRef<ResponsivePopoverDomRef | null>(null);
 	const notifyRef = useRef<ResponsivePopoverDomRef | null>(null);
+	const profileref = useRef<ResponsivePopoverDomRef | null>(null);
 	const { setSidebarCollapsed } = useSidebar();
 
 	const handleThemeSwitch: ListPropTypes["onSelectionChange"] = (e) => {
@@ -64,6 +69,12 @@ const Navbar = ({
 		event: Ui5CustomEvent<ShellBarDomRef, ShellBarNotificationsClickEventDetail>
 	) => {
 		notifyRef.current?.showAt(event.detail.targetRef);
+	};
+
+	const handleProfileClick = (
+		event: Ui5CustomEvent<ShellBarDomRef, ShellBarProfileClickEventDetail>
+	) => {
+		profileref.current?.showAt(event.detail.targetRef);
 	};
 
 	const handleNavMenuButtonclick = () => {
@@ -112,6 +123,14 @@ const Navbar = ({
 						ShellBarNotificationsClickEventDetail
 					>
 				) => handleNotificationClick(event)}
+				onProfileClick={(
+					e: Ui5CustomEvent<
+						ShellBarDomRef,
+						ShellBarNotificationsClickEventDetail
+					>
+				) => {
+					handleProfileClick(e);
+				}}
 				startButton={
 					<Button
 						style={{
@@ -124,14 +143,12 @@ const Navbar = ({
 						onClick={handleNavMenuButtonclick}
 					/>
 				}
-        notificationsCount={notificationCount}>
-        
+				notificationsCount={notificationCount}>
 				<ShellBarItem
 					icon={paletteIcon}
 					text="Change Theme"
 					onClick={handleThemeSwitchItemClick}
-        />
-        
+				/>
 			</ShellBar>
 
 			<ThemeSwitchPopover
@@ -141,6 +158,7 @@ const Navbar = ({
 			/>
 
 			<NotificationPopover notifyRef={notifyRef} />
+			<ProfilePopover profileref={profileref} />
 		</>
 	);
 };
