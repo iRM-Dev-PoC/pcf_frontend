@@ -101,6 +101,7 @@ const ControlLogicDetails = () => {
 				}))}
 				filterable
 				infiniteScroll
+				alternateRowColor
 				rowHeight={44}
 				selectedRowIds={{
 					3: true,

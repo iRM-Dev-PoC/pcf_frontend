@@ -6,9 +6,7 @@ import {
 	TextAlign,
 } from "@ui5/webcomponents-react";
 import { reportData } from "../lib/reportData";
-type WebComponentsReactProperties = {
-	showOverlay: boolean;
-};
+import { webComponentsReactProps } from "../utils/types";
 
 const ReportDetails = () => {
 	return (
@@ -41,7 +39,7 @@ const ReportDetails = () => {
 						Cell: (instance: {
 							cell: string;
 							row: string;
-							webComponentsReactProperties: WebComponentsReactProperties;
+							webComponentsReactProperties: webComponentsReactProps;
 						}) => {
 							const { webComponentsReactProperties } = instance;
 							const isOverlay = webComponentsReactProperties.showOverlay;
@@ -68,7 +66,7 @@ const ReportDetails = () => {
 						Cell: (instance: {
 							cell: string;
 							row: string;
-							webComponentsReactProperties: WebComponentsReactProperties;
+							webComponentsReactProperties: webComponentsReactProps;
 						}) => {
 							const { webComponentsReactProperties } = instance;
 							const isOverlay = webComponentsReactProperties.showOverlay;
@@ -109,6 +107,7 @@ const ReportDetails = () => {
 				}))}
 				filterable
 				infiniteScroll
+				alternateRowColor
 				rowHeight={44}
 				selectedRowIds={{
 					3: true,
