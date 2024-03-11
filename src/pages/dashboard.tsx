@@ -1,35 +1,28 @@
-import { BackgroundDesign, DatePicker, DynamicPage, DynamicPageTitle, FilterBar } from "@ui5/webcomponents-react";
+import {  DynamicPage } from "@ui5/webcomponents-react";
 import DashboardCards from "../components/DashboardCards";
-import cardData from "../lib/cardData";
-
+import { dasboardCardData } from "../lib/dashboardCardData";
+import DashboardDatePicker from "../components/DashboardDatePicker";
 const Dashboard = () => {
 	return (
 	
-		<DynamicPage>
+		<DynamicPage
+		headerContentPinnable={false}
+		showHideHeaderButton={false}
+		headerContent={
+			<DashboardDatePicker/>
+		}
+		>
+		
+
+			{dasboardCardData.map((card, index) => {
+				return (
+					<DashboardCards
+						key={index} 
+						header={card.header} 
+						description={card.description}/>
+				);
+			})}
 			
-      <DynamicPageTitle
-			actions={
-				<>
-					<DatePicker
-						onChange={function _a() {}}
-						onInput={function _a() {}}
-						onValueStateChange={function _a() {}}
-						primaryCalendarType="Gregorian"
-						valueState="None"
-						placeholder="From Date"
-					/>
-					<DatePicker
-						onChange={function _a() {}}
-						onInput={function _a() {}}
-						onValueStateChange={function _a() {}}
-						primaryCalendarType="Gregorian"
-						valueState="None"
-						placeholder="To Date"
-					/>
-				</>
-			}>
-			</DynamicPageTitle>
-			<DashboardCards header={""} description={""}/>
       
 		</DynamicPage>
 		
