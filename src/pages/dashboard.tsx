@@ -12,7 +12,7 @@ const Dashboard = () => {
 			headerContentPinnable={false}
 			showHideHeaderButton={false}
 			headerContent={<DashboardDatePicker />}>
-		<FlexBox direction="Row">
+		{/* <FlexBox direction="Row"> */}
 			<FlexBox direction="Column">
 				<FlexBox direction="Row">
 					<ActivityCard
@@ -37,7 +37,7 @@ const Dashboard = () => {
 				</FlexBox>	
 			</FlexBox>
 			<RiskFactor/>
-		</FlexBox>	
+		{/* </FlexBox>	 */}
 		</DynamicPage>
 	);
 };
