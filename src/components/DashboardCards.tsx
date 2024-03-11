@@ -3,34 +3,33 @@ import { Badge, Card, CardHeader, ExpandableText, FlexBox, } from "@ui5/webcompo
 type DashboardCardProps={
   header:string,
   description:string,
+  count:number,
+  cardcolor:"bg-green-400" | "bg-blue-200"|"bg-yellow-400"|"bg-pink-300"
 };
 
-
-const DashboardCards = ({header,description}:DashboardCardProps) => {
+const DashboardCards = ({header,description,cardcolor,count}:DashboardCardProps) => {
   return (
     <FlexBox
     direction="Row"
-    className="gap-x-2 mt-4"
-    >
+    className="mt-4 flex-grow"
+     >
     <Card
+     className={`${cardcolor}`}
+     style={{width: '500px'}}
        header={
           <CardHeader 
            titleText={header}
            action={<Badge
             onClick={function _a() {}}     
            >
+          {count}
            </Badge>}
-          
-
-           />}
+            />}
     
-  style={{
-    width: '500px'
-  }}
 >
 <ExpandableText
 				maxCharacters={200}
-				className="text-center">
+				className="text-start mt-2 mb-5 m-3"> 
 				{description}
 			</ExpandableText>
 </Card>
@@ -38,4 +37,4 @@ const DashboardCards = ({header,description}:DashboardCardProps) => {
   );
 };
 
-export default DashboardCards
+export default DashboardCards;

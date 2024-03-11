@@ -2,11 +2,20 @@ import { DynamicPage } from "@ui5/webcomponents-react";
 import DashboardCards from "../components/DashboardCards";
 import { dasboardCardData } from "../lib/dashboardCardData";
 import DashboardDatePicker from "../components/DashboardDatePicker";
+
 import ActivityCard from "../components/ActivityCard";
 
 const Dashboard = () => {
+	const dashboardCardData:dasboardCardDataType[] = dasboardCardData;
 	return (
 		<DynamicPage
+		headerContentPinnable={false}
+		showHideHeaderButton={false}
+		headerContent={
+			<DashboardDatePicker/>
+		}
+		>
+		
 			headerContentPinnable={false}
 			showHideHeaderButton={false}
 			headerContent={<DashboardDatePicker />}>
@@ -16,7 +25,10 @@ const Dashboard = () => {
 						key={index}
 						header={card.header}
 						description={card.description}
-					/>
+						cardcolor="bg-blue-200"
+						count={card.count}		
+
+					 		/>
 				);
 			})}
 

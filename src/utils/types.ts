@@ -56,6 +56,14 @@ type SimulationDetailsDataType = {
 	simulated_by: string;
 };
 
+type dasboardCardDataType={
+	header:string | '';
+  description:string|'';
+  count:number |0;
+  cardcolor:"bg-green-400" | "bg-blue-200"|"bg-yellow-400"|"bg-pink-300";
+
+}
+
 export type {
 	SignInProps,
 	SignInFormData,
@@ -66,4 +74,5 @@ export type {
 	SidebarContextType,
 	webComponentsReactProps,
 	SimulationDetailsDataType,
+	dasboardCardDataType
 };
