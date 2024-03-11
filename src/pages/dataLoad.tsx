@@ -8,7 +8,6 @@ import {
 	Bar,
 	FileUploader,
 	IllustratedMessage,
-	Text,
 } from "@ui5/webcomponents-react";
 import SimulationDetails from "../components/SimulationDetails";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
@@ -16,6 +15,7 @@ import "@ui5/webcomponents-fiori/dist/illustrations/UploadToCloud.js";
 
 const DataLoad = () => {
 	const showDialog = Modals.useShowDialog();
+
 	return (
 		<DynamicPage
 			headerTitle={
@@ -34,18 +34,15 @@ const DataLoad = () => {
 							icon="upload-to-cloud"
 							onClick={() => {
 								const { close } = showDialog({
-									headerText: "Select a file to upload",
+									headerText: "Click to select a file",
 									children: (
-										<IllustratedMessage name="UploadToCloud">
-											<Text slot="title">Select a file to upload</Text>
-											<h3 slot="subtitle"></h3>
-											<FileUploader
-												accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-												className=""
-												onChange={function _a() {}}
-												valueState="None"
-											/>
-										</IllustratedMessage>
+										<FileUploader
+											hideInput
+											accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, .xlsx, .xls"
+											onChange={function _a() {}}
+											valueState="None">
+											<IllustratedMessage name="UploadToCloud" />
+										</FileUploader>
 									),
 									footer: (
 										<Bar
