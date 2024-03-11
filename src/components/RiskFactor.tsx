@@ -1,5 +1,5 @@
-import { Card, CardHeader, Icon, List, StandardListItem } from "@ui5/webcomponents-react"
-
+import { Card, CardHeader, Icon, List } from "@ui5/webcomponents-react"
+import {RadialChart} from "@ui5/webcomponents-react"
 
 const RiskFactor = () => {
   return (
@@ -10,16 +10,15 @@ const RiskFactor = () => {
   }}
     >
      <List>
-    <StandardListItem description="Software Architect">
-      Richard Wilson
-    </StandardListItem>
-    <StandardListItem description="Visual Designer">
-      Elena Petrova
-    </StandardListItem>
-    <StandardListItem description="Quality Specialist">
-      John Miller
-    </StandardListItem>
-  </List>
+     <RadialChart
+     color="#f0ab00"
+     displayValue="50%"
+     onClick={function _a(){}}
+     onDataPointClick={function _a(){}}
+     value={50}
+     />
+   
+    </List>
     </Card>
 
     
