@@ -56,6 +56,18 @@ type SimulationDetailsDataType = {
 	simulated_by: string;
 };
 
+type ChartDataItem = {
+	name: string;
+	users: number;
+};
+
+type LineChartDataItem = {
+	name: string;
+	sessions: number;
+	users: number;
+	volume: number;
+};
+
 export type {
 	SignInProps,
 	SignInFormData,
@@ -66,4 +78,6 @@ export type {
 	SidebarContextType,
 	webComponentsReactProps,
 	SimulationDetailsDataType,
+	ChartDataItem,
+	LineChartDataItem,
 };
