@@ -41,7 +41,20 @@ type logInFuncProps = {
 	setLoading: (loading: boolean) => void;
 };
 
+type webComponentsReactProps = {
+	showOverlay: boolean;
+};
 
+type SimulationDetailsDataType = {
+	id: string;
+	control_attribute_name: string;
+	report_name: string;
+	sync_at: string;
+	synced_by: string;
+	is_simulated: boolean;
+	simulate_at: string;
+	simulated_by: string;
+};
 
 export type {
 	SignInProps,
@@ -51,4 +64,6 @@ export type {
 	Permission,
 	PathContextType,
 	SidebarContextType,
+	webComponentsReactProps,
+	SimulationDetailsDataType,
 };

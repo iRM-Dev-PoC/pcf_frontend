@@ -1,210 +1,176 @@
 import {
-	Label,
-	Table,
-	TableCell,
-	TableColumn,
-	TableRow,
+	AnalyticalTable,
 	Button,
-	Icon,
-	TableGrowingMode,
-	Input,
+	Card,
+	FlexBox,
+	TextAlign,
 } from "@ui5/webcomponents-react";
 import { simulateData } from "../lib/simulateData";
-import { useState } from "react";
-// import { getTheme } from "@ui5/webcomponents-base/dist/config/Theme.js";
-type SimulationDataProps = {
-	id: string | number;
-	controlAttributeName: string;
-	reportName: string;
-	syncAt: string;
-	syncedBy: string;
-	simulateAt?: string;
-	simulatedBy?: string;
-	isSimulated: boolean;
-};
+import {
+	SimulationDetailsDataType,
+	webComponentsReactProps,
+} from "../utils/types";
 
 const SimulationDetails = () => {
-	const [searchQuery, setSearchQuery] = useState("");
-	// const currentTheme = getTheme();
-	// const isDarkTheme =
-	// 	currentTheme === "sap_horizon_dark" || currentTheme === "sap_horizon_hcb";
-
-	const filteredData: SimulationDataProps[] = simulateData.filter((data) => {
-		const searchData: (string | undefined)[] = [
-			data.id.toString(),
-			data.controlAttributeName.toLowerCase(),
-			data.reportName.toLowerCase(),
-			data.syncAt.toLowerCase(),
-			data.syncedBy.toLowerCase(),
-			data.isSimulated ? data.simulateAt?.toLowerCase() : undefined,
-			data.isSimulated ? data.simulatedBy?.toLowerCase() : undefined,
-		];
-		const searchTerm = searchQuery.toLowerCase();
-		return searchData.some((field) => field && field.includes(searchTerm));
-	});
-
 	return (
-		<>
-			<div className="mb-1">
-				{/* ui5 searchBox */}
-				<Input
-					onChange={(e) => {
-						const searchTerm = e.target.value;
-						console.log(searchTerm);
+		<Card>
+			<AnalyticalTable
+				columns={[
+					{
+						Header: "Sync ID",
+						accessor: "id",
+						hAlign: "center" as TextAlign,
+					},
+					{
+						Header: "Control Attribute Name",
+						accessor: "control_attribute_name",
+						headerTooltip: "Control Attribute Name",
+						hAlign: "center" as TextAlign,
+					},
+					{
+						Header: "Report Name",
+						accessor: "report_name",
+						headerTooltip: "Report Name",
+						hAlign: "center" as TextAlign,
+					},
+					{
+						Header: "Synced By",
+						headerTooltip: "Synced By",
+						accessor: "synced_by",
+						hAlign: "center" as TextAlign,
+					},
+					{
+						Header: "Sync At",
+						headerTooltip: "Sync At",
+						accessor: "sync_at",
+						hAlign: "center" as TextAlign,
+					},
+					{
+						Header: "Simulated At",
+						headerTooltip: "Simulated At",
+						accessor: "simulate_at",
+						hAlign: "center" as TextAlign,
+					},
+					{
+						Header: "Simulated By",
+						headerTooltip: "Simulated By",
+						accessor: "simulated_by",
+						hAlign: "center" as TextAlign,
+					},
 
-						setSearchQuery(searchTerm);
-					}}
-					type="Text"
-					value={searchQuery}
-					style={{ height: "2rem", width: "50%", position: "relative",}}
-					icon={
-						<Icon
-							name="search"
-							className="text-center absolute z-10 inset-y-0 right-0 px-3 py-2"
-						/>
-					}
-					placeholder="Search"
-				/>
+					{
+						Cell: (instance: {
+							cell: string;
+							row: string;
+							webComponentsReactProperties: webComponentsReactProps;
+						}) => {
+							const { webComponentsReactProperties } = instance;
+							const isOverlay = webComponentsReactProperties.showOverlay;
 
-				{/* normal input */}
-				{/* <input
-					className={`{${isDarkTheme} ? "bg-[#12171C] text-green-400 border " : "text-black bg-gray-300 border-blue-300 text-black"} `}
-					type="text"
-					onChange={(e) => {
-						const searchTerm = e.target.value;
-						console.log(searchTerm);
+							return (
+								<FlexBox>
+									<Button
+										icon="detail-view"
+										disabled={isOverlay}
+									/>
+								</FlexBox>
+							);
+						},
+						Header: "Preview",
+						accessor: ".",
+						disableFilters: true,
+						disableGroupBy: true,
+						disableResizing: true,
+						disableSortBy: true,
+						id: "preview",
+						width: 150,
+						hAlign: "center" as TextAlign,
+					},
+					{
+						Cell: (instance: {
+							cell: string;
+							row: Record<string, SimulationDetailsDataType>;
+							webComponentsReactProperties: webComponentsReactProps;
+						}) => {
+							const { webComponentsReactProperties } = instance;
+							const isOverlay = webComponentsReactProperties.showOverlay;
+							const rowData = instance.row.original;
+							const showDashboardButton = rowData.is_simulated;
 
-						setSearchQuery(searchTerm);
-					}}
-				/> */}
-			</div>
-			<div
-				style={{
-					height: "25rem",
-					width: "100%",
-					overflow: "auto",
-					margin: "0",
-					borderRadius: "0.5rem",
-				}}>
-				<Table
-					growing={TableGrowingMode.Scroll}
-					className="h-full"
-					onLoadMore={() => {
-						console.log("Load More");
-					}}
-					stickyColumnHeader
-					columns={
-						<>
-							<TableColumn>
-								<Label>Sync ID</Label>
-							</TableColumn>
+							return (
+								<FlexBox>
+									{showDashboardButton && (
+										<Button
+											icon="performance"
+											disabled={isOverlay}
+										/>
+									)}
+								</FlexBox>
+							);
+						},
+						Header: "View Dashboard",
+						accessor: ".",
+						disableFilters: true,
+						disableGroupBy: true,
+						disableResizing: true,
+						disableSortBy: true,
+						id: "viewDashboard",
+						width: 150,
+						hAlign: "center" as TextAlign,
+					},
+					{
+						Cell: (instance: {
+							cell: string;
+							row: Record<string, SimulationDetailsDataType>;
+							webComponentsReactProperties: webComponentsReactProps;
+						}) => {
+							const { webComponentsReactProperties } = instance;
+							const isOverlay = webComponentsReactProperties.showOverlay;
+							const rowData = instance.row.original;
+							const showSimulateButton = !rowData.is_simulated;
 
-							<TableColumn>
-								<Label>Control Attribute Name</Label>
-							</TableColumn>
-
-							<TableColumn>
-								<Label>Report Name</Label>
-							</TableColumn>
-
-							<TableColumn>
-								<Label>Synced At</Label>
-							</TableColumn>
-
-							<TableColumn>
-								<Label>Synced By</Label>
-							</TableColumn>
-
-							<TableColumn>
-								<Label>Simulated At</Label>
-							</TableColumn>
-
-							<TableColumn>
-								<Label>Simulated By</Label>
-							</TableColumn>
-
-							<TableColumn>
-								<Label>Preview</Label>
-							</TableColumn>
-
-							<TableColumn>
-								<Label>View Dashboard</Label>
-							</TableColumn>
-
-							<TableColumn>
-								<Label>Simulate</Label>
-							</TableColumn>
-						</>
-					}>
-					{filteredData.map((data: SimulationDataProps, index: number) => (
-						<TableRow
-							style={{ padding: "1rem" }}
-							key={index}>
-							<TableCell
-								className="center-tabledata"
-								data-name="ID">
-								{data.id}
-							</TableCell>
-							<TableCell
-								className="center-tabledata"
-								data-name="controlAttribute">
-								{data.controlAttributeName}
-							</TableCell>
-							<TableCell
-								className="center-tabledata"
-								data-name="reportname">
-								{data.reportName}
-							</TableCell>
-							<TableCell
-								className="center-tabledata"
-								data-name="syncAt">
-								{data.syncAt}
-							</TableCell>
-							<TableCell
-								className="center-tabledata"
-								data-name="syncBy">
-								{data.syncedBy}
-							</TableCell>
-							<TableCell
-								className="center-tabledata"
-								data-name="simulatedAt">
-								{data.isSimulated && data.simulateAt}
-							</TableCell>
-							<TableCell
-								className="center-tabledata"
-								data-name="simulatedBy">
-								{data.isSimulated && data.simulatedBy}
-							</TableCell>
-							<TableCell
-								className="center-tabledata"
-								data-name="previewBtn">
-								<Button>
-									<Icon name="detail-view" />
-								</Button>
-							</TableCell>
-							<TableCell
-								className="center-tabledata"
-								data-name="dashboardBtn">
-								{data.isSimulated && (
-									<Button>
-										<Icon name="performance" />
-									</Button>
-								)}
-							</TableCell>
-							<TableCell
-								className="center-tabledata"
-								data-name="simulatedBtn">
-								{!data.isSimulated && (
-									<Button>
-										<Icon name="synchronize" />
-									</Button>
-								)}
-							</TableCell>
-						</TableRow>
-					))}
-				</Table>
-			</div>
-		</>
+							return (
+								<FlexBox>
+									{showSimulateButton && (
+										<Button
+											icon="synchronize"
+											disabled={isOverlay}
+										/>
+									)}
+								</FlexBox>
+							);
+						},
+						Header: "Simulate",
+						accessor: ".",
+						disableFilters: true,
+						disableGroupBy: true,
+						disableResizing: true,
+						disableSortBy: true,
+						id: "simulate",
+						width: 150,
+						hAlign: "center" as TextAlign,
+					},
+				]}
+				data={simulateData.map((item) => ({
+					id: item.id,
+					control_attribute_name: item.controlAttributeName,
+					report_name: item.reportName,
+					sync_at: item.syncAt,
+					synced_by: item.syncedBy,
+					is_simulated: item.isSimulated,
+					simulate_at: item.simulateAt,
+					simulated_by: item.simulatedBy,
+				}))}
+				filterable
+				infiniteScroll
+				alternateRowColor
+				rowHeight={44}
+				selectedRowIds={{
+					3: true,
+				}}
+				selectionMode="None"
+			/>
+		</Card>
 	);
 };
 
