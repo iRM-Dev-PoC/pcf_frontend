@@ -1,115 +1,96 @@
 import {
-	Label,
-	Table,
-	TableCell,
-	TableColumn,
-	TableRow,
+	AnalyticalTable,
 	Button,
-	Icon,
-	TableGrowingMode,
-
+	Card,
+	FlexBox,
+	TextAlign,
 } from "@ui5/webcomponents-react";
 import { controlfamilyData } from "../lib/controlFamilyData";
+import { webComponentsReactProps } from "../utils/types";
 
 const ControlFamilyDetails = () => {
 	return (
-    <>
-        <div
-			style={{
-				height: "25rem",
-				width: "100%",
-				overflow: "auto",
-				margin: "0",
-				borderRadius: "0.5rem",
-			}}>
+		<Card>
+			<AnalyticalTable
+				columns={[
+					{
+						Header: "ID",
+						accessor: "id",
+						hAlign: "center" as TextAlign,
+					},
+					{
+						Header: "Control Family Name",
+						accessor: "control_family_name",
+						headerTooltip: "Control Family Name",
+						hAlign: "center" as TextAlign,
+					},
+					{
+						Header: "Details",
+						accessor: "details",
+						headerTooltip: "Details",
+						hAlign: "center" as TextAlign,
+					},
+					{
+						Header: "Created By",
+						accessor: "created_By",
+						hAlign: "center" as TextAlign,
+					},
+					{
+						Header: "Created At",
+						accessor: "created_At",
+						hAlign: "center" as TextAlign,
+					},
 
-			<Table
-				growing={TableGrowingMode.Scroll}
-				className="h-full"
-				onLoadMore={() => {
-					console.log("Load More");
+					{
+						Cell: (instance: {
+							cell: string;
+							row: string;
+							webComponentsReactProperties: webComponentsReactProps;
+						}) => {
+							const { webComponentsReactProperties } = instance;
+							const isOverlay = webComponentsReactProperties.showOverlay;
+
+							return (
+								<FlexBox>
+									<Button
+										icon="edit"
+										disabled={isOverlay}
+									/>
+									<Button
+										icon="delete"
+										disabled={isOverlay}
+									/>
+								</FlexBox>
+							);
+						},
+						Header: "Actions",
+						accessor: ".",
+						disableFilters: true,
+						disableGroupBy: true,
+						disableResizing: true,
+						disableSortBy: true,
+						id: "actions",
+						width: 150,
+						hAlign: "center" as TextAlign,
+					},
+				]}
+				data={controlfamilyData.map((item) => ({
+					id: item.id,
+					control_family_name: item.controlFamilyName,
+					details: item.ControlFamilyDetails,
+					created_By: item.createdBy,
+					created_At: item.createdAt,
+				}))}
+				filterable
+				infiniteScroll
+				alternateRowColor
+				rowHeight={44}
+				selectedRowIds={{
+					3: true,
 				}}
-				stickyColumnHeader
-				columns={
-					<>
-						<TableColumn>
-							<Label>ID</Label>
-						</TableColumn>
-
-						<TableColumn>
-							<Label>Control Family Name</Label>
-						</TableColumn>
-
-						<TableColumn>
-							<Label>Details</Label>
-						</TableColumn>
-
-						<TableColumn>
-							<Label>Created By</Label>
-						</TableColumn>
-
-						<TableColumn>
-							<Label>Created At</Label>
-						</TableColumn>
-            <TableColumn>
-							<Label>Edit</Label>
-						</TableColumn>
-            <TableColumn>
-							<Label>Delete</Label>
-						</TableColumn>
-        </>
-				}>
-				{controlfamilyData.map((data, index) => (
-					<TableRow
-						style={{ padding: "5rem",margin:"3rem" }}
-						key={index}>
-						<TableCell
-							className="center-tabledata"
-							data-name="ID">
-							{data.id}
-						</TableCell>
-						<TableCell
-							data-name="controlFamilyName">
-							{data.controlFamilyName}
-						</TableCell>
-						<TableCell
-							// className="center-tabledata"
-							data-name="details">
-							{data.ControlFamilyDetails}
-						</TableCell>
-						<TableCell
-							// className="center-tabledata"
-							data-name="createdBy">
-               {data.createdBy}
-						</TableCell>
-						<TableCell
-							// className="center-tabledata"
-							data-name="createdAt">
-							<Button>
-								<Icon name="create-entry-time" />
-							</Button>
-						</TableCell>
-            <TableCell
-							// className="center-tabledata"
-							data-name="edit">
-							<Button>
-								<Icon name="edit" />
-							</Button>
-						</TableCell>
-            <TableCell
-							// className="center-tabledata"
-							data-name="delete">
-							<Button>
-								<Icon name="delete" />
-							</Button>
-						</TableCell>
-					</TableRow>
-				))}
-			</Table>
-		</div>
-
-    </>
-		
+				selectionMode="None"
+			/>
+		</Card>
 	);
 };
 

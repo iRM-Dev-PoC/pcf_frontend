@@ -1,10 +1,16 @@
 import { Suspense, useEffect, useState } from "react";
+import { Route, Routes } from "react-router-dom";
+
 import { FlexBox } from "@ui5/webcomponents-react";
-import companyLogo from "./assets/images/irm.png";
-import userImage from "./assets/images/userImages/user1.jpg";
+
 import Navbar from "./components/Navbar";
+import Loading from "./components/Loading";
 import SideNavbar from "./components/SideNavbar";
-import routes from "./lib/routedata";
+
+import Role from "./pages/Roles";
+import AddUsers from "./pages/users";
+import SignIn from "./pages/signIn";
+import Home from "./pages/home";
 import ControlAttribute from "./pages/controlAttribute";
 import ControlFamily from "./pages/controlFamily";
 import ControlLogic from "./pages/controlLogic";
@@ -12,12 +18,12 @@ import Dashboard from "./pages/dashboard";
 import Report from "./pages/report";
 import TypeOfControl from "./pages/typeOfControl";
 import DataLoad from "./pages/dataLoad";
-import { Route, Routes } from "react-router-dom";
-import Loading from "./components/Loading";
-import Role from "./pages/Roles";
-import AddUsers from "./pages/users";
-import SignIn from "./pages/signIn";
-import Home from "./pages/home";
+
+import companyLogo from "./assets/images/irm.png";
+import userImage from "./assets/images/userImages/user1.jpg";
+
+import routes from "./lib/routedata";
+
 function App() {
 	const [, setTheme] = useState("sap_horizon");
 
