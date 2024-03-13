@@ -1,4 +1,4 @@
-import { logInFuncProps } from "../utils/types";
+import { logInFuncProps, resetPasswordFuncProps } from "../utils/types";
 import { userData } from "./userList";
 
 const logIn = async ({ loginValues, setError, setLoading }: logInFuncProps) => {
@@ -36,4 +36,23 @@ const logOut = async () => {
 	}
 };
 
-export { logIn, logOut };
+const resetPassword = async ({
+	resetPasswordValues,
+	setError,
+	setLoading,
+}: resetPasswordFuncProps) => {
+	try {
+		const userData = localStorage.getItem("userData");
+		if (userData) {
+			localStorage.removeItem("userData");
+			window.location.reload();
+			console.log(resetPasswordValues, setError, setLoading);
+		}
+		return true;
+	} catch (error) {
+		console.error("An error occurred during logout");
+		return false;
+	}
+};
+
+export { logIn, logOut, resetPassword };

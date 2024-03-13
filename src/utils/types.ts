@@ -68,6 +68,17 @@ type LineChartDataItem = {
 	volume: number;
 };
 
+type ResetPasswordFormData = {
+	password: string;
+	repeatPassword: string;
+};
+
+type resetPasswordFuncProps = {
+	resetPasswordValues: { password: string; repeatPassword: string };
+	setError: (error: string | null) => void;
+	setLoading: (loading: boolean) => void;
+};
+
 export type {
 	SignInProps,
 	SignInFormData,
@@ -80,4 +91,6 @@ export type {
 	SimulationDetailsDataType,
 	ChartDataItem,
 	LineChartDataItem,
+	ResetPasswordFormData,
+	resetPasswordFuncProps,
 };
