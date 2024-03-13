@@ -13,7 +13,6 @@ const ActivityCard = ({ title, description }: ActivityCardProps) => {
 			header={<CardHeader titleText={title} />}
 			style={{
 				marginTop: "1rem",
-				width: "80%",
 			}}>
 			<ExpandableText
 				style={{
