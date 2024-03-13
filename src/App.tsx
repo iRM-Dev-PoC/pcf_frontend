@@ -62,7 +62,7 @@ function App() {
 
 						<FlexBox
 							style={{
-								height: "92.5vh",
+								height: "91.95vh",
 								marginTop: "0.50rem",
 								columnGap: "0.50rem",
 								marginRight: "0.50rem",
