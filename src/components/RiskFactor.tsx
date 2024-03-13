@@ -1,3 +1,4 @@
+
 import { Card, CardHeader, Icon, } from "@ui5/webcomponents-react"
 import { RadialChart } from "@ui5/webcomponents-react-charts"
 const RiskFactor = () => {
@@ -19,12 +20,3 @@ const RiskFactor = () => {
 }
 
 export default RiskFactor;
-
-
-
-
-
-
-
-
-
