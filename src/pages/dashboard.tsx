@@ -3,10 +3,10 @@ import DashboardCards from "../components/DashboardCards";
 import { dasboardCardData } from "../lib/dashboardCardData";
 import DashboardDatePicker from "../components/DashboardDatePicker";
 import ActivityCard from "../components/ActivityCard";
-// import RiskFactor from "../components/RiskFactor";
+import RiskFactor from "../components/RiskFactor";
 import DonutChartCard from "../components/DonutChartCard";
 import LineChartCard from "../components/LineChartCard";
-import ReportDetails from "../components/ReportDetails";
+import NonCompilantData from "../components/NonCompilantData";
 
 const Dashboard = () => {
 	return (
@@ -59,7 +59,7 @@ const Dashboard = () => {
 							data-name="RiskFactor"
 							direction="Column">
 							{/* // ! Risk Factor Component disabled, Uncomment it when Its fixed */}
-							{/* <RiskFactor /> */}
+							<RiskFactor />
 						</FlexBox>
 					</FlexBox>
 					{/* FlexBox for AnalyticalCards */}
@@ -72,8 +72,7 @@ const Dashboard = () => {
 				</FlexBox>
 				<FlexBox className="mt-4 mb-3">
 					{/* FlexBox for Table */}
-					{/* // ! Placeholder Table, Need to be removed and add the actual table */}
-					<ReportDetails />
+					<NonCompilantData />
 				</FlexBox>
 			</FlexBox>
 		</DynamicPage>
