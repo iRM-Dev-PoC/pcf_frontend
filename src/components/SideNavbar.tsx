@@ -32,6 +32,13 @@ const SideNavbar = ({ items }: SideNavbarProps) => {
 	const { isSidebarCollapsed } = useSidebar();
 
 	const handleNavigation = (location: string) => {
+		if (location === "/config") {
+			return;
+		}
+
+		if (location === "/master") {
+			return;
+		}
 		navigate(location);
 	};
 
