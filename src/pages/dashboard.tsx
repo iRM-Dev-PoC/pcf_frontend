@@ -3,7 +3,7 @@ import DashboardCards from "../components/DashboardCards";
 import { dasboardCardData } from "../lib/dashboardCardData";
 import DashboardDatePicker from "../components/DashboardDatePicker";
 import ActivityCard from "../components/ActivityCard";
-import RiskFactor from "../components/RiskFactor";
+// import RiskFactor from "../components/RiskFactor";
 import DonutChartCard from "../components/DonutChartCard";
 import LineChartCard from "../components/LineChartCard";
 import ReportDetails from "../components/ReportDetails";
