@@ -102,7 +102,7 @@ const Navbar = ({
 					position: "relative",
 					marginTop: "0.2rem",
 					marginLeft: "0.4rem",
-					borderRadius: "0.30rem",
+					borderRadius: "0.50rem",
 					width: "calc(100dvw - 0.75rem)",
 				}}
 				logo={
