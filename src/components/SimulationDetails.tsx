@@ -162,7 +162,7 @@ const SimulationDetails = () => {
 					simulated_by: item.simulatedBy,
 				}))}
 				filterable
-				infiniteScroll
+				// infiniteScroll
 				alternateRowColor
 				rowHeight={44}
 				selectedRowIds={{

@@ -140,6 +140,7 @@ export const userData = [
 		name: "Suman Mondal",
 		password: "123456",
 		email: "suman@dev.com",
+		otp: "123456",
 		role: "ADMIN",
 		permissions: {
 			controlAttribute: true,

@@ -28,6 +28,7 @@ type Permission = {
 
 type SignInProps = {
 	setIsLoggedIn: (isLoggedIn: boolean) => void;
+	setIsForgotPassword: (isForgotPassword: boolean) => void;
 };
 
 type SignInFormData = {
@@ -79,6 +80,14 @@ type resetPasswordFuncProps = {
 	setLoading: (loading: boolean) => void;
 };
 
+type OtpInputProps = {
+	otp: string;
+};
+
+type EmailInputProps = {
+	email: string;
+};
+
 export type {
 	SignInProps,
 	SignInFormData,
@@ -93,4 +102,6 @@ export type {
 	LineChartDataItem,
 	ResetPasswordFormData,
 	resetPasswordFuncProps,
+	OtpInputProps,
+	EmailInputProps,
 };

@@ -12,6 +12,7 @@ import {
 import SimulationDetails from "../components/SimulationDetails";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
 import "@ui5/webcomponents-fiori/dist/illustrations/UploadToCloud.js";
+
 const DataLoad = () => {
 	const showDialog = Modals.useShowDialog();
 
@@ -67,7 +68,6 @@ const DataLoad = () => {
 					}></DynamicPageTitle>
 			}
 			style={{
-				maxHeight: "700px",
 				borderRadius: ThemingParameters.sapButton_BorderCornerRadius,
 			}}
 			showHideHeaderButton={false}
