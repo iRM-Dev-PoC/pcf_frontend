@@ -55,7 +55,6 @@ const Dashboard = () => {
 						</FlexBox>
 						{/* FlexBox for RiskFactor */}
 						<FlexBox
-							// style={{ width: "20%" }}
 							data-name="RiskFactor"
 							direction="Column">
 							{/* // ! Risk Factor Component disabled, Uncomment it when Its fixed */}
@@ -65,7 +64,7 @@ const Dashboard = () => {
 					{/* FlexBox for AnalyticalCards */}
 					<FlexBox
 						data-name="AnalyticalCards"
-						className="gap-x-2">
+						className="gap-x-2 mt-0 ">
 						<DonutChartCard />
 						<LineChartCard />
 					</FlexBox>
