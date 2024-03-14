@@ -36,6 +36,42 @@ const logOut = async () => {
 	}
 };
 
+const validateOtp = async (otp: string) => {
+	try {
+		const userData = localStorage.getItem("userData");
+
+		if (userData) {
+			const user = JSON.parse(userData);
+			const userOtp = Number(user.otp);
+			const typedOtp = Number(otp);
+			if (userOtp === typedOtp) {
+				return true;
+			}
+		}
+		return false;
+	} catch (error) {
+		console.error("An error occurred during OTP validation");
+		return false;
+	}
+};
+
+const sendOtp = async (email: string) => {
+	try {
+		const userEmail = email;
+		const storedEmail = userData.find((user) => user.email === userEmail);
+
+		if (userEmail) {
+			if (storedEmail?.email === userEmail) {
+				return true;
+			}
+		}
+		return false;
+	} catch (error) {
+		console.error("An error occurred during OTP validation");
+		return false;
+	}
+};
+
 const resetPassword = async ({
 	resetPasswordValues,
 	setError,
@@ -55,4 +91,4 @@ const resetPassword = async ({
 	}
 };
 
-export { logIn, logOut, resetPassword };
+export { logIn, logOut, resetPassword, validateOtp, sendOtp };

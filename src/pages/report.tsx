@@ -55,10 +55,7 @@ const Report = () => {
 						</MessageStrip>
 					}></DynamicPageTitle>
 			}
-			onPinnedStateChange={function _a() {}}
-			onToggleHeaderContent={function _a() {}}
 			style={{
-				maxHeight: "700px",
 				borderRadius: ThemingParameters.sapButton_BorderCornerRadius,
 			}}
 			showHideHeaderButton={false}

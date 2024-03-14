@@ -23,6 +23,7 @@ import {
 	ShellBarProfileClickEventDetail,
 } from "@ui5/webcomponents-fiori/dist/ShellBar.js";
 import ProfilePopover from "./ProfilePopover";
+import { useNavigate } from "react-router-dom";
 
 type NavbarProps = {
 	companyName: string;
@@ -50,6 +51,7 @@ const Navbar = ({
 	const notifyRef = useRef<ResponsivePopoverDomRef | null>(null);
 	const profileref = useRef<ResponsivePopoverDomRef | null>(null);
 	const { setSidebarCollapsed } = useSidebar();
+	const navigate = useNavigate();
 
 	const handleThemeSwitch: ListPropTypes["onSelectionChange"] = (e) => {
 		const { targetItem } = e.detail;
@@ -79,6 +81,10 @@ const Navbar = ({
 
 	const handleNavMenuButtonclick = () => {
 		setSidebarCollapsed((isCollapseSidebar) => !isCollapseSidebar);
+	};
+
+	const handleLogoClick = () => {
+		navigate("/");
 	};
 
 	useEffect(() => {
@@ -131,6 +137,7 @@ const Navbar = ({
 				) => {
 					handleProfileClick(e);
 				}}
+				onLogoClick={handleLogoClick}
 				startButton={
 					<Button
 						style={{

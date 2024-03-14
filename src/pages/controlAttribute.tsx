@@ -1,29 +1,3 @@
-// import { FlexBox } from "@ui5/webcomponents-react";
-// import Breadcrumb from "../components/Breadcrumb";
-// import ControlDetails from "../components/ControlDetails";
-
-// const ControlAttribute = () => {
-// 	return (
-
-// 		<>
-// 		<div>
-// 			<Breadcrumb />
-// 		</div>
-// 		<FlexBox
-// 		style={{ paddingBlock: "1rem", paddingInline: "1rem", margin: "1rem" }}
-// 			wrap="Wrap"
-// 			className="flex-col gap-2 md:flex-row "
-//         >
-// 			<div>
-//       <ControlDetails/>
-//       </div>
-
-// 			</FlexBox></>
-// 	);
-// };
-
-// export default ControlAttribute;
-
 import {
 	Title,
 	DynamicPage,
@@ -81,13 +55,9 @@ const ControlAttribute = () => {
 						<MessageStrip>
 							Information (only visible if header content is collapsed/snapped)
 						</MessageStrip>
-					}
-				></DynamicPageTitle>
+					}></DynamicPageTitle>
 			}
-			onPinnedStateChange={function _a() {}}
-			onToggleHeaderContent={function _a() {}}
 			style={{
-				maxHeight: "700px",
 				borderRadius: ThemingParameters.sapButton_BorderCornerRadius,
 			}}
 			showHideHeaderButton={false}

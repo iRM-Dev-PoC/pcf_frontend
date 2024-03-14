@@ -41,10 +41,7 @@ const Home = () => {
 						</>
 					}></DynamicPageTitle>
 			}
-			onPinnedStateChange={function _a() {}}
-			onToggleHeaderContent={function _a() {}}
 			style={{
-				maxHeight: "7000px",
 				borderRadius: ThemingParameters.sapButton_BorderCornerRadius,
 			}}
 			showHideHeaderButton={false}
