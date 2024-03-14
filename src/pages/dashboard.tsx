@@ -42,7 +42,7 @@ const Dashboard = () => {
 							<FlexBox
 								data-name="DashboardCards"
 								direction="Row"
-								className="gap-x-2">
+								className="gap-x-2 overflow-hidden">
 								{dasboardCardData.map((cardData, index) => (
 									<DashboardCards
 										key={index}
@@ -55,9 +55,9 @@ const Dashboard = () => {
 						</FlexBox>
 						{/* FlexBox for RiskFactor */}
 						<FlexBox
+							className="top-0"
 							data-name="RiskFactor"
 							direction="Column">
-							{/* // ! Risk Factor Component disabled, Uncomment it when Its fixed */}
 							<RiskFactor />
 						</FlexBox>
 					</FlexBox>
