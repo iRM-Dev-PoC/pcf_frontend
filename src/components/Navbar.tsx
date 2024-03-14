@@ -24,6 +24,7 @@ import {
 } from "@ui5/webcomponents-fiori/dist/ShellBar.js";
 import ProfilePopover from "./ProfilePopover";
 import { useNavigate } from "react-router-dom";
+import "../navbar.css";
 
 type NavbarProps = {
 	companyName: string;
@@ -98,6 +99,7 @@ const Navbar = ({
 	return (
 		<>
 			<ShellBar
+			className="shellbar_custom"
 				style={{
 					position: "relative",
 					marginTop: "0.2rem",
