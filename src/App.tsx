@@ -88,6 +88,7 @@ function App() {
 									path="/"
 									element={<Home />}
 								/>
+								
 
 								{/* Master routes */}
 

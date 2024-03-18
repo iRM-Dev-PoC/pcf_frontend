@@ -3,7 +3,7 @@ const cardData = [
 		header: "Card 1",
 		icon: "person-placeholder",
 		risk: "100",
-		desciption:
+		description:
 			"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit ipsam quod voluptatem id tempore facere deleniti iusto recusandae provident porro? Neque, esse laboriosam facilis expedita mollitia maxime facere ipsa libero, nobis ipsum voluptatibus dicta voluptate ",
 	},
 	{
@@ -11,7 +11,7 @@ const cardData = [
 		icon: "person-placeholder",
 
 		risk: "25",
-		desciption:
+		description:
 			"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit ipsam quod voluptatem id tempore facere deleniti iusto recusandae provident porro? Neque, esse laboriosam facilis expedita mollitia maxime facere ipsa libero, nobis ipsum voluptatibus dicta voluptate ",
 	},
 	{
@@ -19,7 +19,7 @@ const cardData = [
 		icon: "person-placeholder",
 
 		risk: "10",
-		desciption:
+		description:
 			"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit ipsam quod voluptatem id tempore facere deleniti iusto recusandae provident porro? Neque, esse laboriosam facilis expedita mollitia maxime facere ipsa libero, nobis ipsum voluptatibus dicta voluptate ",
 	},
 	{
@@ -27,7 +27,7 @@ const cardData = [
 		icon: "person-placeholder",
 
 		risk: "91",
-		desciption:
+		description:
 			"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit ipsam quod voluptatem id tempore facere deleniti iusto recusandae provident porro? Neque, esse laboriosam facilis expedita mollitia maxime facere ipsa libero, nobis ipsum voluptatibus dicta voluptate ",
 	},
 ];

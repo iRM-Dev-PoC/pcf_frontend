@@ -3,6 +3,9 @@ import {
 	Button,
 	DynamicPage,
 	DynamicPageTitle,
+	Form,
+	FormItem,
+	Input,
 	MessageStrip,
 	Modals,
 	Title,
@@ -21,7 +24,7 @@ const Roles = () => {
 							Information (You can see the Report Details here.)
 						</MessageStrip>
 					}
-					header={<Title>Report</Title>}
+					header={<Title>Roles</Title>}
 					actions={
 						<Button
 							design="Emphasized"
@@ -29,8 +32,21 @@ const Roles = () => {
 							icon="create"
 							onClick={() => {
 								const { close } = showDialog({
-									headerText: "Modal Title",
-									children: "Dialog",
+									headerText: "Added Role Information",
+									children:(
+										<Form
+										style={{
+											alignItems: 'center'
+										}}>
+										<FormItem label="Name">
+												<Input type="Text" placeholder="Role Added By"/>
+											</FormItem>
+											<FormItem label="Role">
+												<Input type="Text" placeholder="Role Added"/>
+											</FormItem>
+				
+									</Form>
+									),
 									footer: (
 										<Bar
 											endContent={

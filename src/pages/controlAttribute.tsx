@@ -6,6 +6,9 @@ import {
 	Button,
 	Modals,
 	Bar,
+	Form,
+	FormItem,
+	Input,
 } from "@ui5/webcomponents-react";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
 import ControlAttributeDetails from "../components/ControlAttributeDetails";
@@ -24,32 +27,43 @@ const ControlAttribute = () => {
 					}
 					header={<Title>Control Attribute Details</Title>}
 					actions={
-						<div>
-							<Button
-								design="Default"
-								icon="create"
-								onClick={function _a() {
-									const { close } = showDialog({
-										headerText: "Modal Title",
-										children: "Dialog",
-										footer: (
-											<Bar
-												endContent={
-													<>
-														<Button design="Emphasized">create</Button>
-														<Button
-															onClick={() => close()}
-															design="Negative">
-															Close
-														</Button>
-													</>
-												}></Bar>
-										),
-									});
-								}}>
-								Create
-							</Button>
-						</div>
+						<Button
+							design="Emphasized"
+							tooltip="Create"
+							icon="create"
+							onClick={() => {
+								const { close } = showDialog({
+									headerText: "User Information",
+									children:(
+										<Form
+										style={{
+											alignItems: 'center'
+										}}>
+										<FormItem label="Name">
+												<Input type="Text" />
+											</FormItem>
+											<FormItem label="Email">
+											<Input type="Text" />
+											</FormItem>		
+									</Form>
+									),
+									footer: (
+										<Bar
+											endContent={
+												<>
+													<Button design="Emphasized">Create</Button>
+													<Button
+														onClick={() => close()}
+														design="Negative">
+														Close
+													</Button>
+												</>
+											}></Bar>
+									),
+								});
+							}}>
+							Create
+						</Button>
 					}
 					snappedContent={
 						<MessageStrip>
