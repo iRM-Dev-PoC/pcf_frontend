@@ -9,7 +9,6 @@ import cardData from "../lib/cardData";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
 import FilterBarComponent from "../components/FilterBarComponent";
 
-
 const Home = () => {
 	return (
 		<DynamicPage
@@ -58,7 +57,6 @@ const Home = () => {
 				);
 			})}
 		</DynamicPage>
-		
 	);
 };
 

@@ -88,6 +88,10 @@ type EmailInputProps = {
 	email: string;
 };
 
+type uploadFileType = {
+	data: FormData;
+}
+
 export type {
 	SignInProps,
 	SignInFormData,
@@ -104,4 +108,5 @@ export type {
 	resetPasswordFuncProps,
 	OtpInputProps,
 	EmailInputProps,
+	uploadFileType,
 };
