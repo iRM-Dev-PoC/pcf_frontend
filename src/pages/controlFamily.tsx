@@ -4,12 +4,18 @@ import {
 	DynamicPageTitle,
 	MessageStrip,
 	Button,
+	Bar,
+	Form,
+	FormItem,
+	Input,
+	Modals,
 } from "@ui5/webcomponents-react";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
 
 import ControlFamilyDetails from "../components/ControlFamilyDetails";
 
 const ControlFamily = () => {
+	const showDialog = Modals.useShowDialog();
 	return (
 		<DynamicPage
 			headerTitle={
@@ -22,14 +28,43 @@ const ControlFamily = () => {
 					}
 					header={<Title>Control Family Details</Title>}
 					actions={
-						<div>
-							<Button
-								design="Emphasized"
-								icon="create"
-								onClick={function _a() {}}>
-								Create
-							</Button>
-						</div>
+						<Button
+							design="Emphasized"
+							tooltip="Create"
+							icon="create"
+							onClick={() => {
+								const { close } = showDialog({
+									headerText: "User Information",
+									children:(
+										<Form
+										style={{
+											alignItems: 'center'
+										}}>
+										<FormItem label="Name">
+												<Input type="Text" />
+											</FormItem>
+											<FormItem label="Email">
+											<Input type="Text" />
+											</FormItem>		
+									</Form>
+									),
+									footer: (
+										<Bar
+											endContent={
+												<>
+													<Button design="Emphasized">Create</Button>
+													<Button
+														onClick={() => close()}
+														design="Negative">
+														Close
+													</Button>
+												</>
+											}></Bar>
+									),
+								});
+							}}>
+							Create
+						</Button>
 					}
 					snappedContent={
 						<MessageStrip>

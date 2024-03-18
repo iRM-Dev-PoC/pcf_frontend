@@ -3,6 +3,9 @@ import {
 	Button,
 	DynamicPage,
 	DynamicPageTitle,
+	Form,
+	FormItem,
+	Input,
 	MessageStrip,
 	Modals,
 	Title,
@@ -25,12 +28,24 @@ const TypeOfControl = () => {
 					actions={
 						<Button
 							design="Emphasized"
-							tooltip="Upload"
+							tooltip="Create"
 							icon="create"
 							onClick={() => {
 								const { close } = showDialog({
-									headerText: "Modal Title",
-									children: "Dialog",
+									headerText: "Type of Controls Details",
+									children:(
+										<Form
+										style={{
+											alignItems: 'center'
+										}}>
+										<FormItem label="Name">
+												<Input type="Text" />
+											</FormItem>
+											<FormItem label="Email">
+											<Input type="Text" />
+											</FormItem>		
+									</Form>
+									),
 									footer: (
 										<Bar
 											endContent={

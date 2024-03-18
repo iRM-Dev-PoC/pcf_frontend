@@ -5,6 +5,9 @@ import {
 	Button,
 	Bar,
 	Modals,
+	Form,
+	FormItem,
+	Input,
 } from "@ui5/webcomponents-react";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
 import ControlLogicDetails from "../components/ControlLogicDetails";
@@ -24,12 +27,24 @@ const ControlLogic = () => {
 					actions={
 						<Button
 							design="Emphasized"
-							tooltip="Upload"
+							tooltip="Create"
 							icon="create"
 							onClick={() => {
 								const { close } = showDialog({
-									headerText: "Modal Title",
-									children: "Dialog",
+									headerText: "User Information",
+									children:(
+										<Form
+										style={{
+											alignItems: 'center'
+										}}>
+										<FormItem label="Name">
+												<Input type="Text" />
+											</FormItem>
+											<FormItem label="Email">
+											<Input type="Text" />
+											</FormItem>		
+									</Form>
+									),
 									footer: (
 										<Bar
 											endContent={
