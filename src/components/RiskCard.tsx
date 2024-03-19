@@ -9,11 +9,15 @@ type RiskCardProps = {
 
 const RiskCard = ({ header, icon, risk, description, onClick }: RiskCardProps) => {
     return (
-        <Card onClick={onClick}>
+        <Card
+        style={{width:"500px"}}
+        className="m-0.5">
             <CardHeader
                 avatar={<Icon name={icon} />}
                 titleText={header}
+                onClick={onClick}
                 action={
+                    
                     <Badge colorScheme={
                         Number(risk) >= 0 && Number(risk) <= 30
                             ? "8"
