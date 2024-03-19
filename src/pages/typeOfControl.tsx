@@ -15,6 +15,8 @@ import TypeOfControlDetails from "../components/TypeOfControlDetails";
 
 const TypeOfControl = () => {
 	const showDialog = Modals.useShowDialog();
+	const showEditDialog = Modals.useShowDialog();
+
 	return (
 		<DynamicPage
 			headerTitle={
@@ -33,18 +35,18 @@ const TypeOfControl = () => {
 							onClick={() => {
 								const { close } = showDialog({
 									headerText: "Type of Controls Details",
-									children:(
+									children: (
 										<Form
-										style={{
-											alignItems: 'center'
-										}}>
-										<FormItem label="Name">
+											style={{
+												alignItems: "center",
+											}}>
+											<FormItem label="Name">
 												<Input type="Text" />
 											</FormItem>
 											<FormItem label="Email">
-											<Input type="Text" />
-											</FormItem>		
-									</Form>
+												<Input type="Text" />
+											</FormItem>
+										</Form>
 									),
 									footer: (
 										<Bar
@@ -75,7 +77,7 @@ const TypeOfControl = () => {
 			}}
 			showHideHeaderButton={false}
 			headerContentPinnable={false}>
-			<TypeOfControlDetails />
+			<TypeOfControlDetails showEditDialog={showEditDialog} />
 		</DynamicPage>
 	);
 };

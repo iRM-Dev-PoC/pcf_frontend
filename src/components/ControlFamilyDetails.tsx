@@ -1,14 +1,23 @@
 import {
 	AnalyticalTable,
+	Bar,
 	Button,
 	Card,
 	FlexBox,
+	Form,
+	FormItem,
+	Input,
 	TextAlign,
 } from "@ui5/webcomponents-react";
 import { controlfamilyData } from "../lib/controlFamilyData";
 import { webComponentsReactProps } from "../utils/types";
 
-const ControlFamilyDetails = () => {
+type ControlFamilyProps = {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	showEditDialog: any;
+};
+
+const ControlFamilyDetails = ({ showEditDialog }: ControlFamilyProps) => {
 	return (
 		<Card>
 			<AnalyticalTable
@@ -55,6 +64,43 @@ const ControlFamilyDetails = () => {
 									<Button
 										icon="edit"
 										disabled={isOverlay}
+										onClick={() => {
+											const { close } = showEditDialog({
+												headerText: "Control Familiy Details",
+												children: (
+													<Form
+														style={{
+															alignItems: "center",
+														}}>
+														<FormItem label="Control Family Name">
+															<Input
+																type="Text"
+																value=""
+															/>
+														</FormItem>
+														<FormItem label="Details">
+															<Input
+																type="Text"
+																value=""
+															/>
+														</FormItem>
+													</Form>
+												),
+												footer: (
+													<Bar
+														endContent={
+															<>
+																<Button design="Emphasized">Update</Button>
+																<Button
+																	onClick={() => close()}
+																	design="Negative">
+																	Close
+																</Button>
+															</>
+														}></Bar>
+												),
+											});
+										}}
 									/>
 									<Button
 										icon="delete"

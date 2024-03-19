@@ -1,14 +1,36 @@
 import {
 	AnalyticalTable,
+	Bar,
 	Button,
 	Card,
+	ComboBox,
+	ComboBoxItem,
 	FlexBox,
+	Form,
+	FormItem,
+	Input,
 	TextAlign,
 } from "@ui5/webcomponents-react";
 import { controlAttributeData } from "../lib/controlAttributeData";
 import { webComponentsReactProps } from "../utils/types";
+import { controlfamilyData } from "../lib/controlFamilyData";
 
-const ControlAttributeDetails = () => {
+type ControlAttributeProps = {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	showEditDialog: any;
+};
+
+const controlFamilyNames = [
+	...new Set(controlfamilyData.map((item) => item.controlFamilyName)),
+];
+
+const ControlFamilyEnum: { [key: string]: string } = {};
+
+controlFamilyNames.forEach((name) => {
+	ControlFamilyEnum[name] = name;
+});
+
+const ControlAttributeDetails = ({ showEditDialog }: ControlAttributeProps) => {
 	return (
 		<Card>
 			<AnalyticalTable
@@ -74,6 +96,47 @@ const ControlAttributeDetails = () => {
 									<Button
 										icon="edit"
 										disabled={isOverlay}
+										onClick={() => {
+											const { close } = showEditDialog({
+												headerText: "Control Attribute Details",
+												children: (
+													<Form
+														style={{
+															alignItems: "center",
+														}}>
+														<FormItem label="Control Attribute Name">
+															<Input
+																type="Text"
+																value=""
+															/>
+														</FormItem>
+														<FormItem label="Control Family">
+															<ComboBox filter="Contains">
+																{Object.keys(ControlFamilyEnum).map((key) => (
+																	<ComboBoxItem
+																		key={key}
+																		text={ControlFamilyEnum[key]}
+																	/>
+																))}
+															</ComboBox>
+														</FormItem>
+													</Form>
+												),
+												footer: (
+													<Bar
+														endContent={
+															<>
+																<Button design="Emphasized">Update</Button>
+																<Button
+																	onClick={() => close()}
+																	design="Negative">
+																	Close
+																</Button>
+															</>
+														}></Bar>
+												),
+											});
+										}}
 									/>
 									<Button
 										icon="delete"

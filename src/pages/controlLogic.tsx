@@ -14,6 +14,7 @@ import ControlLogicDetails from "../components/ControlLogicDetails";
 
 const ControlLogic = () => {
 	const showDialog = Modals.useShowDialog();
+	const showEditDialog = Modals.useShowDialog();
 
 	return (
 		<DynamicPage
@@ -32,18 +33,18 @@ const ControlLogic = () => {
 							onClick={() => {
 								const { close } = showDialog({
 									headerText: "User Information",
-									children:(
+									children: (
 										<Form
-										style={{
-											alignItems: 'center'
-										}}>
-										<FormItem label="Name">
+											style={{
+												alignItems: "center",
+											}}>
+											<FormItem label="Name">
 												<Input type="Text" />
 											</FormItem>
 											<FormItem label="Email">
-											<Input type="Text" />
-											</FormItem>		
-									</Form>
+												<Input type="Text" />
+											</FormItem>
+										</Form>
 									),
 									footer: (
 										<Bar
@@ -74,7 +75,7 @@ const ControlLogic = () => {
 			}}
 			showHideHeaderButton={false}
 			headerContentPinnable={false}>
-			<ControlLogicDetails />
+			<ControlLogicDetails showEditDialog={showEditDialog} />
 		</DynamicPage>
 	);
 };

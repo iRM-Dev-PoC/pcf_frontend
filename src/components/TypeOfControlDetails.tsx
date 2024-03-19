@@ -1,14 +1,25 @@
 import {
 	AnalyticalTable,
+	Bar,
 	Button,
 	Card,
 	FlexBox,
+	Form,
+	FormItem,
+	Input,
 	TextAlign,
 } from "@ui5/webcomponents-react";
 import { typeOfControlData } from "../lib/typeOfControlData";
 import { webComponentsReactProps } from "../utils/types";
 
-const TypeOfControlDetails = () => {
+type TypeOfControlDetailsProps = {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	showEditDialog: any;
+};
+
+const TypeOfControlDetails = ({
+	showEditDialog,
+}: TypeOfControlDetailsProps) => {
 	return (
 		<Card>
 			<AnalyticalTable
@@ -72,6 +83,37 @@ const TypeOfControlDetails = () => {
 									/>
 									<Button
 										icon="edit"
+										onClick={() => {
+											const { close } = showEditDialog({
+												headerText: "Type of Controls Details",
+												children: (
+													<Form
+														style={{
+															alignItems: "center",
+														}}>
+														<FormItem label="Control Name">
+															<Input
+																type="Text"
+																value=""
+															/>
+														</FormItem>
+													</Form>
+												),
+												footer: (
+													<Bar
+														endContent={
+															<>
+																<Button design="Emphasized">Update</Button>
+																<Button
+																	onClick={() => close()}
+																	design="Negative">
+																	Close
+																</Button>
+															</>
+														}></Bar>
+												),
+											});
+										}}
 										disabled={isOverlay}
 									/>
 									<Button
