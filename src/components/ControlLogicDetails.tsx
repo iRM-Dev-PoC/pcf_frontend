@@ -1,8 +1,12 @@
 import {
 	AnalyticalTable,
+	Bar,
 	Button,
 	Card,
 	FlexBox,
+	Form,
+	FormItem,
+	Input,
 	TextAlign,
 } from "@ui5/webcomponents-react";
 import { controlLogicData } from "../lib/controlLogicData";
@@ -10,7 +14,12 @@ type webComponentsReactProps = {
 	showOverlay: boolean;
 };
 
-const ControlLogicDetails = () => {
+type ControlLogicProps = {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	showEditDialog: any;
+};
+
+const ControlLogicDetails = ({ showEditDialog }: ControlLogicProps) => {
 	return (
 		<Card>
 			<AnalyticalTable
@@ -75,6 +84,37 @@ const ControlLogicDetails = () => {
 									<Button
 										icon="edit"
 										disabled={isOverlay}
+										onClick={() => {
+											const { close } = showEditDialog({
+												headerText: "Control Logic Details",
+												children: (
+													<Form
+														style={{
+															alignItems: "center",
+														}}>
+														<FormItem label="Logic">
+															<Input
+																type="Text"
+																value=""
+															/>
+														</FormItem>
+													</Form>
+												),
+												footer: (
+													<Bar
+														endContent={
+															<>
+																<Button design="Emphasized">Update</Button>
+																<Button
+																	onClick={() => close()}
+																	design="Negative">
+																	Close
+																</Button>
+															</>
+														}></Bar>
+												),
+											});
+										}}
 									/>
 									<Button
 										icon="delete"

@@ -108,7 +108,7 @@ export const controlfamilyData = [
 	},
 	{
 		id: "6",
-		controlFamilyName: "Aged supplier advance",
+		controlFamilyName: "Aged supplier advance 2",
 		ControlFamilyDetails: "Human Resource Management",
 		createdBy: "Racktim Guin",
 		createdAt: getCurrentDatetime(),
@@ -122,7 +122,7 @@ export const controlfamilyData = [
 	},
 	{
 		id: "6",
-		controlFamilyName: "Aged supplier advance",
+		controlFamilyName: "Aged supplier advance 6",
 		ControlFamilyDetails: "Human Resource Management",
 		createdBy: "Racktim Guin",
 		createdAt: getCurrentDatetime(),

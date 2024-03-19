@@ -16,6 +16,7 @@ import ControlFamilyDetails from "../components/ControlFamilyDetails";
 
 const ControlFamily = () => {
 	const showDialog = Modals.useShowDialog();
+	const showEditDialog = Modals.useShowDialog();
 	return (
 		<DynamicPage
 			headerTitle={
@@ -35,18 +36,18 @@ const ControlFamily = () => {
 							onClick={() => {
 								const { close } = showDialog({
 									headerText: "User Information",
-									children:(
+									children: (
 										<Form
-										style={{
-											alignItems: 'center'
-										}}>
-										<FormItem label="Name">
+											style={{
+												alignItems: "center",
+											}}>
+											<FormItem label="Name">
 												<Input type="Text" />
 											</FormItem>
 											<FormItem label="Email">
-											<Input type="Text" />
-											</FormItem>		
-									</Form>
+												<Input type="Text" />
+											</FormItem>
+										</Form>
 									),
 									footer: (
 										<Bar
@@ -77,7 +78,7 @@ const ControlFamily = () => {
 			}}
 			showHideHeaderButton={false}
 			headerContentPinnable={false}>
-			<ControlFamilyDetails />
+			<ControlFamilyDetails showEditDialog={showEditDialog} />
 		</DynamicPage>
 	);
 };

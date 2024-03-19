@@ -5,12 +5,12 @@ First we need to add a `start` script on the `package.json` file.
 
 ```Json
  "scripts": {
-  "dev": "vite --port 5001 --strictPort",
-  "build": "tsc && vite build",
-  "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-  "preview": "vite preview --port 5001 --strictPort",
-  "start": "vite preview --port 5001 --strictPort"
- },
+		"dev": "vite --port 5001 --strictPort --host",
+		"build": "tsc && vite build",
+		"lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+		"preview": "vite preview --port 5001 --strictPort --host",
+		"start": "vite preview --port 5001 --strictPort --host"
+ }
 ```
 
 This start script is required to run the app on the cloud foundary. Otherwise you will get an error saying `start script not found`
