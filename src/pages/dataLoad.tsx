@@ -1,4 +1,4 @@
-// //! Working but to display the file name in the modal, modal has to be reopened
+//! Working but to display the file name in the modal, modal has to be reopened
 
 import { useState } from "react";
 import {
@@ -65,6 +65,7 @@ const DataLoad = () => {
 									children: (
 										<>
 											<FileUploader
+												key={selectedFileNames.join(",")}
 												hideInput
 												multiple={true}
 												accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, .xlsx, .xls, application/xml"
@@ -114,9 +115,6 @@ const DataLoad = () => {
 														design="Positive"
 														onClick={() => {
 															if (formData) {
-																// Here you can use formData variable to access the FormData
-																// console.log(formData);
-																// Now you can perform further actions such as sending the FormData to an API endpoint
 																uploadFile({ data: formData });
 															} else {
 																console.error("No files selected");
