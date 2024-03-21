@@ -67,7 +67,6 @@ const Home = () => {
         </DynamicPage>
     );
 };
-
 export default Home;
 
 
