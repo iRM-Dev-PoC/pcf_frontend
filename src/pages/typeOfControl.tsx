@@ -12,6 +12,7 @@ import {
 } from "@ui5/webcomponents-react";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
 import TypeOfControlDetails from "../components/TypeOfControlDetails";
+import FileUpload from "../components/Sod/FileUpload";
 
 const TypeOfControl = () => {
 	const showDialog = Modals.useShowDialog();
@@ -76,6 +77,10 @@ const TypeOfControl = () => {
 			showHideHeaderButton={false}
 			headerContentPinnable={false}>
 			<TypeOfControlDetails />
+			<div>
+
+			<FileUpload/>
+			</div>
 		</DynamicPage>
 	);
 };
