@@ -32,7 +32,7 @@
 // };
 
 // export default FileUpload;
-import React, { useState } from 'react';
+import  { useState, useEffect } from 'react';
 import { Card, CardHeader, FileUploader } from '@ui5/webcomponents-react';
 import JSZip from 'jszip';
 
@@ -53,16 +53,22 @@ const FileUpload = () => {
             const arrayBuffer = event.target.result;
 
             const zip = new JSZip();
+            const extractedFilesData: { name: string, content: string }[] = [];
+
             zip.loadAsync(arrayBuffer).then(function (zip) {
-              const files: React.SetStateAction<{ name: string; content: string; }[]> = [];
+              const promises: Promise<void>[] = [];
 
               zip.forEach((relativePath, zipEntry) => {
-                zipEntry.async('text').then(function (content) {
-                  files.push({ name: relativePath, content });
-                  if (files.length === Object.keys(zip.files).length) {
-                    setExtractedFiles(files);
-                  }
+                const promise = zipEntry.async('text').then(function (content) {
+                  extractedFilesData.push({ name: relativePath, content });
                 });
+                promises.push(promise);
+              });
+
+              Promise.all(promises).then(() => {
+                setExtractedFiles(extractedFilesData);
+              }).catch(error => {
+                console.error('Error extracting zip file:', error);
               });
             });
           }
@@ -73,6 +79,10 @@ const FileUpload = () => {
       }
     }
   };
+
+  useEffect(() => {
+    console.log(extractedFiles); // Log extracted files within useEffect
+  }, [extractedFiles]); // Log when extractedFiles state changes
 
   return (
     <Card
@@ -87,20 +97,18 @@ const FileUpload = () => {
         className='m-5'
         placeholder='Drop file for upload'
       />
-
-      <div>
-        <h2>Extracted Files:</h2>
-        <ul>
-          {extractedFiles.map((file, index) => (
-            <li key={index}>
-              <strong>{file.name}</strong>
-              <pre>{file.content}</pre>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ul>
+        {extractedFiles.map((file, index) => (
+          <li key={file.name + index}>
+            <strong>{file.name}</strong>
+            <pre>{file.content}</pre>
+          </li>
+        ))}
+      </ul>
     </Card>
   );
 };
 
 export default FileUpload;
+
+
