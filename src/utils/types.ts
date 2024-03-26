@@ -7,6 +7,8 @@ type SidebarContextType = {
 
 type PathContextType = string;
 
+type CurrentURLType = string;
+
 type User = {
 	id: number;
 	name: string;
@@ -90,10 +92,11 @@ type EmailInputProps = {
 
 type uploadFileType = {
 	data: FormData;
-}
+};
 
 export type {
 	SignInProps,
+	CurrentURLType,
 	SignInFormData,
 	logInFuncProps,
 	User,

@@ -9,6 +9,7 @@ import ErrorBoundary from "./components/ErrorBoundary.tsx";
 import ErrorPage from "./components/ErrorPage.tsx";
 import Loading from "./components/Loading.tsx";
 import { PathProvider } from "./context/currentPathContext.tsx";
+import { CurrentURLProvider } from "./context/currentURLContext.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
 	<StrictMode>
@@ -17,9 +18,11 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 				<BrowserRouter>
 					<SidebarProvider>
 						<PathProvider>
-							<Suspense fallback={<Loading />}>
-								<App />
-							</Suspense>
+							<CurrentURLProvider>
+								<Suspense fallback={<Loading />}>
+									<App />
+								</Suspense>
+							</CurrentURLProvider>
 						</PathProvider>
 					</SidebarProvider>
 				</BrowserRouter>
