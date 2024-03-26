@@ -80,6 +80,10 @@ const Navbar = ({
 		profileref.current?.showAt(event.detail.targetRef);
 	};
 
+	const handleProductSwitchClick = () => {
+		navigate("/");
+	};
+
 	const handleNavMenuButtonclick = () => {
 		setSidebarCollapsed((isCollapseSidebar) => !isCollapseSidebar);
 	};
@@ -99,7 +103,7 @@ const Navbar = ({
 	return (
 		<>
 			<ShellBar
-			className="shellbar_custom"
+				className="shellbar_custom"
 				style={{
 					position: "relative",
 					marginTop: "0.2rem",
@@ -139,6 +143,9 @@ const Navbar = ({
 				) => {
 					handleProfileClick(e);
 				}}
+				onProductSwitchClick={() => {
+					handleProductSwitchClick();
+				}}
 				onLogoClick={handleLogoClick}
 				startButton={
 					<Button
@@ -152,7 +159,8 @@ const Navbar = ({
 						onClick={handleNavMenuButtonclick}
 					/>
 				}
-				notificationsCount={notificationCount}>
+				notificationsCount={notificationCount}
+				showProductSwitch>
 				<ShellBarItem
 					icon={paletteIcon}
 					text="Change Theme"

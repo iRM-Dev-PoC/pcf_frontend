@@ -18,13 +18,14 @@ import Dashboard from "./pages/dashboard";
 import Report from "./pages/report";
 import TypeOfControl from "./pages/typeOfControl";
 import DataLoad from "./pages/dataLoad";
-import ForgetPassword from "./pages/forgetPassword"; // Import the ForgetPassword component
+import ForgetPassword from "./pages/forgetPassword";
 
 import companyLogo from "./assets/images/irm.png";
 import userImage from "./assets/images/userImages/user1.jpg";
 
 import routes from "./lib/routedata";
 import ResetPassword from "./pages/resetPassword";
+import ProductSelection from "./pages/productSelection";
 
 function App() {
 	const [, setTheme] = useState("sap_horizon");
@@ -84,11 +85,16 @@ function App() {
 									path="/dashboard"
 									element={<Dashboard />}
 								/>
+
 								<Route
 									path="/"
+									element={<ProductSelection />}
+								/>
+
+								<Route
+									path="/home"
 									element={<Home />}
 								/>
-								
 
 								{/* Master routes */}
 
