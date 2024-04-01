@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 *,
 *::before,
 *::after {
@@ -13,7 +12,7 @@
 }
 
 @layer components {
-  .center-tabledata{
-    @apply text-center pb-2 pt-2 w-12;
+  .center-tabledata {
+    @apply w-12 pb-2 pt-2 text-center;
   }
 }

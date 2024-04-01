@@ -28,124 +28,102 @@ import ResetPassword from "./pages/resetPassword";
 import ProductSelection from "./pages/productSelection";
 
 function App() {
-	const [, setTheme] = useState("sap_horizon");
+  const [, setTheme] = useState("sap_horizon");
 
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	const [isForgotPassword, setIsForgotPassword] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isForgotPassword, setIsForgotPassword] = useState(false);
 
-	useEffect(() => {
-		const userData = localStorage.getItem("userData");
-		if (userData) {
-			setIsLoggedIn(true);
-		}
-	}, [isLoggedIn]);
+  useEffect(() => {
+    const userData = localStorage.getItem("userData");
+    if (userData) {
+      setIsLoggedIn(true);
+    }
+  }, [isLoggedIn]);
 
-	return (
-		<div
-			className={`overflow-hidden`}
-			style={{
-				backgroundColor: `color-mix(in srgb, black 4%, var(--sapBackgroundColor))`,
-				gridTemplateRows: "auto 1fr",
-				gridTemplateColumns: "auto 1fr",
-			}}>
-			{isForgotPassword ? (
-				<ForgetPassword />
-			) : !isLoggedIn ? (
-				<SignIn
-					setIsLoggedIn={setIsLoggedIn}
-					setIsForgotPassword={setIsForgotPassword}
-				/>
-			) : (
-				<Suspense fallback={<Loading />}>
-					<Navbar
-						companyName="TRP Global"
-						productName="Process Control Flow"
-						isNotifiction={true}
-						notificationCount="10"
-						companyLogo={companyLogo}
-						userImage={userImage}
-						userName="John Doe"
-						themeSwitch={setTheme}
-					/>
+  return (
+    <div
+      className={`overflow-hidden`}
+      style={{
+        backgroundColor: `color-mix(in srgb, black 4%, var(--sapBackgroundColor))`,
+        gridTemplateRows: "auto 1fr",
+        gridTemplateColumns: "auto 1fr",
+      }}
+    >
+      {isForgotPassword ? (
+        <ForgetPassword />
+      ) : !isLoggedIn ? (
+        <SignIn
+          setIsLoggedIn={setIsLoggedIn}
+          setIsForgotPassword={setIsForgotPassword}
+        />
+      ) : (
+        <Suspense fallback={<Loading />}>
+          <Navbar
+            companyName="TRP Global"
+            productName="Process Control Flow"
+            isNotifiction={true}
+            notificationCount="10"
+            companyLogo={companyLogo}
+            userImage={userImage}
+            userName="John Doe"
+            themeSwitch={setTheme}
+          />
 
-					<FlexBox
-						style={{
-							height: "91.95vh",
-							marginTop: "0.50rem",
-							columnGap: "0.50rem",
-							marginRight: "0.50rem",
-							marginBottom: "0.3rem",
-							borderRadius: "0.5rem",
-						}}>
-						<SideNavbar items={routes} />
+          <FlexBox
+            style={{
+              height: "91.95vh",
+              marginTop: "0.50rem",
+              columnGap: "0.50rem",
+              marginRight: "0.50rem",
+              marginBottom: "0.3rem",
+              borderRadius: "0.5rem",
+            }}
+          >
+            <SideNavbar items={routes} />
 
-						<Suspense fallback={<Loading />}>
-							<Routes>
-								<Route
-									path="/dashboard"
-									element={<Dashboard />}
-								/>
+            <Suspense fallback={<Loading />}>
+              <Routes>
+                <Route path="/dashboard" element={<Dashboard />} />
 
-								<Route
-									path="/"
-									element={<ProductSelection />}
-								/>
+                <Route path="/" element={<ProductSelection />} />
 
-								<Route
-									path="/home"
-									element={<Home />}
-								/>
+                <Route path="/home" element={<Home />} />
 
-								{/* Master routes */}
+                {/* Master routes */}
 
-								<Route
-									path="master/controlAttribute"
-									element={<ControlAttribute />}
-								/>
-								<Route
-									path="master/controlFamily"
-									element={<ControlFamily />}
-								/>
-								<Route
-									path="master/controlLogic"
-									element={<ControlLogic />}
-								/>
-								<Route
-									path="master/report"
-									element={<Report />}
-								/>
-								<Route
-									path="master/typeOfControl"
-									element={<TypeOfControl />}
-								/>
+                <Route
+                  path="master/controlAttribute"
+                  element={<ControlAttribute />}
+                />
+                <Route
+                  path="master/controlFamily"
+                  element={<ControlFamily />}
+                />
+                <Route path="master/controlLogic" element={<ControlLogic />} />
+                <Route path="master/report" element={<Report />} />
+                <Route
+                  path="master/typeOfControl"
+                  element={<TypeOfControl />}
+                />
 
-								{/* Dataload routes */}
-								<Route
-									path="/dataLoad"
-									element={<DataLoad />}
-								/>
+                {/* Dataload routes */}
+                <Route path="/dataLoad" element={<DataLoad />} />
 
-								{/* Configuration routes */}
-								<Route
-									path="/config/roles"
-									element={<Role />}
-								/>
-								<Route
-									path="/config/addUsers"
-									element={<AddUsers />}
-								/>
+                {/* Configuration routes */}
+                <Route path="/config/roles" element={<Role />} />
+                <Route path="/config/addUsers" element={<AddUsers />} />
 
-								<Route
-									path="/resetPassword"
-									element={<ResetPassword changePassword={true} />}
-								/>
-							</Routes>
-						</Suspense>
-					</FlexBox>
-				</Suspense>
-			)}
-		</div>
-	);
+                <Route
+                  path="/resetPassword"
+                  element={<ResetPassword changePassword={true} />}
+                />
+              </Routes>
+            </Suspense>
+          </FlexBox>
+        </Suspense>
+      )}
+    </div>
+  );
 }
 
 export default App;
