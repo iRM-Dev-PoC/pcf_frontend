@@ -10,6 +10,7 @@ import ErrorPage from "./components/ErrorPage.tsx";
 import Loading from "./components/Loading.tsx";
 import { PathProvider } from "./context/currentPathContext.tsx";
 import { CurrentURLProvider } from "./context/currentURLContext.tsx";
+import { ProductSwitchProvider } from "./context/productSwitchContext.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -19,14 +20,16 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <SidebarProvider>
             <PathProvider>
               <CurrentURLProvider>
-                <Suspense fallback={<Loading />}>
-                  <App />
-                </Suspense>
+                <ProductSwitchProvider>
+                  <Suspense fallback={<Loading />}>
+                    <App />
+                  </Suspense>
+                </ProductSwitchProvider>
               </CurrentURLProvider>
             </PathProvider>
           </SidebarProvider>
         </BrowserRouter>
       </ThemeProvider>
     </ErrorBoundary>
-  </StrictMode>,
+  </StrictMode>
 );

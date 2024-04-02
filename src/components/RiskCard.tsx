@@ -21,7 +21,7 @@ const RiskCard = ({
   onClick,
 }: RiskCardProps) => {
   return (
-    <Card style={{ width: "500px" }} className="m-0.5">
+    <Card style={{ width: "27rem" }} className="m-1.5">
       <CardHeader
         avatar={<Icon name={icon} />}
         titleText={header}

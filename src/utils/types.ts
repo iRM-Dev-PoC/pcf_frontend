@@ -9,6 +9,11 @@ type PathContextType = string;
 
 type CurrentURLType = string;
 
+type ProductSwitchType = {
+  isSwitchProduct: boolean;
+  setIsSwitchProduct: Dispatch<SetStateAction<boolean>>;
+};
+
 type User = {
   id: number;
   name: string;
@@ -112,4 +117,5 @@ export type {
   OtpInputProps,
   EmailInputProps,
   uploadFileType,
+  ProductSwitchType,
 };

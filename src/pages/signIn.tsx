@@ -14,12 +14,14 @@ import {
 } from "@ui5/webcomponents-react";
 import { SignInFormData, SignInProps } from "../utils/types";
 import { logIn } from "../lib/auth";
+import { useSwitchProduct } from "../hooks/useSwitchProduct";
 
 const SignIn = ({ setIsLoggedIn, setIsForgotPassword }: SignInProps) => {
   const [rememberMe, setRememberMe] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState(false);
+  const { setIsSwitchProduct } = useSwitchProduct();
 
   const signInSchema = z.object({
     username: z
@@ -66,6 +68,7 @@ const SignIn = ({ setIsLoggedIn, setIsForgotPassword }: SignInProps) => {
 
     setLoading(false);
     setIsLoggedIn(true);
+    setIsSwitchProduct(true);
     localStorage.setItem("userData", JSON.stringify(userData));
   };
 

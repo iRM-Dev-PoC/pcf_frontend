@@ -32,11 +32,11 @@ const SideNavbar = ({ items }: SideNavbarProps) => {
   const { isSidebarCollapsed } = useSidebar();
 
   const handleNavigation = (location: string) => {
-    if (location === "/config") {
+    if (location === "/pcf/config") {
       return;
     }
 
-    if (location === "/master") {
+    if (location === "/pcf/master") {
       return;
     }
     navigate(location);
