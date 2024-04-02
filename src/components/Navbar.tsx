@@ -5,8 +5,10 @@ import {
 import paletteIcon from "@ui5/webcomponents-icons/dist/palette.js";
 import {
   Avatar,
+  Bar,
   Button,
   ListPropTypes,
+  Modals,
   ResponsivePopoverDomRef,
   ShellBar,
   ShellBarDomRef,
@@ -25,6 +27,8 @@ import {
 import ProfilePopover from "./ProfilePopover";
 import { useNavigate } from "react-router-dom";
 import "../navbar.css";
+import ProductSwitchModal from "./ProductSwitchModal";
+// import { useSwitchProduct } from "../hooks/useSwitchProduct";
 
 type NavbarProps = {
   companyName: string;
@@ -52,7 +56,10 @@ const Navbar = ({
   const notifyRef = useRef<ResponsivePopoverDomRef | null>(null);
   const profileref = useRef<ResponsivePopoverDomRef | null>(null);
   const { setSidebarCollapsed } = useSidebar();
+  // const { setIsSwitchProduct } = useSwitchProduct();
   const navigate = useNavigate();
+
+  const showProductSwitchModal = Modals.useShowDialog();
 
   const handleThemeSwitch: ListPropTypes["onSelectionChange"] = (e) => {
     const { targetItem } = e.detail;
@@ -64,27 +71,32 @@ const Navbar = ({
       themeSwitch(selectedTheme);
     }
   };
+
   const handleThemeSwitchItemClick: ShellBarItemPropTypes["onClick"] = (e) => {
     popoverRef.current?.showAt(e.detail.targetRef);
   };
 
   const handleNotificationClick = (
-    event: Ui5CustomEvent<
-      ShellBarDomRef,
-      ShellBarNotificationsClickEventDetail
-    >,
+    event: Ui5CustomEvent<ShellBarDomRef, ShellBarNotificationsClickEventDetail>
   ) => {
     notifyRef.current?.showAt(event.detail.targetRef);
   };
 
   const handleProfileClick = (
-    event: Ui5CustomEvent<ShellBarDomRef, ShellBarProfileClickEventDetail>,
+    event: Ui5CustomEvent<ShellBarDomRef, ShellBarProfileClickEventDetail>
   ) => {
     profileref.current?.showAt(event.detail.targetRef);
   };
 
   const handleProductSwitchClick = () => {
-    navigate("/");
+    // setIsSwitchProduct(true);
+    const { close } = showProductSwitchModal({
+      headerText: "Switch Product",
+      children: <ProductSwitchModal />,
+      footer: (
+        <Bar endContent={<Button onClick={() => close()}>Close</Button>} />
+      ),
+    });
   };
 
   const handleNavMenuButtonclick = () => {
@@ -92,7 +104,7 @@ const Navbar = ({
   };
 
   const handleLogoClick = () => {
-    navigate("/");
+    navigate("/pcf/");
   };
 
   useEffect(() => {
@@ -136,13 +148,13 @@ const Navbar = ({
           event: Ui5CustomEvent<
             ShellBarDomRef,
             ShellBarNotificationsClickEventDetail
-          >,
+          >
         ) => handleNotificationClick(event)}
         onProfileClick={(
           e: Ui5CustomEvent<
             ShellBarDomRef,
             ShellBarNotificationsClickEventDetail
-          >,
+          >
         ) => {
           handleProfileClick(e);
         }}

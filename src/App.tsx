@@ -26,12 +26,14 @@ import userImage from "./assets/images/userImages/user1.jpg";
 import routes from "./lib/routedata";
 import ResetPassword from "./pages/resetPassword";
 import ProductSelection from "./pages/productSelection";
+import { useSwitchProduct } from "./hooks/useSwitchProduct";
 
 function App() {
   const [, setTheme] = useState("sap_horizon");
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isForgotPassword, setIsForgotPassword] = useState(false);
+  const { isSwitchProduct } = useSwitchProduct();
 
   useEffect(() => {
     const userData = localStorage.getItem("userData");
@@ -56,6 +58,8 @@ function App() {
           setIsLoggedIn={setIsLoggedIn}
           setIsForgotPassword={setIsForgotPassword}
         />
+      ) : isSwitchProduct ? (
+        <ProductSelection />
       ) : (
         <Suspense fallback={<Loading />}>
           <Navbar
@@ -83,35 +87,36 @@ function App() {
 
             <Suspense fallback={<Loading />}>
               <Routes>
-                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/pcf/dashboard" element={<Dashboard />} />
 
-                <Route path="/" element={<ProductSelection />} />
-
-                <Route path="/home" element={<Home />} />
+                <Route path="/pcf/" element={<Home />} />
 
                 {/* Master routes */}
 
                 <Route
-                  path="master/controlAttribute"
+                  path="/pcf/master/controlAttribute"
                   element={<ControlAttribute />}
                 />
                 <Route
-                  path="master/controlFamily"
+                  path="/pcf/master/controlFamily"
                   element={<ControlFamily />}
                 />
-                <Route path="master/controlLogic" element={<ControlLogic />} />
-                <Route path="master/report" element={<Report />} />
                 <Route
-                  path="master/typeOfControl"
+                  path="/pcf/master/controlLogic"
+                  element={<ControlLogic />}
+                />
+                <Route path="/pcf/master/report" element={<Report />} />
+                <Route
+                  path="/pcf/master/typeOfControl"
                   element={<TypeOfControl />}
                 />
 
                 {/* Dataload routes */}
-                <Route path="/dataLoad" element={<DataLoad />} />
+                <Route path="/pcf/dataLoad" element={<DataLoad />} />
 
                 {/* Configuration routes */}
-                <Route path="/config/roles" element={<Role />} />
-                <Route path="/config/addUsers" element={<AddUsers />} />
+                <Route path="/pcf/config/roles" element={<Role />} />
+                <Route path="/pcf/config/addUsers" element={<AddUsers />} />
 
                 <Route
                   path="/resetPassword"

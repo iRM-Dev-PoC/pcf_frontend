@@ -1,18 +1,23 @@
 const routes = [
   {
-    text: "Dashboard",
-    icon: "bbyd-dashboard",
-    path: "/dashboard",
+    text: "Home",
+    icon: "home",
+    path: "/pcf/",
   },
+  // {
+  //   text: "Dashboard",
+  //   icon: "bbyd-dashboard",
+  //   path: "/dashboard",
+  // },
   {
     text: "Data Load",
     icon: "upload-to-cloud",
-    path: "/dataLoad",
+    path: "/pcf/dataLoad",
   },
   {
     text: "Master",
     icon: "drop-down-list",
-    path: "/master",
+    path: "/pcf/master",
     subItems: [
       {
         text: "Type Of Control",
@@ -44,7 +49,7 @@ const routes = [
   {
     text: "Configuration",
     icon: "wrench",
-    path: "/config",
+    path: "/pcf/config",
     subItems: [
       {
         text: "Add Roles",
