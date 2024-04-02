@@ -2,21 +2,21 @@ import { ReactNode, createContext, useState } from "react";
 import { ProductSwitchType } from "../utils/types";
 
 export const ProductSwitchContext = createContext<
-  ProductSwitchType | undefined
+    ProductSwitchType | undefined
 >(undefined);
 
 export const ProductSwitchProvider = ({
-  children,
+    children,
 }: {
-  children: ReactNode;
+    children: ReactNode;
 }) => {
-  const [isSwitchProduct, setIsSwitchProduct] = useState(false);
+    const [isSwitchProduct, setIsSwitchProduct] = useState(false);
 
-  return (
-    <ProductSwitchContext.Provider
-      value={{ isSwitchProduct, setIsSwitchProduct }}
-    >
-      {children}
-    </ProductSwitchContext.Provider>
-  );
+    return (
+        <ProductSwitchContext.Provider
+            value={{ isSwitchProduct, setIsSwitchProduct }}
+        >
+            {children}
+        </ProductSwitchContext.Provider>
+    );
 };

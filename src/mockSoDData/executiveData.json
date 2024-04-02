@@ -1,0 +1,211 @@
+{
+    "userRole": [
+        {
+            "users": "12",
+            "roles": "6",
+            "sync_id": 1025
+        }
+    ],
+    "mstObj": {
+        "1014": {
+            "High": {
+                "rules": 1,
+                "SOD_RISK_RATING": "High",
+                "TYPE_OF_VIOLATION": "SoD",
+                "POLICY_ID": "264",
+                "sync_id": 1014
+            },
+            "Medium": {
+                "rules": 4,
+                "SOD_RISK_RATING": "Medium",
+                "TYPE_OF_VIOLATION": "SoD",
+                "POLICY_ID": "264",
+                "sync_id": 1014
+            },
+            "Sensitive": {
+                "rules": 4,
+                "SOD_RISK_RATING": "Sensitive",
+                "TYPE_OF_VIOLATION": "Sensitive Access",
+                "POLICY_ID": "264",
+                "sync_id": 1014
+            }
+        },
+        "1025": {
+            "High": {
+                "rules": 17,
+                "SOD_RISK_RATING": "High",
+                "TYPE_OF_VIOLATION": "SoD",
+                "POLICY_ID": "266",
+                "sync_id": "1025"
+            },
+            "Medium": {
+                "rules": 4,
+                "SOD_RISK_RATING": "Medium",
+                "TYPE_OF_VIOLATION": "SoD",
+                "POLICY_ID": "266",
+                "sync_id": "1025"
+            },
+            "Sensitive": {
+                "rules": 3,
+                "SOD_RISK_RATING": "Sensitive",
+                "TYPE_OF_VIOLATION": "Sensitive Access",
+                "POLICY_ID": "266",
+                "sync_id": "1025"
+            }
+        }
+    },
+    "exobj": {
+        "1014": {
+            "Sensitive": {
+                "sod_name": "4",
+                "user_name": "19",
+                "role_name": "4",
+                "instances": "2219",
+                "risk_rating": "Sensitive",
+                "sync_id": "1014"
+            }
+        },
+        "1025": {
+            "High": {
+                "sod_name": "2",
+                "user_name": "4",
+                "role_name": "4",
+                "instances": "26",
+                "risk_rating": "High",
+                "sync_id": "1025"
+            },
+            "Medium": {
+                "sod_name": "1",
+                "user_name": "11",
+                "role_name": "3",
+                "instances": "128",
+                "risk_rating": "Medium",
+                "sync_id": "1025"
+            },
+            "Sensitive": {
+                "sod_name": "2",
+                "user_name": "12",
+                "role_name": "4",
+                "instances": "1102",
+                "risk_rating": "Sensitive",
+                "sync_id": "1025"
+            }
+        }
+    },
+    "exdata": {
+        "1014": [
+            {
+                "BUSINESS_PROCESS": "Information Technology",
+                "count": "2219",
+                "sync_id": "1014"
+            }
+        ],
+        "1025": [
+            {
+                "BUSINESS_PROCESS": "Information Technology",
+                "count": "1102",
+                "sync_id": "1025"
+            },
+            {
+                "BUSINESS_PROCESS": "Procure to Pay",
+                "count": "154",
+                "sync_id": "1025"
+            }
+        ]
+    },
+    "role_conflicts": {
+        "1014": {
+            "Not Applicable": {
+                "type_of_role_conflict": "Not Applicable",
+                "COUNT": "2219",
+                "sync_id": "1014"
+            }
+        },
+        "1025": {
+            "Inter-role Conflict": {
+                "type_of_role_conflict": "Inter-role Conflict",
+                "COUNT": "26",
+                "sync_id": "1025"
+            },
+            "Intra-role Conflict": {
+                "type_of_role_conflict": "Intra-role Conflict",
+                "COUNT": "128",
+                "sync_id": "1025"
+            },
+            "Not Applicable": {
+                "type_of_role_conflict": "Not Applicable",
+                "COUNT": "1102",
+                "sync_id": "1025"
+            }
+        }
+    },
+    "totalActiveUsers": [
+        {
+            "USER_DISPLAY_NAME": 0
+        }
+    ],
+    "employessUsers": [
+        {
+            "USER_DISPLAY_NAME": 0
+        }
+    ],
+    "otherUsers": [
+        {
+            "USER_DISPLAY_NAME": 0
+        }
+    ],
+    "companyCodes": [
+        {
+            "bu_name": 12
+        }
+    ],
+    "totalusers": [
+        {
+            "users": 870,
+            "sync_id": "1014"
+        },
+        {
+            "users": 870,
+            "sync_id": "1025"
+        }
+    ],
+    "nonDialogUsers": [
+        {
+            "users": 55,
+            "sync_id": "1014"
+        },
+        {
+            "users": 55,
+            "sync_id": "1025"
+        }
+    ],
+    "dialogUsers": [
+        {
+            "users": 815,
+            "sync_id": "1014"
+        },
+        {
+            "users": 815,
+            "sync_id": "1025"
+        }
+    ],
+    "totalRoles": [
+        {
+            "roles": 3636,
+            "sync_id": "1014"
+        },
+        {
+            "roles": 3636,
+            "sync_id": "1025"
+        }
+    ],
+    "erp": "SAP ECC",
+    "drill": {
+        "IRM_BI_SYNC_ID": 10041,
+        "table": "sap_out",
+        "last_sync_id": 1025,
+        "mst_last_sync_id": 1025,
+        "projectID": 1
+    },
+    "prev_sync_id": 1014
+}

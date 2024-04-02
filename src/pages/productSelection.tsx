@@ -1,7 +1,7 @@
 import SelectProduct from "../components/SelectProduct";
 
 const ProductSelection = () => {
-  return <SelectProduct />;
+    return <SelectProduct />;
 };
 
 export default ProductSelection;
