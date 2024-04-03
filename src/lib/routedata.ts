@@ -4,11 +4,6 @@ const routes = [
         icon: "home",
         path: "/",
     },
-    // {
-    //   text: "Dashboard",
-    //   icon: "bbyd-dashboard",
-    //   path: "/dashboard",
-    // },
     {
         text: "Data Load",
         icon: "upload-to-cloud",
@@ -65,4 +60,17 @@ const routes = [
     },
 ];
 
-export default routes;
+const sodRoutes = [
+    {
+        text: "Home",
+        icon: "home",
+        path: "/sod/",
+    },
+    {
+        text: "Test",
+        icon: "feed",
+        path: "/sod/test",
+    },
+];
+
+export { sodRoutes, routes };

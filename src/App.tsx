@@ -1,5 +1,6 @@
 import { Suspense, useLayoutEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
+import { useCurrentPath } from "./hooks/useCurrentPath";
 
 import { FlexBox } from "@ui5/webcomponents-react";
 
@@ -22,7 +23,7 @@ import ForgetPassword from "./pages/forgetPassword";
 
 import companyLogo from "./assets/images/irm.png";
 
-import routes from "./lib/routedata";
+import { routes, sodRoutes } from "./lib/routedata";
 import ResetPassword from "./pages/resetPassword";
 import ProductSelection from "./pages/productSelection";
 import { useSwitchProduct } from "./hooks/useSwitchProduct";
@@ -31,12 +32,13 @@ import SoDDashboard from "./pages/SoD/sodDashboard";
 
 function App() {
     const [, setTheme] = useState("sap_horizon");
-
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState<User | undefined>(undefined);
     const [isForgotPassword, setIsForgotPassword] = useState(false);
     const { isSwitchProduct } = useSwitchProduct();
     const [product, setProduct] = useState("");
+    const [isSoD, setIsSoD] = useState(false);
+    const path = useCurrentPath();
 
     useLayoutEffect(() => {
         const userData = localStorage.getItem("userData");
@@ -54,7 +56,10 @@ function App() {
             const parsedUserData = JSON.parse(userData);
             setUser(parsedUserData);
         }
-    }, [isLoggedIn]);
+        if (path.includes("/sod")) {
+            setIsSoD(true);
+        }
+    }, [isLoggedIn, path]);
 
     return (
         <div
@@ -97,7 +102,11 @@ function App() {
                             borderRadius: "0.5rem",
                         }}
                     >
-                        <SideNavbar items={routes} />
+                        {isSoD ? (
+                            <SideNavbar items={sodRoutes} />
+                        ) : (
+                            <SideNavbar items={routes} />
+                        )}
 
                         <Suspense fallback={<Loading />}>
                             <Routes>
