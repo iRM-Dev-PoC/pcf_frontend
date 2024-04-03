@@ -85,8 +85,8 @@ const FileUpload = () => {
   };
 
   useEffect(() => {
-    console.log(extractedFiles); // Log extracted files within useEffect
-  }, [extractedFiles]); // Log when extractedFiles state changes
+    console.log("useffect triggered with extractedFiles:",extractedFiles); 
+  }, [extractedFiles]); 
 
   return (
     <Card
