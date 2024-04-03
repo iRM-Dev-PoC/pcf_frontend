@@ -4,7 +4,11 @@ import {
     ProductSwitchItem,
 } from "@ui5/webcomponents-react";
 
+// import { useSearchParams } from "react-router-dom";
+
 const ProductSwitchModal = () => {
+    // const [params, setParams] = useSearchParams({ p: "" });
+
     return (
         <div>
             <Card style={{ height: "25rem", width: "30rem" }}>
@@ -16,6 +20,7 @@ const ProductSwitchModal = () => {
                         targetSrc="/"
                         titleText="Process Control Flow"
                         onClick={() => {
+                            // setParams({ p: "pcf" });
                             localStorage.setItem(
                                 "product",
                                 "Process Control Flow"
@@ -28,6 +33,7 @@ const ProductSwitchModal = () => {
                         titleText="SoD"
                         target="_blank"
                         onClick={() => {
+                            // navigate(`?p=sod`);
                             localStorage.setItem("product", "SoD");
                         }}
                         targetSrc="/sod/"
