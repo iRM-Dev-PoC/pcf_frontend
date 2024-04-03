@@ -43,11 +43,7 @@ function App() {
     useLayoutEffect(() => {
         const userData = localStorage.getItem("userData");
         const theme = localStorage.getItem("Theme");
-        const product = localStorage.getItem("product");
 
-        if (product) {
-            setProduct(product);
-        }
         if (theme) {
             setTheme(theme);
         }
@@ -58,6 +54,7 @@ function App() {
         }
         if (path.includes("/sod")) {
             setIsSoD(true);
+            setProduct("SoD");
         }
     }, [isLoggedIn, path]);
 
