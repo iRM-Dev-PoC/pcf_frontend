@@ -1,0 +1,56 @@
+{
+    "candoData": [
+        {
+            "BUSINESS_PROCESS": "Information Technology",
+            "sod_name": "Basis Archiving Actions",
+            "risk_description": "Potential risk due to the presence of sensitive access defined in \"Basis Archiving Actions\" with the user(s) increasing the risk of fraudulent transactions and security breaches through unauthorized access to sensitive information and systems.",
+            "SOD_RISK_RATING": "Sensitive",
+            "conflict_type": "Sensitive Access",
+            "can_do_users": "6",
+            "role_name": "2",
+            "xx_row_id": "694"
+        },
+        {
+            "BUSINESS_PROCESS": "Information Technology",
+            "sod_name": "Basis Configuration Actions",
+            "risk_description": "Potential risk due to the presence of sensitive access defined in \"Basis Configuration Actions\" with the user(s) increasing the risk of fraudulent transactions and security breaches through unauthorized access to sensitive information and systems.",
+            "SOD_RISK_RATING": "Sensitive",
+            "conflict_type": "Sensitive Access",
+            "can_do_users": "7",
+            "role_name": "3",
+            "xx_row_id": "408"
+        },
+        {
+            "BUSINESS_PROCESS": "Procure to Pay",
+            "sod_name": "Approve purchase of unauth item - hide by not fully rcvg",
+            "risk_description": "Potential risk due to a conflicting access combination of \"SoD Leg 1: PO Approval\" and \"SoD Leg 2: Goods Receipts to PO\" as a user could potentially fraudulently approve an unauthorized PO and make process goods invoice against it resulting in potential fraudulent activity.",
+            "SOD_RISK_RATING": "High",
+            "conflict_type": "SoD",
+            "can_do_users": "3",
+            "role_name": "3",
+            "xx_row_id": "24"
+        },
+        {
+            "BUSINESS_PROCESS": "Procure to Pay",
+            "sod_name": "Create fictitious vendor and initiate payment to the vendor",
+            "risk_description": "Potential risk due to a conflicting access combination of \"SoD Leg 1: Vendor Master Maintenance \"  and \" SoD Leg 2: Process Vendor Invoices \"  as a user could potentially conduct fraudulent payment activity by creating fictitious vendors \r\nand initiating payment to those vendors via invoice creation directly in the Financial module. \r\nPayment for invoices from the Financial module will not require matching with purchase order \r\nand good receipt documents.",
+            "SOD_RISK_RATING": "High",
+            "conflict_type": "SoD",
+            "can_do_users": "1",
+            "role_name": "1",
+            "xx_row_id": "2"
+        },
+        {
+            "BUSINESS_PROCESS": "Procure to Pay",
+            "sod_name": "Requisition an item and create a PO from that req",
+            "risk_description": "Potential risk due to a conflicting access combination of \"SoD Leg 1: Requisitioning\" and \"SoD Leg 2: Maintain Purchase Order\" as a user can create requisition for an item and create purchase order without approval",
+            "SOD_RISK_RATING": "Medium",
+            "conflict_type": "SoD",
+            "can_do_users": "11",
+            "role_name": "3",
+            "xx_row_id": "128"
+        }
+    ],
+    "projectID": 1,
+    "tableName": "sap_out"
+}
