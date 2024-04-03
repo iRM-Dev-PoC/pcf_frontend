@@ -36,7 +36,7 @@ function App() {
     const [user, setUser] = useState<User | undefined>(undefined);
     const [isForgotPassword, setIsForgotPassword] = useState(false);
     const { isSwitchProduct } = useSwitchProduct();
-    const [product, setProduct] = useState("");
+    const [product, setProduct] = useState("Process Control Flow");
     const [isSoD, setIsSoD] = useState(false);
     const path = useCurrentPath();
 
