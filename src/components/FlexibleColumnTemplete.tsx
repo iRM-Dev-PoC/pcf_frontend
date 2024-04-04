@@ -54,12 +54,12 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
             startColumn={
                 <List
                     onItemClick={onStartColumnClick}
-                    key={selectedCard.header}
+                    key={`${selectedCard.header}-${selectedCard.id}`}
                 >
                     {dataCard.map((card, index) => (
                         <>
                             <RiskCard
-                                key={`${index}-${card.id}`}
+                                key={`${index}-${card.id}-${card.header}`}
                                 header={card.header}
                                 icon={card.icon}
                                 risk={card.risk}
@@ -71,7 +71,7 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
                 </List>
             }
             midColumn={
-                <>
+                <div className="m-2">
                     <Toolbar design={ToolbarDesign.Solid}>
                         <ToolbarSpacer />
                         <Button
@@ -104,7 +104,7 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
                     </Toolbar>
                     <Toolbar
                         key={selectedCard.header}
-                        style={{ height: "350px" }}
+                        style={{ height: "300px" }}
                     >
                         <FlexBox
                             direction="Row"
@@ -147,7 +147,7 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
                                 data-name="RiskFactor"
                                 direction="Column"
                             >
-                                <RiskFactor />
+                                <RiskFactor layout={layout} />
                             </FlexBox>
                         </FlexBox>
                     </Toolbar>
@@ -166,7 +166,7 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
                             <NonCompilantData />
                         </FlexBox>
                     </FlexBox>
-                </>
+                </div>
             }
         />
     );
