@@ -1,8 +1,16 @@
-import { Card } from "@ui5/webcomponents-react";
+import { Card, FCLLayout } from "@ui5/webcomponents-react";
 import { RadialChart } from "@ui5/webcomponents-react-charts";
-const RiskFactor = () => {
+
+type RiskFactorProps = {
+    layout: FCLLayout;
+};
+const RiskFactor = ({ layout }: RiskFactorProps) => {
+    const isFullScreen = layout === FCLLayout.MidColumnFullScreen;
+
     return (
-        <Card className="mt-[0.9rem] h-[14.6rem] w-[25rem]">
+        <Card
+            className={`${isFullScreen ? `h-[14.8rem] w-[27.7rem] ` : `h-[16.5rem] w-[25rem] `}mt-[0.9rem]   `}
+        >
             <RadialChart
                 chartConfig={{
                     endAngle: 0,
