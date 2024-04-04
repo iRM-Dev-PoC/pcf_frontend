@@ -1,4 +1,4 @@
-import { Suspense, useLayoutEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useCurrentPath } from "./hooks/useCurrentPath";
 
@@ -15,7 +15,6 @@ import Home from "./pages/home";
 import ControlAttribute from "./pages/controlAttribute";
 import ControlFamily from "./pages/controlFamily";
 import ControlLogic from "./pages/controlLogic";
-import Dashboard from "./pages/dashboard";
 import Report from "./pages/report";
 import TypeOfControl from "./pages/typeOfControl";
 import DataLoad from "./pages/dataLoad";
@@ -32,6 +31,7 @@ import SoDDashboard from "./pages/SoD/sodDashboard";
 
 function App() {
     const [, setTheme] = useState("sap_horizon");
+
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState<User | undefined>(undefined);
     const [isForgotPassword, setIsForgotPassword] = useState(false);
@@ -40,13 +40,8 @@ function App() {
     const [isSoD, setIsSoD] = useState(false);
     const path = useCurrentPath();
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         const userData = localStorage.getItem("userData");
-        const theme = localStorage.getItem("Theme");
-
-        if (theme) {
-            setTheme(theme);
-        }
         if (userData) {
             setIsLoggedIn(true);
             const parsedUserData = JSON.parse(userData);
@@ -54,7 +49,7 @@ function App() {
         }
         if (path.includes("/sod")) {
             setIsSoD(true);
-            setProduct("SoD");
+            setProduct("Segregation of Duties");
         }
     }, [isLoggedIn, path]);
 
@@ -107,10 +102,10 @@ function App() {
 
                         <Suspense fallback={<Loading />}>
                             <Routes>
-                                <Route
+                                {/* <Route
                                     path="/pcf/dashboard"
                                     element={<Dashboard />}
-                                />
+                                /> */}
 
                                 <Route path="/" element={<Home />} />
 

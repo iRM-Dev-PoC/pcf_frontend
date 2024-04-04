@@ -12,7 +12,6 @@ const ProductSwitchModal = () => {
                     <ProductSwitchItem
                         className="gap-3"
                         icon="process"
-                        target="_blank"
                         targetSrc="/"
                         titleText="Process Control Flow"
                     />
@@ -20,7 +19,6 @@ const ProductSwitchModal = () => {
                         className="gap-3"
                         icon="activity-individual"
                         titleText="SoD"
-                        target="_blank"
                         targetSrc="/sod/"
                     />
                     <ProductSwitchItem
