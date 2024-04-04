@@ -320,6 +320,14 @@ type CanDoSummaryDataApiResponse = {
     CanDoSummaryDataApiResponse: candoDataType[];
 };
 
+type dataCardType = {
+    id: number;
+    header: string;
+    icon: string;
+    risk: string;
+    description: string;
+};
+
 export type {
     SignInProps,
     CurrentURLType,
@@ -364,4 +372,5 @@ export type {
     logInData,
     candoDataType,
     ERP,
+    dataCardType,
 };

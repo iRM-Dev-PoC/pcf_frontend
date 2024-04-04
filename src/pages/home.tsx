@@ -4,19 +4,12 @@ import {
     DynamicPageTitle,
     DatePicker,
 } from "@ui5/webcomponents-react";
-import RiskCard from "../components/RiskCard";
 import cardData from "../lib/cardData";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
 import FilterBarComponent from "../components/FilterBarComponent";
-import { useNavigate } from "react-router-dom";
+import FlexibleColumnTemplete from "../components/FlexibleColumnTemplete";
 
 const Home = () => {
-    const navigate = useNavigate();
-
-    const handleCardClick = () => {
-        navigate("/pcf/dashboard");
-    };
-
     return (
         <DynamicPage
             headerContent={
@@ -54,16 +47,7 @@ const Home = () => {
             showHideHeaderButton={false}
             headerContentPinnable={false}
         >
-            {cardData.map((card, index) => (
-                <RiskCard
-                    key={index}
-                    header={card.header}
-                    icon={card.icon}
-                    risk={card.risk}
-                    description={card.description}
-                    onClick={handleCardClick}
-                />
-            ))}
+            <FlexibleColumnTemplete dataCard={cardData} />
         </DynamicPage>
     );
 };

@@ -139,13 +139,15 @@ const Navbar = ({
                 }
                 primaryTitle={productName}
                 profile={
-                    <Avatar className="cursor-pointer">
-                        <span className="-mr-1 ml-0 text-lg font-medium">
-                            {fName.charAt(0)}
-                        </span>
-                        <span className="-ml-1 mr-0 text-lg font-medium">
-                            {lName.charAt(0)}
-                        </span>
+                    <Avatar className="">
+                        <div className="flex cursor-pointer items-center justify-center border p-3">
+                            <span className=" text-lg font-medium">
+                                {fName.charAt(0)}
+                            </span>
+                            <span className=" text-lg font-medium">
+                                {lName.charAt(0)}
+                            </span>
+                        </div>
                     </Avatar>
                 }
                 showNotifications={isNotifiction}
