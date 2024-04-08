@@ -11,6 +11,7 @@ import Loading from "./components/Loading.tsx";
 import { PathProvider } from "./context/currentPathContext.tsx";
 import { CurrentURLProvider } from "./context/currentURLContext.tsx";
 import { ProductSwitchProvider } from "./context/productSwitchContext.tsx";
+import { Toaster } from "react-hot-toast";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <StrictMode>
@@ -23,6 +24,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                                 <ProductSwitchProvider>
                                     <Suspense fallback={<Loading />}>
                                         <App />
+                                        <Toaster />
                                     </Suspense>
                                 </ProductSwitchProvider>
                             </CurrentURLProvider>

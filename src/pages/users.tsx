@@ -12,9 +12,14 @@ import {
 } from "@ui5/webcomponents-react";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
 import AddUsers from "../components/AddUsers";
+import toast from "react-hot-toast";
 
 const Users = () => {
     const showDialog = Modals.useShowDialog();
+
+    const handleUserCreation = () => {
+        toast.success("User being created");
+    };
     return (
         <DynamicPage
             headerTitle={
@@ -48,13 +53,24 @@ const Users = () => {
                                             <FormItem label="Email">
                                                 <Input type="Text" />
                                             </FormItem>
+                                            <Button
+                                                onClick={() => close()}
+                                                design="Negative"
+                                            >
+                                                Close
+                                            </Button>
                                         </Form>
                                     ),
                                     footer: (
                                         <Bar
                                             endContent={
                                                 <>
-                                                    <Button design="Emphasized">
+                                                    <Button
+                                                        onClick={
+                                                            handleUserCreation
+                                                        }
+                                                        design="Emphasized"
+                                                    >
                                                         Create
                                                     </Button>
                                                     <Button
