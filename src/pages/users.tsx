@@ -3,23 +3,17 @@ import {
     Button,
     DynamicPage,
     DynamicPageTitle,
-    Form,
-    FormItem,
-    Input,
     MessageStrip,
     Modals,
     Title,
 } from "@ui5/webcomponents-react";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
 import AddUsers from "../components/AddUsers";
-import toast from "react-hot-toast";
+import UserCreationForm from "../components/UserCreationForm";
 
 const Users = () => {
     const showDialog = Modals.useShowDialog();
 
-    const handleUserCreation = () => {
-        toast.success("User being created");
-    };
     return (
         <DynamicPage
             headerTitle={
@@ -38,41 +32,11 @@ const Users = () => {
                             onClick={() => {
                                 const { close } = showDialog({
                                     headerText: "User Information",
-                                    children: (
-                                        <Form
-                                            style={{
-                                                alignItems: "center",
-                                            }}
-                                        >
-                                            <FormItem label="First Name">
-                                                <Input type="Text" />
-                                            </FormItem>
-                                            <FormItem label="Last Name">
-                                                <Input type="Text" />
-                                            </FormItem>
-                                            <FormItem label="Email">
-                                                <Input type="Text" />
-                                            </FormItem>
-                                            <Button
-                                                onClick={() => close()}
-                                                design="Negative"
-                                            >
-                                                Close
-                                            </Button>
-                                        </Form>
-                                    ),
+                                    children: <UserCreationForm />,
                                     footer: (
                                         <Bar
                                             endContent={
                                                 <>
-                                                    <Button
-                                                        onClick={
-                                                            handleUserCreation
-                                                        }
-                                                        design="Emphasized"
-                                                    >
-                                                        Create
-                                                    </Button>
                                                     <Button
                                                         onClick={() => close()}
                                                         design="Negative"
