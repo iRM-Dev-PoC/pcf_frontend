@@ -43,15 +43,31 @@ const UserCreationForm = () => {
         resolver: zodResolver(schema),
     });
 
-    const onSubmit = (data: UserData) => {
+    const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/loginuser/create-user`;
+
+    const fetchData = async (data: UserData) => {
         try {
-            // const res = axios.post();
-            toast.success("User being created");
-            console.log(data);
+            const userName: string = `${data.firstName} ${data.lastName}`;
+            const reqData = {
+                user_name: userName,
+                user_email: data.email,
+                password: "test2",
+                customer_id_id: "6",
+                user_emp_id: "emp_5651",
+            };
+            const response = await axios.post(endPoint, reqData);
+            return response.data;
         } catch (error) {
-            toast.error("Something went wrong!");
-            console.error("[CREATE_USER]", error);
+            console.error(error);
         }
+    };
+
+    const onSubmit = async (data: UserData) => {
+        await toast.promise(fetchData(data), {
+            loading: "Creating user...",
+            success: "User created successfully",
+            error: (error) => `Failed to create user: ${error.message}`,
+        });
     };
     return (
         <Form onSubmit={handleSubmit(onSubmit)} labelSpanM={4}>

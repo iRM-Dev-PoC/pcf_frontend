@@ -6,13 +6,16 @@ import {
     MessageStrip,
     Modals,
     Title,
+    ButtonDomRef,
 } from "@ui5/webcomponents-react";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
 import AddUsers from "../components/AddUsers";
 import UserCreationForm from "../components/UserCreationForm";
+import { useRef } from "react";
 
 const Users = () => {
     const showDialog = Modals.useShowDialog();
+    const closeButtonref = useRef<ButtonDomRef>(null);
 
     return (
         <DynamicPage
@@ -38,7 +41,10 @@ const Users = () => {
                                             endContent={
                                                 <>
                                                     <Button
-                                                        onClick={() => close()}
+                                                        ref={closeButtonref}
+                                                        onClick={() => {
+                                                            close();
+                                                        }}
                                                         design="Negative"
                                                     >
                                                         Close
