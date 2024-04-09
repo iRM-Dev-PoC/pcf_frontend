@@ -8,6 +8,7 @@ import {
     Button,
     InputType,
     ButtonType,
+    ButtonDomRef,
 } from "@ui5/webcomponents-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -28,7 +29,11 @@ const schema = z.object({
     email: z.string().email().min(1, { message: "Email is required" }),
 });
 
-const UserCreationForm = () => {
+const UserCreationForm = ({
+    closeButtonref,
+}: {
+    closeButtonref: React.RefObject<ButtonDomRef>;
+}) => {
     const {
         handleSubmit,
         register,
@@ -68,6 +73,7 @@ const UserCreationForm = () => {
             success: "User created successfully",
             error: (error) => `Failed to create user: ${error.message}`,
         });
+        closeButtonref.current?.click();
     };
     return (
         <Form onSubmit={handleSubmit(onSubmit)} labelSpanM={4}>
