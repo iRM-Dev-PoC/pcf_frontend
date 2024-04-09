@@ -35,7 +35,11 @@ const Users = () => {
                             onClick={() => {
                                 const { close } = showDialog({
                                     headerText: "User Information",
-                                    children: <UserCreationForm />,
+                                    children: (
+                                        <UserCreationForm
+                                            closeButtonref={closeButtonref}
+                                        />
+                                    ),
                                     footer: (
                                         <Bar
                                             endContent={
