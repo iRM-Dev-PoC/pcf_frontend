@@ -18,12 +18,43 @@ import {
     FlexBoxDirection,
 } from "@ui5/webcomponents-react";
 import { userData } from "../lib/userList";
-import { User } from "../utils/types";
+import { User, getAllUserData } from "../utils/types";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "./Loading";
 
 const AddUsers = () => {
     const [layout, setLayout] = useState<FCLLayout>(FCLLayout.OneColumn);
     const [isFullScreen, setIsFullScreen] = useState(false);
     const [selectedUser, setSelectedUser] = useState<User>(userData[0]);
+    const [error, setError] = useState(false);
+
+    const fetchData = async () => {
+        try {
+            const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/loginuser/get-all-users`;
+            const response = await fetch(endPoint);
+            if (!response.ok) {
+                throw new Error("Failed to fetch data");
+            }
+            return response.json();
+        } catch (error) {
+            console.error(error);
+            throw new Error("Failed to fetch data");
+        }
+    };
+
+    const { data, isFetching } = useQuery({
+        queryKey: ["allUserData"],
+        queryFn: fetchData,
+        retry: 3,
+    });
+
+    const userDataRes = data;
+
+    if (userDataRes?.statuscode === 500) {
+        setError(true);
+    }
+
+    const allUserData: getAllUserData[] = userDataRes?.data;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onStartColumnClick = (e: any) => {
@@ -42,15 +73,33 @@ const AddUsers = () => {
             layout={layout}
             startColumn={
                 <List headerText="Users" onItemClick={onStartColumnClick}>
-                    {userData.map((user, index) => (
-                        <StandardListItem
-                            description={user.email}
-                            data-user-id={user.id}
-                            key={`${user.id}-${index}`}
-                        >
-                            {user.fName + " " + user.lName}
+                    {error && (
+                        <StandardListItem className="pointer-events-none">
+                            Something went wrong!
                         </StandardListItem>
-                    ))}
+                    )}
+
+                    {!error && isFetching ? (
+                        <StandardListItem className="pointer-events-none">
+                            <Loading />
+                        </StandardListItem>
+                    ) : allUserData === null ? (
+                        <StandardListItem className="pointer-events-none">
+                            No users found
+                        </StandardListItem>
+                    ) : (
+                        <>
+                            {allUserData.map((user, index) => (
+                                <StandardListItem
+                                    description={user.USER_EMAIL}
+                                    data-user-id={user.ID}
+                                    key={`${user.ID}-${index}`}
+                                >
+                                    {user.USER_NAME}
+                                </StandardListItem>
+                            ))}
+                        </>
+                    )}
                 </List>
             }
             midColumn={

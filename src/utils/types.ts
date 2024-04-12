@@ -9,6 +9,27 @@ type PathContextType = string;
 
 type CurrentURLType = string;
 
+type getAllUserData = {
+    CREATEDAT: string;
+    CREATEDBY: string;
+    MODIFIEDAT: string;
+    MODIFIEDBY: string;
+    ID: string;
+    USER_ID: string;
+    USER_NAME: string;
+    USER_EMAIL: string;
+    USER_EMP_ID: string;
+    PASSWORD: string;
+    CUSTOMER_ID_ID: string;
+    IS_ACTIVE: string;
+    CREATED_ON: string;
+    CREATED_BY: string;
+    CHANGED_ON: string;
+    CHANGED_BY: string;
+    ROLE_ID_ID: string;
+    ROLE_NAME: string;
+};
+
 type ProductSwitchType = {
     isSwitchProduct: boolean;
     setIsSwitchProduct: Dispatch<SetStateAction<boolean>>;
@@ -373,4 +394,5 @@ export type {
     candoDataType,
     ERP,
     dataCardType,
+    getAllUserData,
 };
