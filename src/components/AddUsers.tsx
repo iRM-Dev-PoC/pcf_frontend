@@ -17,15 +17,16 @@ import {
     ButtonDesign,
     FlexBoxDirection,
 } from "@ui5/webcomponents-react";
-import { userData } from "../lib/userList";
-import { User, getAllUserData } from "../utils/types";
+import { getAllUserData } from "../utils/types";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "./Loading";
 
 const AddUsers = () => {
     const [layout, setLayout] = useState<FCLLayout>(FCLLayout.OneColumn);
     const [isFullScreen, setIsFullScreen] = useState(false);
-    const [selectedUser, setSelectedUser] = useState<User>(userData[0]);
+    const [selectedUser, setSelectedUser] = useState<
+        getAllUserData | undefined
+    >(undefined);
     const [error, setError] = useState(false);
 
     const fetchData = async () => {
@@ -50,16 +51,17 @@ const AddUsers = () => {
 
     const userDataRes = data;
 
+    const allUserData: getAllUserData[] = userDataRes?.data;
+
     if (userDataRes?.statuscode === 500) {
         setError(true);
     }
 
-    const allUserData: getAllUserData[] = userDataRes?.data;
-
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onStartColumnClick = (e: any) => {
         const userId = parseInt(e.detail.item.dataset.userId);
-        setSelectedUser(userData.find((user) => user.id === userId)!);
+        const user = allUserData.find((user) => Number(user.ID) === userId);
+        setSelectedUser(user);
         setLayout(FCLLayout.TwoColumnsMidExpanded);
     };
 
@@ -69,10 +71,11 @@ const AddUsers = () => {
                 height: "100%",
                 marginTop: "0.5rem",
                 marginBottom: "0.5rem",
+                borderRadius: "0.5rem",
             }}
             layout={layout}
             startColumn={
-                <List headerText="Users" onItemClick={onStartColumnClick}>
+                <List onItemClick={onStartColumnClick}>
                     {error && (
                         <StandardListItem className="pointer-events-none">
                             Something went wrong!
@@ -105,18 +108,8 @@ const AddUsers = () => {
             midColumn={
                 <>
                     <Toolbar design={ToolbarDesign.Solid}>
-                        <Title>
-                            {selectedUser.fName + " " + selectedUser.lName}
-                        </Title>
+                        <Title>{selectedUser?.USER_NAME}</Title>
                         <ToolbarSpacer />
-                        <Button
-                            icon="decline"
-                            design={ButtonDesign.Transparent}
-                            onClick={() => {
-                                setLayout(FCLLayout.OneColumn);
-                            }}
-                        />
-
                         {isFullScreen ? (
                             <Button
                                 icon="exit-full-screen"
@@ -138,9 +131,16 @@ const AddUsers = () => {
                                 }}
                             />
                         )}
+                        <Button
+                            icon="decline"
+                            design={ButtonDesign.Transparent}
+                            onClick={() => {
+                                setLayout(FCLLayout.OneColumn);
+                            }}
+                        />
                     </Toolbar>
                     <Toolbar
-                        key={selectedUser.lName}
+                        key={selectedUser?.USER_ID}
                         style={{ height: "200px" }}
                     >
                         <Avatar
@@ -155,35 +155,33 @@ const AddUsers = () => {
                             <FlexBox>
                                 <Label>Name:</Label>
                                 <Text style={{ marginLeft: "2px" }}>
-                                    {selectedUser.fName +
-                                        " " +
-                                        selectedUser.lName}
+                                    {selectedUser?.USER_NAME}
                                 </Text>
                             </FlexBox>
                             <FlexBox>
                                 <Label>Email:</Label>
                                 <Text style={{ marginLeft: "2px" }}>
-                                    {selectedUser.email}
+                                    {selectedUser?.USER_EMAIL}
                                 </Text>
                             </FlexBox>
                             <FlexBox>
                                 <Label>User Type:</Label>
                                 <Text style={{ marginLeft: "2px" }}>
-                                    {selectedUser.role}
+                                    {selectedUser?.ROLE_NAME}
                                 </Text>
                             </FlexBox>
                         </FlexBox>
                     </Toolbar>
 
-                    <List headerText="Permissions" growing="Scroll">
-                        {Object.entries(selectedUser.permissions).map(
+                    {/* <List headerText="Permissions" growing="Scroll">
+                        {Object.entries(selectedUser?.permissions).map(
                             ([key, value]) => (
                                 <StandardListItem key={key}>
                                     {key}: {value.toString()}
                                 </StandardListItem>
                             )
                         )}
-                    </List>
+                    </List> */}
                 </>
             }
         />
