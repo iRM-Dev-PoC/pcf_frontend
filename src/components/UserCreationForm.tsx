@@ -48,7 +48,7 @@ const UserCreationForm = ({
         resolver: zodResolver(schema),
     });
 
-    const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/loginuser/create-user`;
+    const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/loginuser/get-all-users`;
 
     const fetchData = async (data: UserData) => {
         try {
@@ -57,7 +57,6 @@ const UserCreationForm = ({
                 user_name: userName,
                 user_email: data.email,
                 password: "test2",
-                customer_id_id: "6",
                 user_emp_id: "emp_5651",
             };
             const response = await axios.post(endPoint, reqData);
@@ -70,7 +69,7 @@ const UserCreationForm = ({
     const onSubmit = async (data: UserData) => {
         await toast.promise(fetchData(data), {
             loading: "Creating user...",
-            success: "User created successfully",
+            success: "User created successfully!",
             error: (error) => `Failed to create user: ${error.message}`,
         });
         closeButtonref.current?.click();
