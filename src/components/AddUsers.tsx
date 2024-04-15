@@ -16,30 +16,38 @@ import {
     FlexibleColumnLayout,
     ButtonDesign,
     FlexBoxDirection,
+    Card,
+    Modals,
+    MessageBoxTypes,
+    MessageBoxActions,
 } from "@ui5/webcomponents-react";
 import { getAllUserData } from "../utils/types";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "./Loading";
+import UserEditForm from "./UserEditForm";
 
 const AddUsers = () => {
     const [layout, setLayout] = useState<FCLLayout>(FCLLayout.OneColumn);
+    const [isEdit, setIsEdit] = useState(false);
     const [isFullScreen, setIsFullScreen] = useState(false);
     const [selectedUser, setSelectedUser] = useState<
         getAllUserData | undefined
     >(undefined);
     const [error, setError] = useState(false);
 
+    const showDeleteConfirmation = Modals.useShowMessageBox();
+
     const fetchData = async () => {
         try {
-            const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/loginuser/get-all-users`;
-            const response = await fetch(endPoint);
+            const endPointAllUsers = `${import.meta.env.VITE_BACKEND_BASE_URL}/loginuser/get-all-users`;
+            const response = await fetch(endPointAllUsers);
             if (!response.ok) {
-                throw new Error("Failed to fetch data");
+                setError(true);
             }
             return response.json();
         } catch (error) {
             console.error(error);
-            throw new Error("Failed to fetch data");
+            setError(true);
         }
     };
 
@@ -52,10 +60,6 @@ const AddUsers = () => {
     const userDataRes = data;
 
     const allUserData: getAllUserData[] = userDataRes?.data;
-
-    if (userDataRes?.statuscode === 500) {
-        setError(true);
-    }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onStartColumnClick = (e: any) => {
@@ -82,6 +86,12 @@ const AddUsers = () => {
                         </StandardListItem>
                     )}
 
+                    {allUserData === undefined && (
+                        <StandardListItem className="pointer-events-none">
+                            Something went wrong!
+                        </StandardListItem>
+                    )}
+
                     {!error && isFetching ? (
                         <StandardListItem className="pointer-events-none">
                             <Loading />
@@ -90,9 +100,13 @@ const AddUsers = () => {
                         <StandardListItem className="pointer-events-none">
                             No users found
                         </StandardListItem>
+                    ) : allUserData === undefined ? (
+                        <StandardListItem className="pointer-events-none">
+                            Something went wrong!
+                        </StandardListItem>
                     ) : (
                         <>
-                            {allUserData.map((user, index) => (
+                            {allUserData?.map((user, index) => (
                                 <StandardListItem
                                     description={user.USER_EMAIL}
                                     data-user-id={user.ID}
@@ -131,6 +145,30 @@ const AddUsers = () => {
                                 }}
                             />
                         )}
+                        <Button
+                            icon="delete"
+                            design={ButtonDesign.Transparent}
+                            onClick={() => {
+                                showDeleteConfirmation({
+                                    type: MessageBoxTypes.Warning,
+                                    actions: [
+                                        MessageBoxActions.Delete,
+                                        MessageBoxActions.Cancel,
+                                    ],
+
+                                    children:
+                                        "Are sure you want to delete this user?",
+                                });
+                                console.log(showDeleteConfirmation);
+                            }}
+                        />
+                        <Button
+                            icon="edit"
+                            design={ButtonDesign.Transparent}
+                            onClick={() => {
+                                setIsEdit(true);
+                            }}
+                        />
                         <Button
                             icon="decline"
                             design={ButtonDesign.Transparent}
@@ -173,15 +211,18 @@ const AddUsers = () => {
                         </FlexBox>
                     </Toolbar>
 
-                    {/* <List headerText="Permissions" growing="Scroll">
-                        {Object.entries(selectedUser?.permissions).map(
-                            ([key, value]) => (
-                                <StandardListItem key={key}>
-                                    {key}: {value.toString()}
-                                </StandardListItem>
-                            )
+                    <Card>
+                        {isEdit && (
+                            <Card>
+                                <UserEditForm
+                                    id={selectedUser?.ID ?? ""}
+                                    email={selectedUser?.USER_EMAIL ?? ""}
+                                    username={selectedUser?.USER_NAME ?? ""}
+                                    setIsEdit={setIsEdit}
+                                />
+                            </Card>
                         )}
-                    </List> */}
+                    </Card>
                 </>
             }
         />
