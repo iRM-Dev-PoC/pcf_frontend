@@ -93,6 +93,8 @@ const AddUsers = () => {
 
     const allUserData: getAllUserData[] = userDataRes?.data;
 
+    console.log(allUserData);
+
     if (isError || error) {
         return (
             <StandardListItem className="pointer-events-none">
@@ -117,7 +119,7 @@ const AddUsers = () => {
         );
     }
 
-    if (!isFetching && data?.statuscode) {
+    if (!isFetching && data?.statuscode === 500) {
         return (
             <StandardListItem className="pointer-events-none">
                 Something went wrong!
