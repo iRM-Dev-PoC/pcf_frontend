@@ -59,7 +59,7 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
                     {dataCard.map((card, index) => (
                         <>
                             <RiskCard
-                                key={`${index}-${card.id}-${card.header}`}
+                                key={`${index}-${card.id}-${card.header}-${card.risk}`}
                                 header={card.header}
                                 icon={card.icon}
                                 risk={card.risk}
