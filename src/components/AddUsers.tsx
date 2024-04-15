@@ -22,9 +22,11 @@ import {
     MessageBoxActions,
 } from "@ui5/webcomponents-react";
 import { getAllUserData } from "../utils/types";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Loading from "./Loading";
 import UserEditForm from "./UserEditForm";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const AddUsers = () => {
     const [layout, setLayout] = useState<FCLLayout>(FCLLayout.OneColumn);
@@ -36,6 +38,7 @@ const AddUsers = () => {
     const [error, setError] = useState(false);
 
     const showDeleteConfirmation = Modals.useShowMessageBox();
+    const queryClient = useQueryClient();
 
     const fetchData = async () => {
         try {
@@ -57,6 +60,33 @@ const AddUsers = () => {
         queryFn: fetchData,
         retry: 3,
     });
+
+    const deleteUserData = async (id: string) => {
+        const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/loginuser/delete-user`;
+        try {
+            const response = await axios.delete(endPoint, {
+                data: {
+                    id: id,
+                },
+            });
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            setError(true);
+        }
+    };
+
+    const handleDeleteUser = async (id: string) => {
+        await toast.promise(deleteUserData(id), {
+            loading: "Deleting user...",
+            success: "User deleted successfully!",
+            error: (error) => `Failed to delete user: ${error.message}`,
+        });
+        await queryClient.invalidateQueries({ queryKey: ["allUserData"] });
+        setIsEdit(false);
+        setIsFullScreen(false);
+        setLayout(FCLLayout.OneColumn);
+    };
 
     const userDataRes = data;
 
@@ -153,6 +183,13 @@ const AddUsers = () => {
                             design={ButtonDesign.Transparent}
                             onClick={() => {
                                 showDeleteConfirmation({
+                                    onClose(event) {
+                                        if (event.detail.action === "Delete") {
+                                            handleDeleteUser(
+                                                selectedUser?.ID ?? ""
+                                            );
+                                        }
+                                    },
                                     type: MessageBoxTypes.Warning,
                                     actions: [
                                         MessageBoxActions.Delete,
@@ -162,7 +199,6 @@ const AddUsers = () => {
                                     children:
                                         "Are sure you want to delete this user?",
                                 });
-                                console.log(showDeleteConfirmation);
                             }}
                         />
                         <Button
@@ -177,6 +213,7 @@ const AddUsers = () => {
                             design={ButtonDesign.Transparent}
                             onClick={() => {
                                 setLayout(FCLLayout.OneColumn);
+                                setIsEdit(false);
                             }}
                         />
                     </Toolbar>
@@ -222,6 +259,8 @@ const AddUsers = () => {
                                     email={selectedUser?.USER_EMAIL ?? ""}
                                     username={selectedUser?.USER_NAME ?? ""}
                                     setIsEdit={setIsEdit}
+                                    setIsFullScreen={setIsFullScreen}
+                                    setLayout={setLayout}
                                 />
                             </Card>
                         )}
