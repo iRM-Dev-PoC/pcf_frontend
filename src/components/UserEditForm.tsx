@@ -8,6 +8,7 @@ import {
     Button,
     InputType,
     ButtonType,
+    FCLLayout,
 } from "@ui5/webcomponents-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -26,6 +27,8 @@ type UserData = {
 
 type UserEditFormProps = {
     setIsEdit: Dispatch<SetStateAction<boolean>>;
+    setIsFullScreen: Dispatch<SetStateAction<boolean>>;
+    setLayout: Dispatch<SetStateAction<FCLLayout>>;
 };
 
 const schema = z.object({
@@ -38,6 +41,8 @@ const UserEditForm = ({
     email,
     username,
     setIsEdit,
+    setLayout,
+    setIsFullScreen,
 }: UserEditFormProps & UserData) => {
     const queryClient = useQueryClient();
     const {
@@ -82,6 +87,9 @@ const UserEditForm = ({
             error: (error) => `Failed to update user: ${error.message}`,
         });
         await queryClient.invalidateQueries({ queryKey: ["allUserData"] });
+        setIsEdit(false);
+        setIsFullScreen(false);
+        setLayout(FCLLayout.OneColumn);
     };
 
     return (
