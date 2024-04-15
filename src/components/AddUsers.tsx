@@ -27,6 +27,7 @@ import Loading from "./Loading";
 import UserEditForm from "./UserEditForm";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { ThemingParameters } from "@ui5/webcomponents-react-base";
 
 const AddUsers = () => {
     const [layout, setLayout] = useState<FCLLayout>(FCLLayout.OneColumn);
@@ -55,7 +56,7 @@ const AddUsers = () => {
         }
     };
 
-    const { data, isFetching } = useQuery({
+    const { data, isFetching, isError } = useQuery({
         queryKey: ["allUserData"],
         queryFn: fetchData,
         retry: 3,
@@ -92,6 +93,38 @@ const AddUsers = () => {
 
     const allUserData: getAllUserData[] = userDataRes?.data;
 
+    if (isError || error) {
+        return (
+            <StandardListItem className="pointer-events-none">
+                Something went wrong!
+            </StandardListItem>
+        );
+    }
+
+    if (isFetching) {
+        return (
+            <StandardListItem className="pointer-events-none">
+                <Loading />
+            </StandardListItem>
+        );
+    }
+
+    if (!isFetching && allUserData === undefined) {
+        return (
+            <StandardListItem className="pointer-events-none">
+                Something went wrong!
+            </StandardListItem>
+        );
+    }
+
+    if (!isFetching && data?.statuscode) {
+        return (
+            <StandardListItem className="pointer-events-none">
+                Something went wrong!
+            </StandardListItem>
+        );
+    }
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onStartColumnClick = (e: any) => {
         const userId = parseInt(e.detail.item.dataset.userId);
@@ -106,50 +139,20 @@ const AddUsers = () => {
                 height: "100%",
                 marginTop: "0.5rem",
                 marginBottom: "0.5rem",
-                borderRadius: "0.5rem",
+                borderRadius: ThemingParameters.sapButton_BorderCornerRadius,
             }}
             layout={layout}
             startColumn={
                 <List onItemClick={onStartColumnClick}>
-                    {error && (
-                        <StandardListItem className="pointer-events-none">
-                            Something went wrong!
+                    {allUserData?.map((user, index) => (
+                        <StandardListItem
+                            description={user.USER_EMAIL}
+                            data-user-id={user.ID}
+                            key={`${user.ID}-${index}`}
+                        >
+                            {user.USER_NAME}
                         </StandardListItem>
-                    )}
-
-                    {allUserData === undefined && (
-                        <StandardListItem className="pointer-events-none">
-                            Something went wrong!
-                        </StandardListItem>
-                    )}
-
-                    {isFetching && <Loading />}
-
-                    {!error && isFetching ? (
-                        <StandardListItem className="pointer-events-none">
-                            <Loading />
-                        </StandardListItem>
-                    ) : allUserData === null ? (
-                        <StandardListItem className="pointer-events-none">
-                            No users found
-                        </StandardListItem>
-                    ) : allUserData === undefined ? (
-                        <StandardListItem className="pointer-events-none">
-                            Something went wrong!
-                        </StandardListItem>
-                    ) : (
-                        <>
-                            {allUserData?.map((user, index) => (
-                                <StandardListItem
-                                    description={user.USER_EMAIL}
-                                    data-user-id={user.ID}
-                                    key={`${user.ID}-${index}`}
-                                >
-                                    {user.USER_NAME}
-                                </StandardListItem>
-                            ))}
-                        </>
-                    )}
+                    ))}
                 </List>
             }
             midColumn={
@@ -205,7 +208,7 @@ const AddUsers = () => {
                             icon="edit"
                             design={ButtonDesign.Transparent}
                             onClick={() => {
-                                setIsEdit(true);
+                                setIsEdit(!isEdit);
                             }}
                         />
                         <Button
