@@ -120,7 +120,7 @@ const UserEditForm = ({
             </FormGroup>
             <FormItem>
                 <Button design="Positive" type={ButtonType.Submit}>
-                    Submit
+                    Update
                 </Button>
             </FormItem>
         </Form>

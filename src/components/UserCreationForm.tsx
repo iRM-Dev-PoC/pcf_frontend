@@ -98,6 +98,7 @@ const UserCreationForm = ({
                             <span>{errors.firstName?.message}</span>
                         }
                         type={InputType.Text}
+                        className="w-full"
                     />
                 </FormItem>
                 <FormItem label={<Label required>Last Name</Label>}>
@@ -110,6 +111,7 @@ const UserCreationForm = ({
                             <span>{errors.lastName?.message}</span>
                         }
                         type={InputType.Text}
+                        className="w-full"
                     />
                 </FormItem>
                 <FormItem label={<Label required>Email address</Label>}>
@@ -120,11 +122,16 @@ const UserCreationForm = ({
                         }
                         valueStateMessage={<span>{errors.email?.message}</span>}
                         type={InputType.Email}
+                        className="w-full"
                     />
                 </FormItem>
             </FormGroup>
             <FormItem>
-                <Button design="Positive" type={ButtonType.Submit}>
+                <Button
+                    design="Transparent"
+                    type={ButtonType.Submit}
+                    className="mx-auto"
+                >
                     Submit
                 </Button>
             </FormItem>
