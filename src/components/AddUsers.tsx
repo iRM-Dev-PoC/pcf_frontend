@@ -44,6 +44,7 @@ const AddUsers = () => {
             if (!response.ok) {
                 setError(true);
             }
+            setError(false);
             return response.json();
         } catch (error) {
             console.error(error);
@@ -91,6 +92,8 @@ const AddUsers = () => {
                             Something went wrong!
                         </StandardListItem>
                     )}
+
+                    {isFetching && <Loading />}
 
                     {!error && isFetching ? (
                         <StandardListItem className="pointer-events-none">
