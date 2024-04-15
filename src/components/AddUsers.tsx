@@ -42,12 +42,12 @@ const AddUsers = () => {
             const endPointAllUsers = `${import.meta.env.VITE_BACKEND_BASE_URL}/loginuser/get-all-users`;
             const response = await fetch(endPointAllUsers);
             if (!response.ok) {
-                throw new Error("Failed to fetch data");
+                setError(true);
             }
             return response.json();
         } catch (error) {
             console.error(error);
-            throw new Error("Failed to fetch data");
+            setError(true);
         }
     };
 
@@ -60,10 +60,6 @@ const AddUsers = () => {
     const userDataRes = data;
 
     const allUserData: getAllUserData[] = userDataRes?.data;
-
-    if (userDataRes?.statuscode === 500) {
-        setError(true);
-    }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onStartColumnClick = (e: any) => {
@@ -90,6 +86,12 @@ const AddUsers = () => {
                         </StandardListItem>
                     )}
 
+                    {allUserData === undefined && (
+                        <StandardListItem className="pointer-events-none">
+                            Something went wrong!
+                        </StandardListItem>
+                    )}
+
                     {!error && isFetching ? (
                         <StandardListItem className="pointer-events-none">
                             <Loading />
@@ -98,9 +100,13 @@ const AddUsers = () => {
                         <StandardListItem className="pointer-events-none">
                             No users found
                         </StandardListItem>
+                    ) : allUserData === undefined ? (
+                        <StandardListItem className="pointer-events-none">
+                            Something went wrong!
+                        </StandardListItem>
                     ) : (
                         <>
-                            {allUserData.map((user, index) => (
+                            {allUserData?.map((user, index) => (
                                 <StandardListItem
                                     description={user.USER_EMAIL}
                                     data-user-id={user.ID}
