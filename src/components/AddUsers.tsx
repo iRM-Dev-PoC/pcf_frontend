@@ -93,8 +93,6 @@ const AddUsers = () => {
 
     const allUserData: getAllUserData[] = userDataRes?.data;
 
-    console.log(allUserData);
-
     if (isError || error) {
         return (
             <StandardListItem className="pointer-events-none">

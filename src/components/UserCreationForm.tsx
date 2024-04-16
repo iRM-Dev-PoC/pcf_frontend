@@ -16,7 +16,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import ValueState from "@ui5/webcomponents-base/dist/types/ValueState.js";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { useCallback } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
 type UserData = {
@@ -54,24 +53,22 @@ const UserCreationForm = ({
 
     const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/loginuser/create-user`;
 
-    const fetchData = useCallback(
-        async (data: UserData) => {
-            try {
-                const userName: string = `${data.firstName} ${data.lastName}`;
-                const reqData = {
-                    user_name: userName,
-                    user_email: data.email,
-                    password: "test2",
-                    user_emp_id: "emp_5651",
-                };
-                const response = await axios.post(endPoint, reqData);
-                return response.data;
-            } catch (error) {
-                console.error(error);
-            }
-        },
-        [endPoint]
-    );
+    const fetchData = async (data: UserData) => {
+        try {
+            const userName: string = `${data.firstName} ${data.lastName}`;
+            const reqData = {
+                user_name: userName,
+                user_email: data.email,
+                password: "test2",
+                user_emp_id: "emp_5651",
+            };
+            const response = await axios.post(endPoint, reqData);
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    };
 
     const onSubmit = async (data: UserData) => {
         await toast.promise(fetchData(data), {
