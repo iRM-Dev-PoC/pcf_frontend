@@ -8,7 +8,7 @@ import Navbar from "./components/Navbar";
 import Loading from "./components/Loading";
 import SideNavbar from "./components/SideNavbar";
 
-import Role from "./pages/Roles";
+import Role from "./pages/roles";
 import AddUsers from "./pages/users";
 import SignIn from "./pages/signIn";
 import Home from "./pages/home";
@@ -19,15 +19,15 @@ import Report from "./pages/report";
 import TypeOfControl from "./pages/typeOfControl";
 import DataLoad from "./pages/dataLoad";
 import ForgetPassword from "./pages/forgetPassword";
+import ResetPassword from "./pages/resetPassword";
+import ProductSelection from "./pages/productSelection";
+import SoDDashboard from "./pages/SoD/sodDashboard";
 
 import companyLogo from "./assets/images/irm.png";
 
 import { routes, sodRoutes } from "./lib/routedata";
-import ResetPassword from "./pages/resetPassword";
-import ProductSelection from "./pages/productSelection";
 import { useSwitchProduct } from "./hooks/useSwitchProduct";
 import { User } from "./utils/types";
-import SoDDashboard from "./pages/SoD/sodDashboard";
 
 function App() {
     const [, setTheme] = useState("sap_horizon");
