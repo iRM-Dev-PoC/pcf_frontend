@@ -16,19 +16,120 @@ import {
     FlexibleColumnLayout,
     ButtonDesign,
     FlexBoxDirection,
+    Card,
+    Modals,
+    MessageBoxTypes,
+    MessageBoxActions,
 } from "@ui5/webcomponents-react";
-import { userData } from "../lib/userList";
-import { User } from "../utils/types";
+import { getAllRoleData } from "../utils/types";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import Loading from "./Loading";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { ThemingParameters } from "@ui5/webcomponents-react-base";
+import RoleEditForm from "./RoleEditForm";
 
-const AddUsers = () => {
+const AddRoles = () => {
     const [layout, setLayout] = useState<FCLLayout>(FCLLayout.OneColumn);
+    const [isEdit, setIsEdit] = useState(false);
     const [isFullScreen, setIsFullScreen] = useState(false);
-    const [selectedUser, setSelectedUser] = useState<User>(userData[0]);
+    const [selectedRole, setSelectedRole] = useState<
+        getAllRoleData | undefined
+    >(undefined);
+    const [error, setError] = useState(false);
+
+    const showDeleteConfirmation = Modals.useShowMessageBox();
+    const queryClient = useQueryClient();
+
+    const fetchData = async () => {
+        try {
+            const endPointAllRoles = `${import.meta.env.VITE_BACKEND_BASE_URL}/role-master/get-all-roles`;
+            const response = await fetch(endPointAllRoles);
+            if (!response.ok) {
+                setError(true);
+            }
+            setError(false);
+            return response.json();
+        } catch (error) {
+            console.error(error);
+            setError(true);
+        }
+    };
+
+    const { data, isFetching, isError } = useQuery({
+        queryKey: ["allRoleData"],
+        queryFn: fetchData,
+        retry: 3,
+    });
+
+    const deleteRoleData = async (id: string) => {
+        const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/role-master/delete-role`;
+        try {
+            const response = await axios.delete(endPoint, {
+                data: {
+                    id,
+                },
+            });
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            setError(true);
+        }
+    };
+
+    const handleDeleteRole = async (id: string) => {
+        await toast.promise(deleteRoleData(id), {
+            loading: "Deleting Role...",
+            success: "Role deleted successfully!",
+            error: (error) => `Failed to delete role: ${error.message}`,
+        });
+        await queryClient.invalidateQueries({ queryKey: ["allRoleData"] });
+        setIsEdit(false);
+        setIsFullScreen(false);
+        setLayout(FCLLayout.OneColumn);
+    };
+
+    const roleDataRes = data;
+
+    const allRoleData: getAllRoleData[] = roleDataRes?.data;
+
+    if (isError || error) {
+        return (
+            <StandardListItem className="pointer-events-none">
+                Something went wrong!
+            </StandardListItem>
+        );
+    }
+
+    if (isFetching) {
+        return (
+            <StandardListItem className="pointer-events-none">
+                <Loading />
+            </StandardListItem>
+        );
+    }
+
+    if (!isFetching && allRoleData === undefined) {
+        return (
+            <StandardListItem className="pointer-events-none">
+                Something went wrong!
+            </StandardListItem>
+        );
+    }
+
+    if (!isFetching && data?.statuscode === 500) {
+        return (
+            <StandardListItem className="pointer-events-none">
+                Something went wrong!
+            </StandardListItem>
+        );
+    }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onStartColumnClick = (e: any) => {
-        const userId = parseInt(e.detail.item.dataset.userId);
-        setSelectedUser(userData.find((user) => user.id === userId)!);
+        const roleId = parseInt(e.detail.item.dataset.roleId);
+        const role = allRoleData.find((role) => Number(role.ID) === roleId);
+        setSelectedRole(role);
         setLayout(FCLLayout.TwoColumnsMidExpanded);
     };
 
@@ -38,17 +139,18 @@ const AddUsers = () => {
                 height: "100%",
                 marginTop: "0.5rem",
                 marginBottom: "0.5rem",
+                borderRadius: ThemingParameters.sapButton_BorderCornerRadius,
             }}
             layout={layout}
             startColumn={
-                <List headerText="Users" onItemClick={onStartColumnClick}>
-                    {userData.map((user, index) => (
+                <List onItemClick={onStartColumnClick}>
+                    {allRoleData?.map((role, index) => (
                         <StandardListItem
-                            description={user.email}
-                            data-user-id={user.id}
-                            key={`${user.id}-${index}`}
+                            description={role.USER_EMAIL}
+                            data-role-id={role.ID}
+                            key={`${role.ID}-${index}`}
                         >
-                            {user.fName + " " + user.lName}
+                            {role.USER_NAME}
                         </StandardListItem>
                     ))}
                 </List>
@@ -56,18 +158,8 @@ const AddUsers = () => {
             midColumn={
                 <>
                     <Toolbar design={ToolbarDesign.Solid}>
-                        <Title>
-                            {selectedUser.fName + " " + selectedUser.lName}
-                        </Title>
+                        <Title>{selectedRole?.USER_NAME}</Title>
                         <ToolbarSpacer />
-                        <Button
-                            icon="decline"
-                            design={ButtonDesign.Transparent}
-                            onClick={() => {
-                                setLayout(FCLLayout.OneColumn);
-                            }}
-                        />
-
                         {isFullScreen ? (
                             <Button
                                 icon="exit-full-screen"
@@ -89,9 +181,47 @@ const AddUsers = () => {
                                 }}
                             />
                         )}
+                        <Button
+                            icon="delete"
+                            design={ButtonDesign.Transparent}
+                            onClick={() => {
+                                showDeleteConfirmation({
+                                    onClose(event) {
+                                        if (event.detail.action === "Delete") {
+                                            handleDeleteRole(
+                                                selectedRole?.ID ?? ""
+                                            );
+                                        }
+                                    },
+                                    type: MessageBoxTypes.Warning,
+                                    actions: [
+                                        MessageBoxActions.Delete,
+                                        MessageBoxActions.Cancel,
+                                    ],
+
+                                    children:
+                                        "Are sure you want to delete this role?",
+                                });
+                            }}
+                        />
+                        <Button
+                            icon="edit"
+                            design={ButtonDesign.Transparent}
+                            onClick={() => {
+                                setIsEdit(!isEdit);
+                            }}
+                        />
+                        <Button
+                            icon="decline"
+                            design={ButtonDesign.Transparent}
+                            onClick={() => {
+                                setLayout(FCLLayout.OneColumn);
+                                setIsEdit(false);
+                            }}
+                        />
                     </Toolbar>
                     <Toolbar
-                        key={selectedUser.lName}
+                        key={selectedRole?.USER_ID}
                         style={{ height: "200px" }}
                     >
                         <Avatar
@@ -106,39 +236,44 @@ const AddUsers = () => {
                             <FlexBox>
                                 <Label>Name:</Label>
                                 <Text style={{ marginLeft: "2px" }}>
-                                    {selectedUser.fName +
-                                        " " +
-                                        selectedUser.lName}
+                                    {selectedRole?.USER_NAME}
                                 </Text>
                             </FlexBox>
                             <FlexBox>
                                 <Label>Email:</Label>
                                 <Text style={{ marginLeft: "2px" }}>
-                                    {selectedUser.email}
+                                    {selectedRole?.USER_EMAIL}
                                 </Text>
                             </FlexBox>
                             <FlexBox>
                                 <Label>User Type:</Label>
                                 <Text style={{ marginLeft: "2px" }}>
-                                    {selectedUser.role}
+                                    {selectedRole?.ROLE_NAME}
                                 </Text>
                             </FlexBox>
                         </FlexBox>
                     </Toolbar>
 
-                    <List headerText="Permissions" growing="Scroll">
-                        {Object.entries(selectedUser.permissions).map(
-                            ([key, value]) => (
-                                <StandardListItem key={key}>
-                                    {key}: {value.toString()}
-                                </StandardListItem>
-                            )
+                    <Card>
+                        {isEdit && (
+                            <Card>
+                                <RoleEditForm
+                                    id={selectedRole?.ID ?? ""}
+                                    roleName={selectedRole?.USER_NAME ?? ""}
+                                    roleDescription={
+                                        selectedRole?.USER_EMAIL ?? ""
+                                    }
+                                    setIsEdit={setIsEdit}
+                                    setIsFullScreen={setIsFullScreen}
+                                    setLayout={setLayout}
+                                />
+                            </Card>
                         )}
-                    </List>
+                    </Card>
                 </>
             }
         />
     );
 };
 
-export default AddUsers;
+export default AddRoles;
