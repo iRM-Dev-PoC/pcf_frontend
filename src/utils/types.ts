@@ -30,6 +30,8 @@ type getAllUserData = {
     ROLE_NAME: string;
 };
 
+type getAllRoleData = {};
+
 type ProductSwitchType = {
     isSwitchProduct: boolean;
     setIsSwitchProduct: Dispatch<SetStateAction<boolean>>;
@@ -395,4 +397,5 @@ export type {
     ERP,
     dataCardType,
     getAllUserData,
+    getAllRoleData,
 };

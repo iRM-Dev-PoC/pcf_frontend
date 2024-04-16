@@ -67,7 +67,7 @@ const AddUsers = () => {
         try {
             const response = await axios.delete(endPoint, {
                 data: {
-                    id: id,
+                    id,
                 },
             });
             return response.data;
