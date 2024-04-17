@@ -23,12 +23,16 @@ import ResetPassword from "./pages/resetPassword";
 import ProductSelection from "./pages/productSelection";
 import SoDDashboard from "./pages/SoD/sodDashboard";
 import SubModule from "./pages/subModule";
+import ModuleMaster from "./pages/moduleMaster";
 
 import companyLogo from "./assets/images/irm.png";
 
 import { routes, sodRoutes } from "./lib/routedata";
 import { useSwitchProduct } from "./hooks/useSwitchProduct";
 import { User } from "./utils/types";
+
+
+
 
 function App() {
     const [, setTheme] = useState("sap_horizon");
@@ -152,6 +156,11 @@ function App() {
                                 <Route
                                     path="/pcf/config/subModule"
                                     element={<SubModule />}
+                                />
+
+                                <Route
+                                  path="/pcf/config/moduleMaster"
+                                  element={<ModuleMaster/>}
                                 />
 
                                 <Route
