@@ -4,10 +4,6 @@ import {
     SideNavigationItem,
     SideNavigationSubItem,
 } from "@ui5/webcomponents-react";
-import "@ui5/webcomponents/dist/Assets.js";
-import "@ui5/webcomponents-fiori/dist/Assets.js";
-import "@ui5/webcomponents-react/dist/Assets.js";
-import "@ui5/webcomponents-icons/dist/AllIcons.js";
 import { useSidebar } from "../hooks/useSidebar";
 
 type SubItemProps = {

@@ -14,6 +14,10 @@ import { ProductSwitchProvider } from "./context/productSwitchContext.tsx";
 import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import "@ui5/webcomponents/dist/Assets.js";
+import "@ui5/webcomponents-fiori/dist/Assets.js";
+import "@ui5/webcomponents-react/dist/Assets.js";
+import "@ui5/webcomponents-icons/dist/AllIcons.js";
 
 const queryClient = new QueryClient();
 
