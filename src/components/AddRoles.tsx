@@ -68,12 +68,19 @@ const AddRoles = () => {
             const response = await axios.delete(endPoint, {
                 data: {
                     id,
+                    customer_id: 1,
                 },
             });
+            if (response.data?.statuscode === 400) {
+                setError(true);
+                throw response.data?.message;
+            }
+
             return response.data;
         } catch (error) {
             console.error(error);
             setError(true);
+            throw error;
         }
     };
 
