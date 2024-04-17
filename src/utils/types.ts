@@ -30,7 +30,18 @@ type getAllUserData = {
     ROLE_NAME: string;
 };
 
-type getAllRoleData = {};
+type getAllRoleData = {
+    ID: number;
+    ROLE_NAME: string;
+    ROLE_DESC: string;
+    CUSTOMER_ID: number;
+    ROLE_PERMISSION: string;
+    IS_ACTIVE: string;
+    CREATED_BY: number;
+    CREATED_ON: string;
+    CHANGED_ON: string;
+    CHANGED_BY: number;
+};
 
 type ProductSwitchType = {
     isSwitchProduct: boolean;

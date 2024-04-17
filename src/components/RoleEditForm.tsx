@@ -21,7 +21,7 @@ import { Dispatch, SetStateAction } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
 type RoleData = {
-    id: string;
+    id: number;
     roleName: string;
     roleDescription: string;
 };
@@ -68,6 +68,7 @@ const RoleEditForm = ({
                 id,
                 user_name: data.roleName,
                 user_roleDescription: data.roleDescription,
+                customer_id: 1,
             };
             const response = await axios.patch(endPoint, updateData);
 
@@ -104,6 +105,7 @@ const RoleEditForm = ({
                             <span>{errors.roleName?.message}</span>
                         }
                         type={InputType.Text}
+                        className="w-full"
                     />
                 </FormItem>
                 <FormItem label={<Label required>Role Description</Label>}>
