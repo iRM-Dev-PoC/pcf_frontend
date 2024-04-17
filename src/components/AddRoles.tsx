@@ -144,6 +144,12 @@ const AddRoles = () => {
             layout={layout}
             startColumn={
                 <List onItemClick={onStartColumnClick}>
+                    {allRoleData.length === 0 && (
+                        <StandardListItem className="pointer-events-none">
+                            No roles found!
+                        </StandardListItem>
+                    )}
+
                     {allRoleData?.map((role, index) => (
                         <StandardListItem
                             description={role.ROLE_DESC}
