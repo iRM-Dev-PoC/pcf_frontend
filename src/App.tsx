@@ -28,6 +28,7 @@ import companyLogo from "./assets/images/irm.png";
 import { routes, sodRoutes } from "./lib/routedata";
 import { useSwitchProduct } from "./hooks/useSwitchProduct";
 import { User } from "./utils/types";
+import SubModule from "./pages/subModule";
 
 function App() {
     const [, setTheme] = useState("sap_horizon");
@@ -148,6 +149,11 @@ function App() {
                                     element={<AddUsers />}
                                 />
 
+<Route
+                                    path="/pcf/config/subModules"
+                                    element={<SubModule/>}
+                                />
+                           
                                 <Route
                                     path="/sod/"
                                     element={<SoDDashboard />}
