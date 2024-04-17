@@ -56,6 +56,16 @@ const routes = [
                 icon: "add-employee",
                 path: "/addUsers",
             },
+            {
+                text:"Module Master",
+                icon:"sub-process-marker",
+                path:"/subModuleDetails",
+            },
+            {
+                text:"Sub-Module Master",
+                icon:"sub-process-marker",
+                path:"/subModule",
+            },
         ],
     },
 ];
