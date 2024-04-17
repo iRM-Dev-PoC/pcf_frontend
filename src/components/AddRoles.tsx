@@ -62,7 +62,7 @@ const AddRoles = () => {
         retry: 3,
     });
 
-    const deleteRoleData = async (id: string) => {
+    const deleteRoleData = async (id: number) => {
         const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/role-master/delete-role`;
         try {
             const response = await axios.delete(endPoint, {
@@ -77,7 +77,7 @@ const AddRoles = () => {
         }
     };
 
-    const handleDeleteRole = async (id: string) => {
+    const handleDeleteRole = async (id: number) => {
         await toast.promise(deleteRoleData(id), {
             loading: "Deleting Role...",
             success: "Role deleted successfully!",
@@ -146,11 +146,11 @@ const AddRoles = () => {
                 <List onItemClick={onStartColumnClick}>
                     {allRoleData?.map((role, index) => (
                         <StandardListItem
-                            description={role.USER_EMAIL}
+                            description={role.ROLE_DESC}
                             data-role-id={role.ID}
                             key={`${role.ID}-${index}`}
                         >
-                            {role.USER_NAME}
+                            {role.ROLE_NAME}
                         </StandardListItem>
                     ))}
                 </List>
@@ -158,7 +158,7 @@ const AddRoles = () => {
             midColumn={
                 <>
                     <Toolbar design={ToolbarDesign.Solid}>
-                        <Title>{selectedRole?.USER_NAME}</Title>
+                        <Title>{selectedRole?.ROLE_NAME}</Title>
                         <ToolbarSpacer />
                         {isFullScreen ? (
                             <Button
@@ -189,7 +189,7 @@ const AddRoles = () => {
                                     onClose(event) {
                                         if (event.detail.action === "Delete") {
                                             handleDeleteRole(
-                                                selectedRole?.ID ?? ""
+                                                selectedRole?.ID ?? 0
                                             );
                                         }
                                     },
@@ -220,10 +220,7 @@ const AddRoles = () => {
                             }}
                         />
                     </Toolbar>
-                    <Toolbar
-                        key={selectedRole?.USER_ID}
-                        style={{ height: "200px" }}
-                    >
+                    <Toolbar key={selectedRole?.ID} style={{ height: "200px" }}>
                         <Avatar
                             icon="person-placeholder"
                             size={AvatarSize.XL}
@@ -236,19 +233,13 @@ const AddRoles = () => {
                             <FlexBox>
                                 <Label>Name:</Label>
                                 <Text style={{ marginLeft: "2px" }}>
-                                    {selectedRole?.USER_NAME}
-                                </Text>
-                            </FlexBox>
-                            <FlexBox>
-                                <Label>Email:</Label>
-                                <Text style={{ marginLeft: "2px" }}>
-                                    {selectedRole?.USER_EMAIL}
-                                </Text>
-                            </FlexBox>
-                            <FlexBox>
-                                <Label>User Type:</Label>
-                                <Text style={{ marginLeft: "2px" }}>
                                     {selectedRole?.ROLE_NAME}
+                                </Text>
+                            </FlexBox>
+                            <FlexBox>
+                                <Label>Description:</Label>
+                                <Text style={{ marginLeft: "2px" }}>
+                                    {selectedRole?.ROLE_DESC}
                                 </Text>
                             </FlexBox>
                         </FlexBox>
@@ -256,18 +247,14 @@ const AddRoles = () => {
 
                     <Card>
                         {isEdit && (
-                            <Card>
-                                <RoleEditForm
-                                    id={selectedRole?.ID ?? ""}
-                                    roleName={selectedRole?.USER_NAME ?? ""}
-                                    roleDescription={
-                                        selectedRole?.USER_EMAIL ?? ""
-                                    }
-                                    setIsEdit={setIsEdit}
-                                    setIsFullScreen={setIsFullScreen}
-                                    setLayout={setLayout}
-                                />
-                            </Card>
+                            <RoleEditForm
+                                id={selectedRole?.ID ?? 0}
+                                roleName={selectedRole?.ROLE_NAME ?? ""}
+                                roleDescription={selectedRole?.ROLE_DESC ?? ""}
+                                setIsEdit={setIsEdit}
+                                setIsFullScreen={setIsFullScreen}
+                                setLayout={setLayout}
+                            />
                         )}
                     </Card>
                 </>

@@ -56,6 +56,7 @@ const RoleCreationForm = ({
             const reqData = {
                 role_name: data.roleName,
                 role_desc: data.roleDescription,
+                customer_id: 1,
             };
             const response = await axios.post(endPoint, reqData);
             return response.data;
