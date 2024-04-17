@@ -150,7 +150,7 @@ function App() {
                                 />
 
 <Route
-                                    path="/pcf/config/subModules"
+                                    path="/pcf/config/subModule"
                                     element={<SubModule/>}
                                 />
                            
