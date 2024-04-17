@@ -59,7 +59,7 @@ const routes = [
             {
                 text: "Module Master",
                 icon: "grid",
-                path: "/subModuleDetails",
+                path: "/moduleMaster",
             },
             {
                 text: "Sub-Module Master",
