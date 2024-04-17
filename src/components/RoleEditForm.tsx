@@ -66,15 +66,20 @@ const RoleEditForm = ({
         try {
             const updateData = {
                 id,
-                user_name: data.roleName,
-                user_roleDescription: data.roleDescription,
+                role_name: data.roleName,
+                role_desc: data.roleDescription,
                 customer_id: 1,
             };
             const response = await axios.patch(endPoint, updateData);
 
+            if (response.data?.statuscode === 400) {
+                throw response.data?.message;
+            }
+
             return response.data;
         } catch (error) {
             console.error(error);
+            throw error;
         } finally {
             setIsEdit(false);
         }
@@ -93,7 +98,11 @@ const RoleEditForm = ({
     };
 
     return (
-        <Form onSubmit={handleSubmit(onSubmit)} labelSpanM={4}>
+        <Form
+            onSubmit={handleSubmit(onSubmit)}
+            labelSpanM={4}
+            className="flex items-center justify-center"
+        >
             <FormGroup>
                 <FormItem label={<Label required>Role Name</Label>}>
                     <Input
@@ -119,6 +128,7 @@ const RoleEditForm = ({
                         valueStateMessage={
                             <span>{errors.roleDescription?.message}</span>
                         }
+                        className="w-full"
                     />
                 </FormItem>
             </FormGroup>

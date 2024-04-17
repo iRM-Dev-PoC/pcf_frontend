@@ -10,8 +10,6 @@ const DonutChartCard = () => {
                 chartConfig={{
                     innerRadius: "20%",
                     outerRadius: "90%",
-                    // legendPosition: "middle",
-                    // legendHorizontalAlign: "right",
                 }}
                 dataset={chartData}
                 dimension={{

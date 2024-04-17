@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import {
     List,
     Toolbar,
@@ -37,8 +37,7 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
         setLayout(FCLLayout.TwoColumnsMidExpanded);
     };
 
-    const handleCardClick = ({ data }: { data: dataCardType }) => {
-        console.table(data);
+    const handleCardClick = () => {
         setLayout(FCLLayout.TwoColumnsMidExpanded);
     };
 
@@ -56,17 +55,16 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
                     onItemClick={onStartColumnClick}
                     key={`${selectedCard.header}-${selectedCard.id}`}
                 >
-                    {dataCard.map((card, index) => (
-                        <>
+                    {dataCard.map((card) => (
+                        <Fragment key={card.id}>
                             <RiskCard
-                                key={`${index}-${card.id}-${card.header}-${card.risk}`}
                                 header={card.header}
                                 icon={card.icon}
                                 risk={card.risk}
                                 description={card.description}
-                                onClick={() => handleCardClick({ data: card })}
+                                onClick={handleCardClick}
                             />
-                        </>
+                        </Fragment>
                     ))}
                 </List>
             }
@@ -134,7 +132,7 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
                                 >
                                     {dasboardCardData.map((cardData, index) => (
                                         <DashboardCards
-                                            key={index}
+                                            key={`${index}-${cardData.count}`}
                                             header={cardData.header}
                                             description={cardData.description}
                                             count={cardData.count}

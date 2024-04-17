@@ -71,10 +71,10 @@ const UserEditForm = ({
                 user_emp_id: "emp_5651",
             };
             const response = await axios.patch(endPoint, updateData);
-
             return response.data;
         } catch (error) {
             console.error(error);
+            throw error;
         } finally {
             setIsEdit(false);
         }
