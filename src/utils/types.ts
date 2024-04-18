@@ -362,6 +362,20 @@ type dataCardType = {
     description: string;
 };
 
+type getAllModulesType={
+            ID: number,
+            MODULE_NAME: string,
+            DISPLAY_MODULE_NAME: string,
+            MODULE_DESC: string,
+            PARENT_MODULE_ID: number,
+            IS_ACTIVE: string,
+            CREATED_ON: string,
+            CREATED_BY: number,
+            CHANGED_ON: string,
+            CHANGED_BY: number,
+            CUSTOMER_ID: number
+}
+
 export type {
     SignInProps,
     CurrentURLType,
@@ -409,4 +423,6 @@ export type {
     dataCardType,
     getAllUserData,
     getAllRoleData,
+   getAllModulesType
+
 };
