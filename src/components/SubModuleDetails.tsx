@@ -1,13 +1,3 @@
-// const SubModuleDetails = () => {
-//   return (
-//     <div>
-//       submodules
-//     </div>
-//   )
-// }
-
-// export default SubModuleDetails;
-
 import { useState } from "react";
 import {
     List,

@@ -1,21 +1,21 @@
 import {
   Bar,
   Button,
+  ButtonDomRef,
   DynamicPage,
   DynamicPageTitle,
-  Form,
-  FormItem,
-  Input,
   MessageStrip,
   Modals,
-  TextArea,
   Title,
 } from "@ui5/webcomponents-react";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
 import ModuleMasterDetails from "../components/ModuleMasterDetails";
+import ModuleCreationForm from "../components/ModuleCreationForm";
+import { useRef } from "react";
 
 const ModuleMaster = () => {
   const showDialog = Modals.useShowDialog();
+  const closeButtonRoleref = useRef<ButtonDomRef>(null);
   return (
       <DynamicPage
           headerTitle={
@@ -33,34 +33,20 @@ const ModuleMaster = () => {
                           icon="create"
                           onClick={() => {
                               const { close } = showDialog({
-                                  headerText: "Added Role Information",
+                                  headerText: "Added Module Information",
                                   children: (
-                                      <Form
-                                          style={{
-                                              alignItems: "center",
-                                          }}
-                                      >
-                                          <FormItem label="Name">
-                                              <Input
-                                                  type="Text"
-                                                  placeholder="Role Name"
-                                              />
-                                          </FormItem>
-                                          <FormItem label="Role Description">
-                                              <TextArea />
-                                          </FormItem>
-                                      </Form>
+                                     <>
+                                     <ModuleCreationForm closeButtonref={closeButtonRoleref}/>
+                                     </>
                                   ),
-                                  footer: (
+                                  footer: ( 
                                       <Bar
                                           endContent={
                                               <>
-                                                  <Button design="Emphasized">
-                                                      Create
-                                                  </Button>
                                                   <Button
                                                       onClick={() => close()}
                                                       design="Negative"
+                                                      ref={closeButtonRoleref}
                                                   >
                                                       Close
                                                   </Button>
