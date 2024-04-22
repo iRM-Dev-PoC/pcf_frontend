@@ -65,7 +65,7 @@ const AddUsers = () => {
     const deleteUserData = async (id: string) => {
         const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/loginuser/delete-user`;
         try {
-            const response = await axios.delete(endPoint, {
+            const response = await axios.patch(endPoint, {
                 data: {
                     id,
                 },

@@ -60,15 +60,20 @@ const SubModuleDetails = () => {
     const deleteSubModuleData = async (id: number) => {
         const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/submodule-master/delete-submodule`;
         try {
-            const response = await axios.delete(endPoint, {
+            const response = await axios.patch(endPoint, {
                 data: {
                     id,
                     customer_id: 1,
                 },
             });
+            console.log(response.data)
             if (response.data?.statuscode === 400) {
                 setError(true);
                 throw response.data?.message;
+            }
+            if (response.data?.statuscode === 404 ){
+                setError(true);
+                throw response.data.message;
             }
             console.log(response.data);
             
@@ -130,8 +135,9 @@ const SubModuleDetails = () => {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onStartColumnClick = (e: any) => {
-        const submoduleId = parseInt(e.detail.item.dataset.submoduleId);
-        const submodule= allSubModuleData.find((submodule) =>Number(submodule.ID)=== submoduleId);
+        const subModuleId = parseInt(e.detail.item.dataset.submoduleId);
+
+        const submodule= allSubModuleData.find((subModule) =>Number(subModule.ID)=== subModuleId);
        
         setSelectedSubModule(submodule);
         setLayout(FCLLayout.TwoColumnsMidExpanded);
@@ -157,7 +163,7 @@ const SubModuleDetails = () => {
 {allSubModuleData?.map((submodule, index) => (
                         <StandardListItem
                             description={submodule.SUBMODULE_DESC}
-                            data-module-id={submodule.ID}
+                            data-subModule-id={submodule.ID}
                             key={`${submodule.ID}-${index}`}
                         >
                             {submodule.DISPLAY_SUBMODULE_NAME}
