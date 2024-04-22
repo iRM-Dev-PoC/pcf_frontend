@@ -65,7 +65,7 @@ const AddRoles = () => {
     const deleteRoleData = async (id: number) => {
         const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/role-master/delete-role`;
         try {
-            const response = await axios.delete(endPoint, {
+            const response = await axios.patch(endPoint, {
                 data: {
                     id,
                     customer_id: 1,

@@ -61,7 +61,7 @@ const ModuleMasterDetails = () => {
     const deleteModuleData = async (id: number) => {
         const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/module-master/delete-module`;
         try {
-            const response = await axios.delete(endPoint, {
+            const response = await axios.patch(endPoint, {
                 data: {
                     id,
                     customer_id: 1,
