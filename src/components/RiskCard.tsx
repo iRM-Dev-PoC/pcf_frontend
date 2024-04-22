@@ -1,29 +1,20 @@
 import {
     Card,
     CardHeader,
-    Icon,
     Badge,
     ExpandableText,
 } from "@ui5/webcomponents-react";
 type RiskCardProps = {
     header: string;
-    icon: string;
-    risk: string;
+    risk: number;
     description: string;
     onClick: () => void;
 };
 
-const RiskCard = ({
-    header,
-    icon,
-    risk,
-    description,
-    onClick,
-}: RiskCardProps) => {
+const RiskCard = ({ header, risk, description, onClick }: RiskCardProps) => {
     return (
         <Card style={{ width: "32rem" }} className="m-2.5">
             <CardHeader
-                avatar={<Icon name={icon} />}
                 titleText={header}
                 onClick={onClick}
                 action={
