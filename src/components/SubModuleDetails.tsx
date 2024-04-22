@@ -32,7 +32,9 @@ const SubModuleDetails = () => {
     const [layout, setLayout] = useState<FCLLayout>(FCLLayout.OneColumn);
     const [isEdit, setIsEdit] = useState(false);
     const [isFullScreen, setIsFullScreen] = useState(false);
-    const [selectedSubModule, setSelectedSubModule] = useState<getAllSubModulesType|undefined>(undefined);
+    const [selectedSubModule, setSelectedSubModule] = useState<
+        getAllSubModulesType | undefined
+    >(undefined);
     const [error, setError] = useState(false);
     const showDeleteConfirmation = Modals.useShowMessageBox();
     const queryClient = useQueryClient();
@@ -56,7 +58,7 @@ const SubModuleDetails = () => {
         queryFn: fetchData,
         retry: 3,
     });
-    
+
     const deleteSubModuleData = async (id: number) => {
         const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/submodule-master/delete-submodule`;
         try {
@@ -76,7 +78,7 @@ const SubModuleDetails = () => {
                 throw response.data.message;
             }
             console.log(response.data);
-            
+
             return response.data;
         } catch (error) {
             console.error(error);
@@ -91,12 +93,14 @@ const SubModuleDetails = () => {
             success: "Sub-Module deleted successfully!",
             error: (error) => `Failed to delete sub-module: ${error.message}`,
         });
-        await queryClient.invalidateQueries({ queryKey: ["allSubModulesData"] });
+        await queryClient.invalidateQueries({
+            queryKey: ["allSubModulesData"],
+        });
         setIsEdit(false);
         setIsFullScreen(false);
         setLayout(FCLLayout.OneColumn);
     };
- 
+
     const submoduleDataRes = data;
 
     const allSubModuleData: getAllSubModulesType[] = submoduleDataRes?.data;
@@ -117,7 +121,7 @@ const SubModuleDetails = () => {
         );
     }
 
-    if (!isFetching &&  allSubModuleData === undefined) {
+    if (!isFetching && allSubModuleData === undefined) {
         return (
             <StandardListItem className="pointer-events-none">
                 Something went wrong!
@@ -135,11 +139,14 @@ const SubModuleDetails = () => {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onStartColumnClick = (e: any) => {
-        const subModuleId = parseInt(e.detail.item.dataset.submoduleId);
 
-        const submodule= allSubModuleData.find((subModule) =>Number(subModule.ID)=== subModuleId);
-       
+        const submoduleId = parseInt(e.detail.item.dataset.submoduleId);
+        const submodule = allSubModuleData.find(
+            (submodule) => Number(submodule.ID) === submoduleId
+        );
+
         setSelectedSubModule(submodule);
+
         setLayout(FCLLayout.TwoColumnsMidExpanded);
     };
 
@@ -147,7 +154,7 @@ const SubModuleDetails = () => {
         <FlexibleColumnLayout
             style={{
                 height: "100%",
-                width:"100%",
+                width: "100%",
                 marginTop: "0.5rem",
                 marginBottom: "0.5rem",
             }}
@@ -160,7 +167,7 @@ const SubModuleDetails = () => {
                         </StandardListItem>
                     )}
 
-{allSubModuleData?.map((submodule, index) => (
+                    {allSubModuleData?.map((submodule, index) => (
                         <StandardListItem
                             description={submodule.SUBMODULE_DESC}
                             data-subModule-id={submodule.ID}
@@ -174,9 +181,7 @@ const SubModuleDetails = () => {
             midColumn={
                 <>
                     <Toolbar design={ToolbarDesign.Solid}>
-                        <Title>
-                            {selectedSubModule?.SUBMODULE_NAME}
-                        </Title>
+                        <Title>{selectedSubModule?.SUBMODULE_NAME}</Title>
                         <ToolbarSpacer />
                         {isFullScreen ? (
                             <Button
@@ -236,9 +241,12 @@ const SubModuleDetails = () => {
                                 setLayout(FCLLayout.OneColumn);
                                 setIsEdit(false);
                             }}
-                            />
+                        />
                     </Toolbar>
-                    <Toolbar key={selectedSubModule?.ID} style={{ height: "200px" }}>
+                    <Toolbar
+                        key={selectedSubModule?.ID}
+                        style={{ height: "200px" }}
+                    >
                         <Avatar
                             icon="person-placeholder"
                             size={AvatarSize.XL}
@@ -273,9 +281,16 @@ const SubModuleDetails = () => {
                         {isEdit && (
                             <SubModuleEditForm
                                 id={selectedSubModule?.ID ?? 0}
-                                subModuleName={selectedSubModule?.SUBMODULE_NAME??""}
-                                subModuleDescription={selectedSubModule?.SUBMODULE_DESC??""}
-                                displaySubModuleName={selectedSubModule?.DISPLAY_SUBMODULE_NAME??""}
+                                subModuleName={
+                                    selectedSubModule?.SUBMODULE_NAME ?? ""
+                                }
+                                subModuleDescription={
+                                    selectedSubModule?.SUBMODULE_DESC ?? ""
+                                }
+                                displaySubModuleName={
+                                    selectedSubModule?.DISPLAY_SUBMODULE_NAME ??
+                                    ""
+                                }
                                 setIsEdit={setIsEdit}
                                 setIsFullScreen={setIsFullScreen}
                                 setLayout={setLayout}
@@ -289,5 +304,3 @@ const SubModuleDetails = () => {
 };
 
 export default SubModuleDetails;
-
-
