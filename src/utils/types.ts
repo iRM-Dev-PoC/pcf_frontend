@@ -362,32 +362,46 @@ type dataCardType = {
     description: string;
 };
 
-type getAllModulesType={
-            ID: number,
-            MODULE_NAME: string,
-            DISPLAY_MODULE_NAME: string,
-            MODULE_DESC: string,
-            PARENT_MODULE_ID: number,
-            IS_ACTIVE: string,
-            CREATED_ON: string,
-            CREATED_BY: number,
-            CHANGED_ON: string,
-            CHANGED_BY: number,
-            CUSTOMER_ID: number
-}
- type getAllSubModulesType={
-            ID: number,
-            SUBMODULE_NAME:string ,
-            DISPLAY_SUBMODULE_NAME:string,
-            SUBMODULE_DESC: string,
-            PARENT_MODULE_ID: number,
-            IS_ACTIVE:string ,
-            CREATED_ON: string,
-            CREATED_BY:string ,
-            CHANGED_ON: string,
-            CHANGED_BY: number,
-            CUSTOMER_ID: number
- }
+type getAllModulesType = {
+    ID: number;
+    MODULE_NAME: string;
+    DISPLAY_MODULE_NAME: string;
+    MODULE_DESC: string;
+    PARENT_MODULE_ID: number;
+    IS_ACTIVE: string;
+    CREATED_ON: string;
+    CREATED_BY: number;
+    CHANGED_ON: string;
+    CHANGED_BY: number;
+    CUSTOMER_ID: number;
+};
+
+type getAllSubModulesType = {
+    ID: number;
+    SUBMODULE_NAME: string;
+    DISPLAY_SUBMODULE_NAME: string;
+    SUBMODULE_DESC: string;
+    PARENT_MODULE_ID: number;
+    IS_ACTIVE: string;
+    CREATED_ON: string;
+    CREATED_BY: string;
+    CHANGED_ON: string;
+    CHANGED_BY: number;
+    CUSTOMER_ID: number;
+};
+type getAllCardDataType = {
+    ID: number;
+    CHECK_POINT_NAME: string;
+    CHECK_POINT_DESC: string;
+    CONTROL_ID: number;
+    CUSTOMER_ID: number;
+    IS_ACTIVE: string;
+    CREATED_ON: string | null;
+    CREATED_BY: number | null;
+    CHANGED_ON: string | null;
+    CHANGED_BY: string | null;
+    RISK_SCORE: number;
+};
 
 export type {
     SignInProps,
@@ -437,6 +451,6 @@ export type {
     getAllUserData,
     getAllRoleData,
     getAllModulesType,
-    getAllSubModulesType
-
+    getAllSubModulesType,
+    getAllCardDataType,
 };

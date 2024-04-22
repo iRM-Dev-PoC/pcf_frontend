@@ -10,7 +10,7 @@ import {
     FlexibleColumnLayout,
     ButtonDesign,
 } from "@ui5/webcomponents-react";
-import { dataCardType } from "../utils/types";
+import { dataCardType, getAllCardDataType } from "../utils/types";
 import RiskCard from "./RiskCard";
 import cardData from "../lib/cardData";
 import NonCompilantData from "./NonCompilantData";
@@ -22,7 +22,7 @@ import DashboardCards from "./DashboardCards";
 import ActivityCard from "./ActivityCard";
 
 type FlexibleColumnTempleteProps = {
-    dataCard: dataCardType[];
+    dataCard: getAllCardDataType[];
 };
 
 const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
@@ -33,6 +33,8 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onStartColumnClick = (e: any) => {
         const cardId = parseInt(e.detail.item.dataset.cardId);
+        console.log(cardId);
+
         setSelectedCard(cardData.find((card) => card.id === cardId)!);
         setLayout(FCLLayout.TwoColumnsMidExpanded);
     };
@@ -55,13 +57,12 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
                     onItemClick={onStartColumnClick}
                     key={`${selectedCard.header}-${selectedCard.id}`}
                 >
-                    {dataCard.map((card) => (
-                        <Fragment key={card.id}>
+                    {dataCard?.map((card) => (
+                        <Fragment key={card?.ID}>
                             <RiskCard
-                                header={card.header}
-                                icon={card.icon}
-                                risk={card.risk}
-                                description={card.description}
+                                header={card?.CHECK_POINT_NAME}
+                                risk={card?.RISK_SCORE}
+                                description={card?.CHECK_POINT_DESC}
                                 onClick={handleCardClick}
                             />
                         </Fragment>
