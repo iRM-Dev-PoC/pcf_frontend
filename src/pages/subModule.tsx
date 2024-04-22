@@ -1,21 +1,22 @@
 import {
   Bar,
   Button,
+  ButtonDomRef,
   DynamicPage,
   DynamicPageTitle,
-  Form,
-  FormItem,
-  Input,
   MessageStrip,
   Modals,
-  TextArea,
   Title,
 } from "@ui5/webcomponents-react";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
 import SubModuleDetails from "../components/SubModuleDetails";
+import { useRef } from "react";
+import SubModuleCreationForm from "../components/SubModuleCreationForm";
+
 
 const SubModules = () => {
   const showDialog = Modals.useShowDialog();
+  const closeButtonRoleref=useRef<ButtonDomRef>(null);
   return (
       <DynamicPage
           headerTitle={
@@ -35,21 +36,7 @@ const SubModules = () => {
                               const { close } = showDialog({
                                   headerText: "Added Role Information",
                                   children: (
-                                      <Form
-                                          style={{
-                                              alignItems: "center",
-                                          }}
-                                      >
-                                          <FormItem label="Name">
-                                              <Input
-                                                  type="Text"
-                                                  placeholder="Role Name"
-                                              />
-                                          </FormItem>
-                                          <FormItem label="Role Description">
-                                              <TextArea />
-                                          </FormItem>
-                                      </Form>
+                                     <SubModuleCreationForm closeButtonref={closeButtonRoleref} />
                                   ),
                                   footer: (
                                       <Bar
@@ -61,6 +48,7 @@ const SubModules = () => {
                                                   <Button
                                                       onClick={() => close()}
                                                       design="Negative"
+                                                      ref={closeButtonRoleref}
                                                   >
                                                       Close
                                                   </Button>

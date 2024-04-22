@@ -375,6 +375,19 @@ type getAllModulesType={
             CHANGED_BY: number,
             CUSTOMER_ID: number
 }
+ type getAllSubModulesType={
+            ID: number,
+            SUBMODULE_NAME:string ,
+            DISPLAY_SUBMODULE_NAME:string,
+            SUBMODULE_DESC: string,
+            PARENT_MODULE_ID: number,
+            IS_ACTIVE:string ,
+            CREATED_ON: string,
+            CREATED_BY:string ,
+            CHANGED_ON: string,
+            CHANGED_BY: number,
+            CUSTOMER_ID: number
+ }
 
 export type {
     SignInProps,
@@ -423,6 +436,7 @@ export type {
     dataCardType,
     getAllUserData,
     getAllRoleData,
-   getAllModulesType
+    getAllModulesType,
+    getAllSubModulesType
 
 };
