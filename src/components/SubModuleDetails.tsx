@@ -62,12 +62,12 @@ const SubModuleDetails = () => {
     const deleteSubModuleData = async (id: number) => {
         const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/submodule-master/delete-submodule`;
         try {
-            const response = await axios.patch(endPoint, {
-                data: {
-                    id,
-                    customer_id: 1,
-                },
-            });
+            const data ={
+                id,
+                customer_id: 1,
+            }
+
+            const response = await axios.patch(endPoint, data)
             console.log(response.data)
             if (response.data?.statuscode === 400) {
                 setError(true);

@@ -70,9 +70,9 @@ const SubModuleEditForm = ({
         try {
             const updateData = {
                 id,
-                module_name:data.subModuleName,
-                module_desc: data.subModuleDescription,
-                display_module_name:data.displaySubModuleName,
+                submodule_name:data.subModuleName,
+                submodule_desc: data.subModuleDescription,
+                display_submodule_name:data.displaySubModuleName,
                 customer_id:1,
             };
             const response = await axios.patch(endPoint, updateData);

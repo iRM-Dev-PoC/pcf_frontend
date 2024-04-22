@@ -61,12 +61,11 @@ const ModuleMasterDetails = () => {
     const deleteModuleData = async (id: number) => {
         const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/module-master/delete-module`;
         try {
-            const response = await axios.patch(endPoint, {
-                data: {
-                    id,
-                    customer_id: 1,
-                },
-            });
+            const data ={
+                id,
+                customer_id: 1,
+            }
+            const response = await axios.patch(endPoint,data)
             if (response.data?.statuscode === 400) {
                 setError(true);
                 throw response.data?.message;
