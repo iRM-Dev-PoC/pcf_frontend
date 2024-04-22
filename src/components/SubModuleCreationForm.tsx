@@ -20,16 +20,19 @@ import axios from "axios";
 import { useQueryClient } from "@tanstack/react-query";
 
 type SubModuleData = {
-    subModuleName:string;
-    subModuleDescription:string;
-    displaySubModuleName:string;
+    subModuleName: string;
+    subModuleDescription: string;
+    displaySubModuleName: string;
 };
 
 const schema = z.object({
     subModuleName: z.string().min(1, { message: "Name is required" }),
-    subModuleDescription: z.string().min(1, { message: "Description is required" }),
-    displaySubModuleName: z.string().min(1, { message: "Display name is required" }),
-
+    subModuleDescription: z
+        .string()
+        .min(1, { message: "Description is required" }),
+    displaySubModuleName: z
+        .string()
+        .min(1, { message: "Display name is required" }),
 });
 
 const SubModuleCreationForm = ({
@@ -47,7 +50,7 @@ const SubModuleCreationForm = ({
         defaultValues: {
             subModuleName: "",
             subModuleDescription: "",
-            displaySubModuleName:"",
+            displaySubModuleName: "",
         },
         mode: "onChange",
         resolver: zodResolver(schema),
@@ -58,13 +61,17 @@ const SubModuleCreationForm = ({
     const fetchData = async (data: SubModuleData) => {
         try {
             const reqData = {
-                submodule_name:data.subModuleName,
-                submodule_desc:data.subModuleDescription,
-                parent_module_id:1,
-                display_module_name:data.displaySubModuleName,
-                customer_id:1
+                submodule_name: data.subModuleName,
+                submodule_desc: data.subModuleDescription,
+                display_submodule_name: data.displaySubModuleName,
+                parent_module_id: 1,
+                customer_id: 1,
             };
             const response = await axios.post(endPoint, reqData);
+            if (response.data.statuscode === 500) {
+                throw response.data?.message;
+            }
+
             return response.data;
         } catch (error) {
             console.error(error);
@@ -76,9 +83,11 @@ const SubModuleCreationForm = ({
         await toast.promise(fetchData(data), {
             loading: "Creating sub-module...",
             success: "Sub-Module created successfully!",
-            error: (error) => `Failed to create sub-module: ${error.message}`,
+            error: (error) => `Failed to create sub-module: ${error}`,
         });
-        await queryClient.invalidateQueries({ queryKey: ["allSubModulesData"] });
+        await queryClient.invalidateQueries({
+            queryKey: ["allSubModulesData"],
+        });
         closeButtonref.current?.click();
     };
 
@@ -89,7 +98,9 @@ const SubModuleCreationForm = ({
                     <Input
                         {...register("subModuleName", { required: true })}
                         valueState={
-                            errors.subModuleName? ValueState.Error : ValueState.None
+                            errors.subModuleName
+                                ? ValueState.Error
+                                : ValueState.None
                         }
                         valueStateMessage={
                             <span>{errors.subModuleName?.message}</span>
@@ -100,9 +111,13 @@ const SubModuleCreationForm = ({
                 </FormItem>
                 <FormItem label={<Label required>Display Name</Label>}>
                     <Input
-                        {...register("displaySubModuleName", { required: true })}
+                        {...register("displaySubModuleName", {
+                            required: true,
+                        })}
                         valueState={
-                            errors.displaySubModuleName? ValueState.Error : ValueState.None
+                            errors.displaySubModuleName
+                                ? ValueState.Error
+                                : ValueState.None
                         }
                         valueStateMessage={
                             <span>{errors.displaySubModuleName?.message}</span>
@@ -113,7 +128,9 @@ const SubModuleCreationForm = ({
                 </FormItem>
                 <FormItem label={<Label required>Description</Label>}>
                     <TextArea
-                        {...register("subModuleDescription", { required: true })}
+                        {...register("subModuleDescription", {
+                            required: true,
+                        })}
                         valueState={
                             errors.subModuleDescription
                                 ? ValueState.Error
