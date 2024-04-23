@@ -33,8 +33,6 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onStartColumnClick = (e: any) => {
         const cardId = parseInt(e.detail.item.dataset.cardId);
-        console.log(cardId);
-
         setSelectedCard(cardData.find((card) => card.id === cardId)!);
         setLayout(FCLLayout.TwoColumnsMidExpanded);
     };
