@@ -32,9 +32,7 @@ import { useSwitchProduct } from "./hooks/useSwitchProduct";
 import { User } from "./utils/types";
 
 
-
-
-function App() {
+const App = () =>  {
     const [, setTheme] = useState("sap_horizon");
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);

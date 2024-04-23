@@ -13,7 +13,7 @@ type RiskCardProps = {
 
 const RiskCard = ({ header, risk, description, onClick }: RiskCardProps) => {
     return (
-        <Card style={{ width: "32rem" }} className="m-2.5">
+        <Card  className="m-2.5 max-w-[32rem]">
             <CardHeader
                 titleText={header}
                 onClick={onClick}
@@ -32,9 +32,12 @@ const RiskCard = ({ header, risk, description, onClick }: RiskCardProps) => {
                 }
                 interactive={true}
             />
-            <ExpandableText maxCharacters={100} className="text-center">
+            <div className="p-4">
+            <ExpandableText maxCharacters={50} className="text-center">
                 {description}
             </ExpandableText>
+            </div>
+
         </Card>
     );
 };
