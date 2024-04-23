@@ -62,16 +62,22 @@ const SubModuleDetails = () => {
     const deleteSubModuleData = async (id: number) => {
         const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/submodule-master/delete-submodule`;
         try {
-            const data = {
+            const data ={
                 id,
                 customer_id: 1,
-            };
+            }
 
-            const response = await axios.patch(endPoint, data);
-            if (response.data?.statuscode !== 200) {
+            const response = await axios.patch(endPoint, data)
+            console.log(response.data)
+            if (response.data?.statuscode === 400) {
                 setError(true);
                 throw response.data?.message;
             }
+            if (response.data?.statuscode === 404 ){
+                setError(true);
+                throw response.data.message;
+            }
+            console.log(response.data);
 
             return response.data;
         } catch (error) {
@@ -133,6 +139,7 @@ const SubModuleDetails = () => {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onStartColumnClick = (e: any) => {
+
         const submoduleId = parseInt(e.detail.item.dataset.submoduleId);
         const submodule = allSubModuleData.find(
             (submodule) => Number(submodule.ID) === submoduleId

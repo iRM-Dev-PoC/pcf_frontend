@@ -10,7 +10,9 @@ type CanDoVSDidDoHeaderProps = {
 };
 
 const CardHeader = ({ title }: CanDoVSDidDoHeaderProps) => {
-    const handleGenerateExcelReport = () => {};
+    const handleGenerateExcelReport = () => {
+        console.log("Generate Excel Report");
+    };
     return (
         <div className="mb-3">
             {title && (
