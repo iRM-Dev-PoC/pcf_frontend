@@ -54,9 +54,7 @@ const TableHeader = ({
 
                 {/* Refresh Button */}
                 <Button
-                    onClick={() => {
-                        console.log("Refresh Button Clicked");
-                    }}
+                    onClick={() => {}}
                     style={{ alignItems: "center" }}
                     icon="refresh"
                 ></Button>
