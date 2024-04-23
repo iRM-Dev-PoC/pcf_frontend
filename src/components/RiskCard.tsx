@@ -4,7 +4,6 @@ import {
     Badge,
     ExpandableText,
 } from "@ui5/webcomponents-react";
-
 type RiskCardProps = {
     header: string;
     risk: number;
@@ -14,8 +13,7 @@ type RiskCardProps = {
 
 const RiskCard = ({ header, risk, description, onClick }: RiskCardProps) => {
     return (
-        
-        <Card className="m-2.5 max-w-[32rem]">
+        <Card  className="m-2.5 max-w-[32rem]">
             <CardHeader
                 titleText={header}
                 onClick={onClick}
@@ -35,10 +33,11 @@ const RiskCard = ({ header, risk, description, onClick }: RiskCardProps) => {
                 interactive={true}
             />
             <div className="p-4">
-                <ExpandableText maxCharacters={50}>
-                    {description}
-                </ExpandableText>
+            <ExpandableText maxCharacters={50} className="text-center">
+                {description}
+            </ExpandableText>
             </div>
+
         </Card>
     );
 };

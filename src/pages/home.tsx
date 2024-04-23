@@ -16,20 +16,20 @@ import Loading from "../components/Loading";
 
 const Home = () => {
     const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/dashboard/control-checkpoints`;
-    const [error, setError] = useState(false);
+    const [error , setError ] = useState(false)
 
     const fetchData = async () => {
         try {
             const res = await axios.get(endPoint);
-            if (res?.data?.statuscode === 200) {
-                setError(false);
-            } else {
-                setError(true);
+            if(res.data?.statuscode === 200){
+                setError(false)
+            }else{
+                setError(true)
             }
             return res.data;
         } catch (error) {
-            console.error(error);
-            setError(true);
+            console.log(error);
+            setError(true)
         }
     };
 
@@ -79,14 +79,18 @@ const Home = () => {
             headerContentPinnable={false}
         >
             <Suspense fallback={<Loading />}>
-                {
-                    isFetching && (<Loading />)
-                }
-                {
-                    error || isError ? (<IllustratedMessage name="UnableToLoad" />) : ( <FlexibleColumnTemplete dataCard={cardValue} />
 
+                {
+                    isFetching && (
+                        <Loading/>
                     )
                 }
+{error  || isError ? (
+    <IllustratedMessage name="UnableToLoad" />
+) : (
+    <FlexibleColumnTemplete dataCard={cardValue} />
+)}
+
             </Suspense>
         </DynamicPage>
     );

@@ -44,14 +44,18 @@ const OtpInput = ({ setIsValidOtp, isValidOtp }: OtpInputPropsType) => {
 
         const validateOtpData = await validateOtp(validateOtpValues.otp);
 
+        console.log(validateOtpData);
+
         if (!validateOtpData) {
             setIsValidOtp(false);
             setValidOTP(false);
+            console.log(validOTP);
 
             return;
         }
         setIsValidOtp(true);
         setValidOTP(true);
+        console.log(validOTP);
     };
 
     return (

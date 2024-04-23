@@ -14,10 +14,27 @@ import { ProductSwitchProvider } from "./context/productSwitchContext.tsx";
 import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import "@ui5/webcomponents/dist/Assets.js";
-import "@ui5/webcomponents-fiori/dist/Assets.js";
-import "@ui5/webcomponents-react/dist/Assets.js";
-import "@ui5/webcomponents-icons/dist/AllIcons.js";
+import "@ui5/webcomponents-icons/dist/menu2.js"
+import "@ui5/webcomponents-icons/dist/log.js"
+import "@ui5/webcomponents-icons/dist/full-screen.js"
+import "@ui5/webcomponents-icons/dist/wrench.js"
+import "@ui5/webcomponents-icons/dist/customer-order-entry.js"
+import "@ui5/webcomponents-icons/dist/add-employee.js"
+import "@ui5/webcomponents-icons/dist/permission.js"
+import "@ui5/webcomponents-icons/dist/key.js"
+import "@ui5/webcomponents-icons/dist/home.js"
+import "@ui5/webcomponents-icons/dist/customer-and-contacts.js"
+import "@ui5/webcomponents-icons/dist/drop-down-list.js"
+import "@ui5/webcomponents-icons/dist/manager-insight.js"
+import "@ui5/webcomponents-icons/dist/role.js"
+import "@ui5/webcomponents-icons/dist/provision.js"
+import "@ui5/webcomponents-icons/dist/flight.js"
+import "@ui5/webcomponents-icons/dist/contacts.js"
+import "@ui5/webcomponents-icons/dist/business-objects-experience.js"
+import "@ui5/webcomponents-icons/dist/activity-individual.js"
+import "@ui5/webcomponents-icons/dist/process.js"
+import "@ui5/webcomponents-icons/dist/person-placeholder.js"
+import "@ui5/webcomponents-icons/dist/delete.js"
 
 const queryClient = new QueryClient();
 
