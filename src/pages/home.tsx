@@ -79,14 +79,13 @@ const Home = () => {
             headerContentPinnable={false}
         >
             <Suspense fallback={<Loading />}>
-                {
-                    isFetching && (<Loading />)
-                }
-                {
-                    error || isError ? (<IllustratedMessage name="UnableToLoad" />) : ( <FlexibleColumnTemplete dataCard={cardValue} />
-
-                    )
-                }
+                {error ? (
+                    <IllustratedMessage name="UnableToLoad" />
+                ) : !isFetching && !isError ? (
+                    <IllustratedMessage name="UnableToLoad" />
+                ) : (
+                    <FlexibleColumnTemplete dataCard={cardValue} />
+                )}
             </Suspense>
         </DynamicPage>
     );
