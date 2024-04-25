@@ -33,8 +33,10 @@ type CheckPointEditFormProps = {
 };
 
 const schema = z.object({
-	roleName: z.string().min(1, { message: "Name is required" }),
-	roleDescription: z.string().min(1, { message: "Description is required" }),
+	checkPointName: z.string().min(1, { message: "Name is required" }),
+	checkPointDescription: z
+		.string()
+		.min(1, { message: "Description is required" }),
 });
 
 const CheckPointEditForm = ({
