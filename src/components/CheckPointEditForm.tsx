@@ -20,13 +20,13 @@ import axios from "axios";
 import { Dispatch, SetStateAction } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
-type RoleData = {
+type CheckPointData = {
 	id: number;
-	roleName: string;
-	roleDescription: string;
+	checkPointName: string;
+	checkPointDescription: string;
 };
 
-type RoleEditFormProps = {
+type CheckPointEditFormProps = {
 	setIsEdit: Dispatch<SetStateAction<boolean>>;
 	setIsFullScreen: Dispatch<SetStateAction<boolean>>;
 	setLayout: Dispatch<SetStateAction<FCLLayout>>;
@@ -37,14 +37,14 @@ const schema = z.object({
 	roleDescription: z.string().min(1, { message: "Description is required" }),
 });
 
-const RoleEditForm = ({
+const CheckPointEditForm = ({
 	id,
-	roleDescription,
-	roleName,
+	checkPointDescription,
+	checkPointName,
 	setIsEdit,
 	setLayout,
 	setIsFullScreen,
-}: RoleEditFormProps & RoleData) => {
+}: CheckPointEditFormProps & CheckPointData) => {
 	const queryClient = useQueryClient();
 	const {
 		handleSubmit,
@@ -53,21 +53,23 @@ const RoleEditForm = ({
 	} = useForm({
 		defaultValues: {
 			id,
-			roleDescription,
-			roleName,
+			checkPointName,
+			checkPointDescription,
 		},
 		mode: "onChange",
 		resolver: zodResolver(schema),
 	});
 
-	const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/role-master/update-role`;
+	const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/check-point-master/update-check-point`;
 
-	const updateRole = async (data: RoleData) => {
+	const updateCheckPoint = async (data: CheckPointData) => {
+		console.log(data);
+
 		try {
 			const updateData = {
 				id,
-				role_name: data.roleName,
-				role_desc: data.roleDescription,
+				check_point_name: data.checkPointName,
+				check_point_desc: data.checkPointDescription,
 				customer_id: 1,
 			};
 			const response = await axios.patch(endPoint, updateData);
@@ -85,13 +87,14 @@ const RoleEditForm = ({
 		}
 	};
 
-	const onSubmit = async (data: RoleData) => {
-		await toast.promise(updateRole(data), {
-			loading: "Updating role...",
-			success: "Role updated successfully!",
-			error: (error) => `Failed to update role: ${error.message}`,
+	const onSubmit = async (data: CheckPointData) => {
+		console.log(data);
+		await toast.promise(updateCheckPoint(data), {
+			loading: "Updating checkPoint...",
+			success: "CheckPoint updated successfully!",
+			error: (error) => `Failed to update checkPoint: ${error.message}`,
 		});
-		await queryClient.invalidateQueries({ queryKey: ["allRoleData"] });
+		await queryClient.invalidateQueries({ queryKey: ["allCheckPointData"] });
 		setIsEdit(false);
 		setIsFullScreen(false);
 		setLayout(FCLLayout.OneColumn);
@@ -103,22 +106,26 @@ const RoleEditForm = ({
 			labelSpanM={4}
 			className="flex items-center justify-center">
 			<FormGroup>
-				<FormItem label={<Label required>Role Name</Label>}>
+				<FormItem label={<Label required>CheckPoint Name</Label>}>
 					<Input
-						{...register("roleName", { required: true })}
-						valueState={errors.roleName ? ValueState.Error : ValueState.None}
-						valueStateMessage={<span>{errors.roleName?.message}</span>}
+						{...register("checkPointName", { required: true })}
+						valueState={
+							errors.checkPointName ? ValueState.Error : ValueState.None
+						}
+						valueStateMessage={<span>{errors.checkPointName?.message}</span>}
 						type={InputType.Text}
 						className="w-full"
 					/>
 				</FormItem>
-				<FormItem label={<Label required>Role Description</Label>}>
+				<FormItem label={<Label required>CheckPoint Description</Label>}>
 					<TextArea
-						{...register("roleDescription", { required: true })}
+						{...register("checkPointDescription", { required: true })}
 						valueState={
-							errors.roleDescription ? ValueState.Error : ValueState.None
+							errors.checkPointDescription ? ValueState.Error : ValueState.None
 						}
-						valueStateMessage={<span>{errors.roleDescription?.message}</span>}
+						valueStateMessage={
+							<span>{errors.checkPointDescription?.message}</span>
+						}
 						className="w-full"
 					/>
 				</FormItem>
@@ -132,4 +139,4 @@ const RoleEditForm = ({
 	);
 };
 
-export default RoleEditForm;
+export default CheckPointEditForm;
