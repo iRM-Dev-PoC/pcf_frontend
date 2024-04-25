@@ -36,6 +36,8 @@ import "@ui5/webcomponents-icons/dist/process.js";
 import "@ui5/webcomponents-icons/dist/person-placeholder.js";
 import "@ui5/webcomponents-icons/dist/delete.js";
 import "@ui5/webcomponents-icons/dist/exit-full-screen.js";
+import "@ui5/webcomponents-icons/dist/flag.js";
+import "@ui5/webcomponents-icons/dist/create.js";
 import "@ui5/webcomponents-icons/Assets.js";
 import "@ui5/webcomponents-icons/AllIcons.js";
 import "@ui5/webcomponents/Assets.js";
