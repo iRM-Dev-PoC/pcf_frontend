@@ -41,9 +41,15 @@ import "@ui5/webcomponents-icons/dist/create.js";
 import "@ui5/webcomponents-icons/dist/detail-view.js";
 import "@ui5/webcomponents-icons/dist/synchronize.js";
 import "@ui5/webcomponents-icons/dist/performance.js";
-import "@ui5/webcomponents-icons/Assets.js";
+import "@ui5/webcomponents-icons/dist/org-chart.js";
+import "@ui5/webcomponents-icons/dist/add-document.js";
+import "@ui5/webcomponents-icons/dist/create-entry-time.js";
+import "@ui5/webcomponents-icons/dist/upload-to-cloud.js";
 import "@ui5/webcomponents-icons/AllIcons.js";
+import "@ui5/webcomponents-fiori/Assets.js";
 import "@ui5/webcomponents/Assets.js";
+import "@ui5/webcomponents-icons-tnt/AllIcons.js";
+import "@ui5/webcomponents-icons-tnt/Assets.js";
 import "@ui5/webcomponents-localization/Assets.js";
 
 const queryClient = new QueryClient();

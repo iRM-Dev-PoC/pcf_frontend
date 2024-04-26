@@ -44,6 +44,11 @@ const routes = [
 				icon: "flag-2",
 				path: "/checkpoint",
 			},
+			{
+				text: "Report Check-Point Mapping",
+				icon: "org-chart",
+				path: "/reportCheckpointMapping",
+			},
 		],
 	},
 	{

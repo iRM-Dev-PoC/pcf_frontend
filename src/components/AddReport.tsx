@@ -30,7 +30,7 @@ import ReportEditForm from "./ReportEditForm";
 import ErrorComponent from "./ErrorComponent";
 import NoDataComponent from "./NoDataComponent";
 
-const ReportDetails = () => {
+const AddReport = () => {
 	const [layout, setLayout] = useState<FCLLayout>(FCLLayout.OneColumn);
 	const [isEdit, setIsEdit] = useState(false);
 	const [isFullScreen, setIsFullScreen] = useState(false);
@@ -264,4 +264,4 @@ const ReportDetails = () => {
 	);
 };
 
-export default ReportDetails;
+export default AddReport;

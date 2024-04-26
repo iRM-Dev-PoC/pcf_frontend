@@ -424,6 +424,30 @@ type getAllModuleType = {
 	CHANGED_BY: string;
 };
 
+type reportDataType = {
+	ID: number;
+	REPORT_NAME: string;
+};
+
+type checkPointDatType = {
+	ID: number;
+	CHECK_POINT_NAME: string;
+};
+
+type getReportCheckPointMappingType = {
+	ID: number;
+	REPORT_ID: number;
+	CHECK_POINT_ID: number;
+	CUSTOMER_ID: number;
+	IS_ACTIVE: string;
+	CREATED_BY: number;
+	CREATED_ON: string;
+	CHANGED_ON: string | null;
+	CHANGED_BY: string | null;
+	reportdata: reportDataType | null;
+	checkpointdata: checkPointDatType | null;
+};
+
 export type {
 	SignInProps,
 	CurrentURLType,
@@ -476,4 +500,7 @@ export type {
 	getAllCardDataType,
 	getAllCheckPointData,
 	getAllModuleType,
+	getReportCheckPointMappingType,
+	reportDataType,
+	checkPointDatType,
 };
