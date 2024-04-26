@@ -1,20 +1,21 @@
 import {
     Bar,
     Button,
+    ButtonDomRef,
     DynamicPage,
     DynamicPageTitle,
-    Form,
-    FormItem,
-    Input,
     MessageStrip,
     Modals,
     Title,
 } from "@ui5/webcomponents-react";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
 import ReportDetails from "../components/ReportDetails";
+import { useRef } from "react";
+import ReportCreationForm from "../components/ReportCreationForm";
 
 const Report = () => {
     const showDialog = Modals.useShowDialog();
+    const closeButtonRoleref = useRef<ButtonDomRef>(null);
     return (
         <DynamicPage
             headerTitle={
@@ -34,18 +35,9 @@ const Report = () => {
                                 const { close } = showDialog({
                                     headerText: "Report Information",
                                     children: (
-                                        <Form
-                                            style={{
-                                                alignItems: "center",
-                                            }}
-                                        >
-                                            <FormItem label="Name">
-                                                <Input type="Text" />
-                                            </FormItem>
-                                            <FormItem label="Email">
-                                                <Input type="Text" />
-                                            </FormItem>
-                                        </Form>
+                                        <ReportCreationForm
+                                        closeButtonref={closeButtonRoleref}
+                                        />
                                     ),
                                     footer: (
                                         <Bar
@@ -57,6 +49,7 @@ const Report = () => {
                                                     <Button
                                                         onClick={() => close()}
                                                         design="Negative"
+                                                        ref={closeButtonRoleref}
                                                     >
                                                         Close
                                                     </Button>
