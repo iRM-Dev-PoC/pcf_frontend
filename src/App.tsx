@@ -124,6 +124,7 @@ const App = () => {
 									path="/pcf/master/typeOfControl"
 									element={<TypeOfControl />}
 								/>
+								<Route path="/pcf/master/checkpoint" element={<CheckPoint />} />
 
 								{/* Dataload routes */}
 								<Route path="/pcf/dataLoad" element={<DataLoad />} />
@@ -133,8 +134,6 @@ const App = () => {
 								<Route path="/pcf/config/addUsers" element={<AddUsers />} />
 
 								<Route path="/pcf/config/subModule" element={<SubModule />} />
-
-								<Route path="/pcf/config/checkpoint" element={<CheckPoint />} />
 
 								<Route
 									path="/pcf/config/moduleMaster"

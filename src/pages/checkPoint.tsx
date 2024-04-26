@@ -25,7 +25,7 @@ const CheckPoint = () => {
 							Information (You can see the Report Details here.)
 						</MessageStrip>
 					}
-					header={<Title>CheckPoint</Title>}
+					header={<Title>Check-Point</Title>}
 					actions={
 						<Button
 							design="Emphasized"
@@ -33,7 +33,7 @@ const CheckPoint = () => {
 							icon="create"
 							onClick={() => {
 								const { close } = showDialog({
-									headerText: "CheckPoint Information",
+									headerText: "Check-Point Information",
 									children: (
 										<CheckPointCreationForm
 											closeButtonref={closeCheckpointBtnRef}

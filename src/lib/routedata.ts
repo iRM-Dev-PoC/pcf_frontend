@@ -39,6 +39,11 @@ const routes = [
 				icon: "wrench",
 				path: "/controlLogic",
 			},
+			{
+				text: "Check-Point Master",
+				icon: "flag-2",
+				path: "/checkpoint",
+			},
 		],
 	},
 	{
@@ -65,11 +70,6 @@ const routes = [
 				text: "Sub-Module Master",
 				icon: "provision",
 				path: "/subModule",
-			},
-			{
-				text: "CheckPoint Master",
-				icon: "flag-2",
-				path: "/checkpoint",
 			},
 		],
 	},
