@@ -16,42 +16,40 @@ import {
 	FlexibleColumnLayout,
 	ButtonDesign,
 	FlexBoxDirection,
-	Card,
-	Modals,
 	MessageBoxTypes,
 	MessageBoxActions,
+	Modals,
+	Card,
 } from "@ui5/webcomponents-react";
-import { getAllRoleData } from "../utils/types";
+import { getAllModulesType } from "../utils/types";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Loading from "./Loading";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { ThemingParameters } from "@ui5/webcomponents-react-base";
-import RoleEditForm from "./RoleEditForm";
+import ModuleEditForm from "./ModuleEditForm";
 import ErrorComponent from "./ErrorComponent";
 import NoDataComponent from "./NoDataComponent";
 
-const AddRoles = () => {
+const AddModuleMaster = () => {
 	const [layout, setLayout] = useState<FCLLayout>(FCLLayout.OneColumn);
 	const [isEdit, setIsEdit] = useState(false);
 	const [isFullScreen, setIsFullScreen] = useState(false);
-	const [selectedRole, setSelectedRole] = useState<getAllRoleData | undefined>(
-		undefined
-	);
+	const [selectedModule, setSelectedModule] = useState<
+		getAllModulesType | undefined
+	>(undefined);
 	const [error, setError] = useState(false);
-
 	const showDeleteConfirmation = Modals.useShowMessageBox();
 	const queryClient = useQueryClient();
 
 	const fetchData = async () => {
 		try {
-			const endPointAllRoles = `${import.meta.env.VITE_BACKEND_BASE_URL}/role-master/get-all-roles`;
-			const response = await fetch(endPointAllRoles);
-			if (!response.ok) {
+			const endPointAllModules = `${import.meta.env.VITE_BACKEND_BASE_URL}/module-master/get-all-modules`;
+			const response = await axios.get(endPointAllModules);
+			if (response.data.statuscode !== 200) {
 				setError(true);
 			}
 			setError(false);
-			return response.json();
+			return response.data;
 		} catch (error) {
 			console.error(error);
 			setError(true);
@@ -59,13 +57,13 @@ const AddRoles = () => {
 	};
 
 	const { data, isFetching, isError } = useQuery({
-		queryKey: ["allRoleData"],
+		queryKey: ["allModulesData"],
 		queryFn: fetchData,
 		retry: 3,
 	});
 
-	const deleteRoleData = async (id: number) => {
-		const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/role-master/delete-role`;
+	const deleteModuleData = async (id: number) => {
+		const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/module-master/delete-module`;
 		try {
 			const data = {
 				id,
@@ -85,21 +83,21 @@ const AddRoles = () => {
 		}
 	};
 
-	const handleDeleteRole = async (id: number) => {
-		await toast.promise(deleteRoleData(id), {
-			loading: "Deleting Role...",
-			success: "Role deleted successfully!",
-			error: (error) => `Failed to delete role: ${error.message}`,
+	const handleDeleteModule = async (id: number) => {
+		await toast.promise(deleteModuleData(id), {
+			loading: "Deleting Module...",
+			success: "Module deleted successfully!",
+			error: (error) => `Failed to delete module: ${error.message}`,
 		});
-		await queryClient.invalidateQueries({ queryKey: ["allRoleData"] });
+		await queryClient.invalidateQueries({ queryKey: ["allModulesData"] });
 		setIsEdit(false);
 		setIsFullScreen(false);
 		setLayout(FCLLayout.OneColumn);
 	};
 
-	const roleDataRes = data;
+	const moduleDataRes = data;
 
-	const allRoleData: getAllRoleData[] = roleDataRes?.data;
+	const allModuleData: getAllModulesType[] = moduleDataRes?.data;
 
 	if (isError || error) {
 		return <ErrorComponent />;
@@ -113,23 +111,25 @@ const AddRoles = () => {
 		);
 	}
 
-	if (!isFetching && allRoleData === undefined) {
+	if (!isFetching && allModuleData === undefined) {
 		return <ErrorComponent />;
 	}
 
-	if (!isFetching && data?.statuscode === 500) {
+	if (!isFetching && data?.statuscode !== 200) {
 		return <ErrorComponent />;
 	}
 
-	if (allRoleData.length === 0) {
+	if (allModuleData.length === 0) {
 		return <NoDataComponent />;
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const onStartColumnClick = (e: any) => {
-		const roleId = parseInt(e.detail.item.dataset.roleId);
-		const role = allRoleData.find((role) => Number(role.ID) === roleId);
-		setSelectedRole(role);
+		const moduleId = parseInt(e.detail.item.dataset.moduleId);
+		const module = allModuleData.find(
+			(module) => Number(module.ID) === moduleId
+		);
+		setSelectedModule(module);
 		setLayout(FCLLayout.TwoColumnsMidExpanded);
 	};
 
@@ -137,19 +137,19 @@ const AddRoles = () => {
 		<FlexibleColumnLayout
 			style={{
 				height: "100%",
+				width: "100%",
 				marginTop: "0.5rem",
 				marginBottom: "0.5rem",
-				borderRadius: ThemingParameters.sapButton_BorderCornerRadius,
 			}}
 			layout={layout}
 			startColumn={
 				<List onItemClick={onStartColumnClick}>
-					{allRoleData?.map((role, index) => (
+					{allModuleData?.map((module, index) => (
 						<StandardListItem
-							description={role.ROLE_DESC}
-							data-role-id={role.ID}
-							key={`${role.ID}-${index}`}>
-							{role.ROLE_NAME}
+							description={module.MODULE_DESC}
+							data-module-id={module.ID}
+							key={`${module.ID}-${index}`}>
+							{module.DISPLAY_MODULE_NAME}
 						</StandardListItem>
 					))}
 				</List>
@@ -157,8 +157,9 @@ const AddRoles = () => {
 			midColumn={
 				<>
 					<Toolbar design={ToolbarDesign.Solid}>
-						<Title>{selectedRole?.ROLE_NAME}</Title>
+						<Title> {selectedModule?.MODULE_NAME} </Title>
 						<ToolbarSpacer />
+
 						{isFullScreen ? (
 							<Button
 								icon="exit-full-screen"
@@ -185,13 +186,15 @@ const AddRoles = () => {
 								showDeleteConfirmation({
 									onClose(event) {
 										if (event.detail.action === "Delete") {
-											handleDeleteRole(selectedRole?.ID ?? 0);
+											handleDeleteModule(
+												selectedModule ? selectedModule.ID : 0
+											);
 										}
 									},
 									type: MessageBoxTypes.Warning,
 									actions: [MessageBoxActions.Delete, MessageBoxActions.Cancel],
 
-									children: "Are sure you want to delete this role?",
+									children: "Are sure you want to delete this module?",
 								});
 							}}
 						/>
@@ -211,7 +214,8 @@ const AddRoles = () => {
 							}}
 						/>
 					</Toolbar>
-					<Toolbar key={selectedRole?.ID} style={{ height: "200px" }}>
+
+					<Toolbar key={selectedModule?.ID} style={{ height: "200px" }}>
 						<Avatar
 							icon="person-placeholder"
 							size={AvatarSize.XL}
@@ -223,13 +227,19 @@ const AddRoles = () => {
 							<FlexBox>
 								<Label>Name:</Label>
 								<Text style={{ marginLeft: "2px" }}>
-									{selectedRole?.ROLE_NAME}
+									{selectedModule?.MODULE_NAME}
+								</Text>
+							</FlexBox>
+							<FlexBox>
+								<Label>Display Name:</Label>
+								<Text style={{ marginLeft: "2px" }}>
+									{selectedModule?.DISPLAY_MODULE_NAME}
 								</Text>
 							</FlexBox>
 							<FlexBox>
 								<Label>Description:</Label>
 								<Text style={{ marginLeft: "2px" }}>
-									{selectedRole?.ROLE_DESC}
+									{selectedModule?.MODULE_DESC}
 								</Text>
 							</FlexBox>
 						</FlexBox>
@@ -237,10 +247,15 @@ const AddRoles = () => {
 
 					<Card>
 						{isEdit && (
-							<RoleEditForm
-								id={selectedRole ? selectedRole.ID : 0}
-								roleName={selectedRole ? selectedRole.ROLE_NAME : ""}
-								roleDescription={selectedRole ? selectedRole.ROLE_DESC : ""}
+							<ModuleEditForm
+								id={selectedModule ? selectedModule.ID : 0}
+								moduleName={selectedModule ? selectedModule.MODULE_NAME : ""}
+								moduleDescription={
+									selectedModule ? selectedModule.MODULE_DESC : ""
+								}
+								displayModuleName={
+									selectedModule ? selectedModule.DISPLAY_MODULE_NAME : ""
+								}
 								setIsEdit={setIsEdit}
 								setIsFullScreen={setIsFullScreen}
 								setLayout={setLayout}
@@ -253,4 +268,4 @@ const AddRoles = () => {
 	);
 };
 
-export default AddRoles;
+export default AddModuleMaster;
