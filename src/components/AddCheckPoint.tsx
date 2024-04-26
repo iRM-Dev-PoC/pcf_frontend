@@ -88,9 +88,9 @@ const AddCheckPoint = () => {
 
 	const handleDeleteCheckPoint = async (id: number) => {
 		await toast.promise(deleteCheckPointData(id), {
-			loading: "Deleting CheckPoint...",
-			success: "CheckPoint deleted successfully!",
-			error: (error) => `Failed to delete Check point: ${error.message}`,
+			loading: "Deleting Check-Point...",
+			success: "Check-Point deleted successfully!",
+			error: (error) => `Failed to delete Check-Point: ${error.message}`,
 		});
 		await queryClient.invalidateQueries({ queryKey: ["allCheckPointData"] });
 		setIsEdit(false);
