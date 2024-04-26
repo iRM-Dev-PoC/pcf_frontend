@@ -68,7 +68,7 @@ const routes = [
 			},
 			{
 				text: "CheckPoint Master",
-				icon: "flag",
+				icon: "flag-2",
 				path: "/checkpoint",
 			},
 		],

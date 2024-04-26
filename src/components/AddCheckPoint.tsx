@@ -28,6 +28,8 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
 import CheckPointEditForm from "./CheckPointEditForm";
+import ErrorComponent from "./ErrorComponent";
+import NoDataComponent from "./NoDataComponent";
 
 const AddCheckPoint = () => {
 	const [layout, setLayout] = useState<FCLLayout>(FCLLayout.OneColumn);
@@ -71,7 +73,7 @@ const AddCheckPoint = () => {
 				customer_id: 1,
 			};
 			const response = await axios.patch(endPoint, data);
-			if (response.data?.statuscode === 400) {
+			if (response.data?.statuscode !== 200) {
 				setError(true);
 				throw response.data?.message;
 			}
@@ -101,11 +103,7 @@ const AddCheckPoint = () => {
 	const allCheckPointData: getAllCheckPointData[] = CheckPointDataRes?.data;
 
 	if (isError || error) {
-		return (
-			<StandardListItem className="pointer-events-none">
-				Something went wrong!
-			</StandardListItem>
-		);
+		return <ErrorComponent />;
 	}
 
 	if (isFetching) {
@@ -117,19 +115,15 @@ const AddCheckPoint = () => {
 	}
 
 	if (!isFetching && allCheckPointData === undefined) {
-		return (
-			<StandardListItem className="pointer-events-none">
-				Something went wrong!
-			</StandardListItem>
-		);
+		return <ErrorComponent />;
 	}
 
-	if (!isFetching && data?.statuscode === 500) {
-		return (
-			<StandardListItem className="pointer-events-none">
-				Something went wrong!
-			</StandardListItem>
-		);
+	if (!isFetching && data?.statuscode !== 200) {
+		return <ErrorComponent />;
+	}
+
+	if (allCheckPointData.length === 0) {
+		<NoDataComponent />;
 	}
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -154,18 +148,12 @@ const AddCheckPoint = () => {
 			layout={layout}
 			startColumn={
 				<List onItemClick={onStartColumnClick}>
-					{allCheckPointData.length === 0 && (
-						<StandardListItem className="pointer-events-none">
-							No CheckPoints found!
-						</StandardListItem>
-					)}
-
-					{allCheckPointData?.map((CheckPoint, index) => (
+					{allCheckPointData?.map((checkPoint, index) => (
 						<StandardListItem
-							description={CheckPoint.CHECK_POINT_DESC}
-							data-CheckPoint-id={CheckPoint.ID}
-							key={`${CheckPoint.ID}-${index}`}>
-							{CheckPoint.CHECK_POINT_NAME}
+							description={checkPoint.CHECK_POINT_DESC}
+							data-checkPoint-id={checkPoint.ID}
+							key={`${checkPoint.ID}-${index}`}>
+							{checkPoint.CHECK_POINT_NAME}
 						</StandardListItem>
 					))}
 				</List>
@@ -201,7 +189,9 @@ const AddCheckPoint = () => {
 								showDeleteConfirmation({
 									onClose(event) {
 										if (event.detail.action === "Delete") {
-											handleDeleteCheckPoint(selectedCheckPoint?.ID ?? 0);
+											handleDeleteCheckPoint(
+												selectedCheckPoint ? selectedCheckPoint.ID : 0
+											);
 										}
 									},
 									type: MessageBoxTypes.Warning,
