@@ -31,6 +31,7 @@ import companyLogo from "./assets/images/irm.png";
 import { routes, sodRoutes } from "./lib/routedata";
 import { useSwitchProduct } from "./hooks/useSwitchProduct";
 import { User } from "./utils/types";
+import ReportCheckPointMapping from "./pages/reportCheckPointMapping";
 
 const App = () => {
 	const [, setTheme] = useState("sap_horizon");
@@ -125,6 +126,10 @@ const App = () => {
 									element={<TypeOfControl />}
 								/>
 								<Route path="/pcf/master/checkpoint" element={<CheckPoint />} />
+								<Route
+									path="/pcf/master/reportCheckpointMapping"
+									element={<ReportCheckPointMapping />}
+								/>
 
 								{/* Dataload routes */}
 								<Route path="/pcf/dataLoad" element={<DataLoad />} />

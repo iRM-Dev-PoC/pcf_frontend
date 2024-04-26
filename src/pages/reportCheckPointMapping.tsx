@@ -9,23 +9,24 @@ import {
 	Title,
 } from "@ui5/webcomponents-react";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
+import AddReportCheckPointMapping from "../components/AddReportCheckPointMapping";
 import { useRef } from "react";
-import ReportCreationForm from "../components/ReportCreationForm";
-import AddReport from "../components/AddReport";
+// import ReportCheckPointMappingCreationForm from "../components/ReportCheckPointMappingCreationForm";
 
-const Report = () => {
+const ReportCheckPointMapping = () => {
 	const showDialog = Modals.useShowDialog();
-	const closeReportBtnRef = useRef<ButtonDomRef>(null);
+	const closeButtonMappingref = useRef<ButtonDomRef>(null);
 	return (
 		<DynamicPage
 			headerTitle={
 				<DynamicPageTitle
 					expandedContent={
 						<MessageStrip>
-							Information (You can see the Report Details here.)
+							Information (You can see the ReportCheckPointMapping Details
+							here.)
 						</MessageStrip>
 					}
-					header={<Title>Report</Title>}
+					header={<Title>Report Check-Point Mapping</Title>}
 					actions={
 						<Button
 							design="Emphasized"
@@ -33,9 +34,10 @@ const Report = () => {
 							icon="create"
 							onClick={() => {
 								const { close } = showDialog({
-									headerText: "Report Information",
+									headerText: "Report Check-Point Mapping Information",
 									children: (
-										<ReportCreationForm closeButtonref={closeReportBtnRef} />
+										// <ReportCheckPointMappingCreationForm closeButtonMappingref={closeButtonMappingref} />
+										<div>Hi</div>
 									),
 									footer: (
 										<Bar
@@ -44,7 +46,7 @@ const Report = () => {
 													<Button
 														onClick={() => close()}
 														design="Negative"
-														ref={closeReportBtnRef}>
+														ref={closeButtonMappingref}>
 														Close
 													</Button>
 												</>
@@ -66,9 +68,9 @@ const Report = () => {
 			}}
 			showHideHeaderButton={false}
 			headerContentPinnable={false}>
-			<AddReport />
+			<AddReportCheckPointMapping />
 		</DynamicPage>
 	);
 };
 
-export default Report;
+export default ReportCheckPointMapping;
