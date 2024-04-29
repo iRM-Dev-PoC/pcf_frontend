@@ -20,16 +20,19 @@ import axios from "axios";
 import { useQueryClient } from "@tanstack/react-query";
 
 type ModuleData = {
-    moduleName:string;
-    moduleDescription:string;
-    displayModuleName:string;
+    moduleName: string;
+    moduleDescription: string;
+    displayModuleName: string;
 };
 
 const schema = z.object({
     moduleName: z.string().min(1, { message: "Name is required" }),
-    moduleDescription: z.string().min(1, { message: "Description is required" }),
-    displayModuleName: z.string().min(1, { message: "Display name is required" }),
-
+    moduleDescription: z
+        .string()
+        .min(1, { message: "Description is required" }),
+    displayModuleName: z
+        .string()
+        .min(1, { message: "Display name is required" }),
 });
 
 const ModuleCreationForm = ({
@@ -47,7 +50,7 @@ const ModuleCreationForm = ({
         defaultValues: {
             moduleName: "",
             moduleDescription: "",
-            displayModuleName:"",
+            displayModuleName: "",
         },
         mode: "onChange",
         resolver: zodResolver(schema),
@@ -58,11 +61,11 @@ const ModuleCreationForm = ({
     const fetchData = async (data: ModuleData) => {
         try {
             const reqData = {
-                module_name:data.moduleName,
-                module_desc:data.moduleDescription,
-                parent_module_id:0,
-                display_module_name:data.displayModuleName,
-                customer_id:1
+                module_name: data.moduleName,
+                module_desc: data.moduleDescription,
+                parent_module_id: 0,
+                display_module_name: data.displayModuleName,
+                customer_id: 1,
             };
             const response = await axios.post(endPoint, reqData);
             return response.data;
@@ -89,7 +92,9 @@ const ModuleCreationForm = ({
                     <Input
                         {...register("moduleName", { required: true })}
                         valueState={
-                            errors.moduleName? ValueState.Error : ValueState.None
+                            errors.moduleName
+                                ? ValueState.Error
+                                : ValueState.None
                         }
                         valueStateMessage={
                             <span>{errors.moduleName?.message}</span>
@@ -102,7 +107,9 @@ const ModuleCreationForm = ({
                     <Input
                         {...register("displayModuleName", { required: true })}
                         valueState={
-                            errors.displayModuleName? ValueState.Error : ValueState.None
+                            errors.displayModuleName
+                                ? ValueState.Error
+                                : ValueState.None
                         }
                         valueStateMessage={
                             <span>{errors.displayModuleName?.message}</span>

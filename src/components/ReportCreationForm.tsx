@@ -22,12 +22,14 @@ import { useQueryClient } from "@tanstack/react-query";
 type ReportData = {
     reportName: string;
     reportDestination: string;
-    reportPath:string;
+    reportPath: string;
 };
 
 const schema = z.object({
     reportName: z.string().min(1, { message: "Name is required" }),
-    reportDestination: z.string().min(1, { message: "Destination is required" }),
+    reportDestination: z
+        .string()
+        .min(1, { message: "Destination is required" }),
     reportPath: z.string().min(1, { message: "Part is required" }),
 });
 
@@ -46,7 +48,7 @@ const ReportCreationForm = ({
         defaultValues: {
             reportName: "",
             reportDestination: "",
-            reportPath:"",
+            reportPath: "",
         },
         mode: "onChange",
         resolver: zodResolver(schema),
@@ -59,7 +61,7 @@ const ReportCreationForm = ({
             const reqData = {
                 report_name: data.reportName,
                 report_destination: data.reportDestination,
-                report_path:data.reportPath,
+                report_path: data.reportPath,
                 customer_id: 1,
             };
             const response = await axios.post(endPoint, reqData);
@@ -87,7 +89,9 @@ const ReportCreationForm = ({
                     <Input
                         {...register("reportName", { required: true })}
                         valueState={
-                            errors.reportName ? ValueState.Error : ValueState.None
+                            errors.reportName
+                                ? ValueState.Error
+                                : ValueState.None
                         }
                         valueStateMessage={
                             <span>{errors.reportName?.message}</span>
