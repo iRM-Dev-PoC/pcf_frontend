@@ -140,9 +140,6 @@ const AddReportCheckPointMapping = () => {
         return <ErrorComponent />;
     }
 
-    if (allReportCheckPointMappingData.length === 0) {
-        return <NoDataComponent />;
-    }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onStartColumnClick = (e: any) => {
@@ -155,44 +152,51 @@ const AddReportCheckPointMapping = () => {
     };
 
     return (
-        <FlexibleColumnLayout
-            style={{
-                height: "100%",
-                width: "100%",
-                marginTop: "0.5rem",
-                marginBottom: "0.5rem",
-            }}
-            layout={layout}
-            startColumn={
-                <List onItemClick={onStartColumnClick}>
-                    {allReportCheckPointMappingData?.map((mapping, index) => (
-                        <StandardListItem
-                            data-report-id={mapping.ID}
-                            key={`${mapping.ID}-${index}`}
-                        >
-                            <span className="text-nowrap">
-                                {
-                                    allReportData.find(
-                                        (report) =>
-                                            report.ID === mapping.REPORT_ID
-                                    )?.REPORT_NAME
-                                }
-                                {arrow}
-                                {
-                                    allCheckPointData.find(
-                                        (checkpoint) =>
-                                            checkpoint.ID ===
-                                            mapping.CHECK_POINT_ID
-                                    )?.CHECK_POINT_NAME
-                                }
-                            </span>
-                        </StandardListItem>
-                    ))}
-                </List>
-            }
-            midColumn={
-                <>
-                    {/* <Toolbar design={ToolbarDesign.Solid}>
+        <>
+            {!isFetching && allReportCheckPointMappingData.length === 0 ? (
+                <NoDataComponent />
+            ) : (
+                <FlexibleColumnLayout
+                    style={{
+                        height: "100%",
+                        width: "100%",
+                        marginTop: "0.5rem",
+                        marginBottom: "0.5rem",
+                    }}
+                    layout={layout}
+                    startColumn={
+                        <List onItemClick={onStartColumnClick}>
+                            {allReportCheckPointMappingData?.map(
+                                (mapping, index) => (
+                                    <StandardListItem
+                                        data-report-id={mapping.ID}
+                                        key={`${mapping.ID}-${index}`}
+                                    >
+                                        <span className="text-nowrap">
+                                            {
+                                                allReportData.find(
+                                                    (report) =>
+                                                        report.ID ===
+                                                        mapping.REPORT_ID
+                                                )?.REPORT_NAME
+                                            }
+                                            {arrow}
+                                            {
+                                                allCheckPointData.find(
+                                                    (checkpoint) =>
+                                                        checkpoint.ID ===
+                                                        mapping.CHECK_POINT_ID
+                                                )?.CHECK_POINT_NAME
+                                            }
+                                        </span>
+                                    </StandardListItem>
+                                )
+                            )}
+                        </List>
+                    }
+                    midColumn={
+                        <>
+                            {/* <Toolbar design={ToolbarDesign.Solid}>
 						<Title> {selectedCheckPointMapping?.REPORT_ID} </Title>
 						<ToolbarSpacer />
 
@@ -285,7 +289,7 @@ const AddReportCheckPointMapping = () => {
 						</FlexBox>
 					</Toolbar> */}
 
-                    {/* <Card>
+                            {/* <Card>
 						{isEdit && (
 							<ReportEditForm
 								id={
@@ -312,9 +316,11 @@ const AddReportCheckPointMapping = () => {
 							/>
 						)}
 					</Card> */}
-                </>
-            }
-        />
+                        </>
+                    }
+                />
+            )}
+        </>
     );
 };
 

@@ -114,10 +114,6 @@ const AddReport = () => {
         return <ErrorComponent />;
     }
 
-    if (allReportData.length === 0) {
-        return <NoDataComponent />;
-    }
-
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onStartColumnClick = (e: any) => {
         const reportId = parseInt(e.detail.item.dataset.moduleId);
@@ -129,157 +125,172 @@ const AddReport = () => {
     };
 
     return (
-        <FlexibleColumnLayout
-            style={{
-                height: "100%",
-                width: "100%",
-                marginTop: "0.5rem",
-                marginBottom: "0.5rem",
-            }}
-            layout={layout}
-            startColumn={
-                <List onItemClick={onStartColumnClick}>
-                    {allReportData?.map((report, index) => (
-                        <StandardListItem
-                            data-report-id={report.ID}
-                            key={`${report.ID}-${index}`}
-                        >
-                            {report.REPORT_NAME}
-                        </StandardListItem>
-                    ))}
-                </List>
-            }
-            midColumn={
-                <>
-                    <Toolbar design={ToolbarDesign.Solid}>
-                        <Title> {selectedReport?.REPORT_NAME} </Title>
-                        <ToolbarSpacer />
+        <>
+            {!isFetching && allReportData.length === 0 ? (
+                <NoDataComponent />
+            ) : (
+                <FlexibleColumnLayout
+                    style={{
+                        height: "100%",
+                        width: "100%",
+                        marginTop: "0.5rem",
+                        marginBottom: "0.5rem",
+                    }}
+                    layout={layout}
+                    startColumn={
+                        <List onItemClick={onStartColumnClick}>
+                            {allReportData?.map((report, index) => (
+                                <StandardListItem
+                                    data-report-id={report.ID}
+                                    key={`${report.ID}-${index}`}
+                                >
+                                    {report.REPORT_NAME}
+                                </StandardListItem>
+                            ))}
+                        </List>
+                    }
+                    midColumn={
+                        <>
+                            <Toolbar design={ToolbarDesign.Solid}>
+                                <Title> {selectedReport?.REPORT_NAME} </Title>
+                                <ToolbarSpacer />
 
-                        {isFullScreen ? (
-                            <Button
-                                icon="exit-full-screen"
-                                design={ButtonDesign.Transparent}
-                                onClick={() => {
-                                    setIsFullScreen(!isFullScreen);
-                                    setLayout(
-                                        FCLLayout.TwoColumnsStartExpanded
-                                    );
-                                }}
-                            />
-                        ) : (
-                            <Button
-                                icon="full-screen"
-                                design={ButtonDesign.Transparent}
-                                onClick={() => {
-                                    setIsFullScreen(!isFullScreen);
-                                    setLayout(FCLLayout.MidColumnFullScreen);
-                                }}
-                            />
-                        )}
-                        <Button
-                            icon="delete"
-                            design={ButtonDesign.Transparent}
-                            onClick={() => {
-                                showDeleteConfirmation({
-                                    onClose(event) {
-                                        if (event.detail.action === "Delete") {
-                                            handleDeleteModule(
-                                                selectedReport
-                                                    ? selectedReport.ID
-                                                    : 0
+                                {isFullScreen ? (
+                                    <Button
+                                        icon="exit-full-screen"
+                                        design={ButtonDesign.Transparent}
+                                        onClick={() => {
+                                            setIsFullScreen(!isFullScreen);
+                                            setLayout(
+                                                FCLLayout.TwoColumnsStartExpanded
                                             );
+                                        }}
+                                    />
+                                ) : (
+                                    <Button
+                                        icon="full-screen"
+                                        design={ButtonDesign.Transparent}
+                                        onClick={() => {
+                                            setIsFullScreen(!isFullScreen);
+                                            setLayout(
+                                                FCLLayout.MidColumnFullScreen
+                                            );
+                                        }}
+                                    />
+                                )}
+                                <Button
+                                    icon="delete"
+                                    design={ButtonDesign.Transparent}
+                                    onClick={() => {
+                                        showDeleteConfirmation({
+                                            onClose(event) {
+                                                if (
+                                                    event.detail.action ===
+                                                    "Delete"
+                                                ) {
+                                                    handleDeleteModule(
+                                                        selectedReport
+                                                            ? selectedReport.ID
+                                                            : 0
+                                                    );
+                                                }
+                                            },
+                                            type: MessageBoxTypes.Warning,
+                                            actions: [
+                                                MessageBoxActions.Delete,
+                                                MessageBoxActions.Cancel,
+                                            ],
+
+                                            children:
+                                                "Are sure you want to delete this module?",
+                                        });
+                                    }}
+                                />
+                                <Button
+                                    icon="edit"
+                                    design={ButtonDesign.Transparent}
+                                    onClick={() => {
+                                        setIsEdit(!isEdit);
+                                    }}
+                                />
+                                <Button
+                                    icon="decline"
+                                    design={ButtonDesign.Transparent}
+                                    onClick={() => {
+                                        setLayout(FCLLayout.OneColumn);
+                                        setIsEdit(false);
+                                    }}
+                                />
+                            </Toolbar>
+
+                            <Toolbar
+                                key={selectedReport?.ID}
+                                style={{ height: "200px" }}
+                            >
+                                <Avatar
+                                    icon="person-placeholder"
+                                    size={AvatarSize.XL}
+                                    style={{ marginLeft: "12px" }}
+                                />
+                                <FlexBox
+                                    direction={FlexBoxDirection.Column}
+                                    style={{ marginLeft: "6px" }}
+                                >
+                                    <FlexBox>
+                                        <Label>Path:</Label>
+                                        <Text style={{ marginLeft: "2px" }}>
+                                            {selectedReport?.REPORT_PATH}
+                                        </Text>
+                                    </FlexBox>
+                                    <FlexBox>
+                                        <Label> Name:</Label>
+                                        <Text style={{ marginLeft: "2px" }}>
+                                            {selectedReport?.REPORT_NAME}
+                                        </Text>
+                                    </FlexBox>
+                                    <FlexBox>
+                                        <Label>Destination:</Label>
+                                        <Text style={{ marginLeft: "2px" }}>
+                                            {selectedReport?.REPORT_DESTINATION}
+                                        </Text>
+                                    </FlexBox>
+                                </FlexBox>
+                            </Toolbar>
+
+                            <Card>
+                                {isEdit && (
+                                    <ReportEditForm
+                                        id={
+                                            selectedReport
+                                                ? selectedReport.ID
+                                                : 0
                                         }
-                                    },
-                                    type: MessageBoxTypes.Warning,
-                                    actions: [
-                                        MessageBoxActions.Delete,
-                                        MessageBoxActions.Cancel,
-                                    ],
-
-                                    children:
-                                        "Are sure you want to delete this module?",
-                                });
-                            }}
-                        />
-                        <Button
-                            icon="edit"
-                            design={ButtonDesign.Transparent}
-                            onClick={() => {
-                                setIsEdit(!isEdit);
-                            }}
-                        />
-                        <Button
-                            icon="decline"
-                            design={ButtonDesign.Transparent}
-                            onClick={() => {
-                                setLayout(FCLLayout.OneColumn);
-                                setIsEdit(false);
-                            }}
-                        />
-                    </Toolbar>
-
-                    <Toolbar
-                        key={selectedReport?.ID}
-                        style={{ height: "200px" }}
-                    >
-                        <Avatar
-                            icon="person-placeholder"
-                            size={AvatarSize.XL}
-                            style={{ marginLeft: "12px" }}
-                        />
-                        <FlexBox
-                            direction={FlexBoxDirection.Column}
-                            style={{ marginLeft: "6px" }}
-                        >
-                            <FlexBox>
-                                <Label>Path:</Label>
-                                <Text style={{ marginLeft: "2px" }}>
-                                    {selectedReport?.REPORT_PATH}
-                                </Text>
-                            </FlexBox>
-                            <FlexBox>
-                                <Label> Name:</Label>
-                                <Text style={{ marginLeft: "2px" }}>
-                                    {selectedReport?.REPORT_NAME}
-                                </Text>
-                            </FlexBox>
-                            <FlexBox>
-                                <Label>Destination:</Label>
-                                <Text style={{ marginLeft: "2px" }}>
-                                    {selectedReport?.REPORT_DESTINATION}
-                                </Text>
-                            </FlexBox>
-                        </FlexBox>
-                    </Toolbar>
-
-                    <Card>
-                        {isEdit && (
-                            <ReportEditForm
-                                id={selectedReport ? selectedReport.ID : 0}
-                                reportName={
-                                    selectedReport
-                                        ? selectedReport.REPORT_NAME
-                                        : ""
-                                }
-                                reportDestination={
-                                    selectedReport
-                                        ? selectedReport.REPORT_DESTINATION
-                                        : ""
-                                }
-                                reportPath={
-                                    selectedReport
-                                        ? selectedReport.REPORT_PATH
-                                        : ""
-                                }
-                                setIsEdit={setIsEdit}
-                                setIsFullScreen={setIsFullScreen}
-                                setLayout={setLayout}
-                            />
-                        )}
-                    </Card>
-                </>
-            }
-        />
+                                        reportName={
+                                            selectedReport
+                                                ? selectedReport.REPORT_NAME
+                                                : ""
+                                        }
+                                        reportDestination={
+                                            selectedReport
+                                                ? selectedReport.REPORT_DESTINATION
+                                                : ""
+                                        }
+                                        reportPath={
+                                            selectedReport
+                                                ? selectedReport.REPORT_PATH
+                                                : ""
+                                        }
+                                        setIsEdit={setIsEdit}
+                                        setIsFullScreen={setIsFullScreen}
+                                        setLayout={setLayout}
+                                    />
+                                )}
+                            </Card>
+                        </>
+                    }
+                />
+            )}
+        </>
     );
 };
 

@@ -13,6 +13,7 @@ import { getAllCardDataType } from "../utils/types";
 import { Suspense, useState } from "react";
 import Loading from "../components/Loading";
 import ErrorComponent from "../components/ErrorComponent";
+import NoDataComponent from "../components/NoDataComponent";
 
 const Home = () => {
     const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/dashboard/control-checkpoints`;
@@ -82,7 +83,7 @@ const Home = () => {
                 {isFetching && <Loading />}
                 {error || isError ? (
                     <ErrorComponent />
-                ) : (
+                )  : !isFetching && cardValue.length ===  0 ? <NoDataComponent/> :   (
                     <FlexibleColumnTemplete dataCard={cardValue} />
                 )}
             </Suspense>
