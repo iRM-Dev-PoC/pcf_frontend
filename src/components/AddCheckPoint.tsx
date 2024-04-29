@@ -109,11 +109,7 @@ const AddCheckPoint = () => {
     }
 
     if (isFetching) {
-        return (
-            <StandardListItem className="pointer-events-none">
-                <Loading />
-            </StandardListItem>
-        );
+        return <Loading />;
     }
 
     if (!isFetching && allCheckPointData === undefined) {

@@ -30,7 +30,6 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Loading from "./Loading";
 import axios from "axios";
 import toast from "react-hot-toast";
-import ReportEditForm from "./ReportEditForm";
 import ErrorComponent from "./ErrorComponent";
 import NoDataComponent from "./NoDataComponent";
 
@@ -130,11 +129,7 @@ const AddReportCheckPointMapping = () => {
     }
 
     if (isFetching) {
-        return (
-            <StandardListItem className="pointer-events-none">
-                <Loading />
-            </StandardListItem>
-        );
+        return <Loading />;
     }
 
     if (!isFetching && allReportCheckPointMappingData === undefined) {
