@@ -5,7 +5,7 @@ const DashboardDatePicker = () => {
         <FlexBox
             alignItems="End"
             justifyContent="End"
-            className="mb-2  mr-2 mt-2 gap-x-2"
+            className="my-2  mr-2 gap-x-2"
         >
             <DatePicker
                 onChange={function _a() {}}

@@ -27,7 +27,7 @@ const ThemeSwitchPopover = ({
     popoverRef,
 }: ThemeSwitchPopoverProps) => {
     return (
-        <ResponsivePopover ref={popoverRef} className="popover">
+        <ResponsivePopover ref={popoverRef}>
             <List
                 onSelectionChange={handleThemeSwitch}
                 headerText="Switch Theme"

@@ -14,7 +14,7 @@ type DashboardCardProps = {
 
 const DashboardCards = ({ header, description, count }: DashboardCardProps) => {
     return (
-        <FlexBox direction="Row" className="mb-2 mt-2 flex-grow">
+        <FlexBox direction="Row" className="my-2 grow">
             <Card
                 header={
                     <CardHeader

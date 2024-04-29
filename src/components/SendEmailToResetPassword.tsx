@@ -61,7 +61,7 @@ const SendEmailToResetPassword = ({
                     <FormGroup titleText="Enter your email address that associated with your account">
                         <FormItem label="Email">
                             <Input
-                                className="relative mb-6 w-[50%]"
+                                className="relative mb-6 w-1/2"
                                 type="Email"
                                 inputMode="email"
                                 required

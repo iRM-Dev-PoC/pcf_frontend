@@ -97,7 +97,7 @@ const SignIn = ({ setIsLoggedIn, setIsForgotPassword }: SignInProps) => {
                             <FormItem label="Username">
                                 <Input
                                     type="Email"
-                                    className="mb-6 w-[50%]"
+                                    className="mb-6 w-1/2"
                                     {...register("username")}
                                 />
 
@@ -110,7 +110,7 @@ const SignIn = ({ setIsLoggedIn, setIsForgotPassword }: SignInProps) => {
 
                             <FormItem label="Password">
                                 <Input
-                                    className="relative mb-6 w-[50%]"
+                                    className="relative mb-6 w-1/2"
                                     type={showPassword ? "Text" : "Password"}
                                     {...register("password")}
                                 />
@@ -121,9 +121,9 @@ const SignIn = ({ setIsLoggedIn, setIsForgotPassword }: SignInProps) => {
                                     className="absolute left-[37.70rem] top-[14.20rem] z-50 text-center"
                                 >
                                     {showPassword ? (
-                                        <Eye className="h-6 w-6 text-center text-black/70" />
+                                        <Eye className="size-6 text-center text-black/70" />
                                     ) : (
-                                        <EyeOff className="h-6 w-6 text-center text-black/70" />
+                                        <EyeOff className="size-6 text-center text-black/70" />
                                     )}
                                 </button>
                                 {errors.password && (

@@ -45,7 +45,7 @@ const ExecutiveSummary = () => {
     const procureToPay = calcPercentage(procureToPayValue, infoTechValue);
 
     return (
-        <Card className="mb-3 mt-3 p-3">
+        <Card className="my-3 p-3">
             <TableHeader
                 setAll={setAll}
                 setSensitive={setSensitive}

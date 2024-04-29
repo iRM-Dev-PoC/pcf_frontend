@@ -21,7 +21,7 @@ const ProfilePopover = ({ profileref }: ProfilePopoverProps) => {
         await logOut();
     };
     return (
-        <ResponsivePopover ref={profileref} className="popover">
+        <ResponsivePopover ref={profileref}>
             <List>
                 <div className="space-y-2">
                     <div>

@@ -13,7 +13,7 @@ type RiskCardProps = {
 
 const RiskCard = ({ header, risk, description, onClick }: RiskCardProps) => {
     return (
-        <Card  className="m-2.5 max-w-[32rem]">
+        <Card  className="m-2.5 max-w-lg">
             <CardHeader
                 titleText={header}
                 onClick={onClick}

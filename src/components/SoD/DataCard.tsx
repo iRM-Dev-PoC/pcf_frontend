@@ -9,8 +9,8 @@ type DataCardProps = {
 };
 
 const Iconmap: { [key: string]: JSX.Element } = {
-    Monitor: <Monitor className="h-12 w-12 text-[#1AD5C3]" />,
-    Cart: <ShoppingCart className="h-12 w-12 text-[#9747FF]" />,
+    Monitor: <Monitor className="size-12 text-[#1AD5C3]" />,
+    Cart: <ShoppingCart className="size-12 text-[#9747FF]" />,
 };
 
 const DataCard = ({ icon, header, value }: DataCardProps) => {
