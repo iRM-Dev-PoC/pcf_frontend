@@ -120,10 +120,6 @@ const AddCheckPoint = () => {
         return <ErrorComponent />;
     }
 
-    if (allCheckPointData.length === 0) {
-        <NoDataComponent />;
-    }
-
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onStartColumnClick = (e: any) => {
         const CheckPointId = parseInt(e.detail.item.dataset.checkpointId);
@@ -136,149 +132,167 @@ const AddCheckPoint = () => {
     };
 
     return (
-        <FlexibleColumnLayout
-            style={{
-                height: "100%",
-                marginTop: "0.5rem",
-                marginBottom: "0.5rem",
-                borderRadius: ThemingParameters.sapButton_BorderCornerRadius,
-            }}
-            layout={layout}
-            startColumn={
-                <List onItemClick={onStartColumnClick}>
-                    {allCheckPointData?.map((checkPoint, index) => (
-                        <StandardListItem
-                            description={checkPoint.CHECK_POINT_DESC}
-                            data-checkPoint-id={checkPoint.ID}
-                            key={`${checkPoint.ID}-${index}`}
-                        >
-                            {checkPoint.CHECK_POINT_NAME}
-                        </StandardListItem>
-                    ))}
-                </List>
-            }
-            midColumn={
-                <>
-                    <Toolbar design={ToolbarDesign.Solid}>
-                        <Title>{selectedCheckPoint?.CHECK_POINT_NAME}</Title>
-                        <ToolbarSpacer />
-                        {isFullScreen ? (
-                            <Button
-                                icon="exit-full-screen"
-                                design={ButtonDesign.Transparent}
-                                onClick={() => {
-                                    setIsFullScreen(!isFullScreen);
-                                    setLayout(
-                                        FCLLayout.TwoColumnsStartExpanded
-                                    );
-                                }}
-                            />
-                        ) : (
-                            <Button
-                                icon="full-screen"
-                                design={ButtonDesign.Transparent}
-                                onClick={() => {
-                                    setIsFullScreen(!isFullScreen);
-                                    setLayout(FCLLayout.MidColumnFullScreen);
-                                }}
-                            />
-                        )}
-                        <Button
-                            icon="delete"
-                            design={ButtonDesign.Transparent}
-                            onClick={() => {
-                                showDeleteConfirmation({
-                                    onClose(event) {
-                                        if (event.detail.action === "Delete") {
-                                            handleDeleteCheckPoint(
-                                                selectedCheckPoint
-                                                    ? selectedCheckPoint.ID
-                                                    : 0
-                                            );
-                                        }
-                                    },
-                                    type: MessageBoxTypes.Warning,
-                                    actions: [
-                                        MessageBoxActions.Delete,
-                                        MessageBoxActions.Cancel,
-                                    ],
-
-                                    children:
-                                        "Are sure you want to delete this checkpoint?",
-                                });
-                            }}
-                        />
-                        <Button
-                            icon="edit"
-                            design={ButtonDesign.Transparent}
-                            onClick={() => {
-                                setIsEdit(!isEdit);
-                            }}
-                        />
-                        <Button
-                            icon="decline"
-                            design={ButtonDesign.Transparent}
-                            onClick={() => {
-                                setLayout(FCLLayout.OneColumn);
-                                setIsEdit(false);
-                            }}
-                        />
-                    </Toolbar>
-                    <Toolbar
-                        key={selectedCheckPoint?.ID}
-                        style={{ height: "200px" }}
-                    >
-                        <Avatar
-                            icon="person-placeholder"
-                            size={AvatarSize.XL}
-                            style={{ marginLeft: "12px" }}
-                        />
-                        <FlexBox
-                            direction={FlexBoxDirection.Column}
-                            style={{ marginLeft: "6px" }}
-                        >
-                            <FlexBox>
-                                <Label>Name:</Label>
-                                <Text style={{ marginLeft: "2px" }}>
+        <>
+            {!isFetching && allCheckPointData.length === 0 ? (
+                <NoDataComponent />
+            ) : (
+                <FlexibleColumnLayout
+                    style={{
+                        height: "100%",
+                        marginTop: "0.5rem",
+                        marginBottom: "0.5rem",
+                        borderRadius:
+                            ThemingParameters.sapButton_BorderCornerRadius,
+                    }}
+                    layout={layout}
+                    startColumn={
+                        <List onItemClick={onStartColumnClick}>
+                            {allCheckPointData?.map((checkPoint, index) => (
+                                <StandardListItem
+                                    description={checkPoint.CHECK_POINT_DESC}
+                                    data-checkPoint-id={checkPoint.ID}
+                                    key={`${checkPoint.ID}-${index}`}
+                                >
+                                    {checkPoint.CHECK_POINT_NAME}
+                                </StandardListItem>
+                            ))}
+                        </List>
+                    }
+                    midColumn={
+                        <>
+                            <Toolbar design={ToolbarDesign.Solid}>
+                                <Title>
                                     {selectedCheckPoint?.CHECK_POINT_NAME}
-                                </Text>
-                            </FlexBox>
-                            <FlexBox>
-                                <Label>Description:</Label>
-                                <Text style={{ marginLeft: "2px" }}>
-                                    {selectedCheckPoint?.CHECK_POINT_DESC}
-                                </Text>
-                            </FlexBox>
-                        </FlexBox>
-                    </Toolbar>
+                                </Title>
+                                <ToolbarSpacer />
+                                {isFullScreen ? (
+                                    <Button
+                                        icon="exit-full-screen"
+                                        design={ButtonDesign.Transparent}
+                                        onClick={() => {
+                                            setIsFullScreen(!isFullScreen);
+                                            setLayout(
+                                                FCLLayout.TwoColumnsStartExpanded
+                                            );
+                                        }}
+                                    />
+                                ) : (
+                                    <Button
+                                        icon="full-screen"
+                                        design={ButtonDesign.Transparent}
+                                        onClick={() => {
+                                            setIsFullScreen(!isFullScreen);
+                                            setLayout(
+                                                FCLLayout.MidColumnFullScreen
+                                            );
+                                        }}
+                                    />
+                                )}
+                                <Button
+                                    icon="delete"
+                                    design={ButtonDesign.Transparent}
+                                    onClick={() => {
+                                        showDeleteConfirmation({
+                                            onClose(event) {
+                                                if (
+                                                    event.detail.action ===
+                                                    "Delete"
+                                                ) {
+                                                    handleDeleteCheckPoint(
+                                                        selectedCheckPoint
+                                                            ? selectedCheckPoint.ID
+                                                            : 0
+                                                    );
+                                                }
+                                            },
+                                            type: MessageBoxTypes.Warning,
+                                            actions: [
+                                                MessageBoxActions.Delete,
+                                                MessageBoxActions.Cancel,
+                                            ],
 
-                    <Card>
-                        {isEdit && (
-                            <CheckPointEditForm
-                                id={
-                                    selectedCheckPoint
-                                        ? selectedCheckPoint.ID
-                                        : 0
-                                }
-                                checkPointName={
-                                    selectedCheckPoint
-                                        ? selectedCheckPoint.CHECK_POINT_NAME
-                                        : ""
-                                }
-                                checkPointDescription={
-                                    selectedCheckPoint
-                                        ? selectedCheckPoint.CHECK_POINT_DESC
-                                        : ""
-                                }
-                                setIsEdit={setIsEdit}
-                                setIsFullScreen={setIsFullScreen}
-                                setLayout={setLayout}
-                            />
-                        )}
-                    </Card>
-                </>
-            }
-        />
+                                            children:
+                                                "Are sure you want to delete this checkpoint?",
+                                        });
+                                    }}
+                                />
+                                <Button
+                                    icon="edit"
+                                    design={ButtonDesign.Transparent}
+                                    onClick={() => {
+                                        setIsEdit(!isEdit);
+                                    }}
+                                />
+                                <Button
+                                    icon="decline"
+                                    design={ButtonDesign.Transparent}
+                                    onClick={() => {
+                                        setLayout(FCLLayout.OneColumn);
+                                        setIsEdit(false);
+                                    }}
+                                />
+                            </Toolbar>
+                            <Toolbar
+                                key={selectedCheckPoint?.ID}
+                                style={{ height: "200px" }}
+                            >
+                                <Avatar
+                                    icon="person-placeholder"
+                                    size={AvatarSize.XL}
+                                    style={{ marginLeft: "12px" }}
+                                />
+                                <FlexBox
+                                    direction={FlexBoxDirection.Column}
+                                    style={{ marginLeft: "6px" }}
+                                >
+                                    <FlexBox>
+                                        <Label>Name:</Label>
+                                        <Text style={{ marginLeft: "2px" }}>
+                                            {
+                                                selectedCheckPoint?.CHECK_POINT_NAME
+                                            }
+                                        </Text>
+                                    </FlexBox>
+                                    <FlexBox>
+                                        <Label>Description:</Label>
+                                        <Text style={{ marginLeft: "2px" }}>
+                                            {
+                                                selectedCheckPoint?.CHECK_POINT_DESC
+                                            }
+                                        </Text>
+                                    </FlexBox>
+                                </FlexBox>
+                            </Toolbar>
+
+                            <Card>
+                                {isEdit && (
+                                    <CheckPointEditForm
+                                        id={
+                                            selectedCheckPoint
+                                                ? selectedCheckPoint.ID
+                                                : 0
+                                        }
+                                        checkPointName={
+                                            selectedCheckPoint
+                                                ? selectedCheckPoint.CHECK_POINT_NAME
+                                                : ""
+                                        }
+                                        checkPointDescription={
+                                            selectedCheckPoint
+                                                ? selectedCheckPoint.CHECK_POINT_DESC
+                                                : ""
+                                        }
+                                        setIsEdit={setIsEdit}
+                                        setIsFullScreen={setIsFullScreen}
+                                        setLayout={setLayout}
+                                    />
+                                )}
+                            </Card>
+                        </>
+                    }
+                />
+            )}
+        </>
     );
 };
 

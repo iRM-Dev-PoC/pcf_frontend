@@ -117,10 +117,6 @@ const AddRoles = () => {
         return <ErrorComponent />;
     }
 
-    if (allRoleData.length === 0) {
-        return <NoDataComponent />;
-    }
-
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onStartColumnClick = (e: any) => {
         const roleId = parseInt(e.detail.item.dataset.roleId);
@@ -130,136 +126,155 @@ const AddRoles = () => {
     };
 
     return (
-        <FlexibleColumnLayout
-            style={{
-                height: "100%",
-                marginTop: "0.5rem",
-                marginBottom: "0.5rem",
-                borderRadius: ThemingParameters.sapButton_BorderCornerRadius,
-            }}
-            layout={layout}
-            startColumn={
-                <List onItemClick={onStartColumnClick}>
-                    {allRoleData?.map((role, index) => (
-                        <StandardListItem
-                            description={role.ROLE_DESC}
-                            data-role-id={role.ID}
-                            key={`${role.ID}-${index}`}
-                        >
-                            {role.ROLE_NAME}
-                        </StandardListItem>
-                    ))}
-                </List>
-            }
-            midColumn={
-                <>
-                    <Toolbar design={ToolbarDesign.Solid}>
-                        <Title>{selectedRole?.ROLE_NAME}</Title>
-                        <ToolbarSpacer />
-                        {isFullScreen ? (
-                            <Button
-                                icon="exit-full-screen"
-                                design={ButtonDesign.Transparent}
-                                onClick={() => {
-                                    setIsFullScreen(!isFullScreen);
-                                    setLayout(
-                                        FCLLayout.TwoColumnsStartExpanded
-                                    );
-                                }}
-                            />
-                        ) : (
-                            <Button
-                                icon="full-screen"
-                                design={ButtonDesign.Transparent}
-                                onClick={() => {
-                                    setIsFullScreen(!isFullScreen);
-                                    setLayout(FCLLayout.MidColumnFullScreen);
-                                }}
-                            />
-                        )}
-                        <Button
-                            icon="delete"
-                            design={ButtonDesign.Transparent}
-                            onClick={() => {
-                                showDeleteConfirmation({
-                                    onClose(event) {
-                                        if (event.detail.action === "Delete") {
-                                            handleDeleteRole(
-                                                selectedRole?.ID ?? 0
+        <>
+            {!isFetching && allRoleData.length === 0 ? (
+                <NoDataComponent />
+            ) : (
+                <FlexibleColumnLayout
+                    style={{
+                        height: "100%",
+                        marginTop: "0.5rem",
+                        marginBottom: "0.5rem",
+                        borderRadius:
+                            ThemingParameters.sapButton_BorderCornerRadius,
+                    }}
+                    layout={layout}
+                    startColumn={
+                        <List onItemClick={onStartColumnClick}>
+                            {allRoleData?.map((role, index) => (
+                                <StandardListItem
+                                    description={role.ROLE_DESC}
+                                    data-role-id={role.ID}
+                                    key={`${role.ID}-${index}`}
+                                >
+                                    {role.ROLE_NAME}
+                                </StandardListItem>
+                            ))}
+                        </List>
+                    }
+                    midColumn={
+                        <>
+                            <Toolbar design={ToolbarDesign.Solid}>
+                                <Title>{selectedRole?.ROLE_NAME}</Title>
+                                <ToolbarSpacer />
+                                {isFullScreen ? (
+                                    <Button
+                                        icon="exit-full-screen"
+                                        design={ButtonDesign.Transparent}
+                                        onClick={() => {
+                                            setIsFullScreen(!isFullScreen);
+                                            setLayout(
+                                                FCLLayout.TwoColumnsStartExpanded
                                             );
+                                        }}
+                                    />
+                                ) : (
+                                    <Button
+                                        icon="full-screen"
+                                        design={ButtonDesign.Transparent}
+                                        onClick={() => {
+                                            setIsFullScreen(!isFullScreen);
+                                            setLayout(
+                                                FCLLayout.MidColumnFullScreen
+                                            );
+                                        }}
+                                    />
+                                )}
+                                <Button
+                                    icon="delete"
+                                    design={ButtonDesign.Transparent}
+                                    onClick={() => {
+                                        showDeleteConfirmation({
+                                            onClose(event) {
+                                                if (
+                                                    event.detail.action ===
+                                                    "Delete"
+                                                ) {
+                                                    handleDeleteRole(
+                                                        selectedRole?.ID ?? 0
+                                                    );
+                                                }
+                                            },
+                                            type: MessageBoxTypes.Warning,
+                                            actions: [
+                                                MessageBoxActions.Delete,
+                                                MessageBoxActions.Cancel,
+                                            ],
+
+                                            children:
+                                                "Are sure you want to delete this role?",
+                                        });
+                                    }}
+                                />
+                                <Button
+                                    icon="edit"
+                                    design={ButtonDesign.Transparent}
+                                    onClick={() => {
+                                        setIsEdit(!isEdit);
+                                    }}
+                                />
+                                <Button
+                                    icon="decline"
+                                    design={ButtonDesign.Transparent}
+                                    onClick={() => {
+                                        setLayout(FCLLayout.OneColumn);
+                                        setIsEdit(false);
+                                    }}
+                                />
+                            </Toolbar>
+                            <Toolbar
+                                key={selectedRole?.ID}
+                                style={{ height: "200px" }}
+                            >
+                                <Avatar
+                                    icon="person-placeholder"
+                                    size={AvatarSize.XL}
+                                    style={{ marginLeft: "12px" }}
+                                />
+                                <FlexBox
+                                    direction={FlexBoxDirection.Column}
+                                    style={{ marginLeft: "6px" }}
+                                >
+                                    <FlexBox>
+                                        <Label>Name:</Label>
+                                        <Text style={{ marginLeft: "2px" }}>
+                                            {selectedRole?.ROLE_NAME}
+                                        </Text>
+                                    </FlexBox>
+                                    <FlexBox>
+                                        <Label>Description:</Label>
+                                        <Text style={{ marginLeft: "2px" }}>
+                                            {selectedRole?.ROLE_DESC}
+                                        </Text>
+                                    </FlexBox>
+                                </FlexBox>
+                            </Toolbar>
+
+                            <Card>
+                                {isEdit && (
+                                    <RoleEditForm
+                                        id={selectedRole ? selectedRole.ID : 0}
+                                        roleName={
+                                            selectedRole
+                                                ? selectedRole.ROLE_NAME
+                                                : ""
                                         }
-                                    },
-                                    type: MessageBoxTypes.Warning,
-                                    actions: [
-                                        MessageBoxActions.Delete,
-                                        MessageBoxActions.Cancel,
-                                    ],
-
-                                    children:
-                                        "Are sure you want to delete this role?",
-                                });
-                            }}
-                        />
-                        <Button
-                            icon="edit"
-                            design={ButtonDesign.Transparent}
-                            onClick={() => {
-                                setIsEdit(!isEdit);
-                            }}
-                        />
-                        <Button
-                            icon="decline"
-                            design={ButtonDesign.Transparent}
-                            onClick={() => {
-                                setLayout(FCLLayout.OneColumn);
-                                setIsEdit(false);
-                            }}
-                        />
-                    </Toolbar>
-                    <Toolbar key={selectedRole?.ID} style={{ height: "200px" }}>
-                        <Avatar
-                            icon="person-placeholder"
-                            size={AvatarSize.XL}
-                            style={{ marginLeft: "12px" }}
-                        />
-                        <FlexBox
-                            direction={FlexBoxDirection.Column}
-                            style={{ marginLeft: "6px" }}
-                        >
-                            <FlexBox>
-                                <Label>Name:</Label>
-                                <Text style={{ marginLeft: "2px" }}>
-                                    {selectedRole?.ROLE_NAME}
-                                </Text>
-                            </FlexBox>
-                            <FlexBox>
-                                <Label>Description:</Label>
-                                <Text style={{ marginLeft: "2px" }}>
-                                    {selectedRole?.ROLE_DESC}
-                                </Text>
-                            </FlexBox>
-                        </FlexBox>
-                    </Toolbar>
-
-                    <Card>
-                        {isEdit && (
-                            <RoleEditForm
-                                id={selectedRole ? selectedRole.ID : 0}
-                                roleName={
-                                    selectedRole ? selectedRole.ROLE_NAME : ""
-                                }
-                                roleDescription={
-                                    selectedRole ? selectedRole.ROLE_DESC : ""
-                                }
-                                setIsEdit={setIsEdit}
-                                setIsFullScreen={setIsFullScreen}
-                                setLayout={setLayout}
-                            />
-                        )}
-                    </Card>
-                </>
-            }
-        />
+                                        roleDescription={
+                                            selectedRole
+                                                ? selectedRole.ROLE_DESC
+                                                : ""
+                                        }
+                                        setIsEdit={setIsEdit}
+                                        setIsFullScreen={setIsFullScreen}
+                                        setLayout={setLayout}
+                                    />
+                                )}
+                            </Card>
+                        </>
+                    }
+                />
+            )}
+        </>
     );
 };
 

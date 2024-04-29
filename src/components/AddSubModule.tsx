@@ -117,9 +117,6 @@ const AddSubModule = () => {
         return <ErrorComponent />;
     }
 
-    if (allSubModuleData.length === 0) {
-        return <NoDataComponent />;
-    }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onStartColumnClick = (e: any) => {
@@ -134,158 +131,175 @@ const AddSubModule = () => {
     };
 
     return (
-        <FlexibleColumnLayout
-            style={{
-                height: "100%",
-                width: "100%",
-                marginTop: "0.5rem",
-                marginBottom: "0.5rem",
-            }}
-            layout={layout}
-            startColumn={
-                <List onItemClick={onStartColumnClick}>
-                    {allSubModuleData?.map((submodule, index) => (
-                        <StandardListItem
-                            description={submodule.SUBMODULE_DESC}
-                            data-subModule-id={submodule.ID}
-                            key={`${submodule.ID}-${index}`}
-                        >
-                            {submodule.DISPLAY_SUBMODULE_NAME}
-                        </StandardListItem>
-                    ))}
-                </List>
-            }
-            midColumn={
-                <>
-                    <Toolbar design={ToolbarDesign.Solid}>
-                        <Title>{selectedSubModule?.SUBMODULE_NAME}</Title>
-                        <ToolbarSpacer />
-                        {isFullScreen ? (
-                            <Button
-                                icon="exit-full-screen"
-                                design={ButtonDesign.Transparent}
-                                onClick={() => {
-                                    setIsFullScreen(!isFullScreen);
-                                    setLayout(
-                                        FCLLayout.TwoColumnsStartExpanded
-                                    );
-                                }}
-                            />
-                        ) : (
-                            <Button
-                                icon="full-screen"
-                                design={ButtonDesign.Transparent}
-                                onClick={() => {
-                                    setIsFullScreen(!isFullScreen);
-                                    setLayout(FCLLayout.MidColumnFullScreen);
-                                }}
-                            />
-                        )}
-                        <Button
-                            icon="delete"
-                            design={ButtonDesign.Transparent}
-                            onClick={() => {
-                                showDeleteConfirmation({
-                                    onClose(event) {
-                                        if (event.detail.action === "Delete") {
-                                            handleDeleteSubModule(
-                                                selectedSubModule
-                                                    ? selectedSubModule.ID
-                                                    : 0
-                                            );
-                                        }
-                                    },
-                                    type: MessageBoxTypes.Warning,
-                                    actions: [
-                                        MessageBoxActions.Delete,
-                                        MessageBoxActions.Cancel,
-                                    ],
-
-                                    children:
-                                        "Are sure you want to delete this sub-module?",
-                                });
-                            }}
-                        />
-                        <Button
-                            icon="edit"
-                            design={ButtonDesign.Transparent}
-                            onClick={() => {
-                                setIsEdit(!isEdit);
-                            }}
-                        />
-                        <Button
-                            icon="decline"
-                            design={ButtonDesign.Transparent}
-                            onClick={() => {
-                                setLayout(FCLLayout.OneColumn);
-                                setIsEdit(false);
-                            }}
-                        />
-                    </Toolbar>
-                    <Toolbar
-                        key={selectedSubModule?.ID}
-                        style={{ height: "200px" }}
-                    >
-                        <Avatar
-                            icon="person-placeholder"
-                            size={AvatarSize.XL}
-                            style={{ marginLeft: "12px" }}
-                        />
-                        <FlexBox
-                            direction={FlexBoxDirection.Column}
-                            style={{ marginLeft: "6px" }}
-                        >
-                            <FlexBox>
-                                <Label>Name:</Label>
-                                <Text style={{ marginLeft: "2px" }}>
+        <>
+            {!isFetching && allSubModuleData.length === 0 ? (
+                <NoDataComponent />
+            ) : (
+                <FlexibleColumnLayout
+                    style={{
+                        height: "100%",
+                        width: "100%",
+                        marginTop: "0.5rem",
+                        marginBottom: "0.5rem",
+                    }}
+                    layout={layout}
+                    startColumn={
+                        <List onItemClick={onStartColumnClick}>
+                            {allSubModuleData?.map((submodule, index) => (
+                                <StandardListItem
+                                    description={submodule.SUBMODULE_DESC}
+                                    data-subModule-id={submodule.ID}
+                                    key={`${submodule.ID}-${index}`}
+                                >
+                                    {submodule.DISPLAY_SUBMODULE_NAME}
+                                </StandardListItem>
+                            ))}
+                        </List>
+                    }
+                    midColumn={
+                        <>
+                            <Toolbar design={ToolbarDesign.Solid}>
+                                <Title>
                                     {selectedSubModule?.SUBMODULE_NAME}
-                                </Text>
-                            </FlexBox>
-                            <FlexBox>
-                                <Label>Display Name:</Label>
-                                <Text style={{ marginLeft: "2px" }}>
-                                    {selectedSubModule?.DISPLAY_SUBMODULE_NAME}
-                                </Text>
-                            </FlexBox>
-                            <FlexBox>
-                                <Label>Description:</Label>
-                                <Text style={{ marginLeft: "2px" }}>
-                                    {selectedSubModule?.SUBMODULE_DESC}
-                                </Text>
-                            </FlexBox>
-                        </FlexBox>
-                    </Toolbar>
+                                </Title>
+                                <ToolbarSpacer />
+                                {isFullScreen ? (
+                                    <Button
+                                        icon="exit-full-screen"
+                                        design={ButtonDesign.Transparent}
+                                        onClick={() => {
+                                            setIsFullScreen(!isFullScreen);
+                                            setLayout(
+                                                FCLLayout.TwoColumnsStartExpanded
+                                            );
+                                        }}
+                                    />
+                                ) : (
+                                    <Button
+                                        icon="full-screen"
+                                        design={ButtonDesign.Transparent}
+                                        onClick={() => {
+                                            setIsFullScreen(!isFullScreen);
+                                            setLayout(
+                                                FCLLayout.MidColumnFullScreen
+                                            );
+                                        }}
+                                    />
+                                )}
+                                <Button
+                                    icon="delete"
+                                    design={ButtonDesign.Transparent}
+                                    onClick={() => {
+                                        showDeleteConfirmation({
+                                            onClose(event) {
+                                                if (
+                                                    event.detail.action ===
+                                                    "Delete"
+                                                ) {
+                                                    handleDeleteSubModule(
+                                                        selectedSubModule
+                                                            ? selectedSubModule.ID
+                                                            : 0
+                                                    );
+                                                }
+                                            },
+                                            type: MessageBoxTypes.Warning,
+                                            actions: [
+                                                MessageBoxActions.Delete,
+                                                MessageBoxActions.Cancel,
+                                            ],
 
-                    <Card>
-                        {isEdit && (
-                            <SubModuleEditForm
-                                id={
-                                    selectedSubModule ? selectedSubModule.ID : 0
-                                }
-                                subModuleName={
-                                    selectedSubModule
-                                        ? selectedSubModule.SUBMODULE_NAME
-                                        : ""
-                                }
-                                subModuleDescription={
-                                    selectedSubModule
-                                        ? selectedSubModule.SUBMODULE_DESC
-                                        : ""
-                                }
-                                displaySubModuleName={
-                                    selectedSubModule
-                                        ? selectedSubModule.DISPLAY_SUBMODULE_NAME
-                                        : ""
-                                }
-                                setIsEdit={setIsEdit}
-                                setIsFullScreen={setIsFullScreen}
-                                setLayout={setLayout}
-                            />
-                        )}
-                    </Card>
-                </>
-            }
-        />
+                                            children:
+                                                "Are sure you want to delete this sub-module?",
+                                        });
+                                    }}
+                                />
+                                <Button
+                                    icon="edit"
+                                    design={ButtonDesign.Transparent}
+                                    onClick={() => {
+                                        setIsEdit(!isEdit);
+                                    }}
+                                />
+                                <Button
+                                    icon="decline"
+                                    design={ButtonDesign.Transparent}
+                                    onClick={() => {
+                                        setLayout(FCLLayout.OneColumn);
+                                        setIsEdit(false);
+                                    }}
+                                />
+                            </Toolbar>
+                            <Toolbar
+                                key={selectedSubModule?.ID}
+                                style={{ height: "200px" }}
+                            >
+                                <Avatar
+                                    icon="person-placeholder"
+                                    size={AvatarSize.XL}
+                                    style={{ marginLeft: "12px" }}
+                                />
+                                <FlexBox
+                                    direction={FlexBoxDirection.Column}
+                                    style={{ marginLeft: "6px" }}
+                                >
+                                    <FlexBox>
+                                        <Label>Name:</Label>
+                                        <Text style={{ marginLeft: "2px" }}>
+                                            {selectedSubModule?.SUBMODULE_NAME}
+                                        </Text>
+                                    </FlexBox>
+                                    <FlexBox>
+                                        <Label>Display Name:</Label>
+                                        <Text style={{ marginLeft: "2px" }}>
+                                            {
+                                                selectedSubModule?.DISPLAY_SUBMODULE_NAME
+                                            }
+                                        </Text>
+                                    </FlexBox>
+                                    <FlexBox>
+                                        <Label>Description:</Label>
+                                        <Text style={{ marginLeft: "2px" }}>
+                                            {selectedSubModule?.SUBMODULE_DESC}
+                                        </Text>
+                                    </FlexBox>
+                                </FlexBox>
+                            </Toolbar>
+
+                            <Card>
+                                {isEdit && (
+                                    <SubModuleEditForm
+                                        id={
+                                            selectedSubModule
+                                                ? selectedSubModule.ID
+                                                : 0
+                                        }
+                                        subModuleName={
+                                            selectedSubModule
+                                                ? selectedSubModule.SUBMODULE_NAME
+                                                : ""
+                                        }
+                                        subModuleDescription={
+                                            selectedSubModule
+                                                ? selectedSubModule.SUBMODULE_DESC
+                                                : ""
+                                        }
+                                        displaySubModuleName={
+                                            selectedSubModule
+                                                ? selectedSubModule.DISPLAY_SUBMODULE_NAME
+                                                : ""
+                                        }
+                                        setIsEdit={setIsEdit}
+                                        setIsFullScreen={setIsFullScreen}
+                                        setLayout={setLayout}
+                                    />
+                                )}
+                            </Card>
+                        </>
+                    }
+                />
+            )}
+        </>
     );
 };
 
