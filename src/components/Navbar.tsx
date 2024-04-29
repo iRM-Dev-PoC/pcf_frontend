@@ -27,7 +27,7 @@ import {
 import ProfilePopover from "./ProfilePopover";
 import { useNavigate } from "react-router-dom";
 import ProductSwitchModal from "./ProductSwitchModal";
-import "../navbar.css";
+import "../css/navbar.css";
 
 type NavbarProps = {
     companyName: string;
@@ -53,7 +53,7 @@ const Navbar = ({
     const [currentTheme, setCurrentTheme] = useState(getTheme);
     const popoverRef = useRef<ResponsivePopoverDomRef | null>(null);
     const notifyRef = useRef<ResponsivePopoverDomRef | null>(null);
-    const profileref = useRef<ResponsivePopoverDomRef | null>(null);
+    const profileRef = useRef<ResponsivePopoverDomRef | null>(null);
     const { setSidebarCollapsed } = useSidebar();
     const navigate = useNavigate();
 
@@ -96,7 +96,7 @@ const Navbar = ({
     const handleProfileClick = (
         event: Ui5CustomEvent<ShellBarDomRef, ShellBarProfileClickEventDetail>
     ) => {
-        profileref.current?.showAt(event.detail.targetRef);
+        profileRef.current?.showAt(event.detail.targetRef);
     };
 
     const handleProductSwitchClick = () => {
@@ -198,7 +198,7 @@ const Navbar = ({
             />
 
             <NotificationPopover notifyRef={notifyRef} />
-            <ProfilePopover profileref={profileref} />
+            <ProfilePopover profileRef={profileRef} />
         </>
     );
 };

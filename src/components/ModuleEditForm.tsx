@@ -22,7 +22,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 type ModuleData = {
     id: number;
-    moduleName:string;
+    moduleName: string;
     moduleDescription: string;
     displayModuleName: string;
 };
@@ -35,8 +35,12 @@ type ModuleEditFormProps = {
 
 const schema = z.object({
     moduleName: z.string().min(1, { message: "Name is required" }),
-    displayModuleName: z.string().min(1, { message: "Display name is required" }),
-    moduleDescription: z.string().min(1, { message: "Description is required" }),
+    displayModuleName: z
+        .string()
+        .min(1, { message: "Display name is required" }),
+    moduleDescription: z
+        .string()
+        .min(1, { message: "Description is required" }),
 });
 
 const ModuleEditForm = ({
@@ -70,16 +74,16 @@ const ModuleEditForm = ({
         try {
             const updateData = {
                 id,
-                module_name:data.moduleName,
+                module_name: data.moduleName,
                 module_desc: data.moduleDescription,
-                display_module_name:data.displayModuleName,
-                customer_id:1,
+                display_module_name: data.displayModuleName,
+                customer_id: 1,
             };
             const response = await axios.patch(endPoint, updateData);
 
             if (response.data?.statuscode === 400) {
                 throw response.data?.message;
-            }            
+            }
             return response.data;
         } catch (error) {
             console.error(error);
@@ -112,7 +116,9 @@ const ModuleEditForm = ({
                     <Input
                         {...register("moduleName", { required: true })}
                         valueState={
-                            errors.moduleName ? ValueState.Error : ValueState.None
+                            errors.moduleName
+                                ? ValueState.Error
+                                : ValueState.None
                         }
                         valueStateMessage={
                             <span>{errors.moduleName?.message}</span>
@@ -126,7 +132,9 @@ const ModuleEditForm = ({
                     <Input
                         {...register("displayModuleName", { required: true })}
                         valueState={
-                            errors.displayModuleName ? ValueState.Error : ValueState.None
+                            errors.displayModuleName
+                                ? ValueState.Error
+                                : ValueState.None
                         }
                         valueStateMessage={
                             <span>{errors.displayModuleName?.message}</span>
@@ -135,8 +143,6 @@ const ModuleEditForm = ({
                         className="w-full"
                     />
                 </FormItem>
-
-
 
                 <FormItem label={<Label required>Module Description</Label>}>
                     <TextArea

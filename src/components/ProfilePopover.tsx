@@ -9,10 +9,10 @@ import { logOut } from "../lib/auth";
 import { useNavigate } from "react-router-dom";
 
 type ProfilePopoverProps = {
-    profileref: MutableRefObject<ResponsivePopoverDomRef | null>;
+    profileRef: MutableRefObject<ResponsivePopoverDomRef | null>;
 };
 
-const ProfilePopover = ({ profileref }: ProfilePopoverProps) => {
+const ProfilePopover = ({ profileRef }: ProfilePopoverProps) => {
     const navigate = useNavigate();
     const handleChangePassword = () => {
         navigate("/resetPassword");
@@ -21,7 +21,7 @@ const ProfilePopover = ({ profileref }: ProfilePopoverProps) => {
         await logOut();
     };
     return (
-        <ResponsivePopover ref={profileref}>
+        <ResponsivePopover ref={profileRef}>
             <List>
                 <div className="space-y-2">
                     <div>

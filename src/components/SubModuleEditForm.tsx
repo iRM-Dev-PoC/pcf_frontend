@@ -22,7 +22,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 type SubModuleData = {
     id: number;
-    subModuleName:string;
+    subModuleName: string;
     subModuleDescription: string;
     displaySubModuleName: string;
 };
@@ -35,8 +35,12 @@ type SubModuleEditFormProps = {
 
 const schema = z.object({
     subModuleName: z.string().min(1, { message: "Name is required" }),
-    displaySubModuleName: z.string().min(1, { message: "Display name is required" }),
-    subModuleDescription: z.string().min(1, { message: "Description is required" }),
+    displaySubModuleName: z
+        .string()
+        .min(1, { message: "Display name is required" }),
+    subModuleDescription: z
+        .string()
+        .min(1, { message: "Description is required" }),
 });
 
 const SubModuleEditForm = ({
@@ -70,16 +74,16 @@ const SubModuleEditForm = ({
         try {
             const updateData = {
                 id,
-                submodule_name:data.subModuleName,
+                submodule_name: data.subModuleName,
                 submodule_desc: data.subModuleDescription,
-                display_submodule_name:data.displaySubModuleName,
-                customer_id:1,
+                display_submodule_name: data.displaySubModuleName,
+                customer_id: 1,
             };
             const response = await axios.patch(endPoint, updateData);
 
             if (response.data?.statuscode === 400) {
                 throw response.data?.message;
-            }            
+            }
             return response.data;
         } catch (error) {
             console.error(error);
@@ -95,7 +99,9 @@ const SubModuleEditForm = ({
             success: "Sub-module updated successfully!",
             error: (error) => `Failed to update sub-module: ${error.message}`,
         });
-        await queryClient.invalidateQueries({ queryKey: ["allSubModulesData"] });
+        await queryClient.invalidateQueries({
+            queryKey: ["allSubModulesData"],
+        });
         setIsEdit(false);
         setIsFullScreen(false);
         setLayout(FCLLayout.OneColumn);
@@ -112,7 +118,9 @@ const SubModuleEditForm = ({
                     <Input
                         {...register("subModuleName", { required: true })}
                         valueState={
-                            errors.subModuleName ? ValueState.Error : ValueState.None
+                            errors.subModuleName
+                                ? ValueState.Error
+                                : ValueState.None
                         }
                         valueStateMessage={
                             <span>{errors.subModuleName?.message}</span>
@@ -124,9 +132,13 @@ const SubModuleEditForm = ({
 
                 <FormItem label={<Label required>Module Display Name</Label>}>
                     <Input
-                        {...register("displaySubModuleName", { required: true })}
+                        {...register("displaySubModuleName", {
+                            required: true,
+                        })}
                         valueState={
-                            errors.displaySubModuleName ? ValueState.Error : ValueState.None
+                            errors.displaySubModuleName
+                                ? ValueState.Error
+                                : ValueState.None
                         }
                         valueStateMessage={
                             <span>{errors.displaySubModuleName?.message}</span>
@@ -136,11 +148,11 @@ const SubModuleEditForm = ({
                     />
                 </FormItem>
 
-
-
                 <FormItem label={<Label required>Module Description</Label>}>
                     <TextArea
-                        {...register("subModuleDescription", { required: true })}
+                        {...register("subModuleDescription", {
+                            required: true,
+                        })}
                         valueState={
                             errors.subModuleDescription
                                 ? ValueState.Error

@@ -1,7 +1,7 @@
 import { StrictMode, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
-import "./index.css";
+import "./css/index.css";
 import { BrowserRouter } from "react-router-dom";
 import { SidebarProvider } from "./context/SidebarContext.tsx";
 import { ThemeProvider } from "@ui5/webcomponents-react";
