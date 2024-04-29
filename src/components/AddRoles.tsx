@@ -46,12 +46,12 @@ const AddRoles = () => {
     const fetchData = async () => {
         try {
             const endPointAllRoles = `${import.meta.env.VITE_BACKEND_BASE_URL}/role-master/get-all-roles`;
-            const response = await fetch(endPointAllRoles);
-            if (!response.ok) {
+            const response = await axios.get(endPointAllRoles);
+            if (response.data.statuscode !== 200) {
                 setError(true);
             }
             setError(false);
-            return response.json();
+            return response.data;
         } catch (error) {
             console.error(error);
             setError(true);
