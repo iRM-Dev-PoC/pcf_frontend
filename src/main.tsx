@@ -48,34 +48,31 @@ import "@ui5/webcomponents-icons/dist/upload-to-cloud.js";
 import "@ui5/webcomponents-icons/AllIcons.js";
 import "@ui5/webcomponents-fiori/Assets.js";
 import "@ui5/webcomponents/Assets.js";
-import "@ui5/webcomponents-icons-tnt/AllIcons.js";
-import "@ui5/webcomponents-icons-tnt/Assets.js";
-import "@ui5/webcomponents-localization/Assets.js";
 
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-	<StrictMode>
-		<ErrorBoundary fallback={<ErrorPage />}>
-			<QueryClientProvider client={queryClient}>
-				<ThemeProvider>
-					<BrowserRouter>
-						<SidebarProvider>
-							<PathProvider>
-								<CurrentURLProvider>
-									<ProductSwitchProvider>
-										<Suspense fallback={<Loading />}>
-											<App />
-											<Toaster />
-											<ReactQueryDevtools />
-										</Suspense>
-									</ProductSwitchProvider>
-								</CurrentURLProvider>
-							</PathProvider>
-						</SidebarProvider>
-					</BrowserRouter>
-				</ThemeProvider>
-			</QueryClientProvider>
-		</ErrorBoundary>
-	</StrictMode>
+    <StrictMode>
+        <ErrorBoundary fallback={<ErrorPage />}>
+            <QueryClientProvider client={queryClient}>
+                <ThemeProvider>
+                    <BrowserRouter>
+                        <SidebarProvider>
+                            <PathProvider>
+                                <CurrentURLProvider>
+                                    <ProductSwitchProvider>
+                                        <Suspense fallback={<Loading />}>
+                                            <App />
+                                            <Toaster />
+                                            <ReactQueryDevtools />
+                                        </Suspense>
+                                    </ProductSwitchProvider>
+                                </CurrentURLProvider>
+                            </PathProvider>
+                        </SidebarProvider>
+                    </BrowserRouter>
+                </ThemeProvider>
+            </QueryClientProvider>
+        </ErrorBoundary>
+    </StrictMode>
 );

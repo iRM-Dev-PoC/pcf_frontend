@@ -21,7 +21,7 @@ type NotificationPopoverProps = {
 
 const NotificationPopover = ({ notifyRef }: NotificationPopoverProps) => {
     return (
-        <ResponsivePopover ref={notifyRef} className="popover">
+        <ResponsivePopover ref={notifyRef}>
             <List
                 headerText="Notifications"
                 mode={ListMode.SingleSelect}

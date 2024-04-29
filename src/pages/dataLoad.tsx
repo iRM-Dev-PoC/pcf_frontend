@@ -137,7 +137,7 @@ const DataLoad = () => {
                                             endContent={
                                                 <>
                                                     <Button
-                                                        className="ml-2 mr-2 gap-x-4"
+                                                        className="mx-2 gap-x-4"
                                                         icon="upload-to-cloud"
                                                         design="Positive"
                                                         onClick={() => {
@@ -155,7 +155,7 @@ const DataLoad = () => {
                                                         Upload
                                                     </Button>
                                                     <Button
-                                                        className="ml-3 mr-3 gap-x-4"
+                                                        className="mx-3 gap-x-4"
                                                         design="Attention"
                                                         onClick={handleClear}
                                                     >

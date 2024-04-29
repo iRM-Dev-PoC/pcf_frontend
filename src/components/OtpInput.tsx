@@ -78,7 +78,7 @@ const OtpInput = ({ setIsValidOtp, isValidOtp }: OtpInputPropsType) => {
                             <FormGroup titleText="Enter the OTP that was sent to your email address :">
                                 <FormItem label="OTP">
                                     <Input
-                                        className="relative mb-6 w-[50%]"
+                                        className="relative mb-6 w-1/2"
                                         type="Number"
                                         inputMode="numeric"
                                         maxlength={6}

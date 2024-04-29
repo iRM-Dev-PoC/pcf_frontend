@@ -132,7 +132,7 @@ const Navbar = ({
                 }}
                 logo={
                     <img
-                        className="h-12 w-12 rounded-full object-cover"
+                        className="size-12 rounded-full object-cover"
                         src={companyLogo}
                         alt={`${companyName} Logo`}
                     />
