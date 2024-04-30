@@ -1,22 +1,22 @@
 import {
     Bar,
     Button,
+    ButtonDomRef,
     DynamicPage,
     DynamicPageTitle,
-    Form,
-    FormItem,
-    Input,
     MessageStrip,
     Modals,
     Title,
 } from "@ui5/webcomponents-react";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
 import TypeOfControlDetails from "../components/TypeOfControlDetails";
-import FileUpload from "../components/SoD/FileUpload";
+// import FileUpload from "../components/SoD/FileUpload";
+import ControlCreationForm from "../components/ControlCreationForm";
+import { useRef } from "react";
 
 const TypeOfControl = () => {
     const showDialog = Modals.useShowDialog();
-    const showEditDialog = Modals.useShowDialog();
+    const closeButtonRoleref = useRef<ButtonDomRef>(null);
 
     return (
         <DynamicPage
@@ -38,29 +38,22 @@ const TypeOfControl = () => {
                                 const { close } = showDialog({
                                     headerText: "Type of Controls Details",
                                     children: (
-                                        <Form
-                                            style={{
-                                                alignItems: "center",
-                                            }}
-                                        >
-                                            <FormItem label="Name">
-                                                <Input type="Text" />
-                                            </FormItem>
-                                            <FormItem label="Email">
-                                                <Input type="Text" />
-                                            </FormItem>
-                                        </Form>
+                                        <>
+                                            <ControlCreationForm
+                                                closeButtonref={
+                                                    closeButtonRoleref
+                                                }
+                                            />
+                                        </>
                                     ),
                                     footer: (
                                         <Bar
                                             endContent={
                                                 <>
-                                                    <Button design="Emphasized">
-                                                        Create
-                                                    </Button>
                                                     <Button
                                                         onClick={() => close()}
                                                         design="Negative"
+                                                        ref={closeButtonRoleref}
                                                     >
                                                         Close
                                                     </Button>
@@ -88,10 +81,10 @@ const TypeOfControl = () => {
             showHideHeaderButton={false}
             headerContentPinnable={false}
         >
-            <TypeOfControlDetails showEditDialog={showEditDialog} />
-            <div>
+            <TypeOfControlDetails />
+            {/* <div>
                 <FileUpload />
-            </div>
+            </div> */}
         </DynamicPage>
     );
 };

@@ -448,6 +448,20 @@ type getReportCheckPointMappingType = {
     checkpointdata: checkPointDatType | null;
 };
 
+type getAllControlsType = {
+    ID: number;
+    CONTROL_FAMILY_ID:number ;
+    CONTROL_NAME: string;
+    CONTROL_DESC: string;
+    CUSTOMER_ID: number;
+    IS_ACTIVE: string;
+    CREATED_ON: string;
+    CREATED_BY: string;
+    CHANGED_ON: string ;
+    CHANGED_BY:number ;
+
+}
+
 export type {
     SignInProps,
     CurrentURLType,
@@ -503,4 +517,5 @@ export type {
     getReportCheckPointMappingType,
     reportDataType,
     checkPointDatType,
+    getAllControlsType ,
 };
