@@ -10,6 +10,8 @@ import {
     ButtonType,
     ButtonDomRef,
     TextArea,
+    ComboBox,
+    ComboBoxItem,
 } from "@ui5/webcomponents-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -18,15 +20,18 @@ import ValueState from "@ui5/webcomponents-base/dist/types/ValueState.js";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 
 type CheckPointData = {
     checkPointName: string;
     checkPointDesc: string;
+    controlValue: string;
 };
 
 const schema = z.object({
     checkPointName: z.string().min(1, { message: "Name is required" }),
     checkPointDesc: z.string().min(1, { message: "Description is required" }),
+    controlValue: z.string(),
 });
 
 const CheckPointCreationForm = ({
@@ -34,6 +39,7 @@ const CheckPointCreationForm = ({
 }: {
     closeButtonref: React.RefObject<ButtonDomRef>;
 }) => {
+    const [selectedValue, setSelectedValue] = useState("");
     const queryClient = useQueryClient();
 
     const {
@@ -44,6 +50,7 @@ const CheckPointCreationForm = ({
         defaultValues: {
             checkPointName: "",
             checkPointDesc: "",
+            controlValue: "",
         },
         mode: "onChange",
         resolver: zodResolver(schema),
@@ -53,13 +60,21 @@ const CheckPointCreationForm = ({
 
     const fetchData = async (data: CheckPointData) => {
         try {
+            let control_id_data: number;
+
+            if (data.controlValue === "Order To Cash") {
+                control_id_data = 1;
+            } else {
+                control_id_data = 2;
+            }
             const reqData = {
                 check_point_name: data.checkPointName,
                 check_point_desc: data.checkPointDesc,
                 customer_id: 1,
-                control_id: 1,
+                control_id: control_id_data,
             };
             const response = await axios.post(endPoint, reqData);
+
             return response.data;
         } catch (error) {
             console.error(error);
@@ -82,6 +97,24 @@ const CheckPointCreationForm = ({
     return (
         <Form onSubmit={handleSubmit(onSubmit)} labelSpanM={4}>
             <FormGroup>
+                <FormItem label={<Label required>Control family</Label>}>
+                    <ComboBox
+                        value={selectedValue}
+                        className="w-full"
+                        onSelectionChange={(e) => {
+                            setSelectedValue(e.detail.item.text);
+                        }}
+                        valueState={
+                            errors.controlValue
+                                ? ValueState.Error
+                                : ValueState.None
+                        }
+                        {...register("controlValue", { required: true })}
+                    >
+                        <ComboBoxItem text="Order To Cash" data-value={1} />
+                        <ComboBoxItem text="Procure To Pay" data-value={2} />
+                    </ComboBox>
+                </FormItem>
                 <FormItem label={<Label required>Name</Label>}>
                     <Input
                         {...register("checkPointName", { required: true })}
