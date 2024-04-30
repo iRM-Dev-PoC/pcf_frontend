@@ -22,7 +22,7 @@ type getAllUserData = {
     CHANGED_ON: string | null;
     CHANGED_BY: string | null;
     ROLE_ID: string;
-    ROLE_NAME: string;
+    DESIGNATION: string;
 };
 
 type getAllRoleData = {
