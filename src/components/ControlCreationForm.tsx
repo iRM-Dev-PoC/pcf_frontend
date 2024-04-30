@@ -10,6 +10,8 @@ import {
     ButtonType,
     ButtonDomRef,
     TextArea,
+    ComboBox,
+    ComboBoxItem,
 } from "@ui5/webcomponents-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -18,9 +20,10 @@ import ValueState from "@ui5/webcomponents-base/dist/types/ValueState.js";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 
 type ControlsData = {
-    controlFamilyId: string;
+    controlValue: string;
     controlName: string;
     controlDescription: string;
 };
@@ -30,7 +33,7 @@ const schema = z.object({
     controlDescription: z
         .string()
         .min(1, { message: "Description is required" }),
-    controlFamilyId: z.string().min(1, { message: "Control Family ID is required" }),
+    controlValue: z.string(),
 });
 
 const ControlCreationForm = ({
@@ -38,6 +41,7 @@ const ControlCreationForm = ({
 }: {
     closeButtonref: React.RefObject<ButtonDomRef>;
 }) => {
+    const [selectedValue, setSelectedValue] = useState("");
     const queryClient = useQueryClient();
 
     const {
@@ -48,7 +52,7 @@ const ControlCreationForm = ({
         defaultValues: {
             controlName: "",
             controlDescription: "",
-            controlFamilyId: "",
+            controlValue: "",
         },
         mode: "onChange",
         resolver: zodResolver(schema),
@@ -58,10 +62,17 @@ const ControlCreationForm = ({
 
     const fetchData = async (data: ControlsData) => {
         try {
+            let control_id_data: number;
+
+            if (data.controlValue === "Order To Cash") {
+                control_id_data = 1;
+            } else {
+                control_id_data = 2;
+            }
             const reqData = {
                 control_name: data.controlName,
                 control_desc: data.controlDescription,
-                control_family_id: data.controlFamilyId,
+                control_family_id: control_id_data,
                 customer_id: 1,
             };
             const response = await axios.post(endPoint, reqData);
@@ -91,6 +102,24 @@ const ControlCreationForm = ({
     return (
         <Form onSubmit={handleSubmit(onSubmit)} labelSpanM={4}>
             <FormGroup>
+                <FormItem label={<Label required>Control family</Label>}>
+                    <ComboBox
+                        value={selectedValue}
+                        className="w-full"
+                        onSelectionChange={(e) => {
+                            setSelectedValue(e.detail.item.text);
+                        }}
+                        valueState={
+                            errors.controlValue
+                                ? ValueState.Error
+                                : ValueState.None
+                        }
+                        {...register("controlValue", { required: true })}
+                    >
+                        <ComboBoxItem text="Order To Cash" data-value={1} />
+                        <ComboBoxItem text="Procure To Pay" data-value={2} />
+                    </ComboBox>
+                </FormItem>
                 <FormItem label={<Label required>Name</Label>}>
                     <Input
                         {...register("controlName", { required: true })}
@@ -101,23 +130,6 @@ const ControlCreationForm = ({
                         }
                         valueStateMessage={
                             <span>{errors.controlName?.message}</span>
-                        }
-                        type={InputType.Text}
-                        className="w-full"
-                    />
-                </FormItem>
-                <FormItem label={<Label required>Control Family ID </Label>}>
-                    <Input
-                        {...register("controlFamilyId", {
-                            required: true,
-                        })}
-                        valueState={
-                            errors.controlFamilyId
-                                ? ValueState.Error
-                                : ValueState.None
-                        }
-                        valueStateMessage={
-                            <span>{errors.controlFamilyId?.message}</span>
                         }
                         type={InputType.Text}
                         className="w-full"
