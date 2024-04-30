@@ -30,8 +30,10 @@ import { ThemingParameters } from "@ui5/webcomponents-react-base";
 import CheckPointEditForm from "./CheckPointEditForm";
 import ErrorComponent from "./ErrorComponent";
 import NoDataComponent from "./NoDataComponent";
+import useCheckPointsData from "../stores/useCheckPoints";
 
 const AddCheckPoint = () => {
+        const [triggerFetch, setTriggerFetch] = useState(0);
     const [layout, setLayout] = useState<FCLLayout>(FCLLayout.OneColumn);
     const [isEdit, setIsEdit] = useState(false);
     const [isFullScreen, setIsFullScreen] = useState(false);
@@ -42,6 +44,7 @@ const AddCheckPoint = () => {
 
     const showDeleteConfirmation = Modals.useShowMessageBox();
     const queryClient = useQueryClient();
+    useCheckPointsData( triggerFetch );
 
     const fetchData = async () => {
         try {
@@ -77,7 +80,7 @@ const AddCheckPoint = () => {
                 setError(true);
                 throw response.data?.message;
             }
-
+             setTriggerFetch(triggerFetch + 1);
             return response.data;
         } catch (error) {
             console.error(error);

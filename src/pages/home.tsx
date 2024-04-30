@@ -14,6 +14,7 @@ import { Suspense, useState } from "react";
 import Loading from "../components/Loading";
 import ErrorComponent from "../components/ErrorComponent";
 import NoDataComponent from "../components/NoDataComponent";
+import useCheckPointsData from "../stores/useCheckPoints";
 
 const Home = () => {
     const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/dashboard/control-checkpoints`;
@@ -38,9 +39,14 @@ const Home = () => {
         queryKey: ["allcardData"],
         queryFn: fetchData,
         retry: 3,
-    });
+    } );
+    
 
     const cardValue: getAllCardDataType[] = data?.data;
+
+    const val = useCheckPointsData()
+    console.log(val);
+    
 
     return (
         <DynamicPage
