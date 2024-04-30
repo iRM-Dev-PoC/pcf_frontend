@@ -249,7 +249,7 @@ const AddUsers = () => {
                                         <FlexBox>
                                             <Label>User Type:</Label>
                                             <Text style={{ marginLeft: "2px" }}>
-                                                {selectedUser?.ROLE_NAME}
+                                                {selectedUser?.DESIGNATION}
                                             </Text>
                                         </FlexBox>
                                     </FlexBox>

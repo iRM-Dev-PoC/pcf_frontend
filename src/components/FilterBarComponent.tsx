@@ -11,7 +11,8 @@ const FilterBarComponent = () => {
         <>
             <FilterBar
                 filterContainerWidth="13.125rem"
-                header={<Title></Title>}
+                header={ <Title></Title> }
+                filterBarCollapsed
             >
                 <FilterGroupItem label="Type Of Controls">
                     <MultiComboBox valueState="None">
