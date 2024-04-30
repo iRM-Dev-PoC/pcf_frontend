@@ -17,8 +17,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import ValueState from "@ui5/webcomponents-base/dist/types/ValueState.js";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
+import useCheckPointsData from '../stores/useCheckPoints';
 
 type CheckPointData = {
     id: number;
@@ -47,7 +48,9 @@ const CheckPointEditForm = ({
     setLayout,
     setIsFullScreen,
 }: CheckPointEditFormProps & CheckPointData) => {
+    const [triggerFetch, setTriggerFetch] = useState(0);
     const queryClient = useQueryClient();
+    useCheckPointsData( triggerFetch );
     const {
         handleSubmit,
         register,
@@ -101,7 +104,8 @@ const CheckPointEditForm = ({
         });
         setIsEdit(false);
         setIsFullScreen(false);
-        setLayout(FCLLayout.OneColumn);
+        setLayout( FCLLayout.OneColumn );
+        setTriggerFetch(triggerFetch + 1);
     };
 
     return (
