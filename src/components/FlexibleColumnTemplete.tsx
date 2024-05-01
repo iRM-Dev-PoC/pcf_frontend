@@ -61,7 +61,12 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
                         <Fragment key={card?.ID}>
                             <RiskCard
                                 header={card?.CHECK_POINT_NAME}
-                                risk={card?.RISK_SCORE}
+                                risk={
+                                    Math.round(
+                                        (card?.RISK_SCORE + Number.EPSILON) *
+                                            100
+                                    ) / 100
+                                }
                                 description={card?.CHECK_POINT_DESC}
                                 onClick={handleCardClick}
                             />
