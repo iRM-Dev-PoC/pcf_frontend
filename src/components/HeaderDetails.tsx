@@ -44,8 +44,6 @@ const HeaderDetails = ({ value }: HeaderDetailsProps) => {
 
     const headerDataDetails: getAllSyncDetails[] = data?.data;
 
-    console.log(headerDataDetails);
-
     if (!isFetching && isError) {
         return <ErrorComponent />;
     }
@@ -94,7 +92,6 @@ const HeaderDetails = ({ value }: HeaderDetailsProps) => {
                     loading={isFetching}
                     filterable
                     groupBy={[]}
-                    infiniteScroll
                     rowHeight={44}
                     selectedRowIds={{
                         3: true,
