@@ -158,7 +158,6 @@ const SimulationDetails = () => {
                                 webComponentsReactProperties.showOverlay;
                             const rowData = instance.row.original;
                             const showSimulateButton = !rowData.is_simulated;
-                            console.log(rowData);
 
                             return (
                                 <FlexBox>

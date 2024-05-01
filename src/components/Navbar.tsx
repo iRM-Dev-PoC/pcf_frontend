@@ -28,6 +28,9 @@ import ProfilePopover from "./ProfilePopover";
 import { useNavigate } from "react-router-dom";
 import ProductSwitchModal from "./ProductSwitchModal";
 import "../css/navbar.css";
+import "@ui5/webcomponents/Assets.js";
+import "@ui5/webcomponents-theming/dist/Assets.js";
+import "@ui5/webcomponents-icons/dist/AllIcons.js";
 
 type NavbarProps = {
     companyName: string;

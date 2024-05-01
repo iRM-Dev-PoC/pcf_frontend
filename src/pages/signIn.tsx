@@ -118,7 +118,7 @@ const SignIn = ({ setIsLoggedIn, setIsForgotPassword }: SignInProps) => {
                                     tabIndex={-1}
                                     type="button"
                                     onClick={handlePasswordVisibility}
-                                    className="absolute left-[37.70rem] top-[14.20rem] z-50 text-center"
+                                    className="absolute left-[35.20rem] top-[12.30rem] z-50 text-center"
                                 >
                                     {showPassword ? (
                                         <Eye className="size-6 text-center text-black/70" />

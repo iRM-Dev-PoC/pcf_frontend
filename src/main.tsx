@@ -1,3 +1,22 @@
+// import "@ui5/webcomponents-fiori/Assets.js";
+// import "@ui5/webcomponents/Assets.js";
+// import "@ui5/webcomponents-icons/dist/AllIcons.js";
+// import "@ui5/webcomponents-theming/dist/generated/json-imports/Themes.js";
+// import "@ui5/webcomponents-react/dist/Assets.js";
+// import "@ui5/webcomponents-react/dist/index.js";
+// import "@ui5/webcomponents-localization/dist/Assets.js";
+// import "@ui5/webcomponents-localization/dist/Assets-static.js";
+// import "@ui5/webcomponents-fiori/dist/Assets.js";
+// import "@ui5/webcomponents-icons/dist/Assets.js";
+// import "@ui5/webcomponents/dist/Assets.js";
+// import "@ui5/webcomponents/Assets.js";
+
+import "@ui5/webcomponents/dist/Assets.js";
+import "@ui5/webcomponents-fiori/dist/Assets.js";
+import "@ui5/webcomponents/dist/Assets.js";
+import "@ui5/webcomponents-fiori/dist/Assets.js";
+import "@ui5/webcomponents-icons/dist/Assets.js";
+
 import { StrictMode, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
@@ -45,9 +64,16 @@ import "@ui5/webcomponents-icons/dist/org-chart.js";
 import "@ui5/webcomponents-icons/dist/add-document.js";
 import "@ui5/webcomponents-icons/dist/create-entry-time.js";
 import "@ui5/webcomponents-icons/dist/upload-to-cloud.js";
-import "@ui5/webcomponents-icons/AllIcons.js";
-import "@ui5/webcomponents-fiori/Assets.js";
-import "@ui5/webcomponents/Assets.js";
+import "@ui5/webcomponents-icons/dist/feed.js";
+import "@ui5/webcomponents-icons/dist/navigation-left-arrow.js";
+import "@ui5/webcomponents-icons/dist/excel-attachment.js";
+import "@ui5/webcomponents-base/dist/locale/normalizeLocale.js";
+import "@ui5/webcomponents-base/dist/locale/Locale.js";
+import "@ui5/webcomponents-base/dist/AssetRegistry.js";
+import "@ui5/webcomponents-base/dist/locale/nextFallbackLocale.js";
+import "@ui5/webcomponents-localization/dist/features/calendar/Gregorian";
+import "@ui5/webcomponents-base/AssetRegistry.js";
+import "@ui5/webcomponents-localization/dist/features/calendar/Gregorian.js";
 
 const queryClient = new QueryClient();
 
