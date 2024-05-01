@@ -5,18 +5,18 @@ import {
     MessageStrip,
     Button,
     Bar,
-    Form,
-    FormItem,
-    Input,
     Modals,
+    ButtonDomRef,
 } from "@ui5/webcomponents-react";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
 
 import ControlFamilyDetails from "../components/ControlFamilyDetails";
+import ControlFamilyCreationForm from "../components/ControlFamilyCreation";
+import { useRef } from "react";
 
 const ControlFamily = () => {
     const showDialog = Modals.useShowDialog();
-    const showEditDialog = Modals.useShowDialog();
+    const closeButtonRoleref = useRef<ButtonDomRef>(null);
     return (
         <DynamicPage
             headerTitle={
@@ -37,29 +37,22 @@ const ControlFamily = () => {
                                 const { close } = showDialog({
                                     headerText: "User Information",
                                     children: (
-                                        <Form
-                                            style={{
-                                                alignItems: "center",
-                                            }}
-                                        >
-                                            <FormItem label="Name">
-                                                <Input type="Text" />
-                                            </FormItem>
-                                            <FormItem label="Email">
-                                                <Input type="Text" />
-                                            </FormItem>
-                                        </Form>
+                                        <>
+                                            <ControlFamilyCreationForm
+                                                closeButtonref={
+                                                    closeButtonRoleref
+                                                }
+                                            />
+                                        </>
                                     ),
                                     footer: (
                                         <Bar
                                             endContent={
                                                 <>
-                                                    <Button design="Emphasized">
-                                                        Create
-                                                    </Button>
                                                     <Button
                                                         onClick={() => close()}
                                                         design="Negative"
+                                                        ref={closeButtonRoleref}
                                                     >
                                                         Close
                                                     </Button>
@@ -87,7 +80,7 @@ const ControlFamily = () => {
             showHideHeaderButton={false}
             headerContentPinnable={false}
         >
-            <ControlFamilyDetails showEditDialog={showEditDialog} />
+            <ControlFamilyDetails />
         </DynamicPage>
     );
 };

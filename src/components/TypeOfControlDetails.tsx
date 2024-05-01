@@ -84,7 +84,7 @@ const TypeOfControlDetails = () => {
         }
     };
 
-    const handleDeleteRole = async (id: number) => {
+    const handleDeleteControls = async (id: number) => {
         await toast.promise(deleteControlData(id), {
             loading: "Deleting Control...",
             success: "Control deleted successfully!",
@@ -190,7 +190,7 @@ const TypeOfControlDetails = () => {
                                                     event.detail.action ===
                                                     "Delete"
                                                 ) {
-                                                    handleDeleteRole(
+                                                    handleDeleteControls(
                                                         selectedControl?.ID ?? 0
                                                     );
                                                 }

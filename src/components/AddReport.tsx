@@ -202,7 +202,7 @@ const AddReport = () => {
                                             ],
 
                                             children:
-                                                "Are sure you want to delete this module?",
+                                                "Are sure you want to delete this report?",
                                         });
                                     }}
                                 />

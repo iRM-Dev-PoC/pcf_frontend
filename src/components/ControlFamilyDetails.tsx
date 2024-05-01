@@ -1,152 +1,308 @@
+import { useState } from "react";
 import {
-    AnalyticalTable,
-    Bar,
+    List,
+    StandardListItem,
+    Toolbar,
+    Title,
+    ToolbarSpacer,
     Button,
-    Card,
+    Avatar,
     FlexBox,
-    Form,
-    FormItem,
-    Input,
-    TextAlign,
+    Label,
+    Text,
+    ToolbarDesign,
+    AvatarSize,
+    FCLLayout,
+    FlexibleColumnLayout,
+    ButtonDesign,
+    FlexBoxDirection,
+    Modals,
+    MessageBoxTypes,
+    MessageBoxActions,
+    Card,
 } from "@ui5/webcomponents-react";
-import { controlfamilyData } from "../lib/controlFamilyData";
-import { webComponentsReactProps } from "../utils/types";
+import { getAllControlFamilyType } from "../utils/types";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import Loading from "./Loading";
+import axios from "axios";
+import toast from "react-hot-toast";
+import ErrorComponent from "./ErrorComponent";
+import NoDataComponent from "./NoDataComponent";
+import ControlFamilyEditForm from "./ControlFamilyEditForm";
 
-type ControlFamilyProps = {
+
+const ControlFamilyDetails = () => {
+    const [layout, setLayout] = useState<FCLLayout>(FCLLayout.OneColumn);
+    const [isEdit, setIsEdit] = useState(false);
+    const [isFullScreen, setIsFullScreen] = useState(false);
+    const [selectedControlFamily, setSelectedControlFamily] = useState<
+        getAllControlFamilyType | undefined
+    >(undefined);
+    const [error, setError] = useState(false);
+    const showDeleteConfirmation = Modals.useShowMessageBox();
+    const queryClient = useQueryClient();
+
+    const fetchData = async () => {
+        try {
+            const endPointAllControlFamily = `${import.meta.env.VITE_BACKEND_BASE_URL}/control-family-master/get-all-control-family`;
+            const response = await axios.get(endPointAllControlFamily);
+            if (response.data.statuscode !== 200) {
+                setError(true);
+            }
+            setError(false);
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            setError(true);
+        }
+    };
+    const { data, isFetching, isError } = useQuery({
+        queryKey: ["allControlFamilyData"],
+        queryFn: fetchData,
+        retry: 3,
+    });
+
+    const deleteControlFamilyData = async (id: number) => {
+        const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/control-master/delete-control`;
+        try {
+            const data = {
+                id,
+                customer_id: 1,
+            };
+
+            const response = await axios.patch(endPoint, data);
+            if (response.data?.statuscode !== 200) {
+                setError(true);
+                throw response.data?.message;
+            }
+
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            setError(true);
+            throw error;
+        }
+    };
+
+    const handleDeleteControlFamily = async (id: number) => {
+        await toast.promise(deleteControlFamilyData(id), {
+            loading: "Deleting Control-Family...",
+            success: "Control-Family deleted successfully!",
+            error: (error) => `Failed to delete control-family: ${error.message}`,
+        });
+        await queryClient.invalidateQueries({
+            queryKey: ["allControlFamilyData"],
+        });
+        setIsEdit(false);
+        setIsFullScreen(false);
+        setLayout(FCLLayout.OneColumn);
+    };
+
+    const controlFamilyRes = data;
+
+    const allControlFamilyData: getAllControlFamilyType[] = controlFamilyRes?.data;
+
+    if (isError || error) {
+        return <ErrorComponent />;
+    }
+
+    if (isFetching) {
+        return <Loading />;
+    }
+
+    if (!isFetching && allControlFamilyData === undefined) {
+        return <ErrorComponent />;
+    }
+
+    if (!isFetching && data?.statuscode !== 200) {
+        return <ErrorComponent />;
+    }
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    showEditDialog: any;
-};
+    const onStartColumnClick = (e: any) => {
+        const controlfamilyId = parseInt(e.detail.item.dataset.controlfamilyId);
+        const controlfamily = allControlFamilyData.find(
+            (controlfamily) => Number(controlfamily.ID) === controlfamilyId
+        );
 
-const ControlFamilyDetails = ({ showEditDialog }: ControlFamilyProps) => {
+        setSelectedControlFamily(controlfamily);
+
+        setLayout(FCLLayout.TwoColumnsMidExpanded);
+    };
+
     return (
-        <Card>
-            <AnalyticalTable
-                columns={[
-                    {
-                        Header: "ID",
-                        accessor: "id",
-                        hAlign: "center" as TextAlign,
-                    },
-                    {
-                        Header: "Control Family Name",
-                        accessor: "control_family_name",
-                        headerTooltip: "Control Family Name",
-                        hAlign: "center" as TextAlign,
-                    },
-                    {
-                        Header: "Details",
-                        accessor: "details",
-                        headerTooltip: "Details",
-                        hAlign: "center" as TextAlign,
-                    },
-                    {
-                        Header: "Created By",
-                        accessor: "created_By",
-                        hAlign: "center" as TextAlign,
-                    },
-                    {
-                        Header: "Created At",
-                        accessor: "created_At",
-                        hAlign: "center" as TextAlign,
-                    },
-
-                    {
-                        Cell: (instance: {
-                            cell: string;
-                            row: string;
-                            webComponentsReactProperties: webComponentsReactProps;
-                        }) => {
-                            const { webComponentsReactProperties } = instance;
-                            const isOverlay =
-                                webComponentsReactProperties.showOverlay;
-
-                            return (
-                                <FlexBox>
+        <>
+            {!isFetching && allControlFamilyData.length === 0 ? (
+                <NoDataComponent />
+            ) : (
+                <FlexibleColumnLayout
+                    style={{
+                        height: "100%",
+                        width: "100%",
+                        marginTop: "0.5rem",
+                        marginBottom: "0.5rem",
+                    }}
+                    layout={layout}
+                    startColumn={
+                        <List onItemClick={onStartColumnClick}>
+                            {allControlFamilyData?.map(
+                                (controlfamily, index) => (
+                                    <StandardListItem
+                                        description={
+                                            controlfamily.CONTROL_FAMILY_DESC
+                                        }
+                                        data-controlFamily-id={controlfamily.ID}
+                                        key={`${controlfamily.ID}-${index}`}
+                                    >
+                                        {controlfamily.CONTROL_FAMILY_NAME}
+                                    </StandardListItem>
+                                )
+                            )}
+                        </List>
+                    }
+                    midColumn={
+                        <>
+                            <Toolbar design={ToolbarDesign.Solid}>
+                                <Title>
+                                    {selectedControlFamily?.CONTROL_FAMILY_NAME}
+                                </Title>
+                                <ToolbarSpacer />
+                                {isFullScreen ? (
                                     <Button
-                                        icon="edit"
-                                        disabled={isOverlay}
+                                        icon="exit-full-screen"
+                                        design={ButtonDesign.Transparent}
                                         onClick={() => {
-                                            const { close } = showEditDialog({
-                                                headerText:
-                                                    "Control Familiy Details",
-                                                children: (
-                                                    <Form
-                                                        style={{
-                                                            alignItems:
-                                                                "center",
-                                                        }}
-                                                    >
-                                                        <FormItem label="Control Family Name">
-                                                            <Input
-                                                                type="Text"
-                                                                value=""
-                                                            />
-                                                        </FormItem>
-                                                        <FormItem label="Details">
-                                                            <Input
-                                                                type="Text"
-                                                                value=""
-                                                            />
-                                                        </FormItem>
-                                                    </Form>
-                                                ),
-                                                footer: (
-                                                    <Bar
-                                                        endContent={
-                                                            <>
-                                                                <Button design="Emphasized">
-                                                                    Update
-                                                                </Button>
-                                                                <Button
-                                                                    onClick={() =>
-                                                                        close()
-                                                                    }
-                                                                    design="Negative"
-                                                                >
-                                                                    Close
-                                                                </Button>
-                                                            </>
-                                                        }
-                                                    ></Bar>
-                                                ),
-                                            });
+                                            setIsFullScreen(!isFullScreen);
+                                            setLayout(
+                                                FCLLayout.TwoColumnsStartExpanded
+                                            );
                                         }}
                                     />
+                                ) : (
                                     <Button
-                                        icon="delete"
-                                        disabled={isOverlay}
+                                        icon="full-screen"
+                                        design={ButtonDesign.Transparent}
+                                        onClick={() => {
+                                            setIsFullScreen(!isFullScreen);
+                                            setLayout(
+                                                FCLLayout.MidColumnFullScreen
+                                            );
+                                        }}
                                     />
+                                )}
+                                <Button
+                                    icon="delete"
+                                    design={ButtonDesign.Transparent}
+                                    onClick={() => {
+                                        showDeleteConfirmation({
+                                            onClose(event) {
+                                                if (
+                                                    event.detail.action ===
+                                                    "Delete"
+                                                ) {
+                                                    handleDeleteControlFamily(
+                                                        selectedControlFamily
+                                                            ? selectedControlFamily.ID
+                                                            : 0
+                                                    );
+                                                }
+                                            },
+                                            type: MessageBoxTypes.Warning,
+                                            actions: [
+                                                MessageBoxActions.Delete,
+                                                MessageBoxActions.Cancel,
+                                            ],
+
+                                            children:
+                                                "Are sure you want to delete this control-family?",
+                                        });
+                                    }}
+                                />
+                                <Button
+                                    icon="edit"
+                                    design={ButtonDesign.Transparent}
+                                    onClick={() => {
+                                        setIsEdit(!isEdit);
+                                    }}
+                                />
+                                <Button
+                                    icon="decline"
+                                    design={ButtonDesign.Transparent}
+                                    onClick={() => {
+                                        setLayout(FCLLayout.OneColumn);
+                                        setIsEdit(false);
+                                    }}
+                                />
+                            </Toolbar>
+                            <Toolbar
+                                key={selectedControlFamily?.ID}
+                                style={{ height: "200px" }}
+                            >
+                                <Avatar
+                                    icon="person-placeholder"
+                                    size={AvatarSize.XL}
+                                    style={{ marginLeft: "12px" }}
+                                />
+                                <FlexBox
+                                    direction={FlexBoxDirection.Column}
+                                    style={{ marginLeft: "6px" }}
+                                >
+                                    <FlexBox>
+                                        <Label>Name:</Label>
+                                        <Text style={{ marginLeft: "2px" }}>
+                                            {
+                                                selectedControlFamily?.CONTROL_FAMILY_NAME
+                                            }
+                                        </Text>
+                                        {/* </FlexBox>
+                                    <FlexBox>
+                                        <Label>Display Name:</Label>
+                                        <Text style={{ marginLeft: "2px" }}>
+                                            {
+                                                selectedControlFamily?.DISPLAY_SUBMODULE_NAME
+                                            }
+                                        </Text> */}
+                                    </FlexBox>
+                                    <FlexBox>
+                                        <Label>Description:</Label>
+                                        <Text style={{ marginLeft: "2px" }}>
+                                            {
+                                                selectedControlFamily?.CONTROL_FAMILY_DESC
+                                            }
+                                        </Text>
+                                    </FlexBox>
                                 </FlexBox>
-                            );
-                        },
-                        Header: "Actions",
-                        accessor: ".",
-                        disableFilters: true,
-                        disableGroupBy: true,
-                        disableResizing: true,
-                        disableSortBy: true,
-                        id: "actions",
-                        width: 150,
-                        hAlign: "center" as TextAlign,
-                    },
-                ]}
-                data={controlfamilyData.map((item) => ({
-                    id: item.id,
-                    control_family_name: item.controlFamilyName,
-                    details: item.ControlFamilyDetails,
-                    created_By: item.createdBy,
-                    created_At: item.createdAt,
-                }))}
-                filterable
-                infiniteScroll
-                alternateRowColor
-                rowHeight={44}
-                selectedRowIds={{
-                    3: true,
-                }}
-                selectionMode="None"
-            />
-        </Card>
+                            </Toolbar>
+
+                            <Card>
+                                {isEdit && (
+                                    <ControlFamilyEditForm
+                                        id={
+                                            selectedControlFamily
+                                                ? selectedControlFamily.ID
+                                                : 0
+                                        }
+                                        controlName={
+                                            selectedControlFamily
+                                                ? selectedControlFamily.CONTROL_FAMILY_NAME
+                                                : ""
+                                        }
+                                        controlDescription={
+                                            selectedControlFamily
+                                                ? selectedControlFamily.CONTROL_FAMILY_DESC
+                                                : ""
+                                        }
+                                        setIsEdit={setIsEdit}
+                                        setIsFullScreen={setIsFullScreen}
+                                        setLayout={setLayout}
+                                    />
+                                )}
+                            </Card>
+                        </>
+                    }
+                />
+            )}
+        </>
     );
 };
 

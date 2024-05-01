@@ -485,6 +485,19 @@ type getAllSyncDetails = {
     IS_ACTIVE: string;
 };
 
+
+type getAllControlFamilyType = {
+    ID: number;
+    CONTROL_FAMILY_NAME: string;
+    CONTROL_FAMILY_DESC: string;
+    CUSTOMER_ID: 1;
+    IS_ACTIVE: string;
+    CREATED_ON: string;
+    CREATED_BY: null;
+    CHANGED_ON: string;
+    CHANGED_BY: number;
+};
+
 export type {
     SignInProps,
     CurrentURLType,
@@ -541,6 +554,7 @@ export type {
     reportDataType,
     checkPointDatType,
     getAllControlsType,
+    getAllControlFamilyType,
     getHeaderTypes,
     getAllSyncDetails,
 };
