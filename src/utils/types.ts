@@ -84,6 +84,7 @@ type webComponentsReactProps = {
 };
 
 type SimulationDetailsDataType = {
+    [x: string]: unknown;
     id: string;
     control_attribute_name: string;
     report_name: string;
@@ -395,7 +396,7 @@ type getAllCardDataType = {
     CREATED_BY: number;
     CHANGED_ON: string | null;
     CHANGED_BY: string | null;
-    RISK_SCORE: number;
+    RISK_SCORE: float;
 };
 
 type getAllCheckPointData = {
@@ -484,7 +485,6 @@ type getAllSyncDetails = {
     CUSTOMER_ID: number | null;
     IS_ACTIVE: string;
 };
-
 
 type getAllControlFamilyType = {
     ID: number;

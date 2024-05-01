@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { AnalyticalTable, Card } from "@ui5/webcomponents-react";
+import { AnalyticalTable, Badge, Card } from "@ui5/webcomponents-react";
 import axios from "axios";
 import { useState } from "react";
 import { getAllSyncDetails } from "../utils/types";
@@ -14,8 +14,6 @@ const HeaderDetails = ({ value }: HeaderDetailsProps) => {
     const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/data-sync/get-all-details`;
     const [error, setError] = useState(false);
 
-    console.log(value);
-
     const fetchData = async () => {
         try {
             const requestData = {
@@ -29,7 +27,7 @@ const HeaderDetails = ({ value }: HeaderDetailsProps) => {
             }
             return res.data;
         } catch (error) {
-            console.log(error);
+            console.error(error);
             setError(true);
         }
     };
@@ -40,7 +38,11 @@ const HeaderDetails = ({ value }: HeaderDetailsProps) => {
         retry: 3,
     });
 
-    // console.log(data);
+    const badgeMap: Record<string, string> = {
+        Completed: "8",
+        Initiated: "1",
+        Error: "2",
+    };
 
     const headerDataDetails: getAllSyncDetails[] = data?.data;
 
@@ -58,22 +60,37 @@ const HeaderDetails = ({ value }: HeaderDetailsProps) => {
 
     const columns = [
         {
-            Header: "CREATED ON",
-            accessor: "CREATED_ON",
-            headerTooltip: "CREATED_ON",
-            disableDragAndDrop: true,
+            Header: "Started At",
+            accessor: "SYNC_STARTED_AT",
+            headerTooltip: "Started At",
+            width: 450,
+        },
+
+        {
+            Header: "Ended At",
+            accessor: "SYNC_ENDED_AT",
+            headerTooltip: "Ended At",
+            width: 450,
         },
         {
-            Header: "CREATED BY",
-            accessor: "CREATED_BY",
-            headerTooltip: "CREATED_BY",
-            disableDragAndDrop: true,
-        },
-        {
-            Header: "SYNC STATUS",
+            Header: "Status",
+            headerTooltip: "Status",
+            width: 300,
             accessor: "SYNC_STATUS",
-            headerTooltip: "USERS",
-            disableDragAndDrop: true,
+            Cell: (instance: {
+                cell: string;
+                row: Record<string, getAllSyncDetails>;
+                accessor: string;
+            }) => {
+                const rowData = instance.row.original;
+                const scheme = rowData.SYNC_STATUS;
+                const colorscheme = badgeMap[scheme];
+                return (
+                    <Badge colorScheme={colorscheme} className="p-2">
+                        {rowData.SYNC_STATUS}
+                    </Badge>
+                );
+            },
         },
     ];
 
@@ -93,9 +110,6 @@ const HeaderDetails = ({ value }: HeaderDetailsProps) => {
                     filterable
                     groupBy={[]}
                     rowHeight={44}
-                    selectedRowIds={{
-                        3: true,
-                    }}
                     selectionMode="None"
                 />
             </div>

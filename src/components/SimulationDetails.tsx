@@ -18,10 +18,13 @@ import { useQuery } from "@tanstack/react-query";
 import HeaderDetails from "./HeaderDetails";
 import ErrorComponent from "./ErrorComponent";
 import NoDataComponent from "./NoDataComponent";
+import toast from "react-hot-toast";
 
 const SimulationDetails = () => {
     const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/data-sync/get-all-headers`;
+    const simulateEndPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/dataload/simulate-data`;
     const [error, setError] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const fetchData = async () => {
         try {
@@ -33,7 +36,7 @@ const SimulationDetails = () => {
             }
             return res.data;
         } catch (error) {
-            console.log(error);
+            console.error(error);
             setError(true);
         }
     };
@@ -43,9 +46,6 @@ const SimulationDetails = () => {
         queryFn: fetchData,
         retry: 3,
     });
-
-    console.log(isFetching);
-    console.log(isError);
 
     const showDialog = Modals.useShowDialog();
 
@@ -74,23 +74,55 @@ const SimulationDetails = () => {
         });
     };
 
+    const handleSimulate = async (id: number) => {
+        try {
+            setIsLoading(true);
+            const body = {
+                id,
+            };
+
+            const res = await axios.post(simulateEndPoint, body);
+            if (res.data?.statuscode !== 200) {
+                throw "Failed to simulate data!";
+            }
+            return true;
+        } catch (error) {
+            console.error(error);
+            setError(true);
+            throw error;
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const onSimulate = async (id: number) => {
+        await toast.promise(handleSimulate(id), {
+            loading: "Simulating data...",
+            success: "Data simulated successfully!",
+            error: (error) => `Failed to simulate data: ${error.message}`,
+        });
+    };
+
     return (
         <Card>
             <AnalyticalTable
                 columns={[
                     {
-                        Header: "ID",
+                        Header: "SYNC ID",
                         accessor: "SYNC_ID",
+                        width: 200,
                     },
                     {
                         Header: "Sync Started At",
                         accessor: "SYNC_STARTED_AT",
+                        width: 650,
                     },
                     {
-                        Header: "USER NAME",
+                        Header: "Username",
                         headerTooltip: "Synced By",
                         accessor: "USER_NAME",
                         hAlign: "center" as TextAlign,
+                        width: 650,
                     },
                     {
                         Header: "Preview",
@@ -99,6 +131,7 @@ const SimulationDetails = () => {
                         disableResizing: true,
                         disableSortBy: true,
                         disableDragAndDrop: true,
+                        width: 120,
                         Cell: () => {
                             return (
                                 <Button
@@ -124,47 +157,18 @@ const SimulationDetails = () => {
                             const isOverlay =
                                 webComponentsReactProperties.showOverlay;
                             const rowData = instance.row.original;
-                            const showDashboardButton = rowData.is_simulated;
-
-                            return (
-                                <FlexBox>
-                                    {showDashboardButton && (
-                                        <Button
-                                            icon="performance"
-                                            disabled={isOverlay}
-                                        />
-                                    )}
-                                </FlexBox>
-                            );
-                        },
-                        Header: "View Dashboard",
-                        accessor: ".",
-                        disableFilters: true,
-                        disableGroupBy: true,
-                        disableResizing: true,
-                        disableSortBy: true,
-                        id: "viewDashboard",
-                        width: 150,
-                        hAlign: "center" as TextAlign,
-                    },
-                    {
-                        Cell: (instance: {
-                            cell: string;
-                            row: Record<string, SimulationDetailsDataType>;
-                            webComponentsReactProperties: webComponentsReactProps;
-                        }) => {
-                            const { webComponentsReactProperties } = instance;
-                            const isOverlay =
-                                webComponentsReactProperties.showOverlay;
-                            const rowData = instance.row.original;
                             const showSimulateButton = !rowData.is_simulated;
+                            console.log(rowData);
 
                             return (
                                 <FlexBox>
                                     {showSimulateButton && (
                                         <Button
                                             icon="synchronize"
-                                            disabled={isOverlay}
+                                            disabled={isOverlay || isLoading}
+                                            onClick={() =>
+                                                onSimulate(Number(rowData.ID))
+                                            }
                                         />
                                     )}
                                 </FlexBox>
@@ -177,7 +181,7 @@ const SimulationDetails = () => {
                         disableResizing: true,
                         disableSortBy: true,
                         id: "simulate",
-                        width: 150,
+                        width: 120,
                     },
                 ]}
                 data={allHeaderData?.map((header) => ({
