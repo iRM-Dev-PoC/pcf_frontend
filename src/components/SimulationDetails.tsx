@@ -16,6 +16,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import HeaderDetails from "./HeaderDetails";
+import ErrorComponent from "./ErrorComponent";
+import NoDataComponent from "./NoDataComponent";
 
 const SimulationDetails = () => {
     const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/data-sync/get-all-headers`;
@@ -49,7 +51,17 @@ const SimulationDetails = () => {
 
     const allHeaderData: getHeaderTypes[] = data?.data;
 
-    console.log(allHeaderData);
+    if (!isFetching && isError) {
+        return <ErrorComponent />;
+    }
+
+    if (!isFetching && error) {
+        return <ErrorComponent />;
+    }
+
+    if (!isFetching && allHeaderData.length === 0) {
+        return <NoDataComponent />;
+    }
 
     const showModal = ({ value }: { value: number }) => {
         const { close } = showDialog({
@@ -69,20 +81,10 @@ const SimulationDetails = () => {
                     {
                         Header: "ID",
                         accessor: "SYNC_ID",
-                        // headerTooltip: "Control Attribute Name",
-                        // hAlign: "center" as TextAlign,
                     },
-                    // {
-                    //     Header: "SYNC ID",
-                    //     accessor: "ID",
-                    //     hAlign: "center" as TextAlign,
-                    // },
-
                     {
                         Header: "Sync Started At",
                         accessor: "SYNC_STARTED_AT",
-                        // headerTooltip: "Report Name",
-                        // hAlign: "center" as TextAlign,
                     },
                     {
                         Header: "USER NAME",
@@ -90,54 +92,6 @@ const SimulationDetails = () => {
                         accessor: "USER_NAME",
                         hAlign: "center" as TextAlign,
                     },
-                    // {
-                    //     Header: "Sync At",
-                    //     headerTooltip: "Sync At",
-                    //     accessor: "sync_at",
-                    //     hAlign: "center" as TextAlign,
-                    // },
-                    // {
-                    //     Header: "Simulated At",
-                    //     headerTooltip: "Simulated At",
-                    //     accessor: "simulate_at",
-                    //     hAlign: "center" as TextAlign,
-                    // },
-                    // {
-                    //     Header: "Simulated By",
-                    //     headerTooltip: "Simulated By",
-                    //     accessor: "simulated_by",
-                    //     hAlign: "center" as TextAlign,
-                    // },
-
-                    // {
-                    //     Cell: (instance: {
-                    //         cell: string;
-                    //         row: string;
-                    //         webComponentsReactProperties: webComponentsReactProps;
-                    //     }) => {
-                    //         const { webComponentsReactProperties } = instance;
-                    //         const isOverlay =
-                    //             webComponentsReactProperties.showOverlay;
-
-                    //         return (
-                    //             <FlexBox>
-                    //                 <Button
-                    //                     icon="detail-view"
-                    //                     disabled={isOverlay}
-                    //                 />
-                    //             </FlexBox>
-                    //         );
-                    //     },
-                    //     Header: "Preview",
-                    //     accessor: ".",
-                    //     disableFilters: true,
-                    //     disableGroupBy: true,
-                    //     disableResizing: true,
-                    //     disableSortBy: true,
-                    //     id: "preview",
-                    //     width: 150,
-                    //     hAlign: "center" as TextAlign,
-                    // },
                     {
                         Header: "Preview",
                         disableFilters: true,
@@ -224,7 +178,6 @@ const SimulationDetails = () => {
                         disableSortBy: true,
                         id: "simulate",
                         width: 150,
-                        hAlign: "center" as TextAlign,
                     },
                 ]}
                 data={allHeaderData?.map((header) => ({
@@ -234,12 +187,8 @@ const SimulationDetails = () => {
                     USER_NAME: header.USER_NAME,
                 }))}
                 filterable
-                // infiniteScroll
                 alternateRowColor
                 rowHeight={44}
-                selectedRowIds={{
-                    3: true,
-                }}
                 selectionMode="None"
                 loading={isFetching}
             />

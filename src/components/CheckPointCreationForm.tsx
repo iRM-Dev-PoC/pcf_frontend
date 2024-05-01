@@ -22,8 +22,6 @@ import axios from "axios";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
-import useCheckPointsData from '../stores/useCheckPoints';
-
 type CheckPointData = {
     checkPointName: string;
     checkPointDesc: string;
@@ -41,10 +39,8 @@ const CheckPointCreationForm = ({
 }: {
     closeButtonref: React.RefObject<ButtonDomRef>;
 }) => {
-    const [selectedValue, setSelectedValue] = useState( "" );
-    const [triggerFetch, setTriggerFetch] = useState(0);
+    const [selectedValue, setSelectedValue] = useState("");
     const queryClient = useQueryClient();
-    useCheckPointsData( triggerFetch );
 
     const {
         handleSubmit,
@@ -96,7 +92,6 @@ const CheckPointCreationForm = ({
             queryKey: ["allCheckPointData"],
         });
         closeButtonref.current?.click();
-        setTriggerFetch(triggerFetch + 1);
     };
 
     return (
