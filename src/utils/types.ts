@@ -22,7 +22,7 @@ type getAllUserData = {
     CHANGED_ON: string | null;
     CHANGED_BY: string | null;
     ROLE_ID: string;
-    ROLE_NAME: string;
+    DESIGNATION: string;
 };
 
 type getAllRoleData = {
@@ -450,16 +450,41 @@ type getReportCheckPointMappingType = {
 
 type getAllControlsType = {
     ID: number;
-    CONTROL_FAMILY_ID:number ;
+    CONTROL_FAMILY_ID: number;
     CONTROL_NAME: string;
     CONTROL_DESC: string;
     CUSTOMER_ID: number;
     IS_ACTIVE: string;
     CREATED_ON: string;
     CREATED_BY: string;
-    CHANGED_ON: string ;
-    CHANGED_BY:number ;
-}
+    CHANGED_ON: string;
+    CHANGED_BY: number;
+};
+
+type getHeaderTypes = {
+    ID: number;
+    SYNC_ID: string;
+    SYNC_STARTED_AT: string;
+    USER_NAME: string;
+};
+
+type getAllSyncDetails = {
+    ID: number;
+    SYNC_HEADER_ID: number;
+    SYNC_STATUS: string;
+    CONTROL_ID: number;
+    REPORT_ID: number;
+    REPORT_DESTINATION: string;
+    SYNC_STARTED_AT: string;
+    SYNC_ENDED_AT: string;
+    CREATED_ON: string;
+    CREATED_BY: number;
+    CHANGED_ON: string;
+    CHANGED_BY: number | null;
+    CUSTOMER_ID: number | null;
+    IS_ACTIVE: string;
+};
+
 
 type getAllControlFamilyType = {
     ID: number;
@@ -530,4 +555,6 @@ export type {
     checkPointDatType,
     getAllControlsType,
     getAllControlFamilyType,
+    getHeaderTypes,
+    getAllSyncDetails,
 };
