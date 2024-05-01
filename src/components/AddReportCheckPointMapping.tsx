@@ -2,49 +2,33 @@ import { useState } from "react";
 import {
     List,
     StandardListItem,
-    Toolbar,
-    Title,
-    ToolbarSpacer,
-    Button,
-    Avatar,
-    FlexBox,
-    Label,
-    Text,
-    ToolbarDesign,
-    AvatarSize,
     FCLLayout,
     FlexibleColumnLayout,
-    ButtonDesign,
-    FlexBoxDirection,
-    MessageBoxTypes,
-    MessageBoxActions,
-    Modals,
-    Card,
 } from "@ui5/webcomponents-react";
 import {
     checkPointDatType,
     getReportCheckPointMappingType,
     reportDataType,
 } from "../utils/types";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import Loading from "./Loading";
 import axios from "axios";
-import toast from "react-hot-toast";
+// import toast from "react-hot-toast";
 import ErrorComponent from "./ErrorComponent";
 import NoDataComponent from "./NoDataComponent";
 
-import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
+// import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
 
 const AddReportCheckPointMapping = () => {
     const [layout, setLayout] = useState<FCLLayout>(FCLLayout.OneColumn);
-    const [isEdit, setIsEdit] = useState(false);
-    const [isFullScreen, setIsFullScreen] = useState(false);
-    const [selectedCheckPointMapping, setSelectedCheckPointMapping] = useState<
+    // const [isEdit, setIsEdit] = useState(false);
+    // const [isFullScreen, setIsFullScreen] = useState(false);
+    const [, setSelectedCheckPointMapping] = useState<
         getReportCheckPointMappingType | undefined
     >(undefined);
     const [error, setError] = useState(false);
-    const showDeleteConfirmation = Modals.useShowMessageBox();
-    const queryClient = useQueryClient();
+    // const showDeleteConfirmation = Modals.useShowMessageBox();
+    // const queryClient = useQueryClient();
 
     const fetchData = async () => {
         try {
@@ -139,7 +123,6 @@ const AddReportCheckPointMapping = () => {
     if (!isFetching && data?.statuscode !== 200) {
         return <ErrorComponent />;
     }
-
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onStartColumnClick = (e: any) => {

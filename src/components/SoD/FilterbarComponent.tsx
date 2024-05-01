@@ -11,6 +11,7 @@ const FilterbarComponent = () => {
         <>
             <FilterBar
                 filterContainerWidth="13.125rem"
+                filterBarCollapsed
                 header={<Title>Applied Filter</Title>}
             >
                 <FilterGroupItem label="BUISNESS PROCESS">

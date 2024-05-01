@@ -31,10 +31,16 @@ import { routes, sodRoutes } from "./lib/routedata";
 import { useSwitchProduct } from "./hooks/useSwitchProduct";
 import { User } from "./utils/types";
 import ReportCheckPointMapping from "./pages/reportCheckPointMapping";
+import "@ui5/webcomponents-icons/dist/AllIcons.js";
+import {
+    getLanguage,
+    setLanguage,
+    getDefaultLanguage,
+    getFetchDefaultLanguage,
+} from "@ui5/webcomponents-base/dist/config/Language.js";
 
 const App = () => {
     const [, setTheme] = useState("sap_horizon");
-
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState<User | undefined>(undefined);
     const [isForgotPassword, setIsForgotPassword] = useState(false);
@@ -44,6 +50,9 @@ const App = () => {
     const path = useCurrentPath();
 
     useEffect(() => {
+        console.log(getDefaultLanguage, getFetchDefaultLanguage, getLanguage);
+
+        setLanguage("en_GB");
         const userData = localStorage.getItem("userData");
         if (userData) {
             setIsLoggedIn(true);
