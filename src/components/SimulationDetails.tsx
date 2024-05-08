@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import {
     AnalyticalTable,
     Bar,
@@ -7,18 +8,17 @@ import {
     Modals,
     TextAlign,
 } from "@ui5/webcomponents-react";
+import axios from "axios";
+import { useState } from "react";
+import toast from "react-hot-toast";
 import {
     SimulationDetailsDataType,
     getHeaderTypes,
     webComponentsReactProps,
 } from "../utils/types";
-import { useState } from "react";
-import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
-import HeaderDetails from "./HeaderDetails";
 import ErrorComponent from "./ErrorComponent";
+import HeaderDetails from "./HeaderDetails";
 import NoDataComponent from "./NoDataComponent";
-import toast from "react-hot-toast";
 
 const SimulationDetails = () => {
     const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/data-sync/get-all-headers`;
@@ -164,9 +164,13 @@ const SimulationDetails = () => {
                                     {showSimulateButton && (
                                         <Button
                                             icon="synchronize"
-                                            disabled={isOverlay || isLoading}
+                                            disabled={
+                                                isOverlay ||
+                                                isLoading ||
+                                                rowData.IS_SIMULATED === 1
+                                            }
                                             onClick={() =>
-                                                onSimulate(Number(rowData.ID))
+                                                onSimulate(Number(rowData?.ID))
                                             }
                                         />
                                     )}
@@ -188,6 +192,7 @@ const SimulationDetails = () => {
                     SYNC_ID: header.SYNC_ID,
                     SYNC_STARTED_AT: header.SYNC_STARTED_AT,
                     USER_NAME: header.USER_NAME,
+                    IS_SIMULATED: header.IS_SIMULATED,
                 }))}
                 filterable
                 alternateRowColor
