@@ -9,7 +9,6 @@ import {
     ButtonDomRef,
 } from "@ui5/webcomponents-react";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
-
 import ControlFamilyDetails from "../components/ControlFamilyDetails";
 import ControlFamilyCreationForm from "../components/ControlFamilyCreation";
 import { useRef } from "react";

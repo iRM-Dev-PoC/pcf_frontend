@@ -53,7 +53,7 @@ const ControlFamilyCreationForm = ({
         resolver: zodResolver(schema),
     });
 
-    const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/control-master/create-control`;
+    const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/control-family-master/create-control-family`;
 
     const fetchData = async (data: ControlsData) => {
         try {
