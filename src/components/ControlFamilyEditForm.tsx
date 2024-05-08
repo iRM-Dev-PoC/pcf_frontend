@@ -62,7 +62,7 @@ const ControlFamilyEditForm = ({
         resolver: zodResolver(schema),
     });
 
-    const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/control-master/update-control`;
+    const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/control-family-master/update-control-family`;
 
     const updateControlFamily = async (data: ControlFamilyData) => {
         try {

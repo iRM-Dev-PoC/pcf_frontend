@@ -63,7 +63,7 @@ const ControlFamilyDetails = () => {
     });
 
     const deleteControlFamilyData = async (id: number) => {
-        const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/control-master/delete-control`;
+        const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/control-family-master/delete-control-family`;
         try {
             const data = {
                 id,
@@ -98,9 +98,9 @@ const ControlFamilyDetails = () => {
         setLayout(FCLLayout.OneColumn);
     };
 
-    const controlFamilyRes = data;
+    const controlFamilyDataRes = data;
 
-    const allControlFamilyData: getAllControlFamilyType[] = controlFamilyRes?.data;
+    const allControlFamilyData: getAllControlFamilyType[] = controlFamilyDataRes?.data;
 
     if (isError || error) {
         return <ErrorComponent />;
