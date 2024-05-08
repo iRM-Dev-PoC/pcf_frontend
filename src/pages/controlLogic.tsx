@@ -1,13 +1,13 @@
 import {
+    Bar,
+    Button,
     DynamicPage,
     DynamicPageTitle,
-    MessageStrip,
-    Button,
-    Bar,
-    Modals,
     Form,
     FormItem,
     Input,
+    MessageStrip,
+    Modals,
 } from "@ui5/webcomponents-react";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
 import ControlLogicDetails from "../components/ControlLogicDetails";
