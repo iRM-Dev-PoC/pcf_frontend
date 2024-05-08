@@ -127,7 +127,7 @@ type EmailInputProps = {
 };
 
 type uploadFileType = {
-    data: FormData;
+    uploadData: FormData;
 };
 
 type checkUser = {
