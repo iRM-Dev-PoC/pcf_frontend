@@ -1,5 +1,6 @@
 //! Working but to display the file name in the modal, modal has to be reopened
 
+import { useQueryClient } from "@tanstack/react-query";
 import "@ui5/webcomponents-fiori/dist/illustrations/UploadToCloud.js";
 import {
   Bar,
@@ -25,6 +26,7 @@ const DataLoad = () => {
   const [formData, setFormData] = useState<FormData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const closeButtonref = useRef<ButtonDomRef>(null);
+  const queryClient = useQueryClient();
 
   const handleClear = () => {
     setSelectedFileNames([]);
@@ -35,13 +37,16 @@ const DataLoad = () => {
     const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/dataload/upload-and-store`;
     try {
       setIsLoading(true);
-      const response = await axios.post(endPoint, uploadData);
+      const reqBody = uploadData;
+      reqBody.append("CUST_ID", "1");
+      const response = await axios.post(endPoint, reqBody);
       return response.data;
     } catch (error) {
       console.error(error);
       throw error;
     } finally {
       setIsLoading(false);
+      closeButtonref.current?.click();
     }
   }
 
@@ -51,7 +56,9 @@ const DataLoad = () => {
       success: "File(s) uploaded successfully!",
       error: (error) => `Failed to upload file(s): ${error.message}`,
     });
-    closeButtonref.current?.click();
+    await queryClient.invalidateQueries({
+      queryKey: ["allHeaderData"],
+    });
   };
 
   return (
