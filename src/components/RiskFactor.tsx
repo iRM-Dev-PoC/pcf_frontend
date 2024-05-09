@@ -1,10 +1,12 @@
 import { Card, FCLLayout } from "@ui5/webcomponents-react";
 import { RadialChart } from "@ui5/webcomponents-react-charts";
+import { formatNumber } from "../lib/formatNumber";
 
 type RiskFactorProps = {
     layout: FCLLayout;
+    value: number;
 };
-const RiskFactor = ({ layout }: RiskFactorProps) => {
+const RiskFactor = ({ layout, value }: RiskFactorProps) => {
     const isFullScreen = layout === FCLLayout.MidColumnFullScreen;
 
     return (
@@ -19,8 +21,8 @@ const RiskFactor = ({ layout }: RiskFactorProps) => {
                     outerRadius: 140,
                 }}
                 color="#f0ab00"
-                displayValue="50%"
-                value={50}
+                displayValue={`${String(formatNumber(value))}%`}
+                value={formatNumber(value)}
             />
         </Card>
     );

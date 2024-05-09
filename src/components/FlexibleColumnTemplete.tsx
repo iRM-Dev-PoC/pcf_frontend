@@ -12,7 +12,7 @@ import {
 import axios from "axios";
 import { Fragment, useState } from "react";
 import cardData from "../lib/cardData";
-import { dasboardCardData } from "../lib/dashboardCardData";
+import { formatNumber } from "../lib/formatNumber";
 import {
     dataCardType,
     getAllCardDataType,
@@ -75,6 +75,36 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
     };
 
     const nonCompilantDataRes = dasboardData?.violatedData;
+    const activityCardDataRes = dasboardData?.control_data;
+    // const baseDataRes = dasboardCardData[0];
+    // const exceptionDataRes = dasboardCardData[1];
+    // const deviationDataRes = dasboardCardData[2];
+
+    console.log("dasboardCardData", dasboardData?.base_data_count);
+    // const cardDataRes = {
+    // baseData: dasboardData?.base_data_count,
+    // exceptionData: dasboardData?.exception_count,
+    // daviationData: dasboardData?.deviation_count,
+    // };
+
+    // const cardDataRes = [
+    //     {
+    //         header: "Base",
+    //         baseData: dasboardData?.base_data_count,
+    //     },
+    //     {
+    //         header: "Exception",
+    //         exceptionData: dasboardData?.exception_count,
+    //     },
+    //     {
+    //         header: "Daviation",
+    //         daviationData: dasboardData?.deviation_count,
+    //     },
+    // ];
+
+    // console.log("exceptionDataRes", exceptionDataRes);
+    // console.log("deviationDataRes", deviationDataRes);
+
     console.log(error);
     console.log(isloading);
 
@@ -96,12 +126,7 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
                         <Fragment key={card?.ID}>
                             <RiskCard
                                 header={card?.CHECK_POINT_NAME}
-                                risk={
-                                    Math.round(
-                                        (card?.RISK_SCORE + Number.EPSILON) *
-                                            100
-                                    ) / 100
-                                }
+                                risk={formatNumber(card?.RISK_SCORE)}
                                 description={card?.CHECK_POINT_DESC}
                                 onClick={() => handleCardClick(card?.ID)}
                             />
@@ -162,8 +187,16 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
                                     data-name="ActivityCard"
                                 >
                                     <ActivityCard
-                                        title="Activity"
-                                        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, obcaecati!"
+                                        title={
+                                            activityCardDataRes
+                                                ? activityCardDataRes.CHECK_POINT_NAME
+                                                : ""
+                                        }
+                                        description={
+                                            activityCardDataRes
+                                                ? activityCardDataRes.CHECK_POINT_DESC
+                                                : ""
+                                        }
                                     />
                                 </FlexBox>
                                 <FlexBox
@@ -171,14 +204,39 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
                                     direction="Row"
                                     className="gap-x-2 overflow-hidden"
                                 >
-                                    {dasboardCardData.map((cardData, index) => (
-                                        <DashboardCards
-                                            key={`${index}-${cardData.count}`}
-                                            header={cardData.header}
-                                            description={cardData.description}
-                                            count={cardData.count}
-                                        />
-                                    ))}
+                                    <DashboardCards
+                                        header="Base"
+                                        description="Total Number of Rows in Base Data"
+                                        count={
+                                            dasboardData
+                                                ? formatNumber(
+                                                      dasboardData?.base_data_count
+                                                  )
+                                                : 0
+                                        }
+                                    />
+                                    <DashboardCards
+                                        header="Exception"
+                                        description="Number of Exceptions in Report"
+                                        count={
+                                            dasboardData
+                                                ? formatNumber(
+                                                      dasboardData?.exception_count
+                                                  )
+                                                : 0
+                                        }
+                                    />
+                                    <DashboardCards
+                                        header="Deviation"
+                                        description="Deviation Between Total Rows and Exception"
+                                        count={
+                                            dasboardData
+                                                ? formatNumber(
+                                                      dasboardData?.deviation_count
+                                                  )
+                                                : 0
+                                        }
+                                    />
                                 </FlexBox>
                             </FlexBox>
                             <FlexBox
@@ -186,7 +244,14 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
                                 data-name="RiskFactor"
                                 direction="Column"
                             >
-                                <RiskFactor layout={layout} />
+                                <RiskFactor
+                                    layout={layout}
+                                    value={
+                                        dasboardData
+                                            ? dasboardData?.risk_score
+                                            : 0
+                                    }
+                                />
                             </FlexBox>
                         </FlexBox>
                     </Toolbar>

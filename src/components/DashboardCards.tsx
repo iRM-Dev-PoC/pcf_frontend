@@ -7,19 +7,34 @@ import {
 } from "@ui5/webcomponents-react";
 
 type DashboardCardProps = {
-    header: string;
-    description: string;
+    header: "Base" | "Exception" | "Deviation";
     count: number;
+    description:
+        | "Total Number of Rows in Base Data"
+        | "Number of Exceptions in Report"
+        | "Deviation Between Total Rows and Exception";
 };
 
-const DashboardCards = ({ header, description, count }: DashboardCardProps) => {
+const DashboardCards = ({ header, count, description }: DashboardCardProps) => {
     return (
         <FlexBox direction="Row" className="my-2 grow">
             <Card
                 header={
                     <CardHeader
                         titleText={header}
-                        action={<Badge>{count}</Badge>}
+                        action={
+                            <Badge
+                                colorScheme={
+                                    header === "Base"
+                                        ? "7"
+                                        : header === "Exception"
+                                          ? "1"
+                                          : "2"
+                                }
+                            >
+                                {count}
+                            </Badge>
+                        }
                     />
                 }
             >
