@@ -1,5 +1,6 @@
 import { AnalyticalTable, Card, TextAlign } from "@ui5/webcomponents-react";
 import { nonCompilantTable } from "../lib/nonCompilantTable";
+
 const NonCompilantData = () => {
     return (
         <Card>

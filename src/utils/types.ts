@@ -497,7 +497,26 @@ type getAllControlFamilyType = {
     CHANGED_ON: string;
     CHANGED_BY: number;
 };
-
+type getAllNonCompilantData = {
+    ID: number;
+    SYNC_HEADER_ID: string;
+    CUSTOMER_ID: number;
+    BILLING_DOCUMENT: string;
+    BILLING_INVOICE_NET_VALUE: string;
+    SALES_ORDER_NET_VALUE: string;
+    PERSONNEL_NUMBER: string | null;
+    EMPLOYEE_NAME: string;
+    CREAETD_ON: string | null;
+    BILLING_TAX_AMOUNT: number;
+    BILLING_COST: string;
+    SALES_PERSONNEL_NUMBER: string;
+    SOLD_TO_PARTY_NAME: string;
+    ITEM_DESCRIPTION: string;
+    PAYER_DESCRIPTION: string;
+    SALES_ORDER_CREATED_ON: string;
+    BILLING_CREATED_ON: string;
+    SALES_DOCUMENT: string;
+};
 export type {
     SignInProps,
     CurrentURLType,
@@ -557,4 +576,5 @@ export type {
     getAllControlFamilyType,
     getHeaderTypes,
     getAllSyncDetails,
+    getAllNonCompilantData,
 };
