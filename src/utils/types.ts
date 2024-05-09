@@ -531,8 +531,8 @@ type controlData = {
     CHANGED_BY: number | null;
 };
 
-type  = {
-    control_data: controlData[];
+type getControlDataType = {
+    control_data: controlData;
     base_data_count: number;
     exception_count: number;
     deviation_count: number;
