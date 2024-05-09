@@ -1,164 +1,112 @@
 import { AnalyticalTable, Card, TextAlign } from "@ui5/webcomponents-react";
-import { nonCompilantTable } from "../lib/nonCompilantTable";
+import { getAllNonCompilantData } from "../utils/types";
+import NoDataComponent from "./NoDataComponent";
 
-const NonCompilantData = () => {
+type NonCompilantDataProps = {
+    nonCompilantDataRes: getAllNonCompilantData[] | undefined;
+};
+
+const NonCompilantData = ({ nonCompilantDataRes }: NonCompilantDataProps) => {
+    console.log(nonCompilantDataRes);
+    if (nonCompilantDataRes === undefined) {
+        return <NoDataComponent />;
+    }
     return (
         <Card>
             <h1 className="p-6 text-xl font-semibold">Non Compilant Data</h1>
             <AnalyticalTable
                 columns={[
                     {
-                        Header: "Sl No.",
-                        accessor: "id",
+                        Header: "BILLING DOCUMENT",
+                        accessor: "BILLING_DOCUMENT",
                         hAlign: "center" as TextAlign,
                     },
                     {
-                        Header: "Account Name",
-                        accessor: "account_name",
+                        Header: "BILLING INVOICE NET VALUE",
+                        accessor: "BILLING_INVOICE_NET_VALUE",
                         hAlign: "center" as TextAlign,
                     },
                     {
-                        Header: "Account Number",
-                        accessor: "account_number",
+                        Header: "SALES ORDER NET VALUE",
+                        accessor: "SALES_ORDER_NET_VALUE",
                         hAlign: "center" as TextAlign,
                     },
                     {
-                        Header: "Address 1",
-                        accessor: "address_1",
+                        Header: "PERSONNEL NUMBER",
+                        accessor: "PERSONNEL_NUMBER",
                         hAlign: "center" as TextAlign,
                     },
                     {
-                        Header: "Address 2",
-                        accessor: "address_2",
+                        Header: "CREAETD ON",
+                        accessor: "CREAETD_ON",
                         hAlign: "center" as TextAlign,
                     },
                     {
-                        Header: "Address 3",
-                        accessor: "address_3",
+                        Header: "BILLING TAX AMOUNT",
+                        accessor: "BILLING_TAX_AMOUNT",
                         hAlign: "center" as TextAlign,
                     },
                     {
-                        Header: "City",
-                        accessor: "city_name",
+                        Header: "BILLING COST",
+                        accessor: "BILLING_COST",
                         hAlign: "center" as TextAlign,
                     },
                     {
-                        Header: "Country",
-                        accessor: "country_name",
+                        Header: "SALES PERSONNEL NUMBER",
+                        accessor: "SALES_PERSONNEL_NUMBER",
                         hAlign: "center" as TextAlign,
                     },
                     {
-                        Header: "Customer Account Status",
-                        accessor: "customer_account_status",
+                        Header: "SOLD TO PARTY NAME",
+                        accessor: "SOLD_TO_PARTY_NAME",
                         hAlign: "center" as TextAlign,
                     },
                     {
-                        Header: "Customer Class",
-                        accessor: "customer_class",
+                        Header: "ITEM DESCRIPTION",
+                        accessor: "ITEM_DESCRIPTION",
                         hAlign: "center" as TextAlign,
                     },
                     {
-                        Header: "Customer ID",
-                        accessor: "customer_id",
+                        Header: "PAYER DESCRIPTION",
+                        accessor: "PAYER_DESCRIPTION",
                         hAlign: "center" as TextAlign,
                     },
                     {
-                        Header: "Customer Name",
-                        accessor: "customer_name",
+                        Header: "SALES ORDER CREATED ON",
+                        accessor: "SALES_ORDER_CREATED_ON",
                         hAlign: "center" as TextAlign,
                     },
                     {
-                        Header: "Customer No.",
-                        accessor: "customer_number",
+                        Header: "BILLING CREATED ON",
+                        accessor: "BILLING_CREATED_ON",
                         hAlign: "center" as TextAlign,
                     },
                     {
-                        Header: "Discription",
-                        accessor: "description",
+                        Header: "SALES DOCUMENT",
+                        accessor: "SALES_DOCUMENT",
                         hAlign: "center" as TextAlign,
                     },
-                    {
-                        Header: "Icao Code",
-                        accessor: "icao_code",
-                        hAlign: "center" as TextAlign,
-                    },
-                    {
-                        Header: "Location",
-                        accessor: "location",
-                        hAlign: "center" as TextAlign,
-                    },
-                    {
-                        Header: "Ou Name",
-                        accessor: "ou_name",
-                        hAlign: "center" as TextAlign,
-                    },
-                    {
-                        Header: "Overall Credit Limit",
-                        accessor: "overall_credit_limit",
-                        hAlign: "center" as TextAlign,
-                    },
-                    {
-                        Header: "Party ID",
-                        accessor: "party_id",
-                        hAlign: "center" as TextAlign,
-                    },
-                    {
-                        Header: "Party Site Name ",
-                        accessor: "party_site_name",
-                        hAlign: "center" as TextAlign,
-                    },
-                    {
-                        Header: "Party Site Number",
-                        accessor: "party_site_number",
-                        hAlign: "center" as TextAlign,
-                    },
-                    {
-                        Header: "Postal code",
-                        accessor: "postal_code",
-                        hAlign: "center" as TextAlign,
-                    },
-                    {
-                        Header: "Profile",
-                        accessor: "profile",
-                        hAlign: "center" as TextAlign,
-                    },
-                    {
-                        Header: "Province",
-                        accessor: "province",
-                        hAlign: "center" as TextAlign,
-                    },
-                    {
-                        Header: "State",
-                        accessor: "state",
-                        hAlign: "center" as TextAlign,
-                    },
+                   
                 ]}
-                data={nonCompilantTable.map((item) => ({
-                    id: item.id,
-                    account_name: item.accountname,
-                    account_number: item.accountnumber,
-                    address_1: item.address1,
-                    address_2: item.address2,
-                    address_3: item.address3,
-                    city_name: item.cityname,
-                    country_name: item.countryname,
-                    customer_account_status: item.customeraccountstatus,
-                    customer_class: item.customerclass,
-                    customer_id: item.customerid,
-                    customer_name: item.customername,
-                    customer_number: item.customernumber,
-                    description: item.description,
-                    icao_code: item.icaocode,
-                    location: item.location,
-                    ou_name: item.ouname,
-                    overall_credit_limit: item.overallcreditlimit,
-                    party_id: item.partyid,
-                    party_site_name: item.partysitename,
-                    party_site_number: item.partysitenumber,
-                    postal_code: item.postalcode,
-                    profile: item.profile,
-                    province: item.province,
-                    state: item.state,
+                data={nonCompilantDataRes.map((item) => ({
+                    ID: item.ID,
+                    SYNC_HEADER_ID: item.SYNC_HEADER_ID,
+                    CUSTOMER_ID: item.CUSTOMER_ID,
+                    BILLING_DOCUMENT: item.BILLING_DOCUMENT,
+                    BILLING_INVOICE_NET_VALUE: item.BILLING_INVOICE_NET_VALUE,
+                    SALES_ORDER_NET_VALUE: item.SALES_ORDER_NET_VALUE,
+                    PERSONNEL_NUMBER: item.PERSONNEL_NUMBER,
+                    EMPLOYEE_NAME: item.EMPLOYEE_NAME,
+                    CREAETD_ON: item.CREAETD_ON,
+                    BILLING_TAX_AMOUNT: item.BILLING_TAX_AMOUNT,
+                    BILLING_COST: item.BILLING_COST,
+                    SALES_PERSONNEL_NUMBER: item.SALES_PERSONNEL_NUMBER,
+                    SOLD_TO_PARTY_NAME: item.SOLD_TO_PARTY_NAME,
+                    ITEM_DESCRIPTION: item.ITEM_DESCRIPTION,
+                    PAYER_DESCRIPTION: item.PAYER_DESCRIPTION,
+                    SALES_ORDER_CREATED_ON: item.SALES_ORDER_CREATED_ON,
+                    BILLING_CREATED_ON: item.BILLING_CREATED_ON,
+                    SALES_DOCUMENT: item.SALES_DOCUMENT,
                 }))}
                 filterable
                 infiniteScroll
