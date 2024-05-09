@@ -518,6 +518,27 @@ type getAllNonCompilantData = {
     BILLING_CREATED_ON: string;
     SALES_DOCUMENT: string;
 };
+type controlData = {
+    ID: number;
+    CHECK_POINT_NAME: string;
+    CHECK_POINT_DESC: string;
+    CONTROL_ID: number;
+    CUSTOMER_ID: number;
+    IS_ACTIVE: string;
+    CREATED_ON: string;
+    CREATED_BY: number | null;
+    CHANGED_ON: number | null;
+    CHANGED_BY: number | null;
+};
+
+type  = {
+    control_data: controlData[];
+    base_data_count: number;
+    exception_count: number;
+    deviation_count: number;
+    risk_score: number;
+    violatedData: getAllNonCompilantData[];
+};
 export type {
     ApiResponse,
     CanDoSummaryDataApiResponse,
@@ -556,6 +577,7 @@ export type {
     candoDataType,
     checkPointDatType,
     checkUser,
+    controlData,
     dataCardType,
     getAllCardDataType,
     getAllCheckPointData,
@@ -563,22 +585,18 @@ export type {
     getAllControlsType,
     getAllModuleType,
     getAllModulesType,
+    getAllNonCompilantData,
     getAllRoleData,
     getAllSubModulesType,
     getAllSyncDetails,
     getAllUserData,
+    getControlDataType,
     getHeaderTypes,
     getReportCheckPointMappingType,
     levels,
     logInData,
     logInFuncProps,
     reportDataType,
-    checkPointDatType,
-    getAllControlsType,
-    getAllControlFamilyType,
-    getHeaderTypes,
-    getAllSyncDetails,
-    getAllNonCompilantData,
     resetPasswordFuncProps,
     transactionDetailsTypes,
     uploadFileType,
