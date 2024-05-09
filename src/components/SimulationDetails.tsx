@@ -11,6 +11,7 @@ import {
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { formatDate } from "../lib/formatDate";
 import {
     SimulationDetailsDataType,
     getHeaderTypes,
@@ -190,7 +191,7 @@ const SimulationDetails = () => {
                 data={allHeaderData?.map((header) => ({
                     ID: header.ID,
                     SYNC_ID: header.SYNC_ID,
-                    SYNC_STARTED_AT: header.SYNC_STARTED_AT,
+                    SYNC_STARTED_AT: formatDate(header.SYNC_STARTED_AT),
                     USER_NAME: header.USER_NAME,
                     IS_SIMULATED: header.IS_SIMULATED,
                 }))}
