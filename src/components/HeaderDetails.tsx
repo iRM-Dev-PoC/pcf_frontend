@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { AnalyticalTable, Badge, Card } from "@ui5/webcomponents-react";
 import axios from "axios";
 import { useState } from "react";
+import { formatDate } from "../lib/formatDate";
 import { getAllSyncDetails } from "../utils/types";
 import ErrorComponent from "./ErrorComponent";
 import NoDataComponent from "./NoDataComponent";
@@ -105,7 +106,11 @@ const HeaderDetails = ({ value }: HeaderDetailsProps) => {
                     scaleWidthMode="Smart"
                     visibleRows={10}
                     columns={columns}
-                    data={headerDataDetails}
+                    data={headerDataDetails?.map((item) => ({
+                        SYNC_STARTED_AT: formatDate(item.SYNC_STARTED_AT),
+                        SYNC_ENDED_AT: formatDate(item.SYNC_ENDED_AT),
+                        SYNC_STATUS: item.SYNC_STATUS,
+                    }))}
                     loading={isFetching}
                     filterable
                     groupBy={[]}
