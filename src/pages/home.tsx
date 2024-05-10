@@ -1,9 +1,11 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import {
     DatePicker,
     DynamicPage,
     DynamicPageHeader,
     DynamicPageTitle,
+    MessageStrip,
+    Title,
 } from "@ui5/webcomponents-react";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
 import axios from "axios";
@@ -19,7 +21,7 @@ const Home = () => {
     const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/dashboard/control-checkpoints`;
     const [error, setError] = useState(false);
 
-    const queryClient = useQueryClient();
+    // const queryClient = useQueryClient();
 
     const fetchData = async () => {
         try {
@@ -44,21 +46,21 @@ const Home = () => {
 
     const cardValue: getAllCardDataType[] = data?.data;
 
-    const getAllCheckPointData = async () => {
-        try {
-            let allCardDataCache;
-            allCardDataCache = queryClient.getQueryData(["allcardData"]);
-            if (allCardDataCache === undefined) {
-                await queryClient.refetchQueries();
-                allCardDataCache = queryClient.getQueryData(["allcardData"]);
-            }
-            return allCardDataCache;
-        } catch (error) {
-            console.error(error);
-            return undefined;
-        }
-    };
-    console.log("getAllCheckPointData", getAllCheckPointData());
+    // const getAllCheckPointData = async () => {
+    //     try {
+    //         let allCardDataCache;
+    //         allCardDataCache = queryClient.getQueryData(["allcardData"]);
+    //         if (allCardDataCache === undefined) {
+    //             await queryClient.refetchQueries();
+    //             allCardDataCache = queryClient.getQueryData(["allcardData"]);
+    //         }
+    //         return allCardDataCache;
+    //     } catch (error) {
+    //         console.error("[HOMEPAGEERROR]", error);
+    //         return undefined;
+    //     }
+    // };
+    // console.log("getAllCheckPointData", getAllCheckPointData());
 
     return (
         <DynamicPage
@@ -69,6 +71,12 @@ const Home = () => {
             }
             headerTitle={
                 <DynamicPageTitle
+                    expandedContent={
+                        <MessageStrip>
+                            Information (You can see the Dashboard Details here.)
+                        </MessageStrip>
+                    }
+                    header={<Title>Dashboard</Title>}
                     actions={
                         <>
                             <DatePicker
