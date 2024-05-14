@@ -43,8 +43,11 @@ import "@ui5/webcomponents-icons/dist/provision.js";
 import "@ui5/webcomponents-icons/dist/role.js";
 import "@ui5/webcomponents-icons/dist/synchronize.js";
 import "@ui5/webcomponents-icons/dist/upload-to-cloud.js";
+import "@ui5/webcomponents-icons/dist/upload.js";
 import "@ui5/webcomponents-icons/dist/wrench.js";
+
 import "@ui5/webcomponents-localization/dist/features/calendar/Gregorian";
+
 import "@ui5/webcomponents-localization/dist/features/calendar/Gregorian.js";
 import { ThemeProvider } from "@ui5/webcomponents-react";
 import { StrictMode, Suspense } from "react";
