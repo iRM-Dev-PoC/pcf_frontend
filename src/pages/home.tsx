@@ -23,6 +23,10 @@ const Home = () => {
 
     // const queryClient = useQueryClient();
 
+    // const dataImport = () => {
+
+    // };
+
     const fetchData = async () => {
         try {
             const res = await axios.get(endPoint);
@@ -45,22 +49,6 @@ const Home = () => {
     });
 
     const cardValue: getAllCardDataType[] = data?.data;
-
-    // const getAllCheckPointData = async () => {
-    //     try {
-    //         let allCardDataCache;
-    //         allCardDataCache = queryClient.getQueryData(["allcardData"]);
-    //         if (allCardDataCache === undefined) {
-    //             await queryClient.refetchQueries();
-    //             allCardDataCache = queryClient.getQueryData(["allcardData"]);
-    //         }
-    //         return allCardDataCache;
-    //     } catch (error) {
-    //         console.error("[HOMEPAGEERROR]", error);
-    //         return undefined;
-    //     }
-    // };
-    // console.log("getAllCheckPointData", getAllCheckPointData());
 
     return (
         <DynamicPage
