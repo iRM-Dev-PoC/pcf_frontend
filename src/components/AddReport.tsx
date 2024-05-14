@@ -1,34 +1,34 @@
-import { useState } from "react";
-import {
-    List,
-    StandardListItem,
-    Toolbar,
-    Title,
-    ToolbarSpacer,
-    Button,
-    Avatar,
-    FlexBox,
-    Label,
-    Text,
-    ToolbarDesign,
-    AvatarSize,
-    FCLLayout,
-    FlexibleColumnLayout,
-    ButtonDesign,
-    FlexBoxDirection,
-    MessageBoxTypes,
-    MessageBoxActions,
-    Modals,
-    Card,
-} from "@ui5/webcomponents-react";
-import { getAllModuleType } from "../utils/types";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import Loading from "./Loading";
+import {
+    Avatar,
+    AvatarSize,
+    Button,
+    ButtonDesign,
+    Card,
+    FCLLayout,
+    FlexBox,
+    FlexBoxDirection,
+    FlexibleColumnLayout,
+    Label,
+    List,
+    MessageBoxActions,
+    MessageBoxTypes,
+    Modals,
+    StandardListItem,
+    Text,
+    Title,
+    Toolbar,
+    ToolbarDesign,
+    ToolbarSpacer,
+} from "@ui5/webcomponents-react";
 import axios from "axios";
+import { useState } from "react";
 import toast from "react-hot-toast";
-import ReportEditForm from "./ReportEditForm";
+import { getAllModuleType } from "../utils/types";
 import ErrorComponent from "./ErrorComponent";
+import Loading from "./Loading";
 import NoDataComponent from "./NoDataComponent";
+import ReportEditForm from "./ReportEditForm";
 
 const AddReport = () => {
     const [layout, setLayout] = useState<FCLLayout>(FCLLayout.OneColumn);
@@ -116,7 +116,7 @@ const AddReport = () => {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onStartColumnClick = (e: any) => {
-        const reportId = parseInt(e.detail.item.dataset.moduleId);
+        const reportId = parseInt(e.detail.item.dataset.reportId);
         const report = allReportData.find(
             (report) => Number(report.ID) === reportId
         );

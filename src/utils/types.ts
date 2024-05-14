@@ -471,20 +471,11 @@ type getHeaderTypes = {
 };
 
 type getAllSyncDetails = {
-    ID: number;
     SYNC_HEADER_ID: number;
-    SYNC_STATUS: string;
-    CONTROL_ID: number;
-    REPORT_ID: number;
-    REPORT_DESTINATION: string;
+    REPORT_NAME: string;
     SYNC_STARTED_AT: string;
     SYNC_ENDED_AT: string;
-    CREATED_ON: string;
-    CREATED_BY: number;
-    CHANGED_ON: string;
-    CHANGED_BY: number | null;
-    CUSTOMER_ID: number | null;
-    IS_ACTIVE: string;
+    SYNC_STATUS: string;
 };
 
 type getAllControlFamilyType = {
@@ -592,7 +583,9 @@ export type {
     getAllModulesType,
     getAllNonCompilantData,
     getAllRoleData,
-    getAllSubModulesType, getAllSyncData, getAllSyncDetails,
+    getAllSubModulesType,
+    getAllSyncData,
+    getAllSyncDetails,
     getAllUserData,
     getControlDataType,
     getHeaderTypes,
@@ -604,6 +597,5 @@ export type {
     resetPasswordFuncProps,
     transactionDetailsTypes,
     uploadFileType,
-    webComponentsReactProps
+    webComponentsReactProps,
 };
-
