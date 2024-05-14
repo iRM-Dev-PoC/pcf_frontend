@@ -8,7 +8,6 @@ import {
     Toolbar,
     ToolbarDesign,
     ToolbarSpacer,
-
 } from "@ui5/webcomponents-react";
 import axios from "axios";
 import { Fragment, useState } from "react";
@@ -29,7 +28,6 @@ import NonCompilantData from "./NonCompilantData";
 import RiskCard from "./RiskCard";
 import RiskFactor from "./RiskFactor";
 import SyncID from "./SyncID";
-// import ErrorComponent from "./ErrorComponent";
 
 type FlexibleColumnTempleteProps = {
     dataCard: getAllCardDataType[];
@@ -44,7 +42,11 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
     const [dasboardData, setDashboardData] = useState<
         getControlDataType | undefined
     >(undefined);
+    const [selectedSyncID, setSelectedSyncID] = useState<string | undefined>(
+        undefined
+    );
 
+    console.log(selectedSyncID);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onStartColumnClick = (e: any) => {
         const cardId = parseInt(e.detail.item.dataset.cardId);
@@ -83,7 +85,7 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
     const activityCardDataRes = dasboardData?.control_data;
     const syncIdDataRes = dasboardData?.getSyncHeaderData;
 
-    console.log(syncIdDataRes)
+    console.log(syncIdDataRes);
 
     if (error && !isloading) {
         <ErrorComponent />;
@@ -125,8 +127,12 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
                         design={ToolbarDesign.Solid}
                         style={{ height: "150px" }}
                     >
-                        <SyncID syncIdDataRes={syncIdDataRes} />
-                        
+                        <SyncID
+                            setSelectedSyncID={setSelectedSyncID}
+                            syncIdDataRes={syncIdDataRes}
+                            
+                        />
+
                         <ToolbarSpacer />
                         <Button
                             icon="decline"
@@ -269,3 +275,4 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
 };
 
 export default FlexibleColumnTemplete;
+
