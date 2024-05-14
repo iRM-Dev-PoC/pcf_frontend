@@ -20,11 +20,6 @@ const ControlLogic = () => {
         <DynamicPage
             headerTitle={
                 <DynamicPageTitle
-                    expandedContent={
-                        <MessageStrip>
-                            Information (You can see the control logic here.)
-                        </MessageStrip>
-                    }
                     actions={
                         <Button
                             design="Emphasized"
@@ -72,8 +67,10 @@ const ControlLogic = () => {
                     }
                     snappedContent={
                         <MessageStrip>
-                            Information (only visible if header content is
-                            collapsed/snapped)
+                            The Control Logic Page provides a platform for
+                            configuring and managing logical rules and
+                            conditions governing system behavior and
+                            decision-making processes.
                         </MessageStrip>
                     }
                 ></DynamicPageTitle>

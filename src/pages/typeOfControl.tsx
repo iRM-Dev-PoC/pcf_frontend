@@ -22,12 +22,6 @@ const TypeOfControl = () => {
         <DynamicPage
             headerTitle={
                 <DynamicPageTitle
-                    expandedContent={
-                        <MessageStrip>
-                            Information (You can see the type of controls you
-                            have here.)
-                        </MessageStrip>
-                    }
                     header={<Title>Type Of Controls</Title>}
                     actions={
                         <Button
@@ -69,8 +63,11 @@ const TypeOfControl = () => {
                     }
                     snappedContent={
                         <MessageStrip>
-                            Information (only visible if header content is
-                            collapsed/snapped)
+                            The Type of Control Page provides a
+                            comprehensive overview of dashboard details,
+                            metrics, user management, customization options,
+                            integration, performance analytics, and additional
+                            resources.
                         </MessageStrip>
                     }
                 ></DynamicPageTitle>

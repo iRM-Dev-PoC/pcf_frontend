@@ -20,12 +20,6 @@ const ReportCheckPointMapping = () => {
         <DynamicPage
             headerTitle={
                 <DynamicPageTitle
-                    expandedContent={
-                        <MessageStrip>
-                            Information (You can see the ReportCheckPointMapping
-                            Details here.)
-                        </MessageStrip>
-                    }
                     header={<Title>Report Check-Point Mapping</Title>}
                     actions={
                         <Button
@@ -65,8 +59,9 @@ const ReportCheckPointMapping = () => {
                     }
                     snappedContent={
                         <MessageStrip>
-                            Information (only visible if header content is
-                            collapsed/snapped)
+                            The Report Check Point Mapping Page enables the
+                            association of specific check points with reports to
+                            ensure accurate tracking and validation of data.
                         </MessageStrip>
                     }
                 ></DynamicPageTitle>

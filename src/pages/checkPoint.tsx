@@ -20,11 +20,6 @@ const CheckPoint = () => {
         <DynamicPage
             headerTitle={
                 <DynamicPageTitle
-                    expandedContent={
-                        <MessageStrip>
-                            Information (You can see the Report Details here.)
-                        </MessageStrip>
-                    }
                     header={<Title>Check-Point</Title>}
                     actions={
                         <Button
@@ -68,8 +63,9 @@ const CheckPoint = () => {
                     }
                     snappedContent={
                         <MessageStrip>
-                            Information (only visible if header content is
-                            collapsed/snapped)
+                            The Check Point Page allows you to define, manage,
+                            and monitor specific control points within the
+                            system for tracking and validation purposes.
                         </MessageStrip>
                     }
                 ></DynamicPageTitle>

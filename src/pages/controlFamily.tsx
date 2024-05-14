@@ -20,12 +20,6 @@ const ControlFamily = () => {
         <DynamicPage
             headerTitle={
                 <DynamicPageTitle
-                    expandedContent={
-                        <MessageStrip>
-                            Information (You can see the Control Family Details
-                            and when these are created & by whom.)
-                        </MessageStrip>
-                    }
                     header={<Title>Control Family Details</Title>}
                     actions={
                         <Button
@@ -67,8 +61,9 @@ const ControlFamily = () => {
                     }
                     snappedContent={
                         <MessageStrip>
-                            Information (only visible if header content is
-                            collapsed/snapped)
+                            The Control Family Page offers a comprehensive
+                            overview and management of related control measures
+                            and policies within a specified domain or framework.
                         </MessageStrip>
                     }
                 ></DynamicPageTitle>
