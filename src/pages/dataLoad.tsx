@@ -18,8 +18,8 @@ import { ThemingParameters } from "@ui5/webcomponents-react-base";
 import axios from "axios";
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
+import FileUploaderComonent from "../components/FileUploader";
 import SimulationDetails from "../components/SimulationDetails";
-import SimulateUploadComponent from "../components/FileUploader";
 
 const DataLoad = () => {
     const showDialog = Modals.useShowDialog();
@@ -217,7 +217,7 @@ const DataLoad = () => {
             headerContentPinnable={false}
         >
             <SimulationDetails />
-            <SimulateUploadComponent />
+            <FileUploaderComonent />
         </DynamicPage>
     );
 };
