@@ -20,12 +20,6 @@ const ModuleMaster = () => {
         <DynamicPage
             headerTitle={
                 <DynamicPageTitle
-                    expandedContent={
-                        <MessageStrip>
-                            Information (You can see the Sub-Module Details
-                            here.)
-                        </MessageStrip>
-                    }
                     header={<Title>Module-Master</Title>}
                     actions={
                         <Button
@@ -67,8 +61,10 @@ const ModuleMaster = () => {
                     }
                     snappedContent={
                         <MessageStrip>
-                            Information (only visible if header content is
-                            collapsed/snapped)
+                            The Module Page provides an overview and management
+                            options for various modules within the system,
+                            enabling customization and integration of specific
+                            functionalities.
                         </MessageStrip>
                     }
                 ></DynamicPageTitle>

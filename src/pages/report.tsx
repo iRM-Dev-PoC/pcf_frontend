@@ -20,11 +20,6 @@ const Report = () => {
         <DynamicPage
             headerTitle={
                 <DynamicPageTitle
-                    expandedContent={
-                        <MessageStrip>
-                            Information (You can see the Report Details here.)
-                        </MessageStrip>
-                    }
                     header={<Title>Report</Title>}
                     actions={
                         <Button
@@ -62,8 +57,9 @@ const Report = () => {
                     }
                     snappedContent={
                         <MessageStrip>
-                            Information (only visible if header content is
-                            collapsed/snapped)
+                            The Reports Page allows you to generate, view, and
+                            manage detailed reports on various system activities
+                            and data insights.
                         </MessageStrip>
                     }
                 ></DynamicPageTitle>

@@ -21,11 +21,6 @@ const Users = () => {
         <DynamicPage
             headerTitle={
                 <DynamicPageTitle
-                    expandedContent={
-                        <MessageStrip>
-                            Information (You can see the Report Details here.)
-                        </MessageStrip>
-                    }
                     header={<Title>Users</Title>}
                     actions={
                         <Button
@@ -65,8 +60,9 @@ const Users = () => {
                     }
                     snappedContent={
                         <MessageStrip>
-                            Information (only visible if header content is
-                            collapsed/snapped)
+                            The Users Page serves as a centralized hub for
+                            managing user accounts, permissions, and access
+                            levels within the system.
                         </MessageStrip>
                     }
                 ></DynamicPageTitle>

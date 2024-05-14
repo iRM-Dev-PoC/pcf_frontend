@@ -17,64 +17,63 @@ const Roles = () => {
   const showDialog = Modals.useShowDialog();
   const closeButtonRoleref = useRef<ButtonDomRef>(null);
   return (
-    <DynamicPage
-      headerTitle={
-        <DynamicPageTitle
-          expandedContent={
-            <MessageStrip>
-              Information (You can see the Report Details here.)
-            </MessageStrip>
+      <DynamicPage
+          headerTitle={
+              <DynamicPageTitle
+                  header={<Title>Roles</Title>}
+                  actions={
+                      <Button
+                          design="Emphasized"
+                          tooltip="Create"
+                          icon="create"
+                          onClick={() => {
+                              const { close } = showDialog({
+                                  headerText: "Role Information",
+                                  children: (
+                                      <RoleCreationForm
+                                          closeButtonref={closeButtonRoleref}
+                                      />
+                                  ),
+                                  footer: (
+                                      <Bar
+                                          endContent={
+                                              <>
+                                                  <Button
+                                                      ref={closeButtonRoleref}
+                                                      onClick={() => {
+                                                          close();
+                                                      }}
+                                                      design="Negative"
+                                                  >
+                                                      Close
+                                                  </Button>
+                                              </>
+                                          }
+                                      ></Bar>
+                                  ),
+                              });
+                          }}
+                      >
+                          Create
+                      </Button>
+                  }
+                  snappedContent={
+                      <MessageStrip>
+                          The Roles Page allows you to manage user permissions
+                          and assign specific roles to control access and
+                          capabilities within the system.
+                      </MessageStrip>
+                  }
+              ></DynamicPageTitle>
           }
-          header={<Title>Roles</Title>}
-          actions={
-            <Button
-              design="Emphasized"
-              tooltip="Create"
-              icon="create"
-              onClick={() => {
-                const { close } = showDialog({
-                  headerText: "Role Information",
-                  children: (
-                    <RoleCreationForm closeButtonref={closeButtonRoleref} />
-                  ),
-                  footer: (
-                    <Bar
-                      endContent={
-                        <>
-                          <Button
-                            ref={closeButtonRoleref}
-                            onClick={() => {
-                              close();
-                            }}
-                            design="Negative"
-                          >
-                            Close
-                          </Button>
-                        </>
-                      }
-                    ></Bar>
-                  ),
-                });
-              }}
-            >
-              Create
-            </Button>
-          }
-          snappedContent={
-            <MessageStrip>
-              Information (only visible if header content is collapsed/snapped)
-            </MessageStrip>
-          }
-        ></DynamicPageTitle>
-      }
-      style={{
-        borderRadius: ThemingParameters.sapButton_BorderCornerRadius,
-      }}
-      showHideHeaderButton={false}
-      headerContentPinnable={false}
-    >
-      <AddRoles />
-    </DynamicPage>
+          style={{
+              borderRadius: ThemingParameters.sapButton_BorderCornerRadius,
+          }}
+          showHideHeaderButton={false}
+          headerContentPinnable={false}
+      >
+          <AddRoles />
+      </DynamicPage>
   );
 };
 

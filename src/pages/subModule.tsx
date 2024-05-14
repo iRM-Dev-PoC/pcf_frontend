@@ -20,12 +20,6 @@ const SubModules = () => {
         <DynamicPage
             headerTitle={
                 <DynamicPageTitle
-                    expandedContent={
-                        <MessageStrip>
-                            Information (You can see the Sub-Module Details
-                            here.)
-                        </MessageStrip>
-                    }
                     header={<Title>Sub-Module</Title>}
                     actions={
                         <Button
@@ -63,8 +57,9 @@ const SubModules = () => {
                     }
                     snappedContent={
                         <MessageStrip>
-                            Information (only visible if header content is
-                            collapsed/snapped)
+                            The Sub Module Page offers detailed management and
+                            configuration options for individual sub-modules
+                            within a larger module.
                         </MessageStrip>
                     }
                 ></DynamicPageTitle>
