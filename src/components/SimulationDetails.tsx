@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import {
     AnalyticalTable,
+    Badge,
     Bar,
     Button,
     Card,
@@ -51,6 +52,7 @@ const SimulationDetails = () => {
     const showDialog = Modals.useShowDialog();
 
     const allHeaderData: getHeaderTypes[] = data?.data;
+    console.log(allHeaderData);
 
     if (!isFetching && isError) {
         return <ErrorComponent />;
@@ -65,6 +67,8 @@ const SimulationDetails = () => {
     }
 
     const showModal = ({ value }: { value: number }) => {
+        console.log(value);
+
         const { close } = showDialog({
             children: <HeaderDetails value={value} />,
             footer: (
@@ -74,6 +78,8 @@ const SimulationDetails = () => {
             ),
         });
     };
+
+    console.log(allHeaderData);
 
     const handleSimulate = async (id: number) => {
         try {
@@ -133,12 +139,18 @@ const SimulationDetails = () => {
                         disableSortBy: true,
                         disableDragAndDrop: true,
                         width: 120,
-                        Cell: () => {
+                        Cell: (instance: {
+                            cell: string;
+                            row: Record<string, SimulationDetailsDataType>;
+                            webComponentsReactProperties: webComponentsReactProps;
+                        }) => {
+                            const rowData = instance.row.original;
+
                             return (
                                 <Button
                                     onClick={() => {
                                         showModal({
-                                            value: allHeaderData?.[0].ID,
+                                            value: Number(rowData?.ID),
                                         });
                                     }}
                                     design="Transparent"
@@ -159,21 +171,23 @@ const SimulationDetails = () => {
                                 webComponentsReactProperties.showOverlay;
                             const rowData = instance.row.original;
                             const showSimulateButton = !rowData.is_simulated;
+                            const completedSimulate = Boolean(
+                                rowData.IS_SIMULATED === 1
+                            );
 
                             return (
                                 <FlexBox>
-                                    {showSimulateButton && (
+                                    {showSimulateButton &&
+                                    !completedSimulate ? (
                                         <Button
                                             icon="synchronize"
-                                            disabled={
-                                                isOverlay ||
-                                                isLoading ||
-                                                rowData.IS_SIMULATED === 1
-                                            }
+                                            disabled={isOverlay || isLoading}
                                             onClick={() =>
                                                 onSimulate(Number(rowData?.ID))
                                             }
                                         />
+                                    ) : (
+                                        <Badge colorScheme="7">Completed</Badge>
                                     )}
                                 </FlexBox>
                             );

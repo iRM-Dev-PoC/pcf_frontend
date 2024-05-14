@@ -30,11 +30,6 @@ const routes = [
                 path: "/report",
             },
             {
-                text: "Control Logic",
-                icon: "wrench",
-                path: "/controlLogic",
-            },
-            {
                 text: "Check-Point Master",
                 icon: "flag-2",
                 path: "/checkpoint",
@@ -88,4 +83,4 @@ const sodRoutes = [
     },
 ];
 
-export { sodRoutes, routes };
+export { routes, sodRoutes };

@@ -47,6 +47,8 @@ const HeaderDetails = ({ value }: HeaderDetailsProps) => {
 
     const headerDataDetails: getAllSyncDetails[] = data?.data;
 
+    console.log(headerDataDetails);
+
     if (!isFetching && isError) {
         return <ErrorComponent />;
     }
@@ -60,6 +62,12 @@ const HeaderDetails = ({ value }: HeaderDetailsProps) => {
     }
 
     const columns = [
+        {
+            Header: "Report Name",
+            accessor: "REPORT_NAME",
+            headerTooltip: "Report Name",
+            width: 450,
+        },
         {
             Header: "Started At",
             accessor: "SYNC_STARTED_AT",
@@ -107,6 +115,8 @@ const HeaderDetails = ({ value }: HeaderDetailsProps) => {
                     visibleRows={10}
                     columns={columns}
                     data={headerDataDetails?.map((item) => ({
+                        ID: item.SYNC_HEADER_ID,
+                        REPORT_NAME: item.REPORT_NAME,
                         SYNC_STARTED_AT: formatDate(item.SYNC_STARTED_AT),
                         SYNC_ENDED_AT: formatDate(item.SYNC_ENDED_AT),
                         SYNC_STATUS: item.SYNC_STATUS,

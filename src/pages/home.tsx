@@ -73,7 +73,9 @@ const Home = () => {
                 <DynamicPageTitle
                     expandedContent={
                         <MessageStrip>
-                            Information (You can see the Dashboard Details here.)
+                            A Dashboard is a visual interface that presents key
+                            information and data in a consolidated view for
+                            quick insights and decision-making.
                         </MessageStrip>
                     }
                     header={<Title>Dashboard</Title>}

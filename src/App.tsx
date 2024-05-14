@@ -11,7 +11,6 @@ import SideNavbar from "./components/SideNavbar";
 import SoDDashboard from "./pages/SoD/sodDashboard";
 import CheckPoint from "./pages/checkPoint";
 import ControlFamily from "./pages/controlFamily";
-import ControlLogic from "./pages/controlLogic";
 import DataLoad from "./pages/dataLoad";
 import ForgetPassword from "./pages/forgetPassword";
 import Home from "./pages/home";
@@ -111,10 +110,6 @@ const App = () => {
                                 <Route
                                     path="/pcf/master/controlFamily"
                                     element={<ControlFamily />}
-                                />
-                                <Route
-                                    path="/pcf/master/controlLogic"
-                                    element={<ControlLogic />}
                                 />
                                 <Route
                                     path="/pcf/master/report"
