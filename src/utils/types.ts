@@ -530,6 +530,10 @@ type controlData = {
     CHANGED_ON: number | null;
     CHANGED_BY: number | null;
 };
+type getAllSyncData = {
+    ID: number;
+    SYNC_ID: string;
+};
 
 type getControlDataType = {
     control_data: controlData;
@@ -538,6 +542,7 @@ type getControlDataType = {
     deviation_count: number;
     risk_score: number;
     violatedData: getAllNonCompilantData[];
+    getSyncHeaderData: getAllSyncData[];
 };
 export type {
     ApiResponse,
@@ -587,8 +592,7 @@ export type {
     getAllModulesType,
     getAllNonCompilantData,
     getAllRoleData,
-    getAllSubModulesType,
-    getAllSyncDetails,
+    getAllSubModulesType, getAllSyncData, getAllSyncDetails,
     getAllUserData,
     getControlDataType,
     getHeaderTypes,
@@ -600,5 +604,6 @@ export type {
     resetPasswordFuncProps,
     transactionDetailsTypes,
     uploadFileType,
-    webComponentsReactProps,
+    webComponentsReactProps
 };
+

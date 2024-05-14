@@ -8,6 +8,7 @@ import {
     Toolbar,
     ToolbarDesign,
     ToolbarSpacer,
+
 } from "@ui5/webcomponents-react";
 import axios from "axios";
 import { Fragment, useState } from "react";
@@ -27,6 +28,7 @@ import Loading from "./Loading";
 import NonCompilantData from "./NonCompilantData";
 import RiskCard from "./RiskCard";
 import RiskFactor from "./RiskFactor";
+import SyncID from "./SyncID";
 // import ErrorComponent from "./ErrorComponent";
 
 type FlexibleColumnTempleteProps = {
@@ -79,6 +81,9 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
 
     const nonCompilantDataRes = dasboardData?.violatedData;
     const activityCardDataRes = dasboardData?.control_data;
+    const syncIdDataRes = dasboardData?.getSyncHeaderData;
+
+    console.log(syncIdDataRes)
 
     if (error && !isloading) {
         <ErrorComponent />;
@@ -116,7 +121,12 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
             }
             midColumn={
                 <div className="m-2">
-                    <Toolbar design={ToolbarDesign.Solid}>
+                    <Toolbar
+                        design={ToolbarDesign.Solid}
+                        style={{ height: "150px" }}
+                    >
+                        <SyncID syncIdDataRes={syncIdDataRes} />
+                        
                         <ToolbarSpacer />
                         <Button
                             icon="decline"
