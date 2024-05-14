@@ -6,6 +6,7 @@ type SidebarContextType = {
 };
 
 type PathContextType = string;
+type SyncHeaderContextType = string;
 
 type CurrentURLType = string;
 
@@ -535,6 +536,9 @@ type getControlDataType = {
     violatedData: getAllNonCompilantData[];
     getSyncHeaderData: getAllSyncData[];
 };
+
+
+
 export type {
     ApiResponse,
     CanDoSummaryDataApiResponse,
@@ -598,4 +602,5 @@ export type {
     transactionDetailsTypes,
     uploadFileType,
     webComponentsReactProps,
+    SyncHeaderContextType,
 };

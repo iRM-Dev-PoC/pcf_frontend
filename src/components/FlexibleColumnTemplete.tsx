@@ -27,7 +27,6 @@ import Loading from "./Loading";
 import NonCompilantData from "./NonCompilantData";
 import RiskCard from "./RiskCard";
 import RiskFactor from "./RiskFactor";
-import SyncID from "./SyncID";
 
 type FlexibleColumnTempleteProps = {
     dataCard: getAllCardDataType[];
@@ -42,11 +41,7 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
     const [dasboardData, setDashboardData] = useState<
         getControlDataType | undefined
     >(undefined);
-    const [selectedSyncID, setSelectedSyncID] = useState<string | undefined>(
-        undefined
-    );
 
-    console.log(selectedSyncID);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onStartColumnClick = (e: any) => {
         const cardId = parseInt(e.detail.item.dataset.cardId);
@@ -125,13 +120,12 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
                 <div className="m-2">
                     <Toolbar
                         design={ToolbarDesign.Solid}
-                        style={{ height: "150px" }}
+                        // style={{ height: "150px" }}
                     >
-                        <SyncID
+                        {/* <SyncID
                             setSelectedSyncID={setSelectedSyncID}
                             syncIdDataRes={syncIdDataRes}
-                            
-                        />
+                        /> */}
 
                         <ToolbarSpacer />
                         <Button
@@ -275,4 +269,3 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
 };
 
 export default FlexibleColumnTemplete;
-
