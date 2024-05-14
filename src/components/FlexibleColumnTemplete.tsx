@@ -21,10 +21,13 @@ import {
 import ActivityCard from "./ActivityCard";
 import DashboardCards from "./DashboardCards";
 import DonutChartCard from "./DonutChartCard";
+import ErrorComponent from "./ErrorComponent";
 import LineChartCard from "./LineChartCard";
+import Loading from "./Loading";
 import NonCompilantData from "./NonCompilantData";
 import RiskCard from "./RiskCard";
 import RiskFactor from "./RiskFactor";
+// import ErrorComponent from "./ErrorComponent";
 
 type FlexibleColumnTempleteProps = {
     dataCard: getAllCardDataType[];
@@ -61,7 +64,7 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
             }
             return res.data;
         } catch (error) {
-            console.error(error);
+            console.error("[FLEXIBLECOMPONENTERROR]", error);
         } finally {
             setIsLoading(false);
         }
@@ -76,37 +79,14 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
 
     const nonCompilantDataRes = dasboardData?.violatedData;
     const activityCardDataRes = dasboardData?.control_data;
-    // const baseDataRes = dasboardCardData[0];
-    // const exceptionDataRes = dasboardCardData[1];
-    // const deviationDataRes = dasboardCardData[2];
 
-    console.log("dasboardCardData", dasboardData?.base_data_count);
-    // const cardDataRes = {
-    // baseData: dasboardData?.base_data_count,
-    // exceptionData: dasboardData?.exception_count,
-    // daviationData: dasboardData?.deviation_count,
-    // };
+    if (error && !isloading) {
+        <ErrorComponent />;
+    }
 
-    // const cardDataRes = [
-    //     {
-    //         header: "Base",
-    //         baseData: dasboardData?.base_data_count,
-    //     },
-    //     {
-    //         header: "Exception",
-    //         exceptionData: dasboardData?.exception_count,
-    //     },
-    //     {
-    //         header: "Daviation",
-    //         daviationData: dasboardData?.deviation_count,
-    //     },
-    // ];
-
-    // console.log("exceptionDataRes", exceptionDataRes);
-    // console.log("deviationDataRes", deviationDataRes);
-
-    console.log(error);
-    console.log(isloading);
+    if (isloading && !error) {
+        <Loading />;
+    }
 
     return (
         <FlexibleColumnLayout
