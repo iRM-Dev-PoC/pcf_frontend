@@ -1,4 +1,4 @@
-const cardData = [
+export const cardData = [
     {
         id: 1,
         header: "Card 1",
@@ -32,5 +32,3 @@ const cardData = [
             "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit ipsam quod voluptatem id tempore facere deleniti iusto recusandae provident porro? Neque, esse laboriosam facilis expedita mollitia maxime facere ipsa libero, nobis ipsum voluptatibus dicta voluptate ",
     },
 ];
-
-export default cardData;

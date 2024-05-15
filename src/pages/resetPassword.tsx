@@ -1,8 +1,4 @@
-import { useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { Eye, EyeOff } from "lucide-react";
 import {
     Button,
     Form,
@@ -12,9 +8,13 @@ import {
     Loader,
 } from "@ui5/webcomponents-react";
 import "@ui5/webcomponents/dist/features/InputElementsFormSupport.js";
-import { ResetPasswordFormData } from "../utils/types";
-import { resetPassword } from "../lib/auth";
+import { Eye, EyeOff } from "lucide-react";
+import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { z } from "zod";
 import OtpInput from "../components/OtpInput";
+import { resetPassword } from "../lib/auth";
+import { ResetPasswordFormData } from "../lib/types";
 
 type ResetPasswordProps = {
     changePassword: boolean;

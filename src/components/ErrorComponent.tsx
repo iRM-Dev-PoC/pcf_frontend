@@ -1,5 +1,5 @@
-import { IllustratedMessage } from "@ui5/webcomponents-react";
 import "@ui5/webcomponents-fiori/dist/illustrations/ErrorScreen.js";
+import { IllustratedMessage } from "@ui5/webcomponents-react";
 
 const ErrorComponent = () => {
     return (

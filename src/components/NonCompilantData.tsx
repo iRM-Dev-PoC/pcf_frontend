@@ -1,13 +1,12 @@
+import NoDataComponent from "@/components/NoDataComponent";
+import { getAllNonCompilantData } from "@/lib/types";
 import { AnalyticalTable, Card, TextAlign } from "@ui5/webcomponents-react";
-import { getAllNonCompilantData } from "../utils/types";
-import NoDataComponent from "./NoDataComponent";
 
 type NonCompilantDataProps = {
     nonCompilantDataRes: getAllNonCompilantData[] | undefined;
 };
 
 const NonCompilantData = ({ nonCompilantDataRes }: NonCompilantDataProps) => {
-    console.log(nonCompilantDataRes);
     if (nonCompilantDataRes === undefined) {
         return <NoDataComponent />;
     }
@@ -86,7 +85,6 @@ const NonCompilantData = ({ nonCompilantDataRes }: NonCompilantDataProps) => {
                         accessor: "SALES_DOCUMENT",
                         hAlign: "center" as TextAlign,
                     },
-                   
                 ]}
                 data={nonCompilantDataRes.map((item) => ({
                     ID: item.ID,

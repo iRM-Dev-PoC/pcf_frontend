@@ -48,23 +48,23 @@ import "@ui5/webcomponents-icons/dist/wrench.js";
 
 import "@ui5/webcomponents-localization/dist/features/calendar/Gregorian";
 
+import App from "@/App.tsx";
+import ErrorBoundary from "@/components/ErrorBoundary.tsx";
+import ErrorPage from "@/components/ErrorPage.tsx";
+import Loading from "@/components/Loading.tsx";
+import { SidebarProvider } from "@/context/SidebarContext.tsx";
+import { PathProvider } from "@/context/currentPathContext.tsx";
+import { SelectedItemProvider } from "@/context/currentSelectedHeader.tsx";
+import { CurrentURLProvider } from "@/context/currentURLContext.tsx";
+import { HeaderDataProvider } from "@/context/headerDataContext.tsx";
+import { ProductSwitchProvider } from "@/context/productSwitchContext.tsx";
+import "@/index.css";
 import "@ui5/webcomponents-localization/dist/features/calendar/Gregorian.js";
 import { ThemeProvider } from "@ui5/webcomponents-react";
 import { StrictMode, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import { Toaster } from "react-hot-toast";
 import { BrowserRouter } from "react-router-dom";
-import App from "./App.tsx";
-import ErrorBoundary from "./components/ErrorBoundary.tsx";
-import ErrorPage from "./components/ErrorPage.tsx";
-import Loading from "./components/Loading.tsx";
-import { SidebarProvider } from "./context/SidebarContext.tsx";
-import { PathProvider } from "./context/currentPathContext.tsx";
-import { SelectedItemProvider } from "./context/currentSelectedHeader.tsx";
-import { CurrentURLProvider } from "./context/currentURLContext.tsx";
-import { HeaderDataProvider } from "./context/headerDataContext.tsx";
-import { ProductSwitchProvider } from "./context/productSwitchContext.tsx";
-import "./css/index.css";
 
 const queryClient = new QueryClient();
 

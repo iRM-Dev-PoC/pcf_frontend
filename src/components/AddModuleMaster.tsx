@@ -1,34 +1,34 @@
-import { useState } from "react";
-import {
-    List,
-    StandardListItem,
-    Toolbar,
-    Title,
-    ToolbarSpacer,
-    Button,
-    Avatar,
-    FlexBox,
-    Label,
-    Text,
-    ToolbarDesign,
-    AvatarSize,
-    FCLLayout,
-    FlexibleColumnLayout,
-    ButtonDesign,
-    FlexBoxDirection,
-    MessageBoxTypes,
-    MessageBoxActions,
-    Modals,
-    Card,
-} from "@ui5/webcomponents-react";
-import { getAllModulesType } from "../utils/types";
+import ErrorComponent from "@/components/ErrorComponent";
+import Loading from "@/components/Loading";
+import ModuleEditForm from "@/components/ModuleEditForm";
+import NoDataComponent from "@/components/NoDataComponent";
+import { getAllModulesType } from "@/lib/types";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import Loading from "./Loading";
+import {
+    Avatar,
+    AvatarSize,
+    Button,
+    ButtonDesign,
+    Card,
+    FCLLayout,
+    FlexBox,
+    FlexBoxDirection,
+    FlexibleColumnLayout,
+    Label,
+    List,
+    MessageBoxActions,
+    MessageBoxTypes,
+    Modals,
+    StandardListItem,
+    Text,
+    Title,
+    Toolbar,
+    ToolbarDesign,
+    ToolbarSpacer,
+} from "@ui5/webcomponents-react";
 import axios from "axios";
+import { useState } from "react";
 import toast from "react-hot-toast";
-import ModuleEditForm from "./ModuleEditForm";
-import ErrorComponent from "./ErrorComponent";
-import NoDataComponent from "./NoDataComponent";
 
 const AddModuleMaster = () => {
     const [layout, setLayout] = useState<FCLLayout>(FCLLayout.OneColumn);

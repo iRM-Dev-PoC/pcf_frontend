@@ -1,35 +1,35 @@
-import { useState } from "react";
-import {
-    List,
-    StandardListItem,
-    Toolbar,
-    Title,
-    ToolbarSpacer,
-    Button,
-    Avatar,
-    FlexBox,
-    Label,
-    Text,
-    ToolbarDesign,
-    AvatarSize,
-    FCLLayout,
-    FlexibleColumnLayout,
-    ButtonDesign,
-    FlexBoxDirection,
-    Card,
-    Modals,
-    MessageBoxTypes,
-    MessageBoxActions,
-} from "@ui5/webcomponents-react";
-import { getAllUserData } from "../utils/types";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import Loading from "./Loading";
-import UserEditForm from "./UserEditForm";
-import axios from "axios";
-import toast from "react-hot-toast";
+import {
+    Avatar,
+    AvatarSize,
+    Button,
+    ButtonDesign,
+    Card,
+    FCLLayout,
+    FlexBox,
+    FlexBoxDirection,
+    FlexibleColumnLayout,
+    Label,
+    List,
+    MessageBoxActions,
+    MessageBoxTypes,
+    Modals,
+    StandardListItem,
+    Text,
+    Title,
+    Toolbar,
+    ToolbarDesign,
+    ToolbarSpacer,
+} from "@ui5/webcomponents-react";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
+import axios from "axios";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { getAllUserData } from "../lib/types";
 import ErrorComponent from "./ErrorComponent";
+import Loading from "./Loading";
 import NoDataComponent from "./NoDataComponent";
+import UserEditForm from "./UserEditForm";
 
 const AddUsers = () => {
     const [layout, setLayout] = useState<FCLLayout>(FCLLayout.OneColumn);
@@ -125,162 +125,167 @@ const AddUsers = () => {
 
     return (
         <>
-            {
-                !isFetching && allUserData.length === 0 ? <NoDataComponent /> :
-            
-                    <FlexibleColumnLayout
-                        style={{
-                            height: "100%",
-                            marginTop: "0.5rem",
-                            marginBottom: "0.5rem",
-                            borderRadius:
-                                ThemingParameters.sapButton_BorderCornerRadius,
-                        }}
-                        layout={layout}
-                        startColumn={
-                            <List onItemClick={onStartColumnClick}>
-                                {allUserData?.map((user, index) => (
-                                    <StandardListItem
-                                        description={user.USER_EMAIL}
-                                        data-user-id={user.ID}
-                                        key={`${user.ID}-${index}`}
-                                    >
-                                        {user.USER_NAME}
-                                    </StandardListItem>
-                                ))}
-                            </List>
-                        }
-                        midColumn={
-                            <>
-                                <Toolbar design={ToolbarDesign.Solid}>
-                                    <Title>{selectedUser?.USER_NAME}</Title>
-                                    <ToolbarSpacer />
-                                    {isFullScreen ? (
-                                        <Button
-                                            icon="exit-full-screen"
-                                            design={ButtonDesign.Transparent}
-                                            onClick={() => {
-                                                setIsFullScreen(!isFullScreen);
-                                                setLayout(
-                                                    FCLLayout.TwoColumnsStartExpanded
-                                                );
-                                            }}
-                                        />
-                                    ) : (
-                                        <Button
-                                            icon="full-screen"
-                                            design={ButtonDesign.Transparent}
-                                            onClick={() => {
-                                                setIsFullScreen(!isFullScreen);
-                                                setLayout(
-                                                    FCLLayout.MidColumnFullScreen
-                                                );
-                                            }}
-                                        />
-                                    )}
-                                    <Button
-                                        icon="delete"
-                                        design={ButtonDesign.Transparent}
-                                        onClick={() => {
-                                            showDeleteConfirmation({
-                                                onClose(event) {
-                                                    if (
-                                                        event.detail.action === "Delete"
-                                                    ) {
-                                                        handleDeleteUser(
-                                                            selectedUser
-                                                                ? selectedUser.ID
-                                                                : 0
-                                                        );
-                                                    }
-                                                },
-                                                type: MessageBoxTypes.Warning,
-                                                actions: [
-                                                    MessageBoxActions.Delete,
-                                                    MessageBoxActions.Cancel,
-                                                ],
-
-                                                children:
-                                                    "Are sure you want to delete this user?",
-                                            });
-                                        }}
-                                    />
-                                    <Button
-                                        icon="edit"
-                                        design={ButtonDesign.Transparent}
-                                        onClick={() => {
-                                            setIsEdit(!isEdit);
-                                        }}
-                                    />
-                                    <Button
-                                        icon="decline"
-                                        design={ButtonDesign.Transparent}
-                                        onClick={() => {
-                                            setLayout(FCLLayout.OneColumn);
-                                            setIsEdit(false);
-                                        }}
-                                    />
-                                </Toolbar>
-                                <Toolbar
-                                    key={selectedUser?.ID}
-                                    style={{ height: "200px" }}
+            {!isFetching && allUserData.length === 0 ? (
+                <NoDataComponent />
+            ) : (
+                <FlexibleColumnLayout
+                    style={{
+                        height: "100%",
+                        marginTop: "0.5rem",
+                        marginBottom: "0.5rem",
+                        borderRadius:
+                            ThemingParameters.sapButton_BorderCornerRadius,
+                    }}
+                    layout={layout}
+                    startColumn={
+                        <List onItemClick={onStartColumnClick}>
+                            {allUserData?.map((user, index) => (
+                                <StandardListItem
+                                    description={user.USER_EMAIL}
+                                    data-user-id={user.ID}
+                                    key={`${user.ID}-${index}`}
                                 >
-                                    <Avatar
-                                        icon="person-placeholder"
-                                        size={AvatarSize.XL}
-                                        style={{ marginLeft: "12px" }}
+                                    {user.USER_NAME}
+                                </StandardListItem>
+                            ))}
+                        </List>
+                    }
+                    midColumn={
+                        <>
+                            <Toolbar design={ToolbarDesign.Solid}>
+                                <Title>{selectedUser?.USER_NAME}</Title>
+                                <ToolbarSpacer />
+                                {isFullScreen ? (
+                                    <Button
+                                        icon="exit-full-screen"
+                                        design={ButtonDesign.Transparent}
+                                        onClick={() => {
+                                            setIsFullScreen(!isFullScreen);
+                                            setLayout(
+                                                FCLLayout.TwoColumnsStartExpanded
+                                            );
+                                        }}
                                     />
-                                    <FlexBox
-                                        direction={FlexBoxDirection.Column}
-                                        style={{ marginLeft: "6px" }}
-                                    >
-                                        <FlexBox>
-                                            <Label>Name:</Label>
-                                            <Text style={{ marginLeft: "2px" }}>
-                                                {selectedUser?.USER_NAME}
-                                            </Text>
-                                        </FlexBox>
-                                        <FlexBox>
-                                            <Label>Email:</Label>
-                                            <Text style={{ marginLeft: "2px" }}>
-                                                {selectedUser?.USER_EMAIL}
-                                            </Text>
-                                        </FlexBox>
-                                        <FlexBox>
-                                            <Label>User Type:</Label>
-                                            <Text style={{ marginLeft: "2px" }}>
-                                                {selectedUser?.DESIGNATION}
-                                            </Text>
-                                        </FlexBox>
-                                    </FlexBox>
-                                </Toolbar>
+                                ) : (
+                                    <Button
+                                        icon="full-screen"
+                                        design={ButtonDesign.Transparent}
+                                        onClick={() => {
+                                            setIsFullScreen(!isFullScreen);
+                                            setLayout(
+                                                FCLLayout.MidColumnFullScreen
+                                            );
+                                        }}
+                                    />
+                                )}
+                                <Button
+                                    icon="delete"
+                                    design={ButtonDesign.Transparent}
+                                    onClick={() => {
+                                        showDeleteConfirmation({
+                                            onClose(event) {
+                                                if (
+                                                    event.detail.action ===
+                                                    "Delete"
+                                                ) {
+                                                    handleDeleteUser(
+                                                        selectedUser
+                                                            ? selectedUser.ID
+                                                            : 0
+                                                    );
+                                                }
+                                            },
+                                            type: MessageBoxTypes.Warning,
+                                            actions: [
+                                                MessageBoxActions.Delete,
+                                                MessageBoxActions.Cancel,
+                                            ],
 
-                                <Card>
-                                    {isEdit && (
-                                        <Card>
-                                            <UserEditForm
-                                                id={selectedUser ? selectedUser.ID : 0}
-                                                email={
-                                                    selectedUser
-                                                        ? selectedUser.USER_EMAIL
-                                                        : ""
-                                                }
-                                                username={
-                                                    selectedUser
-                                                        ? selectedUser.USER_NAME
-                                                        : ""
-                                                }
-                                                setIsEdit={setIsEdit}
-                                                setIsFullScreen={setIsFullScreen}
-                                                setLayout={setLayout}
-                                            />
-                                        </Card>
-                                    )}
-                                </Card>
-                            </>
-                        }
-                    />
-            }
+                                            children:
+                                                "Are sure you want to delete this user?",
+                                        });
+                                    }}
+                                />
+                                <Button
+                                    icon="edit"
+                                    design={ButtonDesign.Transparent}
+                                    onClick={() => {
+                                        setIsEdit(!isEdit);
+                                    }}
+                                />
+                                <Button
+                                    icon="decline"
+                                    design={ButtonDesign.Transparent}
+                                    onClick={() => {
+                                        setLayout(FCLLayout.OneColumn);
+                                        setIsEdit(false);
+                                    }}
+                                />
+                            </Toolbar>
+                            <Toolbar
+                                key={selectedUser?.ID}
+                                style={{ height: "200px" }}
+                            >
+                                <Avatar
+                                    icon="person-placeholder"
+                                    size={AvatarSize.XL}
+                                    style={{ marginLeft: "12px" }}
+                                />
+                                <FlexBox
+                                    direction={FlexBoxDirection.Column}
+                                    style={{ marginLeft: "6px" }}
+                                >
+                                    <FlexBox>
+                                        <Label>Name:</Label>
+                                        <Text style={{ marginLeft: "2px" }}>
+                                            {selectedUser?.USER_NAME}
+                                        </Text>
+                                    </FlexBox>
+                                    <FlexBox>
+                                        <Label>Email:</Label>
+                                        <Text style={{ marginLeft: "2px" }}>
+                                            {selectedUser?.USER_EMAIL}
+                                        </Text>
+                                    </FlexBox>
+                                    <FlexBox>
+                                        <Label>User Type:</Label>
+                                        <Text style={{ marginLeft: "2px" }}>
+                                            {selectedUser?.DESIGNATION}
+                                        </Text>
+                                    </FlexBox>
+                                </FlexBox>
+                            </Toolbar>
+
+                            <Card>
+                                {isEdit && (
+                                    <Card>
+                                        <UserEditForm
+                                            id={
+                                                selectedUser
+                                                    ? selectedUser.ID
+                                                    : 0
+                                            }
+                                            email={
+                                                selectedUser
+                                                    ? selectedUser.USER_EMAIL
+                                                    : ""
+                                            }
+                                            username={
+                                                selectedUser
+                                                    ? selectedUser.USER_NAME
+                                                    : ""
+                                            }
+                                            setIsEdit={setIsEdit}
+                                            setIsFullScreen={setIsFullScreen}
+                                            setLayout={setLayout}
+                                        />
+                                    </Card>
+                                )}
+                            </Card>
+                        </>
+                    }
+                />
+            )}
         </>
     );
 };

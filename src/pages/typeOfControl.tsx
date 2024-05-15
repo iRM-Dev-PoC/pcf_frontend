@@ -1,3 +1,5 @@
+import ControlCreationForm from "@/components/ControlCreationForm";
+import TypeOfControlDetails from "@/components/TypeOfControlDetails";
 import {
     Bar,
     Button,
@@ -9,9 +11,6 @@ import {
     Title,
 } from "@ui5/webcomponents-react";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
-import TypeOfControlDetails from "../components/TypeOfControlDetails";
-// import FileUpload from "../components/SoD/FileUpload";
-import ControlCreationForm from "../components/ControlCreationForm";
 import { useRef } from "react";
 
 const TypeOfControl = () => {
@@ -63,11 +62,10 @@ const TypeOfControl = () => {
                     }
                     snappedContent={
                         <MessageStrip>
-                            The Type of Control Page provides a
-                            comprehensive overview of dashboard details,
-                            metrics, user management, customization options,
-                            integration, performance analytics, and additional
-                            resources.
+                            The Type of Control Page provides a comprehensive
+                            overview of dashboard details, metrics, user
+                            management, customization options, integration,
+                            performance analytics, and additional resources.
                         </MessageStrip>
                     }
                 ></DynamicPageTitle>
@@ -79,9 +77,6 @@ const TypeOfControl = () => {
             headerContentPinnable={false}
         >
             <TypeOfControlDetails />
-            {/* <div>
-                <FileUpload />
-            </div> */}
         </DynamicPage>
     );
 };

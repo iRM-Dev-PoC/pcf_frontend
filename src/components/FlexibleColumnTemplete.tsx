@@ -1,3 +1,19 @@
+import ActivityCard from "@/components/ActivityCard";
+import DashboardCards from "@/components/DashboardCards";
+import DonutChartCard from "@/components/DonutChartCard";
+import ErrorComponent from "@/components/ErrorComponent";
+import LineChartCard from "@/components/LineChartCard";
+import Loading from "@/components/Loading";
+import NonCompilantData from "@/components/NonCompilantData";
+import RiskCard from "@/components/RiskCard";
+import RiskFactor from "@/components/RiskFactor";
+import { useSelectedItem } from "@/hooks/useSelectedItem";
+import {
+    dataCardType,
+    getAllCardDataType,
+    getControlDataType,
+} from "@/lib/types";
+import { formatNumber } from "@/lib/utils";
 import {
     Button,
     ButtonDesign,
@@ -11,23 +27,7 @@ import {
 } from "@ui5/webcomponents-react";
 import axios from "axios";
 import { Fragment, useCallback, useState } from "react";
-import { useSelectedItem } from "../hooks/useSelectedItem";
-import cardData from "../lib/cardData";
-import { formatNumber } from "../lib/formatNumber";
-import {
-    dataCardType,
-    getAllCardDataType,
-    getControlDataType,
-} from "../utils/types";
-import ActivityCard from "./ActivityCard";
-import DashboardCards from "./DashboardCards";
-import DonutChartCard from "./DonutChartCard";
-import ErrorComponent from "./ErrorComponent";
-import LineChartCard from "./LineChartCard";
-import Loading from "./Loading";
-import NonCompilantData from "./NonCompilantData";
-import RiskCard from "./RiskCard";
-import RiskFactor from "./RiskFactor";
+import { cardData } from "../lib/cardData";
 
 type FlexibleColumnTempleteProps = {
     dataCard: getAllCardDataType[];

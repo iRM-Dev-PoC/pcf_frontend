@@ -1,3 +1,8 @@
+import ErrorComponent from "@/components/ErrorComponent";
+import Loading from "@/components/Loading";
+import NoDataComponent from "@/components/NoDataComponent";
+import ReportEditForm from "@/components/ReportEditForm";
+import { getAllModuleType } from "@/lib/types";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
     Avatar,
@@ -24,11 +29,6 @@ import {
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { getAllModuleType } from "../utils/types";
-import ErrorComponent from "./ErrorComponent";
-import Loading from "./Loading";
-import NoDataComponent from "./NoDataComponent";
-import ReportEditForm from "./ReportEditForm";
 
 const AddReport = () => {
     const [layout, setLayout] = useState<FCLLayout>(FCLLayout.OneColumn);

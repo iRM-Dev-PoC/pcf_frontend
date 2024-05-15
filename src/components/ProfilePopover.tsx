@@ -1,3 +1,4 @@
+import { logOut } from "@/lib/auth";
 import {
     Button,
     List,
@@ -5,7 +6,6 @@ import {
     ResponsivePopoverDomRef,
 } from "@ui5/webcomponents-react";
 import { MutableRefObject } from "react";
-import { logOut } from "../lib/auth";
 import { useNavigate } from "react-router-dom";
 
 type ProfilePopoverProps = {

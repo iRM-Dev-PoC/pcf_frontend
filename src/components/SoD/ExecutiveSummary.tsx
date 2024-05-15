@@ -1,11 +1,11 @@
+import { calcPercentage } from "@/lib/utils";
 import { Card, FlexBox } from "@ui5/webcomponents-react";
+import { useEffect, useState } from "react";
+import { ApiResponse } from "../../lib/types";
+import executiveSoDData from "../../mockSoDData/executiveData.json";
 import DataCard from "./DataCard";
 import DataTable from "./DataTable";
-import { ApiResponse } from "../../utils/types";
-import { calcPercentage } from "../../utils/calcPercentage";
 import TableHeader from "./TableHeader";
-import { useState, useEffect } from "react";
-import executiveSoDData from "../../mockSoDData/executiveData.json";
 
 const ExecutiveSummary = () => {
     const [, setSod] = useState<boolean>(false);

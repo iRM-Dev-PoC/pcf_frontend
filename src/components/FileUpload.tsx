@@ -1,12 +1,12 @@
-import { DragEvent, useState } from "react";
+import { getCurrentDatetime } from "@/lib/utils";
 import {
+    Icon,
     Text,
     UploadCollection,
-    UploadCollectionItem,
     UploadCollectionDomRef,
-    Icon,
+    UploadCollectionItem,
 } from "@ui5/webcomponents-react";
-import getCurrentDatetime from "../utils/getCurrentDatetime";
+import { DragEvent, useState } from "react";
 
 const FileUpload = () => {
     const [children, setChildren] = useState<JSX.Element[]>([]);

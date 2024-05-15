@@ -8,11 +8,11 @@ import {
     Card,
     Modals,
 } from "@ui5/webcomponents-react";
-import CardHeader from "./CardHeader";
-import { candoDataType } from "../../utils/types";
-import CanDoDetailsData from "./CanDoDetailsData";
 import { useEffect, useState } from "react";
+import { candoDataType } from "../../lib/types";
+import CanDoDetailsData from "./CanDoDetailsData";
 import CanDoSummaryHeader from "./CanDoSummaryHeader";
+import CardHeader from "./CardHeader";
 
 import canDoSummarychart from "../../mockSoDData/canDoSummary.json";
 

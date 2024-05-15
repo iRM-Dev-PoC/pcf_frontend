@@ -1,11 +1,11 @@
+import ErrorComponent from "@/components/ErrorComponent";
+import NoDataComponent from "@/components/NoDataComponent";
+import { getAllSyncDetails } from "@/lib/types";
+import { formatDate } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import { AnalyticalTable, Badge, Card } from "@ui5/webcomponents-react";
 import axios from "axios";
 import { useState } from "react";
-import { formatDate } from "../lib/formatDate";
-import { getAllSyncDetails } from "../utils/types";
-import ErrorComponent from "./ErrorComponent";
-import NoDataComponent from "./NoDataComponent";
 
 type HeaderDetailsProps = {
     value: number;

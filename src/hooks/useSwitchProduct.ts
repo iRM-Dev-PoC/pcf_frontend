@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { ProductSwitchType } from "../utils/types";
 import { ProductSwitchContext } from "../context/productSwitchContext";
+import { ProductSwitchType } from "../lib/types";
 
 export const useSwitchProduct = (): ProductSwitchType => {
     const context = useContext(ProductSwitchContext);

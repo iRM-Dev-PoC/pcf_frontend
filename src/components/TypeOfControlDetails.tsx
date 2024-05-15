@@ -1,35 +1,35 @@
-import { useState } from "react";
-import {
-    List,
-    StandardListItem,
-    Toolbar,
-    Title,
-    ToolbarSpacer,
-    Button,
-    Avatar,
-    FlexBox,
-    Label,
-    Text,
-    ToolbarDesign,
-    AvatarSize,
-    FCLLayout,
-    FlexibleColumnLayout,
-    ButtonDesign,
-    FlexBoxDirection,
-    Card,
-    Modals,
-    MessageBoxTypes,
-    MessageBoxActions,
-} from "@ui5/webcomponents-react";
-import { getAllControlsType } from "../utils/types";
+import ControlEditForm from "@/components/ControlEditForm";
+import ErrorComponent from "@/components/ErrorComponent";
+import Loading from "@/components/Loading";
+import NoDataComponent from "@/components/NoDataComponent";
+import { getAllControlsType } from "@/lib/types";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import Loading from "./Loading";
-import axios from "axios";
-import toast from "react-hot-toast";
+import {
+    Avatar,
+    AvatarSize,
+    Button,
+    ButtonDesign,
+    Card,
+    FCLLayout,
+    FlexBox,
+    FlexBoxDirection,
+    FlexibleColumnLayout,
+    Label,
+    List,
+    MessageBoxActions,
+    MessageBoxTypes,
+    Modals,
+    StandardListItem,
+    Text,
+    Title,
+    Toolbar,
+    ToolbarDesign,
+    ToolbarSpacer,
+} from "@ui5/webcomponents-react";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
-import ErrorComponent from "./ErrorComponent";
-import NoDataComponent from "./NoDataComponent";
-import ControlEditForm from "./ControlEditForm";
+import axios from "axios";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 const TypeOfControlDetails = () => {
     const [layout, setLayout] = useState<FCLLayout>(FCLLayout.OneColumn);
@@ -119,7 +119,9 @@ const TypeOfControlDetails = () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onStartColumnClick = (e: any) => {
         const controlId = parseInt(e.detail.item.dataset.controlId);
-        const control = allControlsData.find((control) => Number(control.ID) === controlId);
+        const control = allControlsData.find(
+            (control) => Number(control.ID) === controlId
+        );
         setSelectedControl(control);
         console.log(control);
         setLayout(FCLLayout.TwoColumnsMidExpanded);

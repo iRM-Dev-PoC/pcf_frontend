@@ -1,10 +1,10 @@
-import { useNavigate } from "react-router-dom";
+import { useSidebar } from "@/hooks/useSidebar";
 import {
     SideNavigation,
     SideNavigationItem,
     SideNavigationSubItem,
 } from "@ui5/webcomponents-react";
-import { useSidebar } from "../hooks/useSidebar";
+import { useNavigate } from "react-router-dom";
 
 type SubItemProps = {
     icon: string;

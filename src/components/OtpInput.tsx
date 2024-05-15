@@ -1,6 +1,8 @@
-import { useForm, SubmitHandler } from "react-hook-form";
+import SendEmailToResetPassword from "@/components/SendEmailToResetPassword";
+import { validateOtp } from "@/lib/auth";
+import { OtpInputProps } from "@/lib/types";
+import ResetPassword from "@/pages/resetPassword";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import {
     Button,
     Form,
@@ -9,11 +11,9 @@ import {
     Input,
 } from "@ui5/webcomponents-react";
 import "@ui5/webcomponents/dist/features/InputElementsFormSupport.js";
-import { OtpInputProps } from "../utils/types";
-import { validateOtp } from "../lib/auth";
 import { useState } from "react";
-import SendEmailToResetPassword from "./SendEmailToResetPassword";
-import ResetPassword from "../pages/resetPassword";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { z } from "zod";
 
 type OtpInputPropsType = {
     setIsValidOtp: (value: boolean) => void;

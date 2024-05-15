@@ -1,34 +1,28 @@
-import { useState } from "react";
-import {
-    List,
-    StandardListItem,
-    FCLLayout,
-    FlexibleColumnLayout,
-} from "@ui5/webcomponents-react";
+import Loading from "@/components/Loading";
 import {
     checkPointDatType,
     getReportCheckPointMappingType,
     reportDataType,
-} from "../utils/types";
+} from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";
-import Loading from "./Loading";
+import {
+    FCLLayout,
+    FlexibleColumnLayout,
+    List,
+    StandardListItem,
+} from "@ui5/webcomponents-react";
 import axios from "axios";
-// import toast from "react-hot-toast";
-import ErrorComponent from "./ErrorComponent";
-import NoDataComponent from "./NoDataComponent";
+import { useState } from "react";
 
-// import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
+import ErrorComponent from "@/components/ErrorComponent";
+import NoDataComponent from "@/components/NoDataComponent";
 
 const AddReportCheckPointMapping = () => {
     const [layout, setLayout] = useState<FCLLayout>(FCLLayout.OneColumn);
-    // const [isEdit, setIsEdit] = useState(false);
-    // const [isFullScreen, setIsFullScreen] = useState(false);
     const [, setSelectedCheckPointMapping] = useState<
         getReportCheckPointMappingType | undefined
     >(undefined);
     const [error, setError] = useState(false);
-    // const showDeleteConfirmation = Modals.useShowMessageBox();
-    // const queryClient = useQueryClient();
 
     const fetchData = async () => {
         try {
@@ -55,40 +49,6 @@ const AddReportCheckPointMapping = () => {
         queryFn: fetchData,
         retry: 3,
     });
-
-    // const deleteReportData = async (id: number) => {
-    // 	const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/report-master/delete-report`;
-    // 	try {
-    // 		const data = {
-    // 			id,
-    // 			customer_id: 1,
-    // 		};
-    // 		const response = await axios.patch(endPoint, data);
-    // 		if (response.data?.statuscode !== 200) {
-    // 			setError(true);
-    // 			throw response.data?.message;
-    // 		}
-    // 		return response.data;
-    // 	} catch (error) {
-    // 		console.error(error);
-    // 		setError(true);
-    // 		throw error;
-    // 	}
-    // };
-
-    // const handleDeleteModule = async (id: number) => {
-    // 	await toast.promise(deleteReportData(id), {
-    // 		loading: "Deleting Report...",
-    // 		success: "Report deleted successfully!",
-    // 		error: (error) => `Failed to delete report: ${error.message}`,
-    // 	});
-    // 	await queryClient.invalidateQueries({
-    // 		queryKey: ["allReportCheckPointMappingData"],
-    // 	});
-    // 	setIsEdit(false);
-    // 	setIsFullScreen(false);
-    // 	setLayout(FCLLayout.OneColumn);
-    // };
 
     const checkPointMappingData = data;
 
@@ -176,130 +136,6 @@ const AddReportCheckPointMapping = () => {
                                 )
                             )}
                         </List>
-                    }
-                    midColumn={
-                        <>
-                            {/* <Toolbar design={ToolbarDesign.Solid}>
-						<Title> {selectedCheckPointMapping?.REPORT_ID} </Title>
-						<ToolbarSpacer />
-
-						{isFullScreen ? (
-							<Button
-								icon="exit-full-screen"
-								design={ButtonDesign.Transparent}
-								onClick={() => {
-									setIsFullScreen(!isFullScreen);
-									setLayout(FCLLayout.TwoColumnsStartExpanded);
-								}}
-							/>
-						) : (
-							<Button
-								icon="full-screen"
-								design={ButtonDesign.Transparent}
-								onClick={() => {
-									setIsFullScreen(!isFullScreen);
-									setLayout(FCLLayout.MidColumnFullScreen);
-								}}
-							/>
-						)}
-						<Button
-							icon="delete"
-							design={ButtonDesign.Transparent}
-							// onClick={() => {
-							// 	showDeleteConfirmation({
-							// 		onClose(event) {
-							// 			if (event.detail.action === "Delete") {
-							// 				handleDeleteModule(
-							// 					selectedCheckPointMapping
-							// 						? selectedCheckPointMapping.ID
-							// 						: 0
-							// 				);
-							// 			}
-							// 		},
-							// 		type: MessageBoxTypes.Warning,
-							// 		actions: [MessageBoxActions.Delete, MessageBoxActions.Cancel],
-
-							// 		children: "Are sure you want to delete this module?",
-							// 	});
-							// }}
-						/>
-						<Button
-							icon="edit"
-							design={ButtonDesign.Transparent}
-							onClick={() => {
-								setIsEdit(!isEdit);
-							}}
-						/>
-						<Button
-							icon="decline"
-							design={ButtonDesign.Transparent}
-							onClick={() => {
-								setLayout(FCLLayout.OneColumn);
-								setIsEdit(false);
-							}}
-						/>
-					</Toolbar>
-
-					<Toolbar
-						key={selectedCheckPointMapping?.ID}
-						style={{ height: "200px" }}>
-						<Avatar
-							icon="person-placeholder"
-							size={AvatarSize.XL}
-							style={{ marginLeft: "12px" }}
-						/>
-						<FlexBox
-							direction={FlexBoxDirection.Column}
-							style={{ marginLeft: "6px" }}>
-							<FlexBox>
-								<Label>Path:</Label>
-								<Text style={{ marginLeft: "2px" }}>
-									{selectedCheckPointMapping?.CREATED_BY}
-								</Text>
-							</FlexBox>
-							<FlexBox>
-								<Label> Name:</Label>
-								<Text style={{ marginLeft: "2px" }}>
-									{selectedCheckPointMapping?.CHANGED_ON}
-								</Text>
-							</FlexBox>
-							<FlexBox>
-								<Label>Destination:</Label>
-								<Text style={{ marginLeft: "2px" }}>
-									{selectedCheckPointMapping?.CHANGED_ON}
-								</Text>
-							</FlexBox>
-						</FlexBox>
-					</Toolbar> */}
-
-                            {/* <Card>
-						{isEdit && (
-							<ReportEditForm
-								id={
-									selectedCheckPointMapping ? selectedCheckPointMapping.ID : 0
-								}
-								reportName={
-									selectedCheckPointMapping
-										? selectedCheckPointMapping.CREATED_ON
-										: ""
-								}
-								reportDestination={
-									selectedCheckPointMapping
-										? selectedCheckPointMapping.CREATED_ON
-										: ""
-								}
-								reportPath={
-									selectedCheckPointMapping
-										? selectedCheckPointMapping.CREATED_ON
-										: ""
-								}
-								setIsEdit={setIsEdit}
-								setIsFullScreen={setIsFullScreen}
-								setLayout={setLayout}
-							/>
-						)}
-					</Card> */}
-                        </>
                     }
                 />
             )}

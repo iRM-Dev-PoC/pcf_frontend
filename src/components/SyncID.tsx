@@ -1,5 +1,5 @@
+import { getAllSyncData } from "@/lib/types";
 import { Dispatch, SetStateAction } from "react";
-import { getAllSyncData } from "../utils/types";
 
 type SyncIDProps = {
     syncIdDataRes: getAllSyncData[] | undefined;
@@ -19,7 +19,7 @@ const SyncID = ({ syncIdDataRes, setSelectedSyncID }: SyncIDProps) => {
             >
                 <option className="m-2 rounded-sm p-2">Select Sync ID</option>
                 {syncIdDataRes?.map((syncData: getAllSyncData) => (
-                    <option key={syncData.ID} value={syncData.ID} >
+                    <option key={syncData.ID} value={syncData.ID}>
                         {syncData.SYNC_ID}
                     </option>
                 ))}

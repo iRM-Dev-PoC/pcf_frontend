@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useState } from "react";
-import { ProductSwitchType } from "../utils/types";
+import { ProductSwitchType } from "../lib/types";
 
 export const ProductSwitchContext = createContext<
     ProductSwitchType | undefined

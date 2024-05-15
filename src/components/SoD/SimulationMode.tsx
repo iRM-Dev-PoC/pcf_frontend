@@ -1,5 +1,5 @@
+import { getCurrentDatetime } from "@/lib/utils";
 import { Button, FlexBox, Text } from "@ui5/webcomponents-react";
-import getCurrentDatetime from "../../utils/getCurrentDatetime";
 
 const SimulationMode = () => {
     const date = getCurrentDatetime();

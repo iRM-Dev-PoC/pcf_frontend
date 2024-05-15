@@ -1,6 +1,6 @@
+import { chartData } from "@/lib/donutChartData";
 import { Card } from "@ui5/webcomponents-react";
 import { DonutChart } from "@ui5/webcomponents-react-charts";
-import { chartData } from "../lib/donutChartData";
 
 const DonutChartCard = () => {
     return (

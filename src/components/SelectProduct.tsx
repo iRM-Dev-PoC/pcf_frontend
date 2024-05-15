@@ -1,4 +1,4 @@
-import ProductSwitchModal from "./ProductSwitchModal";
+import ProductSwitchModal from "@/components/ProductSwitchModal";
 
 const SelectProduct = () => {
     return (

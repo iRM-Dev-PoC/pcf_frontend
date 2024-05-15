@@ -1,3 +1,12 @@
+import ErrorComponent from "@/components/ErrorComponent";
+import HeaderDetails from "@/components/HeaderDetails";
+import NoDataComponent from "@/components/NoDataComponent";
+import {
+    SimulationDetailsDataType,
+    getHeaderTypes,
+    webComponentsReactProps,
+} from "@/lib/types";
+import { formatDate } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import {
     AnalyticalTable,
@@ -12,15 +21,6 @@ import {
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { formatDate } from "../lib/formatDate";
-import {
-    SimulationDetailsDataType,
-    getHeaderTypes,
-    webComponentsReactProps,
-} from "../utils/types";
-import ErrorComponent from "./ErrorComponent";
-import HeaderDetails from "./HeaderDetails";
-import NoDataComponent from "./NoDataComponent";
 
 const SimulationDetails = () => {
     const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/data-sync/get-all-headers`;

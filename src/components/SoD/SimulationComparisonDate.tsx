@@ -1,10 +1,10 @@
+import { getCurrentDatetime } from "@/lib/utils";
 import {
     Button,
     DateTimePicker,
     FlexBox,
     Text,
 } from "@ui5/webcomponents-react";
-import getCurrentDatetime from "../../utils/getCurrentDatetime";
 
 const SimulationComparisonDate = () => {
     return (

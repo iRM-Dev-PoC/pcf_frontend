@@ -1,9 +1,9 @@
 import {
     List,
     ListMode,
-    StandardListItem,
     ResponsivePopover,
     ResponsivePopoverDomRef,
+    StandardListItem,
 } from "@ui5/webcomponents-react";
 import { MutableRefObject } from "react";
 

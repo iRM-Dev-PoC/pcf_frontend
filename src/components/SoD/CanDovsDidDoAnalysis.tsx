@@ -5,11 +5,11 @@ import {
     Card,
     Modals,
 } from "@ui5/webcomponents-react";
-import CardHeader from "./CardHeader";
-import CanDoAnalysisDetailsTable from "./CanDoAnalysisDetails";
-import { CanDovsDidDoDataApiResponse, SoDData } from "../../utils/types";
-import chartData from "../../mockSoDData/canDoVSDidDo.json";
 import { useEffect, useState } from "react";
+import { CanDovsDidDoDataApiResponse, SoDData } from "../../lib/types";
+import chartData from "../../mockSoDData/canDoVSDidDo.json";
+import CanDoAnalysisDetailsTable from "./CanDoAnalysisDetails";
+import CardHeader from "./CardHeader";
 
 const CanDovsDidDoAnalysis = () => {
     const [chartDataSoD, setChartDataSoD] = useState();
