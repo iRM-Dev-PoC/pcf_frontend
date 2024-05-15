@@ -282,12 +282,12 @@ const ControlFamilyDetails = () => {
                                                 ? selectedControlFamily.ID
                                                 : 0
                                         }
-                                        controlName={
+                                        controlFamilyName={
                                             selectedControlFamily
                                                 ? selectedControlFamily.CONTROL_FAMILY_NAME
                                                 : ""
                                         }
-                                        controlDescription={
+                                        controlFamilyDescription={
                                             selectedControlFamily
                                                 ? selectedControlFamily.CONTROL_FAMILY_DESC
                                                 : ""
