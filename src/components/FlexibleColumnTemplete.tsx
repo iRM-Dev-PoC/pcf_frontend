@@ -10,7 +10,8 @@ import {
     ToolbarSpacer,
 } from "@ui5/webcomponents-react";
 import axios from "axios";
-import { Fragment, useState } from "react";
+import { Fragment, useCallback, useState } from "react";
+import { useSelectedItem } from "../hooks/useSelectedItem";
 import cardData from "../lib/cardData";
 import { formatNumber } from "../lib/formatNumber";
 import {
@@ -42,6 +43,9 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
         getControlDataType | undefined
     >(undefined);
 
+    const { selectedItem } = useSelectedItem();
+    const hdrId = selectedItem?.ID;
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onStartColumnClick = (e: any) => {
         const cardId = parseInt(e.detail.item.dataset.cardId);
@@ -49,25 +53,29 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
         setSelectedCard(cardData.find((card) => card.id === cardId)!);
         setLayout(FCLLayout.TwoColumnsMidExpanded);
     };
-    const fetchData = async (id: number) => {
-        const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/dashboard/get-control-data`;
-        try {
-            setIsLoading(true);
-            const reqBody = {
-                id,
-                hdrId: 51,
-            };
-            const res = await axios.post(endPoint, reqBody);
-            if (res?.data.statuscode !== 200) {
-                setError("Something went wrong!");
+    const fetchData = useCallback(
+        async (id: number) => {
+            const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/dashboard/get-control-data`;
+
+            try {
+                setIsLoading(true);
+                const reqBody = {
+                    id,
+                    hdrId,
+                };
+                const res = await axios.post(endPoint, reqBody);
+                if (res?.data.statuscode !== 200) {
+                    setError("Something went wrong!");
+                }
+                return res.data;
+            } catch (error) {
+                console.error("[FLEXIBLECOMPONENTERROR]", error);
+            } finally {
+                setIsLoading(false);
             }
-            return res.data;
-        } catch (error) {
-            console.error("[FLEXIBLECOMPONENTERROR]", error);
-        } finally {
-            setIsLoading(false);
-        }
-    };
+        },
+        [hdrId]
+    );
 
     const handleCardClick = async (id: number) => {
         setLayout(FCLLayout.TwoColumnsMidExpanded);
@@ -118,15 +126,7 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
             }
             midColumn={
                 <div className="m-2">
-                    <Toolbar
-                        design={ToolbarDesign.Solid}
-                        // style={{ height: "150px" }}
-                    >
-                        {/* <SyncID
-                            setSelectedSyncID={setSelectedSyncID}
-                            syncIdDataRes={syncIdDataRes}
-                        /> */}
-
+                    <Toolbar design={ToolbarDesign.Solid}>
                         <ToolbarSpacer />
                         <Button
                             icon="decline"
