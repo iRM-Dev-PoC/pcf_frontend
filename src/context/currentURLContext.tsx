@@ -1,5 +1,5 @@
-import { createContext, useEffect, useState, ReactNode } from "react";
-import { CurrentURLType } from "../utils/types";
+import { ReactNode, createContext, useEffect, useState } from "react";
+import { CurrentURLType } from "../lib/types";
 
 type CurrentURLProviderProps = {
     children: ReactNode;

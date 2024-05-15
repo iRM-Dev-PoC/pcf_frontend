@@ -1,6 +1,6 @@
-import { useForm, SubmitHandler } from "react-hook-form";
+import { sendOtp } from "@/lib/auth";
+import { EmailInputProps } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import {
     Button,
     Form,
@@ -9,8 +9,8 @@ import {
     Input,
 } from "@ui5/webcomponents-react";
 import "@ui5/webcomponents/dist/features/InputElementsFormSupport.js";
-import { EmailInputProps } from "../utils/types";
-import { sendOtp } from "../lib/auth";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { z } from "zod";
 
 type SendEmailToResetPasswordPropsType = {
     setIsMailSent: (value: boolean) => void;

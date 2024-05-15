@@ -15,7 +15,8 @@ import FilterBarComponent from "../components/FilterBarComponent";
 import FlexibleColumnTemplete from "../components/FlexibleColumnTemplete";
 import Loading from "../components/Loading";
 import NoDataComponent from "../components/NoDataComponent";
-import { getAllCardDataType } from "../utils/types";
+import CardWithForm from "../components/TestCard";
+import { getAllCardDataType } from "../lib/types";
 
 const Home = () => {
     const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/dashboard/control-checkpoints`;
@@ -99,6 +100,7 @@ const Home = () => {
                     <FlexibleColumnTemplete dataCard={cardValue} />
                 )}
             </Suspense>
+            <CardWithForm />
         </DynamicPage>
     );
 };

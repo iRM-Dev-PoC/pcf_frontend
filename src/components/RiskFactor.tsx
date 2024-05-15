@@ -1,6 +1,6 @@
+import { formatNumber } from "@/lib/utils";
 import { Card, FCLLayout } from "@ui5/webcomponents-react";
 import { RadialChart } from "@ui5/webcomponents-react-charts";
-import { formatNumber } from "../lib/formatNumber";
 
 type RiskFactorProps = {
     layout: FCLLayout;

@@ -1,5 +1,5 @@
-import { IllustratedMessage } from "@ui5/webcomponents-react";
 import "@ui5/webcomponents-fiori/dist/illustrations/EmptyList.js";
+import { IllustratedMessage } from "@ui5/webcomponents-react";
 
 const NoDataComponent = () => {
     return (

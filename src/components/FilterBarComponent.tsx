@@ -1,3 +1,8 @@
+import ErrorComponent from "@/components/ErrorComponent";
+import Loading from "@/components/Loading";
+import { useHeaderData } from "@/hooks/useHeaderData";
+import { useSelectedItem } from "@/hooks/useSelectedItem";
+import { getHeaderTypes } from "@/lib/types";
 import {
     ComboBox,
     ComboBoxDomRef,
@@ -10,11 +15,6 @@ import {
     Ui5CustomEvent,
 } from "@ui5/webcomponents-react";
 import { ComboBoxSelectionChangeEventDetail } from "@ui5/webcomponents/dist/ComboBox.js";
-import { useHeaderData } from "../hooks/useHeaderData";
-import { useSelectedItem } from "../hooks/useSelectedItem";
-import { getHeaderTypes } from "../utils/types";
-import ErrorComponent from "./ErrorComponent";
-import Loading from "./Loading";
 
 const FilterBarComponent = () => {
     const { data, error, isLoading } = useHeaderData();
@@ -83,7 +83,6 @@ const FilterBarComponent = () => {
                 </FilterGroupItem>
                 <FilterGroupItem label="SYNC">
                     <ComboBox
-                        // value={data && data.length > 0 ? data[0].SYNC_ID : ""}
                         valueState="None"
                         onSelectionChange={handleSyncComboBoxChange}
                     >

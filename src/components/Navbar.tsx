@@ -1,7 +1,18 @@
+import NotificationPopover from "@/components/NotificationPopover";
+import ProductSwitchModal from "@/components/ProductSwitchModal";
+import ProfilePopover from "@/components/ProfilePopover";
+import ThemeSwitchPopover from "@/components/ThemeSwitchPopover";
+import "@/css/navbar.css";
+import { useSidebar } from "@/hooks/useSidebar";
 import {
     getTheme,
     setTheme,
 } from "@ui5/webcomponents-base/dist/config/Theme.js";
+import {
+    ShellBarNotificationsClickEventDetail,
+    ShellBarProfileClickEventDetail,
+} from "@ui5/webcomponents-fiori/dist/ShellBar.js";
+import "@ui5/webcomponents-icons/dist/AllIcons.js";
 import paletteIcon from "@ui5/webcomponents-icons/dist/palette.js";
 import {
     Avatar,
@@ -16,21 +27,10 @@ import {
     ShellBarItemPropTypes,
     Ui5CustomEvent,
 } from "@ui5/webcomponents-react";
-import { useEffect, useRef, useState } from "react";
-import ThemeSwitchPopover from "./ThemeSwitchPopover";
-import { useSidebar } from "../hooks/useSidebar";
-import NotificationPopover from "./NotificationPopover";
-import {
-    ShellBarNotificationsClickEventDetail,
-    ShellBarProfileClickEventDetail,
-} from "@ui5/webcomponents-fiori/dist/ShellBar.js";
-import ProfilePopover from "./ProfilePopover";
-import { useNavigate } from "react-router-dom";
-import ProductSwitchModal from "./ProductSwitchModal";
-import "../css/navbar.css";
-import "@ui5/webcomponents/Assets.js";
 import "@ui5/webcomponents-theming/dist/Assets.js";
-import "@ui5/webcomponents-icons/dist/AllIcons.js";
+import "@ui5/webcomponents/Assets.js";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 type NavbarProps = {
     companyName: string;

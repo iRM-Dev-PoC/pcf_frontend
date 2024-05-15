@@ -1,7 +1,7 @@
 import {
+    Badge,
     Card,
     CardHeader,
-    Badge,
     ExpandableText,
 } from "@ui5/webcomponents-react";
 type RiskCardProps = {

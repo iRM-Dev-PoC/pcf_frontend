@@ -7,7 +7,7 @@ import {
     TableRow,
 } from "@ui5/webcomponents-react";
 import { ArrowUp10, BookText, User, UserPlus } from "lucide-react";
-import { ApiResponse } from "../../utils/types";
+import { ApiResponse } from "../../lib/types";
 
 type DataTableProps = {
     data: ApiResponse;

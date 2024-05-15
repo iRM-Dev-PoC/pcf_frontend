@@ -2,9 +2,9 @@
 // @ts-nocheck
 
 import { AnalyticalTable, Card } from "@ui5/webcomponents-react";
-import { canDoDetailsDataApiResponse } from "../../utils/types";
-import canDoData from "../../mockSoDData/canDoDetails.json";
 import { useEffect, useState } from "react";
+import { canDoDetailsDataApiResponse } from "../../lib/types";
+import canDoData from "../../mockSoDData/canDoDetails.json";
 import CardHeader from "./CardHeader";
 
 const CanDoDetailsData = () => {

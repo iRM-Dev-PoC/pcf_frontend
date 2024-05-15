@@ -1,35 +1,34 @@
-import { useState } from "react";
-import {
-    List,
-    StandardListItem,
-    Toolbar,
-    Title,
-    ToolbarSpacer,
-    Button,
-    Avatar,
-    FlexBox,
-    Label,
-    Text,
-    ToolbarDesign,
-    AvatarSize,
-    FCLLayout,
-    FlexibleColumnLayout,
-    ButtonDesign,
-    FlexBoxDirection,
-    Modals,
-    MessageBoxTypes,
-    MessageBoxActions,
-    Card,
-} from "@ui5/webcomponents-react";
-import { getAllControlFamilyType } from "../utils/types";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import Loading from "./Loading";
+import {
+    Avatar,
+    AvatarSize,
+    Button,
+    ButtonDesign,
+    Card,
+    FCLLayout,
+    FlexBox,
+    FlexBoxDirection,
+    FlexibleColumnLayout,
+    Label,
+    List,
+    MessageBoxActions,
+    MessageBoxTypes,
+    Modals,
+    StandardListItem,
+    Text,
+    Title,
+    Toolbar,
+    ToolbarDesign,
+    ToolbarSpacer,
+} from "@ui5/webcomponents-react";
 import axios from "axios";
+import { useState } from "react";
 import toast from "react-hot-toast";
-import ErrorComponent from "./ErrorComponent";
-import NoDataComponent from "./NoDataComponent";
+import { getAllControlFamilyType } from "../lib/types";
 import ControlFamilyEditForm from "./ControlFamilyEditForm";
-
+import ErrorComponent from "./ErrorComponent";
+import Loading from "./Loading";
+import NoDataComponent from "./NoDataComponent";
 
 const ControlFamilyDetails = () => {
     const [layout, setLayout] = useState<FCLLayout>(FCLLayout.OneColumn);
@@ -88,7 +87,8 @@ const ControlFamilyDetails = () => {
         await toast.promise(deleteControlFamilyData(id), {
             loading: "Deleting Control-Family...",
             success: "Control-Family deleted successfully!",
-            error: (error) => `Failed to delete control-family: ${error.message}`,
+            error: (error) =>
+                `Failed to delete control-family: ${error.message}`,
         });
         await queryClient.invalidateQueries({
             queryKey: ["allControlFamilyData"],
@@ -100,7 +100,8 @@ const ControlFamilyDetails = () => {
 
     const controlFamilyDataRes = data;
 
-    const allControlFamilyData: getAllControlFamilyType[] = controlFamilyDataRes?.data;
+    const allControlFamilyData: getAllControlFamilyType[] =
+        controlFamilyDataRes?.data;
 
     if (isError || error) {
         return <ErrorComponent />;

@@ -8,15 +8,15 @@ import Loading from "./components/Loading";
 import Navbar from "./components/Navbar";
 import SideNavbar from "./components/SideNavbar";
 
-import SoDDashboard from "./pages/SoD/sodDashboard";
-import CheckPoint from "./pages/checkPoint";
-import ControlFamily from "./pages/controlFamily";
-import DataLoad from "./pages/dataLoad";
+import SoDDashboard from "@/pages/SoD/sodDashboard";
+import CheckPoint from "@/pages/checkPoint";
+import ControlFamily from "@/pages/controlFamily";
+import DataLoad from "@/pages/dataLoad";
+import Report from "@/pages/report";
 import ForgetPassword from "./pages/forgetPassword";
 import Home from "./pages/home";
 import ModuleMaster from "./pages/moduleMaster";
 import ProductSelection from "./pages/productSelection";
-import Report from "./pages/report";
 import ReportCheckPointMapping from "./pages/reportCheckPointMapping";
 import ResetPassword from "./pages/resetPassword";
 import Role from "./pages/roles";
@@ -30,7 +30,7 @@ import companyLogo from "./assets/images/irm.png";
 import "@ui5/webcomponents-icons/dist/AllIcons.js";
 import { useSwitchProduct } from "./hooks/useSwitchProduct";
 import { routes, sodRoutes } from "./lib/routedata";
-import { User } from "./utils/types";
+import { User } from "./lib/types";
 
 const App = () => {
     const [, setTheme] = useState("sap_horizon");

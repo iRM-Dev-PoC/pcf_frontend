@@ -1,4 +1,4 @@
-import { logInFuncProps, resetPasswordFuncProps } from "../utils/types";
+import { logInFuncProps, resetPasswordFuncProps } from "./types";
 import { userData } from "./userList";
 
 const logIn = async ({ loginValues, setError, setLoading }: logInFuncProps) => {
@@ -91,4 +91,4 @@ const resetPassword = async ({
     }
 };
 
-export { logIn, logOut, resetPassword, validateOtp, sendOtp };
+export { logIn, logOut, resetPassword, sendOtp, validateOtp };
