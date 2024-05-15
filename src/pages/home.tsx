@@ -21,12 +21,6 @@ const Home = () => {
     const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/dashboard/control-checkpoints`;
     const [error, setError] = useState(false);
 
-    // const queryClient = useQueryClient();
-
-    // const dataImport = () => {
-
-    // };
-
     const fetchData = async () => {
         try {
             const res = await axios.get(endPoint);

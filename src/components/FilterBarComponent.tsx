@@ -18,7 +18,9 @@ import Loading from "./Loading";
 
 const FilterBarComponent = () => {
     const { data, error, isLoading } = useHeaderData();
-    const { setSelectedItem } = useSelectedItem();
+    const { selectedItem, setSelectedItem } = useSelectedItem();
+
+    console.log("selected", selectedItem);
 
     const handleSyncComboBoxChange = (
         event: Ui5CustomEvent<
@@ -81,6 +83,7 @@ const FilterBarComponent = () => {
                 </FilterGroupItem>
                 <FilterGroupItem label="SYNC">
                     <ComboBox
+                        // value={data && data.length > 0 ? data[0].SYNC_ID : ""}
                         valueState="None"
                         onSelectionChange={handleSyncComboBoxChange}
                     >
