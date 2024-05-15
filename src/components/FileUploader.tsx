@@ -94,7 +94,10 @@ const FileUploaderComponent = ({
             error: (error) => `${error}`,
         });
         await queryClient.invalidateQueries({
-            queryKey: ["allHeaderData"],
+            queryKey: ["allHeaderData", "allHeaderDataContext"],
+        });
+        await queryClient.invalidateQueries({
+            queryKey: ["allHeaderDataContext"],
         });
         closeButtonref.current?.click();
     };
