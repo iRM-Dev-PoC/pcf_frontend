@@ -1,19 +1,41 @@
 import {
     ComboBox,
+    ComboBoxDomRef,
+    ComboBoxItem,
     FilterBar,
     FilterGroupItem,
     MultiComboBox,
     MultiComboBoxItem,
     Title,
+    Ui5CustomEvent,
 } from "@ui5/webcomponents-react";
+import { ComboBoxSelectionChangeEventDetail } from "@ui5/webcomponents/dist/ComboBox.js";
 import { useHeaderData } from "../hooks/useHeaderData";
+import { useSelectedItem } from "../hooks/useSelectedItem";
 import { getHeaderTypes } from "../utils/types";
+import ErrorComponent from "./ErrorComponent";
+import Loading from "./Loading";
 
 const FilterBarComponent = () => {
     const { data, error, isLoading } = useHeaderData();
-    console.log("data", data);
-    console.log("error", error);
-    console.log("isLoading", isLoading);
+    const { setSelectedItem } = useSelectedItem();
+
+    const handleSyncComboBoxChange = (
+        event: Ui5CustomEvent<
+            ComboBoxDomRef,
+            ComboBoxSelectionChangeEventDetail
+        >
+    ) => {
+        const selectedItemId = Number(
+            event.detail?.item?.getAttribute("data-key")
+        );
+        const selectedItem =
+            data?.find((item) => item.ID === selectedItemId) || null;
+        setSelectedItem(selectedItem);
+    };
+
+    if (isLoading && !error) return <Loading />;
+    if (error) return <ErrorComponent />;
 
     return (
         <>
@@ -58,11 +80,15 @@ const FilterBarComponent = () => {
                     </MultiComboBox>
                 </FilterGroupItem>
                 <FilterGroupItem label="SYNC">
-                    <ComboBox valueState="None">
+                    <ComboBox
+                        valueState="None"
+                        onSelectionChange={handleSyncComboBoxChange}
+                    >
                         {data?.map((head: getHeaderTypes) => (
-                            <MultiComboBoxItem
+                            <ComboBoxItem
                                 key={head.SYNC_ID}
                                 text={head.SYNC_ID}
+                                data-key={head.ID}
                             />
                         ))}
                     </ComboBox>
