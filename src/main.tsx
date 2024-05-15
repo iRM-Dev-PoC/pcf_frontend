@@ -60,6 +60,7 @@ import ErrorPage from "./components/ErrorPage.tsx";
 import Loading from "./components/Loading.tsx";
 import { SidebarProvider } from "./context/SidebarContext.tsx";
 import { PathProvider } from "./context/currentPathContext.tsx";
+import { SelectedItemProvider } from "./context/currentSelectedHeader.tsx";
 import { CurrentURLProvider } from "./context/currentURLContext.tsx";
 import { HeaderDataProvider } from "./context/headerDataContext.tsx";
 import { ProductSwitchProvider } from "./context/productSwitchContext.tsx";
@@ -74,19 +75,23 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
                 <ThemeProvider>
                     <BrowserRouter>
                         <HeaderDataProvider>
-                            <SidebarProvider>
-                                <PathProvider>
-                                    <CurrentURLProvider>
-                                        <ProductSwitchProvider>
-                                            <Suspense fallback={<Loading />}>
-                                                <App />
-                                                <Toaster />
-                                                <ReactQueryDevtools />
-                                            </Suspense>
-                                        </ProductSwitchProvider>
-                                    </CurrentURLProvider>
-                                </PathProvider>
-                            </SidebarProvider>
+                            <SelectedItemProvider>
+                                <SidebarProvider>
+                                    <PathProvider>
+                                        <CurrentURLProvider>
+                                            <ProductSwitchProvider>
+                                                <Suspense
+                                                    fallback={<Loading />}
+                                                >
+                                                    <App />
+                                                    <Toaster />
+                                                    <ReactQueryDevtools />
+                                                </Suspense>
+                                            </ProductSwitchProvider>
+                                        </CurrentURLProvider>
+                                    </PathProvider>
+                                </SidebarProvider>
+                            </SelectedItemProvider>
                         </HeaderDataProvider>
                     </BrowserRouter>
                 </ThemeProvider>
