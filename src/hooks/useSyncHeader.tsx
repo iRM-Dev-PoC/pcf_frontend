@@ -1,13 +1,13 @@
 import { useContext } from "react";
-import { getAllSyncData } from "../utils/types";
-import { ProductSwitchContext } from "../context/productSwitchContext";
+// import { getAllSyncData } from "../utils/types";
+import { HeaderDataContext } from "../context/headerDataContext";
 
-export const useSyncHeader = (): getAllSyncData => {
-    const context = useContext(ProductSwitchContext);
+export const useSyncHeader = () => {
+    const context = useContext(HeaderDataContext);
     if (!context) {
         throw new Error(
             "useSwitchProduct must be used within a ProductSwitchProvider"
         );
     }
-    return context;
+    // return context;
 };

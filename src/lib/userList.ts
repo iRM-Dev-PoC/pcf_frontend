@@ -162,4 +162,23 @@ export const userData = [
             typeOfcontrol: true,
         },
     },
+    {
+        id: 9640,
+        fName: "Admin",
+        lName: "",
+        password: "123456",
+        email: "admin@admin.com",
+        otp: "123456",
+        role: "ADMIN",
+        permissions: {
+            controlAttribute: true,
+            controlFamily: true,
+            controlLogic: true,
+            dashboard: true,
+            dataLoad: true,
+            report: true,
+            roles: true,
+            typeOfcontrol: true,
+        },
+    },
 ];
