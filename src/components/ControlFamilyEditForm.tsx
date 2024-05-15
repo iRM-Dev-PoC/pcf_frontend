@@ -22,8 +22,8 @@ import { useQueryClient } from "@tanstack/react-query";
 
 type ControlFamilyData = {
     id: number;
-    controlName: string;
-    controlDescription: string;
+    controlFamilyName: string;
+    controlFamilyDescription: string;
 };
 
 type ControlFamilyEditFormProps = {
@@ -33,16 +33,16 @@ type ControlFamilyEditFormProps = {
 };
 
 const schema = z.object({
-    controlName: z.string().min(1, { message: "Name is required" }),
-    controlDescription: z
+    controlFamilyName: z.string().min(1, { message: "Name is required" }),
+    controlFamilyDescription: z
         .string()
         .min(1, { message: "Description is required" }),
 });
 
 const ControlFamilyEditForm = ({
     id,
-    controlName,
-    controlDescription,
+    controlFamilyName,
+    controlFamilyDescription,
     setIsEdit,
     setLayout,
     setIsFullScreen,
@@ -55,8 +55,8 @@ const ControlFamilyEditForm = ({
     } = useForm({
         defaultValues: {
             id,
-            controlName,
-            controlDescription,
+            controlFamilyName,
+            controlFamilyDescription,
         },
         mode: "onChange",
         resolver: zodResolver(schema),
@@ -68,8 +68,8 @@ const ControlFamilyEditForm = ({
         try {
             const updateData = {
                 id,
-                control_name: data.controlName,
-                control_desc: data.controlDescription,
+                control_family_name: data.controlFamilyName,
+                control_family_desc: data.controlFamilyDescription,
                 customer_id: 1,
             };
             const response = await axios.patch(endPoint, updateData);
@@ -109,14 +109,14 @@ const ControlFamilyEditForm = ({
             <FormGroup>
                 <FormItem label={<Label required>Control Name</Label>}>
                     <Input
-                        {...register("controlName", { required: true })}
+                        {...register("controlFamilyName", { required: true })}
                         valueState={
-                            errors.controlName
+                            errors.controlFamilyName
                                 ? ValueState.Error
                                 : ValueState.None
                         }
                         valueStateMessage={
-                            <span>{errors.controlName?.message}</span>
+                            <span>{errors.controlFamilyName?.message}</span>
                         }
                         type={InputType.Text}
                         className="w-full"
@@ -124,16 +124,16 @@ const ControlFamilyEditForm = ({
                 </FormItem>
                 <FormItem label={<Label required>Control Description</Label>}>
                     <TextArea
-                        {...register("controlDescription", {
+                        {...register("controlFamilyDescription", {
                             required: true,
                         })}
                         valueState={
-                            errors.controlDescription
+                            errors.controlFamilyDescription
                                 ? ValueState.Error
                                 : ValueState.None
                         }
                         valueStateMessage={
-                            <span>{errors.controlDescription?.message}</span>
+                            <span>{errors.controlFamilyDescription?.message}</span>
                         }
                         className="w-full"
                     />

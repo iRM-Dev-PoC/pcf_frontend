@@ -32,9 +32,7 @@ const ControlFamily = () => {
                                     children: (
                                         <>
                                             <ControlFamilyCreationForm
-                                                closeButtonref={
-                                                    closeButtonRoleref
-                                                }
+                                                closeButtonref={closeButtonRoleref}
                                             />
                                         </>
                                     ),

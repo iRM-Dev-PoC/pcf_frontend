@@ -20,16 +20,15 @@ import axios from "axios";
 import { useQueryClient } from "@tanstack/react-query";
 
 type ControlsData = {
-    controlName: string;
-    controlDescription: string;
+    controlFamilyName: string;
+    controlFamilyDescription: string;
 };
 
 const schema = z.object({
-    controlName: z.string().min(1, { message: "Name is required" }),
-    controlDescription: z
+    controlFamilyName: z.string().min(1, { message: "Name is required" }),
+    controlFamilyDescription: z
         .string()
         .min(1, { message: "Description is required" }),
-    controlValue: z.string(),
 });
 
 const ControlFamilyCreationForm = ({
@@ -45,9 +44,8 @@ const ControlFamilyCreationForm = ({
         formState: { errors },
     } = useForm({
         defaultValues: {
-            controlName: "",
-            controlDescription: "",
-            customer_id: 1,
+            controlFamilyName: "",
+            controlFamilyDescription: "",
         },
         mode: "onChange",
         resolver: zodResolver(schema),
@@ -58,13 +56,13 @@ const ControlFamilyCreationForm = ({
     const fetchData = async (data: ControlsData) => {
         try {
             const reqData = {
-                control_name: data.controlName,
-                control_desc: data.controlDescription,
+                control_family_name: data.controlFamilyName,
+                control_family_desc: data.controlFamilyDescription,
                 customer_id: 1,
             };
             const response = await axios.post(endPoint, reqData);
             if (response.data.statuscode === 500) {
-                throw response.data?.message;
+                throw new Error(response.data?.message);
             }
 
             return response.data;
@@ -91,14 +89,14 @@ const ControlFamilyCreationForm = ({
             <FormGroup>
                 <FormItem label={<Label required>Name</Label>}>
                     <Input
-                        {...register("controlName", { required: true })}
+                        {...register("controlFamilyName", { required: true })}
                         valueState={
-                            errors.controlName
+                            errors.controlFamilyName
                                 ? ValueState.Error
                                 : ValueState.None
                         }
                         valueStateMessage={
-                            <span>{errors.controlName?.message}</span>
+                            <span>{errors.controlFamilyName?.message}</span>
                         }
                         type={InputType.Text}
                         className="w-full"
@@ -106,16 +104,18 @@ const ControlFamilyCreationForm = ({
                 </FormItem>
                 <FormItem label={<Label required>Description</Label>}>
                     <TextArea
-                        {...register("controlDescription", {
+                        {...register("controlFamilyDescription", {
                             required: true,
                         })}
                         valueState={
-                            errors.controlDescription
+                            errors.controlFamilyDescription
                                 ? ValueState.Error
                                 : ValueState.None
                         }
                         valueStateMessage={
-                            <span>{errors.controlDescription?.message}</span>
+                            <span>
+                                {errors.controlFamilyDescription?.message}
+                            </span>
                         }
                         className="w-full"
                     />
