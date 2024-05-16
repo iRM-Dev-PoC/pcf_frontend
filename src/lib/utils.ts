@@ -66,3 +66,19 @@ export const formatDate = (timestamp: string) => {
     const formatedDate = format(parseISO(timestamp), "yyyy-MM-dd HH:mm:ss");
     return formatedDate;
 };
+
+export const calcRisk = (val: number) => {
+    const riskMap = {
+        highMargin: 70,
+        MidMargin: 40,
+        lowMargin: 0,
+    };
+
+    if (val > riskMap.highMargin) {
+        return "High";
+    } else if (val > riskMap.MidMargin && val < riskMap.highMargin) {
+        return "Medium";
+    } else {
+        return "Low";
+    }
+};
