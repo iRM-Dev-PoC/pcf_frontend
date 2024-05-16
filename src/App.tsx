@@ -1,36 +1,36 @@
+import { useCurrentPath } from "@/hooks/useCurrentPath";
 import { Suspense, useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import { useCurrentPath } from "./hooks/useCurrentPath";
 
 import { FlexBox } from "@ui5/webcomponents-react";
 
-import Loading from "./components/Loading";
-import Navbar from "./components/Navbar";
-import SideNavbar from "./components/SideNavbar";
+import Loading from "@/components/Loading";
+import Navbar from "@/components/Navbar";
+import SideNavbar from "@/components/SideNavbar";
 
 import SoDDashboard from "@/pages/SoD/sodDashboard";
 import CheckPoint from "@/pages/checkPoint";
 import ControlFamily from "@/pages/controlFamily";
 import DataLoad from "@/pages/dataLoad";
+import ForgetPassword from "@/pages/forgetPassword";
+import Home from "@/pages/home";
+import ModuleMaster from "@/pages/moduleMaster";
+import ProductSelection from "@/pages/productSelection";
 import Report from "@/pages/report";
-import ForgetPassword from "./pages/forgetPassword";
-import Home from "./pages/home";
-import ModuleMaster from "./pages/moduleMaster";
-import ProductSelection from "./pages/productSelection";
-import ReportCheckPointMapping from "./pages/reportCheckPointMapping";
-import ResetPassword from "./pages/resetPassword";
-import Role from "./pages/roles";
-import SignIn from "./pages/signIn";
-import SubModule from "./pages/subModule";
-import TypeOfControl from "./pages/typeOfControl";
-import AddUsers from "./pages/users";
+import ReportCheckPointMapping from "@/pages/reportCheckPointMapping";
+import ResetPassword from "@/pages/resetPassword";
+import Role from "@/pages/roles";
+import SignIn from "@/pages/signIn";
+import SubModule from "@/pages/subModule";
+import TypeOfControl from "@/pages/typeOfControl";
+import AddUsers from "@/pages/users";
 
-import companyLogo from "./assets/images/irm.png";
+import companyLogo from "@/assets/images/irm.png";
 
+import { useSwitchProduct } from "@/hooks/useSwitchProduct";
+import { routes, sodRoutes } from "@/lib/routedata";
+import { User } from "@/lib/types";
 import "@ui5/webcomponents-icons/dist/AllIcons.js";
-import { useSwitchProduct } from "./hooks/useSwitchProduct";
-import { routes, sodRoutes } from "./lib/routedata";
-import { User } from "./lib/types";
 
 const App = () => {
     const [, setTheme] = useState("sap_horizon");

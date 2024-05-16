@@ -1,3 +1,5 @@
+import AddReport from "@/components/AddReport";
+import ReportCreationForm from "@/components/ReportCreationForm";
 import {
     Bar,
     Button,
@@ -10,8 +12,6 @@ import {
 } from "@ui5/webcomponents-react";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
 import { useRef } from "react";
-import ReportCreationForm from "../components/ReportCreationForm";
-import AddReport from "../components/AddReport";
 
 const Report = () => {
     const showDialog = Modals.useShowDialog();

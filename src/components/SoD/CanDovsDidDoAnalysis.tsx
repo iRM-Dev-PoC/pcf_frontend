@@ -1,3 +1,6 @@
+import CanDoAnalysisDetailsTable from "@/components/SoD/CanDoAnalysisDetails";
+import CardHeader from "@/components/SoD/CardHeader";
+import chartData from "@/mockSoDData/canDoVSDidDo.json";
 import {
     AnalyticalTable,
     Bar,
@@ -7,9 +10,6 @@ import {
 } from "@ui5/webcomponents-react";
 import { useEffect, useState } from "react";
 import { CanDovsDidDoDataApiResponse, SoDData } from "../../lib/types";
-import chartData from "../../mockSoDData/canDoVSDidDo.json";
-import CanDoAnalysisDetailsTable from "./CanDoAnalysisDetails";
-import CardHeader from "./CardHeader";
 
 const CanDovsDidDoAnalysis = () => {
     const [chartDataSoD, setChartDataSoD] = useState();

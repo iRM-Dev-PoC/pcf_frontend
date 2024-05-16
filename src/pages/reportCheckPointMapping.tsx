@@ -1,3 +1,4 @@
+import AddReportCheckPointMapping from "@/components/AddReportCheckPointMapping";
 import {
     Bar,
     Button,
@@ -9,9 +10,7 @@ import {
     Title,
 } from "@ui5/webcomponents-react";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
-import AddReportCheckPointMapping from "../components/AddReportCheckPointMapping";
 import { useRef } from "react";
-// import ReportCheckPointMappingCreationForm from "../components/ReportCheckPointMappingCreationForm";
 
 const ReportCheckPointMapping = () => {
     const showDialog = Modals.useShowDialog();
@@ -30,10 +29,7 @@ const ReportCheckPointMapping = () => {
                                 const { close } = showDialog({
                                     headerText:
                                         "Report Check-Point Mapping Information",
-                                    children: (
-                                        // <ReportCheckPointMappingCreationForm closeButtonMappingref={closeButtonMappingref} />
-                                        <div>Hi</div>
-                                    ),
+                                    children: <div>Hi</div>,
                                     footer: (
                                         <Bar
                                             endContent={

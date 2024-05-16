@@ -1,4 +1,4 @@
-import { ChartDataItem } from "./types";
+import { ChartDataItem } from "@/lib/types";
 
 export const chartData: ChartDataItem[] = [
     {

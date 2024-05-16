@@ -1,11 +1,11 @@
+import DataCard from "@/components/SoD/DataCard";
+import DataTable from "@/components/SoD/DataTable";
+import TableHeader from "@/components/SoD/TableHeader";
+import { ApiResponse } from "@/lib/types";
 import { calcPercentage } from "@/lib/utils";
+import executiveSoDData from "@/mockSoDData/executiveData.json";
 import { Card, FlexBox } from "@ui5/webcomponents-react";
 import { useEffect, useState } from "react";
-import { ApiResponse } from "../../lib/types";
-import executiveSoDData from "../../mockSoDData/executiveData.json";
-import DataCard from "./DataCard";
-import DataTable from "./DataTable";
-import TableHeader from "./TableHeader";
 
 const ExecutiveSummary = () => {
     const [, setSod] = useState<boolean>(false);

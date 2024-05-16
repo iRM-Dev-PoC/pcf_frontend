@@ -1,16 +1,16 @@
+import ControlFamilyCreationForm from "@/components/ControlFamilyCreation";
+import ControlFamilyDetails from "@/components/ControlFamilyDetails";
 import {
-    Title,
+    Bar,
+    Button,
+    ButtonDomRef,
     DynamicPage,
     DynamicPageTitle,
     MessageStrip,
-    Button,
-    Bar,
     Modals,
-    ButtonDomRef,
+    Title,
 } from "@ui5/webcomponents-react";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
-import ControlFamilyDetails from "../components/ControlFamilyDetails";
-import ControlFamilyCreationForm from "../components/ControlFamilyCreation";
 import { useRef } from "react";
 
 const ControlFamily = () => {
@@ -32,7 +32,9 @@ const ControlFamily = () => {
                                     children: (
                                         <>
                                             <ControlFamilyCreationForm
-                                                closeButtonref={closeButtonRoleref}
+                                                closeButtonref={
+                                                    closeButtonRoleref
+                                                }
                                             />
                                         </>
                                     ),

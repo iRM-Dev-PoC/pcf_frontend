@@ -1,6 +1,6 @@
+import OtpInput from "@/components/OtpInput";
+import SendEmailToResetPassword from "@/components/SendEmailToResetPassword";
 import { useState } from "react";
-import SendEmailToResetPassword from "../components/SendEmailToResetPassword";
-import OtpInput from "../components/OtpInput";
 
 const ForgetPassword = () => {
     const [isMailSent, setIsMailSent] = useState<boolean>(false);

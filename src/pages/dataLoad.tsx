@@ -1,3 +1,5 @@
+import FileUploaderComponent from "@/components/FileUploader";
+import SimulationDetails from "@/components/SimulationDetails";
 import "@ui5/webcomponents-fiori/dist/illustrations/UploadToCloud.js";
 import {
     Bar,
@@ -11,8 +13,6 @@ import {
 } from "@ui5/webcomponents-react";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
 import { useRef } from "react";
-import FileUploaderComponent from "../components/FileUploader";
-import SimulationDetails from "../components/SimulationDetails";
 
 const DataLoad = () => {
     const showDialog = Modals.useShowDialog();

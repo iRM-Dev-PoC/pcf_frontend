@@ -1,4 +1,4 @@
-import { CheckBox, FlexBox, Label, Button } from "@ui5/webcomponents-react";
+import { Button, CheckBox, FlexBox, Label } from "@ui5/webcomponents-react";
 
 type TableHeaderProps = {
     title: string;
