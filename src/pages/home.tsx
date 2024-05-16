@@ -16,7 +16,6 @@ import {
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
 import axios from "axios";
 import { Suspense, useState } from "react";
-import HomepageCard from "../components/v2/HomepageCard";
 
 const Home = () => {
     const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/dashboard/control-checkpoints`;
@@ -100,7 +99,12 @@ const Home = () => {
                     <FlexibleColumnTemplete dataCard={cardValue} />
                 )}
             </Suspense>
-            <HomepageCard />
+            {/* <RiskCard
+                title="Test"
+                riskScore={90}
+                desc="This is a test desc"
+                info="Test info"
+            /> */}
         </DynamicPage>
     );
 };

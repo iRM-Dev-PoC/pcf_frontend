@@ -5,8 +5,8 @@ import ErrorComponent from "@/components/ErrorComponent";
 import LineChartCard from "@/components/LineChartCard";
 import Loading from "@/components/Loading";
 import NonCompilantData from "@/components/NonCompilantData";
-import RiskCard from "@/components/RiskCard";
 import RiskFactor from "@/components/RiskFactor";
+import RiskCard from "@/components/v2/RiskCard";
 import { useSelectedItem } from "@/hooks/useSelectedItem";
 import {
     dataCardType,
@@ -115,9 +115,10 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
                     {dataCard?.map((card) => (
                         <Fragment key={card?.ID}>
                             <RiskCard
-                                header={card?.CHECK_POINT_NAME}
-                                risk={formatNumber(card?.RISK_SCORE)}
-                                description={card?.CHECK_POINT_DESC}
+                                title={card?.CHECK_POINT_NAME}
+                                riskScore={formatNumber(card?.RISK_SCORE)}
+                                desc={card?.CHECK_POINT_DESC}
+                                info={card?.CHECK_POINT_DESC}
                                 onClick={() => handleCardClick(card?.ID)}
                             />
                         </Fragment>
