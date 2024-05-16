@@ -3,7 +3,6 @@ import FilterBarComponent from "@/components/FilterBarComponent";
 import FlexibleColumnTemplete from "@/components/FlexibleColumnTemplete";
 import Loading from "@/components/Loading";
 import NoDataComponent from "@/components/NoDataComponent";
-import CardWithForm from "@/components/TestCard";
 import { getAllCardDataType } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -17,6 +16,7 @@ import {
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
 import axios from "axios";
 import { Suspense, useState } from "react";
+import HomepageCard from "../components/v2/HomepageCard";
 
 const Home = () => {
     const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/dashboard/control-checkpoints`;
@@ -100,7 +100,7 @@ const Home = () => {
                     <FlexibleColumnTemplete dataCard={cardValue} />
                 )}
             </Suspense>
-            <CardWithForm />
+            <HomepageCard />
         </DynamicPage>
     );
 };
