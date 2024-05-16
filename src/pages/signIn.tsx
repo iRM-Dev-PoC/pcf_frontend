@@ -1,3 +1,6 @@
+import { useSwitchProduct } from "@/hooks/useSwitchProduct";
+import { logIn } from "@/lib/auth";
+import { SignInFormData, SignInProps } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
     Button,
@@ -12,9 +15,6 @@ import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
-import { useSwitchProduct } from "../hooks/useSwitchProduct";
-import { logIn } from "../lib/auth";
-import { SignInFormData, SignInProps } from "../lib/types";
 
 const SignIn = ({ setIsLoggedIn, setIsForgotPassword }: SignInProps) => {
     const [rememberMe, setRememberMe] = useState<boolean>(false);

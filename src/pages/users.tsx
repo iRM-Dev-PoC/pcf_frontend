@@ -1,16 +1,16 @@
+import AddUsers from "@/components/AddUsers";
+import UserCreationForm from "@/components/UserCreationForm";
 import {
     Bar,
     Button,
+    ButtonDomRef,
     DynamicPage,
     DynamicPageTitle,
     MessageStrip,
     Modals,
     Title,
-    ButtonDomRef,
 } from "@ui5/webcomponents-react";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
-import AddUsers from "../components/AddUsers";
-import UserCreationForm from "../components/UserCreationForm";
 import { useRef } from "react";
 
 const Users = () => {

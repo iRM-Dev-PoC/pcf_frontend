@@ -1,3 +1,6 @@
+import OtpInput from "@/components/OtpInput";
+import { resetPassword } from "@/lib/auth";
+import { ResetPasswordFormData } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
     Button,
@@ -12,9 +15,6 @@ import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
-import OtpInput from "../components/OtpInput";
-import { resetPassword } from "../lib/auth";
-import { ResetPasswordFormData } from "../lib/types";
 
 type ResetPasswordProps = {
     changePassword: boolean;

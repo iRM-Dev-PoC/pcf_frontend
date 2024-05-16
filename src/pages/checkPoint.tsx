@@ -1,3 +1,5 @@
+import AddCheckPoint from "@/components/AddCheckPoint";
+import CheckPointCreationForm from "@/components/CheckPointCreationForm";
 import {
     Bar,
     Button,
@@ -9,9 +11,7 @@ import {
     Title,
 } from "@ui5/webcomponents-react";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
-import AddCheckPoint from "../components/AddCheckPoint";
 import { useRef } from "react";
-import CheckPointCreationForm from "../components/CheckPointCreationForm";
 
 const CheckPoint = () => {
     const showDialog = Modals.useShowDialog();

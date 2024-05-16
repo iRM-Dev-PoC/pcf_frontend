@@ -1,5 +1,5 @@
-import { logInFuncProps, resetPasswordFuncProps } from "./types";
-import { userData } from "./userList";
+import type { logInFuncProps, resetPasswordFuncProps } from "@/lib/types";
+import { userData } from "@/lib/userList";
 
 const logIn = async ({ loginValues, setError, setLoading }: logInFuncProps) => {
     try {

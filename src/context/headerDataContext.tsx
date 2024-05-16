@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { ReactNode, createContext } from "react";
-import { getHeaderTypes } from "../lib/types";
+import { getHeaderTypes } from "@/lib/types";
 
 type HeaderDataContextProps = {
     data: getHeaderTypes[] | undefined;

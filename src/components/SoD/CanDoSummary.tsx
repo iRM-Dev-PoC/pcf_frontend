@@ -1,6 +1,10 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 
+import CanDoDetailsData from "@/components/SoD/CanDoDetailsData";
+import CanDoSummaryHeader from "@/components/SoD/CanDoSummaryHeader";
+import CardHeader from "@/components/SoD/CardHeader";
+import { candoDataType } from "@/lib/types";
 import {
     AnalyticalTable,
     Bar,
@@ -9,12 +13,8 @@ import {
     Modals,
 } from "@ui5/webcomponents-react";
 import { useEffect, useState } from "react";
-import { candoDataType } from "../../lib/types";
-import CanDoDetailsData from "./CanDoDetailsData";
-import CanDoSummaryHeader from "./CanDoSummaryHeader";
-import CardHeader from "./CardHeader";
 
-import canDoSummarychart from "../../mockSoDData/canDoSummary.json";
+import canDoSummarychart from "@/mockSoDData/canDoSummary.json";
 
 const CanDoSummary = () => {
     const [, setSodSection] = useState<boolean>(false);

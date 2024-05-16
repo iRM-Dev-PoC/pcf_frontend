@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useEffect, useState } from "react";
-import { PathContextType } from "../lib/types";
+import { PathContextType } from "@/lib/types";
 
 type PathProviderProps = {
     children: ReactNode;

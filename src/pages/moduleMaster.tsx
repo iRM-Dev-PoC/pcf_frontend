@@ -1,3 +1,5 @@
+import AddModuleMaster from "@/components/AddModuleMaster";
+import ModuleCreationForm from "@/components/ModuleCreationForm";
 import {
     Bar,
     Button,
@@ -9,9 +11,7 @@ import {
     Title,
 } from "@ui5/webcomponents-react";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
-import ModuleCreationForm from "../components/ModuleCreationForm";
 import { useRef } from "react";
-import AddModuleMaster from "../components/AddModuleMaster";
 
 const ModuleMaster = () => {
     const showDialog = Modals.useShowDialog();

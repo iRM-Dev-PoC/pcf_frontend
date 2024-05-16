@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 
+import CardHeader from "@/components/SoD/CardHeader";
+import { canDoDetailsDataApiResponse } from "@/lib/types";
+import canDoData from "@/mockSoDData/canDoDetails.json";
 import { AnalyticalTable, Card } from "@ui5/webcomponents-react";
 import { useEffect, useState } from "react";
-import { canDoDetailsDataApiResponse } from "../../lib/types";
-import canDoData from "../../mockSoDData/canDoDetails.json";
-import CardHeader from "./CardHeader";
 
 const CanDoDetailsData = () => {
     const [canDoDetailsDataSoD, setCanDoDetailsDataSoD] = useState<

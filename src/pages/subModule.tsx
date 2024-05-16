@@ -1,3 +1,5 @@
+import AddSubModule from "@/components/AddSubModule";
+import SubModuleCreationForm from "@/components/SubModuleCreationForm";
 import {
     Bar,
     Button,
@@ -10,8 +12,6 @@ import {
 } from "@ui5/webcomponents-react";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
 import { useRef } from "react";
-import SubModuleCreationForm from "../components/SubModuleCreationForm";
-import AddSubModule from "../components/AddSubModule";
 
 const SubModules = () => {
     const showDialog = Modals.useShowDialog();

@@ -5,7 +5,7 @@ import {
     SetStateAction,
     useState,
 } from "react";
-import { getHeaderTypes } from "../lib/types";
+import { getHeaderTypes } from "@/lib/types";
 
 type SelectedItemContextProps = {
     selectedItem: getHeaderTypes | null;

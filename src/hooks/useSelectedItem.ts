@@ -1,5 +1,5 @@
+import { SelectedItemContext } from "@/context/currentSelectedHeader";
 import { useContext } from "react";
-import { SelectedItemContext } from "../context/currentSelectedHeader";
 
 export const useSelectedItem = () => {
     const context = useContext(SelectedItemContext);
