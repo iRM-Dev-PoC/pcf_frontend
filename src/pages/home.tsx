@@ -21,7 +21,7 @@ const Home = () => {
     const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/dashboard/control-checkpoints`;
     const [error, setError] = useState(false);
 
-    const fetchData = async () => {
+    const getAllControlCheckPoint = async () => {
         try {
             const res = await axios.get(endPoint);
             if (res.data?.statuscode === 200) {
@@ -38,7 +38,7 @@ const Home = () => {
 
     const { data, isFetching, isError } = useQuery({
         queryKey: ["allcardData"],
-        queryFn: fetchData,
+        queryFn: getAllControlCheckPoint,
         retry: 3,
     });
 

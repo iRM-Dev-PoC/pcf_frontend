@@ -56,7 +56,7 @@ const ReportCreationForm = ({
 
     const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/report-master/create-report`;
 
-    const fetchData = async (data: ReportData) => {
+    const createReport = async (data: ReportData) => {
         try {
             const reqData = {
                 report_name: data.reportName,
@@ -73,7 +73,7 @@ const ReportCreationForm = ({
     };
 
     const onSubmit = async (data: ReportData) => {
-        await toast.promise(fetchData(data), {
+        await toast.promise(createReport(data), {
             loading: "Creating report...",
             success: "Report created successfully!",
             error: (error) => `Failed to create report: ${error.message}`,

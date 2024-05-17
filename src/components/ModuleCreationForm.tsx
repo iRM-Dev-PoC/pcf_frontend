@@ -58,7 +58,7 @@ const ModuleCreationForm = ({
 
     const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/module-master/create-module`;
 
-    const fetchData = async (data: ModuleData) => {
+    const createModule = async (data: ModuleData) => {
         try {
             const reqData = {
                 module_name: data.moduleName,
@@ -76,7 +76,7 @@ const ModuleCreationForm = ({
     };
 
     const onSubmit = async (data: ModuleData) => {
-        await toast.promise(fetchData(data), {
+        await toast.promise(createModule(data), {
             loading: "Creating module...",
             success: "Module created successfully!",
             error: (error) => `Failed to create module: ${error.message}`,

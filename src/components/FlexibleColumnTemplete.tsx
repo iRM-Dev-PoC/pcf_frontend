@@ -8,26 +8,20 @@ import NonCompilantData from "@/components/NonCompilantData";
 import RiskFactor from "@/components/RiskFactor";
 import RiskCard from "@/components/v2/RiskCard";
 import { useSelectedItem } from "@/hooks/useSelectedItem";
-import {
-    dataCardType,
-    getAllCardDataType,
-    getControlDataType,
-} from "@/lib/types";
-import { formatNumber } from "@/lib/utils";
+import { getAllCardDataType, getControlDataType } from "@/lib/types";
+import { cn, formatNumber } from "@/lib/utils";
 import {
     Button,
     ButtonDesign,
     FCLLayout,
     FlexBox,
     FlexibleColumnLayout,
-    List,
     Toolbar,
     ToolbarDesign,
     ToolbarSpacer,
 } from "@ui5/webcomponents-react";
 import axios from "axios";
-import { Fragment, useCallback, useState } from "react";
-import { cardData } from "../lib/cardData";
+import { Fragment, useState } from "react";
 
 type FlexibleColumnTempleteProps = {
     dataCard: getAllCardDataType[];
@@ -36,7 +30,6 @@ type FlexibleColumnTempleteProps = {
 const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
     const [layout, setLayout] = useState<FCLLayout>(FCLLayout.OneColumn);
     const [isFullScreen, setIsFullScreen] = useState(false);
-    const [selectedCard, setSelectedCard] = useState<dataCardType>(cardData[0]);
     const [error, setError] = useState<string | undefined>(undefined);
     const [isloading, setIsLoading] = useState(false);
     const [dasboardData, setDashboardData] = useState<
@@ -45,41 +38,42 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
 
     const { selectedItem } = useSelectedItem();
     const hdrId = selectedItem?.ID;
+    console.log(layout);
+    const isTwoColumn = layout === "TwoColumnsMidExpanded";
+    console.log("IsTwocolumn", isTwoColumn);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const onStartColumnClick = (e: any) => {
-        const cardId = parseInt(e.detail.item.dataset.cardId);
+    // const onStartColumnClick = (e: any) => {
+    //     const cardId = parseInt(e.detail.item.dataset.cardId);
 
-        setSelectedCard(cardData.find((card) => card.id === cardId)!);
-        setLayout(FCLLayout.TwoColumnsMidExpanded);
-    };
-    const fetchData = useCallback(
-        async (id: number) => {
-            const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/dashboard/get-control-data`;
+    //     setSelectedCard(cardData.find((card) => card.id === cardId)!);
+    //     setLayout(FCLLayout.TwoColumnsMidExpanded);
+    // };
 
-            try {
-                setIsLoading(true);
-                const reqBody = {
-                    id,
-                    hdrId,
-                };
-                const res = await axios.post(endPoint, reqBody);
-                if (res?.data.statuscode !== 200) {
-                    setError("Something went wrong!");
-                }
-                return res.data;
-            } catch (error) {
-                console.error("[FLEXIBLECOMPONENTERROR]", error);
-            } finally {
-                setIsLoading(false);
+    const fetchAllControlData = async (id: number) => {
+        const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/dashboard/get-control-data`;
+
+        try {
+            setIsLoading(true);
+            const reqBody = {
+                id,
+                hdrId,
+            };
+            const res = await axios.post(endPoint, reqBody);
+            if (res?.data.statuscode !== 200) {
+                setError("Something went wrong!");
             }
-        },
-        [hdrId]
-    );
+            return res.data;
+        } catch (error) {
+            console.error("[FLEXIBLECOMPONENTERROR]", error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     const handleCardClick = async (id: number) => {
         setLayout(FCLLayout.TwoColumnsMidExpanded);
-        const res = await fetchData(id);
+        const res = await fetchAllControlData(id);
         const val: getControlDataType = res?.data;
         setDashboardData(val);
     };
@@ -108,9 +102,11 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
             }}
             layout={layout}
             startColumn={
-                <List
-                    onItemClick={onStartColumnClick}
-                    key={`${selectedCard.header}-${selectedCard.id}`}
+                <ul
+                    className={cn(
+                        "grid  grid-cols-1 gap-2 md:grid-cols-3",
+                        isTwoColumn && "md:grid-cols-1"
+                    )}
                 >
                     {dataCard?.map((card) => (
                         <Fragment key={card?.ID}>
@@ -123,7 +119,7 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
                             />
                         </Fragment>
                     ))}
-                </List>
+                </ul>
             }
             midColumn={
                 <div className="m-2">
@@ -158,7 +154,7 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
                         )}
                     </Toolbar>
                     <Toolbar
-                        key={selectedCard.header}
+                        // key={selectedCard.header}
                         style={{ height: "300px" }}
                     >
                         <FlexBox

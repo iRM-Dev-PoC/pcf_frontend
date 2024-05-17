@@ -58,7 +58,7 @@ const SubModuleCreationForm = ({
 
     const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/submodule-master/create-submodule`;
 
-    const fetchData = async (data: SubModuleData) => {
+    const createSubModule = async (data: SubModuleData) => {
         try {
             const reqData = {
                 submodule_name: data.subModuleName,
@@ -80,7 +80,7 @@ const SubModuleCreationForm = ({
     };
 
     const onSubmit = async (data: SubModuleData) => {
-        await toast.promise(fetchData(data), {
+        await toast.promise(createSubModule(data), {
             loading: "Creating sub-module...",
             success: "Sub-Module created successfully!",
             error: (error) => `Failed to create sub-module: ${error}`,

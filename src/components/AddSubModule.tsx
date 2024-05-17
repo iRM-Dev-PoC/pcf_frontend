@@ -41,7 +41,7 @@ const AddSubModule = () => {
     const showDeleteConfirmation = Modals.useShowMessageBox();
     const queryClient = useQueryClient();
 
-    const fetchData = async () => {
+    const getAllSubModules = async () => {
         try {
             const endPointAllSubModules = `${import.meta.env.VITE_BACKEND_BASE_URL}/submodule-master/get-all-submodules`;
             const response = await axios.get(endPointAllSubModules);
@@ -57,7 +57,7 @@ const AddSubModule = () => {
     };
     const { data, isFetching, isError } = useQuery({
         queryKey: ["allSubModulesData"],
-        queryFn: fetchData,
+        queryFn: getAllSubModules,
         retry: 3,
     });
 

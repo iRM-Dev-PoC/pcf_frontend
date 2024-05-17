@@ -43,7 +43,7 @@ const AddCheckPoint = () => {
     const showDeleteConfirmation = Modals.useShowMessageBox();
     const queryClient = useQueryClient();
 
-    const fetchData = async () => {
+    const getAllCheckPoinData = async () => {
         try {
             const endPointAllCheckPoints = `${import.meta.env.VITE_BACKEND_BASE_URL}/check-point-master/get-all-check-points`;
             const response = await axios.get(endPointAllCheckPoints);
@@ -61,7 +61,7 @@ const AddCheckPoint = () => {
 
     const { data, isFetching, isError } = useQuery({
         queryKey: ["allCheckPointData"],
-        queryFn: fetchData,
+        queryFn: getAllCheckPoinData,
         retry: 3,
     });
 

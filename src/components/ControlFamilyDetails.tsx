@@ -1,3 +1,8 @@
+import ControlFamilyEditForm from "@/components/ControlFamilyEditForm";
+import ErrorComponent from "@/components/ErrorComponent";
+import Loading from "@/components/Loading";
+import NoDataComponent from "@/components/NoDataComponent";
+import { getAllControlFamilyType } from "@/lib/types";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
     Avatar,
@@ -24,11 +29,6 @@ import {
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { getAllControlFamilyType } from "../lib/types";
-import ControlFamilyEditForm from "./ControlFamilyEditForm";
-import ErrorComponent from "./ErrorComponent";
-import Loading from "./Loading";
-import NoDataComponent from "./NoDataComponent";
 
 const ControlFamilyDetails = () => {
     const [layout, setLayout] = useState<FCLLayout>(FCLLayout.OneColumn);
@@ -41,7 +41,7 @@ const ControlFamilyDetails = () => {
     const showDeleteConfirmation = Modals.useShowMessageBox();
     const queryClient = useQueryClient();
 
-    const fetchData = async () => {
+    const getAllControlFamiliyData = async () => {
         try {
             const endPointAllControlFamily = `${import.meta.env.VITE_BACKEND_BASE_URL}/control-family-master/get-all-control-family`;
             const response = await axios.get(endPointAllControlFamily);
@@ -57,7 +57,7 @@ const ControlFamilyDetails = () => {
     };
     const { data, isFetching, isError } = useQuery({
         queryKey: ["allControlFamilyData"],
-        queryFn: fetchData,
+        queryFn: getAllControlFamiliyData,
         retry: 3,
     });
 

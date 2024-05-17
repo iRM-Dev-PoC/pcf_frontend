@@ -53,7 +53,7 @@ const ControlFamilyCreationForm = ({
 
     const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/control-family-master/create-control-family`;
 
-    const fetchData = async (data: ControlsData) => {
+    const createControlFamiliy = async (data: ControlsData) => {
         try {
             const reqData = {
                 control_family_name: data.controlFamilyName,
@@ -73,7 +73,7 @@ const ControlFamilyCreationForm = ({
     };
 
     const onSubmit = async (data: ControlsData) => {
-        await toast.promise(fetchData(data), {
+        await toast.promise(createControlFamiliy(data), {
             loading: "Creating control family...",
             success: "Control-Family created successfully!",
             error: (error) => `Failed to create control-family: ${error}`,

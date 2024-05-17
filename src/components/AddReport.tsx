@@ -41,7 +41,7 @@ const AddReport = () => {
     const showDeleteConfirmation = Modals.useShowMessageBox();
     const queryClient = useQueryClient();
 
-    const fetchData = async () => {
+    const getAllReportData = async () => {
         try {
             const endPointAllReports = `${import.meta.env.VITE_BACKEND_BASE_URL}/report-master/get-all-reports`;
             const response = await axios.get(endPointAllReports);
@@ -58,7 +58,7 @@ const AddReport = () => {
 
     const { data, isFetching, isError } = useQuery({
         queryKey: ["allReportData"],
-        queryFn: fetchData,
+        queryFn: getAllReportData,
         retry: 3,
     });
 

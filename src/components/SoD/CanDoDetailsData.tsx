@@ -13,7 +13,7 @@ const CanDoDetailsData = () => {
     >(undefined);
 
     useEffect(() => {
-        const fetchData = async () => {
+        const getAllCanDoDetailsData = async () => {
             try {
                 const response = await JSON.parse(JSON.stringify(canDoData));
                 setCanDoDetailsDataSoD(response);
@@ -22,7 +22,7 @@ const CanDoDetailsData = () => {
             }
         };
 
-        fetchData();
+        getAllCanDoDetailsData();
     }, []);
 
     const canDoDetailsData = canDoDetailsDataSoD;
