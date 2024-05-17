@@ -3,6 +3,7 @@ import FilterBarComponent from "@/components/FilterBarComponent";
 import FlexibleColumnTemplete from "@/components/FlexibleColumnTemplete";
 import Loading from "@/components/Loading";
 import NoDataComponent from "@/components/NoDataComponent";
+import RadialChart from "@/components/v2/RadialChart";
 import { getAllCardDataType } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -99,12 +100,7 @@ const Home = () => {
                     <FlexibleColumnTemplete dataCard={cardValue} />
                 )}
             </Suspense>
-            {/* <RiskCard
-                title="Test"
-                riskScore={90}
-                desc="This is a test desc"
-                info="Test info"
-            /> */}
+            <RadialChart value={86} />
         </DynamicPage>
     );
 };
