@@ -15,7 +15,7 @@ const HeaderDetails = ({ value }: HeaderDetailsProps) => {
     const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/data-sync/get-all-details`;
     const [error, setError] = useState(false);
 
-    const fetchData = async () => {
+    const getAllHeaderDetails = async () => {
         try {
             const requestData = {
                 id: value,
@@ -35,7 +35,7 @@ const HeaderDetails = ({ value }: HeaderDetailsProps) => {
 
     const { data, isFetching, isError } = useQuery({
         queryKey: ["allHeaderDetails"],
-        queryFn: fetchData,
+        queryFn: getAllHeaderDetails,
         retry: 3,
     });
 

@@ -1,13 +1,13 @@
 import ErrorComponent from "@/components/ErrorComponent";
 import HeaderDetails from "@/components/HeaderDetails";
 import NoDataComponent from "@/components/NoDataComponent";
+import { useHeaderData } from "@/hooks/useHeaderData";
 import {
     SimulationDetailsDataType,
     getHeaderTypes,
     webComponentsReactProps,
 } from "@/lib/types";
 import { formatDate } from "@/lib/utils";
-import { useQuery } from "@tanstack/react-query";
 import {
     AnalyticalTable,
     Badge,
@@ -23,35 +23,15 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 
 const SimulationDetails = () => {
-    const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/data-sync/get-all-headers`;
     const simulateEndPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/dataload/simulate-data`;
     const [error, setError] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    const fetchData = async () => {
-        try {
-            const res = await axios.get(endPoint);
-            if (res.data?.statuscode === 200) {
-                setError(false);
-            } else {
-                setError(true);
-            }
-            return res.data;
-        } catch (error) {
-            console.error(error);
-            setError(true);
-        }
-    };
-
-    const { data, isFetching, isError } = useQuery({
-        queryKey: ["allHeaderData"],
-        queryFn: fetchData,
-        retry: 3,
-    });
-
     const showDialog = Modals.useShowDialog();
 
-    const allHeaderData: getHeaderTypes[] = data?.data;
+    const { data, isLoading: isFetching, error: isError } = useHeaderData();
+
+    const allHeaderData: getHeaderTypes[] = data ? data : [];
     console.log(allHeaderData);
 
     if (!isFetching && isError) {

@@ -1,4 +1,3 @@
-import ErrorComponent from "@/components/ErrorComponent";
 import Loading from "@/components/Loading";
 import { useHeaderData } from "@/hooks/useHeaderData";
 import { useSelectedItem } from "@/hooks/useSelectedItem";
@@ -37,7 +36,6 @@ const FilterBarComponent = () => {
     };
 
     if (isLoading && !error) return <Loading />;
-    if (error) return <ErrorComponent />;
 
     return (
         <>

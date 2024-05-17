@@ -51,7 +51,7 @@ const RoleCreationForm = ({
 
     const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/role-master/create-role`;
 
-    const fetchData = async (data: RoleData) => {
+    const createRole = async (data: RoleData) => {
         try {
             const reqData = {
                 role_name: data.roleName,
@@ -67,7 +67,7 @@ const RoleCreationForm = ({
     };
 
     const onSubmit = async (data: RoleData) => {
-        await toast.promise(fetchData(data), {
+        await toast.promise(createRole(data), {
             loading: "Creating role...",
             success: "Role created successfully!",
             error: (error) => `Failed to create role: ${error.message}`,

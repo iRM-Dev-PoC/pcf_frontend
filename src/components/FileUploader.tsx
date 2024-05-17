@@ -1,4 +1,3 @@
-/* eslint-disable no-useless-catch */
 import { useQueryClient } from "@tanstack/react-query";
 import { Button, ButtonDomRef } from "@ui5/webcomponents-react";
 import axios from "axios";
@@ -17,15 +16,12 @@ const FileUploaderComponent = ({
     // const [isLoading, setIsLoading] = useState(false);
     // const [error, setError] = useState(false);
     const queryClient = useQueryClient();
-
-    // added by Racktim Guin
     const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
 
     const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
         const files = event.target.files;
         setSelectedFiles(files);
     };
-    // ends
 
     // const handleDelete = (
     //     event: Ui5CustomEvent<
@@ -50,25 +46,17 @@ const FileUploaderComponent = ({
     // };
 
     const handleUpload = async () => {
-        try {
-            // setIsLoading(true);
-            if (!selectedFiles) {
-                throw "Please select at least one file!";
-            }
-            const formData = new FormData();
-            for (let i = 0; i < selectedFiles.length; i++) {
-                console.log(selectedFiles[i]);
-                formData.append(
-                    `files`,
-                    selectedFiles[i],
-                    selectedFiles[i].name
-                );
-            }
-
-            await uploadFile(formData);
-        } catch (error) {
-            throw error;
+        if (!selectedFiles) {
+            throw "Please select at least one file!";
         }
+
+        const formData = new FormData();
+        for (let i = 0; i < selectedFiles.length; i++) {
+            console.log(selectedFiles[i]);
+            formData.append(`files`, selectedFiles[i], selectedFiles[i].name);
+        }
+
+        await uploadFile(formData);
     };
 
     async function uploadFile(uploadData: FormData) {
@@ -76,7 +64,6 @@ const FileUploaderComponent = ({
 
         const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/dataload/upload-and-store`;
         try {
-            // setIsLoading(true);
             const reqBody = uploadData;
             reqBody.append("CUST_ID", "1");
             const response = await axios.post(endPoint, reqBody);

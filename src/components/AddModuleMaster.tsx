@@ -41,7 +41,7 @@ const AddModuleMaster = () => {
     const showDeleteConfirmation = Modals.useShowMessageBox();
     const queryClient = useQueryClient();
 
-    const fetchData = async () => {
+    const getAllModuleData = async () => {
         try {
             const endPointAllModules = `${import.meta.env.VITE_BACKEND_BASE_URL}/module-master/get-all-modules`;
             const response = await axios.get(endPointAllModules);
@@ -58,7 +58,7 @@ const AddModuleMaster = () => {
 
     const { data, isFetching, isError } = useQuery({
         queryKey: ["allModulesData"],
-        queryFn: fetchData,
+        queryFn: getAllModuleData,
         retry: 3,
     });
 

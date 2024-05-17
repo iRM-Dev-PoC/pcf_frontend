@@ -24,7 +24,7 @@ const AddReportCheckPointMapping = () => {
     >(undefined);
     const [error, setError] = useState(false);
 
-    const fetchData = async () => {
+    const getAllMappingData = async () => {
         try {
             const endPointAllReports = `${import.meta.env.VITE_BACKEND_BASE_URL}/report-check-point-mapping/get-all-mappings`;
             const response = await axios.get(endPointAllReports);
@@ -46,7 +46,7 @@ const AddReportCheckPointMapping = () => {
 
     const { data, isFetching, isError } = useQuery({
         queryKey: ["allReportCheckPointMappingData"],
-        queryFn: fetchData,
+        queryFn: getAllMappingData,
         retry: 3,
     });
 

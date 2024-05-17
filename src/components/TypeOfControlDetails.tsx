@@ -42,7 +42,7 @@ const TypeOfControlDetails = () => {
     const showDeleteConfirmation = Modals.useShowMessageBox();
     const queryClient = useQueryClient();
 
-    const fetchData = async () => {
+    const getAllControls = async () => {
         try {
             const endPointAllControls = `${import.meta.env.VITE_BACKEND_BASE_URL}/control-master/get-all-controls`;
             const response = await axios.get(endPointAllControls);
@@ -59,7 +59,7 @@ const TypeOfControlDetails = () => {
 
     const { data, isFetching, isError } = useQuery({
         queryKey: ["allControlsData"],
-        queryFn: fetchData,
+        queryFn: getAllControls,
         retry: 3,
     });
 

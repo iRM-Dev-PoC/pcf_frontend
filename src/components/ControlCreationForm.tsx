@@ -60,7 +60,7 @@ const ControlCreationForm = ({
 
     const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/control-master/create-control`;
 
-    const fetchData = async (data: ControlsData) => {
+    const createControl = async (data: ControlsData) => {
         try {
             let control_id_data: number;
 
@@ -88,7 +88,7 @@ const ControlCreationForm = ({
     };
 
     const onSubmit = async (data: ControlsData) => {
-        await toast.promise(fetchData(data), {
+        await toast.promise(createControl(data), {
             loading: "Creating control...",
             success: "Control created successfully!",
             error: (error) => `Failed to create control: ${error}`,

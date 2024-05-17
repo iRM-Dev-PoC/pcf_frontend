@@ -43,7 +43,7 @@ const AddUsers = () => {
     const showDeleteConfirmation = Modals.useShowMessageBox();
     const queryClient = useQueryClient();
 
-    const fetchData = async () => {
+    const getAllUsers = async () => {
         try {
             const endPointAllUsers = `${import.meta.env.VITE_BACKEND_BASE_URL}/loginuser/get-all-users`;
             const response = await axios.get(endPointAllUsers);
@@ -60,7 +60,7 @@ const AddUsers = () => {
 
     const { data, isFetching, isError } = useQuery({
         queryKey: ["allUserData"],
-        queryFn: fetchData,
+        queryFn: getAllUsers,
         retry: 3,
     });
 

@@ -43,7 +43,7 @@ const AddRoles = () => {
     const showDeleteConfirmation = Modals.useShowMessageBox();
     const queryClient = useQueryClient();
 
-    const fetchData = async () => {
+    const getAllRoles = async () => {
         try {
             const endPointAllRoles = `${import.meta.env.VITE_BACKEND_BASE_URL}/role-master/get-all-roles`;
             const response = await axios.get(endPointAllRoles);
@@ -60,7 +60,7 @@ const AddRoles = () => {
 
     const { data, isFetching, isError } = useQuery({
         queryKey: ["allRoleData"],
-        queryFn: fetchData,
+        queryFn: getAllRoles,
         retry: 3,
     });
 

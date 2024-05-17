@@ -53,7 +53,7 @@ const UserCreationForm = ({
 
     const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/loginuser/create-user`;
 
-    const fetchData = async (data: UserData) => {
+    const createUser = async (data: UserData) => {
         try {
             const userName: string = `${data.firstName} ${data.lastName}`;
             const reqData = {
@@ -71,7 +71,7 @@ const UserCreationForm = ({
     };
 
     const onSubmit = async (data: UserData) => {
-        await toast.promise(fetchData(data), {
+        await toast.promise(createUser(data), {
             loading: "Creating user...",
             success: "User created successfully!",
             error: (error) => `Failed to create user: ${error.message}`,

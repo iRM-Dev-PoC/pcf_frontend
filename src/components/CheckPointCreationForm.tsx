@@ -58,7 +58,7 @@ const CheckPointCreationForm = ({
 
     const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/check-point-master/create-check-point`;
 
-    const fetchData = async (data: CheckPointData) => {
+    const createCheckPoint = async (data: CheckPointData) => {
         try {
             let control_id_data: number;
 
@@ -83,7 +83,7 @@ const CheckPointCreationForm = ({
     };
 
     const onSubmit = async (data: CheckPointData) => {
-        await toast.promise(fetchData(data), {
+        await toast.promise(createCheckPoint(data), {
             loading: "Creating check point...",
             success: "Check point created successfully!",
             error: (error) => `Failed to create Check point: ${error.message}`,
