@@ -1,4 +1,4 @@
-import type { logInFuncProps, resetPasswordFuncProps } from "@/lib/types";
+import type { logInFuncProps } from "@/lib/types";
 import { userData } from "@/lib/userList";
 
 const logIn = async ({ loginValues, setError, setLoading }: logInFuncProps) => {
@@ -72,17 +72,12 @@ const sendOtp = async (email: string) => {
     }
 };
 
-const resetPassword = async ({
-    resetPasswordValues,
-    setError,
-    setLoading,
-}: resetPasswordFuncProps) => {
+const resetPassword = async () => {
     try {
         const userData = localStorage.getItem("userData");
         if (userData) {
             localStorage.removeItem("userData");
             window.location.reload();
-            console.log(resetPasswordValues, setError, setLoading);
         }
         return true;
     } catch (error) {

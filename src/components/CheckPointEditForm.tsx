@@ -65,8 +65,6 @@ const CheckPointEditForm = ({
     const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/check-point-master/update-check-point`;
 
     const updateCheckPoint = async (data: CheckPointData) => {
-        console.log(data);
-
         try {
             const updateData = {
                 id,
@@ -90,7 +88,6 @@ const CheckPointEditForm = ({
     };
 
     const onSubmit = async (data: CheckPointData) => {
-        console.log(data);
         await toast.promise(updateCheckPoint(data), {
             loading: "Updating checkPoint...",
             success: "CheckPoint updated successfully!",

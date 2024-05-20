@@ -1,5 +1,6 @@
 import ActivityCard from "@/components/ActivityCard";
 import DashboardCards from "@/components/DashboardCards";
+import DashboardLayout from "@/components/DashboardLayout";
 import DonutChartCard from "@/components/DonutChartCard";
 import ErrorComponent from "@/components/ErrorComponent";
 import LineChartCard from "@/components/LineChartCard";
@@ -35,20 +36,13 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
     const [dasboardData, setDashboardData] = useState<
         getControlDataType | undefined
     >(undefined);
+    const [clickedCard, setClickedCard] = useState<
+        getAllCardDataType | undefined
+    >(undefined);
 
     const { selectedItem } = useSelectedItem();
     const hdrId = selectedItem?.ID;
-    console.log(layout);
     const isTwoColumn = layout === "TwoColumnsMidExpanded";
-    console.log("IsTwocolumn", isTwoColumn);
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    // const onStartColumnClick = (e: any) => {
-    //     const cardId = parseInt(e.detail.item.dataset.cardId);
-
-    //     setSelectedCard(cardData.find((card) => card.id === cardId)!);
-    //     setLayout(FCLLayout.TwoColumnsMidExpanded);
-    // };
 
     const fetchAllControlData = async (id: number) => {
         const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/dashboard/get-control-data`;
@@ -76,13 +70,12 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
         const res = await fetchAllControlData(id);
         const val: getControlDataType = res?.data;
         setDashboardData(val);
+        const index = dataCard.findIndex((data) => data.ID === id);
+        setClickedCard(dataCard[index]);
     };
 
     const nonCompilantDataRes = dasboardData?.violatedData;
-    const activityCardDataRes = dasboardData?.control_data;
-    const syncIdDataRes = dasboardData?.getSyncHeaderData;
-
-    console.log(syncIdDataRes);
+    // const activityCardDataRes = dasboardData?.control_data;
 
     if (error && !isloading) {
         <ErrorComponent />;
@@ -154,8 +147,12 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
                         )}
                     </Toolbar>
                     <Toolbar
-                        // key={selectedCard.header}
-                        style={{ height: "300px" }}
+                        data-name="toolbar-mid"
+                        style={{
+                            height: "300px",
+                            display: "grid",
+                        }}
+                        // className="grid"
                     >
                         <FlexBox
                             direction="Row"
@@ -174,15 +171,9 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
                                     data-name="ActivityCard"
                                 >
                                     <ActivityCard
-                                        title={
-                                            activityCardDataRes
-                                                ? activityCardDataRes.CHECK_POINT_NAME
-                                                : ""
-                                        }
+                                        title={clickedCard?.CHECK_POINT_NAME}
                                         description={
-                                            activityCardDataRes
-                                                ? activityCardDataRes.CHECK_POINT_DESC
-                                                : ""
+                                            clickedCard?.CHECK_POINT_DESC
                                         }
                                     />
                                 </FlexBox>
@@ -259,6 +250,9 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
                             />
                         </FlexBox>
                     </FlexBox>
+                    <div className="m-0 p-0">
+                        <DashboardLayout layout={layout} />
+                    </div>
                 </div>
             }
         />

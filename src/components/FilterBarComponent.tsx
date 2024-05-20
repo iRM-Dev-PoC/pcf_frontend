@@ -17,9 +17,7 @@ import { ComboBoxSelectionChangeEventDetail } from "@ui5/webcomponents/dist/Comb
 
 const FilterBarComponent = () => {
     const { data, error, isLoading } = useHeaderData();
-    const { selectedItem, setSelectedItem } = useSelectedItem();
-
-    console.log("selected", selectedItem);
+    const { setSelectedItem } = useSelectedItem();
 
     const handleSyncComboBoxChange = (
         event: Ui5CustomEvent<
