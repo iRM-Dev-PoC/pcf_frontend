@@ -1,4 +1,3 @@
-import NoDataComponent from "@/components/NoDataComponent";
 import { getAllNonCompilantData } from "@/lib/types";
 import { AnalyticalTable, Card, TextAlign } from "@ui5/webcomponents-react";
 
@@ -8,7 +7,7 @@ type NonCompilantDataProps = {
 
 const NonCompilantData = ({ nonCompilantDataRes }: NonCompilantDataProps) => {
     if (nonCompilantDataRes === undefined) {
-        return <NoDataComponent />;
+        return null;
     }
     return (
         <Card>

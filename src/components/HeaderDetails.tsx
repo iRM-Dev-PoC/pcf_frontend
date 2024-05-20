@@ -47,8 +47,6 @@ const HeaderDetails = ({ value }: HeaderDetailsProps) => {
 
     const headerDataDetails: getAllSyncDetails[] = data?.data;
 
-    console.log(headerDataDetails);
-
     if (!isFetching && isError) {
         return <ErrorComponent />;
     }

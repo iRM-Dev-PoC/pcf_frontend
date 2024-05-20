@@ -116,14 +116,15 @@ const TypeOfControlDetails = () => {
         return <ErrorComponent />;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const onStartColumnClick = (e: any) => {
+    const onStartColumnClick = (
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        e: any
+    ) => {
         const controlId = parseInt(e.detail.item.dataset.controlId);
         const control = allControlsData.find(
             (control) => Number(control.ID) === controlId
         );
         setSelectedControl(control);
-        console.log(control);
         setLayout(FCLLayout.TwoColumnsMidExpanded);
     };
 

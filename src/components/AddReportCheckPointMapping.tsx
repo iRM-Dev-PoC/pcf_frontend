@@ -28,14 +28,12 @@ const AddReportCheckPointMapping = () => {
         try {
             const endPointAllReports = `${import.meta.env.VITE_BACKEND_BASE_URL}/report-check-point-mapping/get-all-mappings`;
             const response = await axios.get(endPointAllReports);
-            console.log(response.data);
 
             const mappingData = response?.data;
             if (response.data.statuscode !== 200) {
                 setError(true);
             }
             setError(false);
-            console.log(mappingData);
 
             return mappingData;
         } catch (error) {
@@ -54,19 +52,12 @@ const AddReportCheckPointMapping = () => {
 
     const arrow = " --> ";
 
-    console.log(data);
-
     const allReportCheckPointMappingData: getReportCheckPointMappingType[] =
         checkPointMappingData?.data;
-
-    console.log(allReportCheckPointMappingData);
 
     const allReportData: reportDataType[] = checkPointMappingData?.reportdata;
     const allCheckPointData: checkPointDatType[] =
         checkPointMappingData?.checkpointdata;
-
-    console.log(allReportData);
-    console.log(allCheckPointData);
 
     if (isError || error) {
         return <ErrorComponent />;

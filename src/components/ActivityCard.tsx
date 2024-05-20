@@ -2,8 +2,8 @@ import { Card, CardHeader, ExpandableText } from "@ui5/webcomponents-react";
 import { ThemingParameters, spacing } from "@ui5/webcomponents-react-base";
 
 type ActivityCardProps = {
-    title: string;
-    description: string;
+    title: string | undefined;
+    description: string | undefined;
 };
 
 const ActivityCard = ({ title, description }: ActivityCardProps) => {

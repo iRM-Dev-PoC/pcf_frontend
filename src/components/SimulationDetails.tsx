@@ -32,7 +32,6 @@ const SimulationDetails = () => {
     const { data, isLoading: isFetching, error: isError } = useHeaderData();
 
     const allHeaderData: getHeaderTypes[] = data ? data : [];
-    console.log(allHeaderData);
 
     if (!isFetching && isError) {
         return <ErrorComponent />;
@@ -47,8 +46,6 @@ const SimulationDetails = () => {
     }
 
     const showModal = ({ value }: { value: number }) => {
-        console.log(value);
-
         const { close } = showDialog({
             children: <HeaderDetails value={value} />,
             footer: (
@@ -58,8 +55,6 @@ const SimulationDetails = () => {
             ),
         });
     };
-
-    console.log(allHeaderData);
 
     const handleSimulate = async (id: number) => {
         try {

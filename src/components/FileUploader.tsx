@@ -52,7 +52,6 @@ const FileUploaderComponent = ({
 
         const formData = new FormData();
         for (let i = 0; i < selectedFiles.length; i++) {
-            console.log(selectedFiles[i]);
             formData.append(`files`, selectedFiles[i], selectedFiles[i].name);
         }
 
@@ -60,8 +59,6 @@ const FileUploaderComponent = ({
     };
 
     async function uploadFile(uploadData: FormData) {
-        console.log("uploading");
-
         const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/dataload/upload-and-store`;
         try {
             const reqBody = uploadData;

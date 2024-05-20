@@ -7,8 +7,6 @@ type SyncIDProps = {
 };
 
 const SyncID = ({ syncIdDataRes, setSelectedSyncID }: SyncIDProps) => {
-    console.log("syncIdDataRes", syncIdDataRes);
-
     return (
         <div>
             <select

@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { Card, CardHeader, FileUploader } from "@ui5/webcomponents-react";
 import JSZip from "jszip";
+import { useState } from "react";
 
 const FileUpload = () => {
     const [extractedFiles, setExtractedFiles] = useState<
@@ -59,9 +59,6 @@ const FileUpload = () => {
                     }
                 };
                 reader.readAsArrayBuffer(uploadedFile);
-            } else {
-                console.log("Uploaded file is of type:", fileType);
-            }
         }
     };
 
