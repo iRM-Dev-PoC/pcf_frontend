@@ -8,12 +8,7 @@ type ActivityCardProps = {
 
 const ActivityCard = ({ title, description }: ActivityCardProps) => {
     return (
-        <Card
-            header={<CardHeader titleText={title} />}
-            style={{
-                marginTop: "1rem",
-            }}
-        >
+        <Card header={<CardHeader titleText={title} />} className="mb-2 h-full">
             <ExpandableText
                 style={{
                     fontSize: "1rem",

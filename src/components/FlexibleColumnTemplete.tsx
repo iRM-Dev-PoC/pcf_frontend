@@ -1,19 +1,14 @@
-import ActivityCard from "@/components/ActivityCard";
-import DashboardCards from "@/components/DashboardCards";
-import DashboardLayout from "@/components/DashboardLayout";
-import DonutChartCard from "@/components/DonutChartCard";
 import ErrorComponent from "@/components/ErrorComponent";
-import LineChartCard from "@/components/LineChartCard";
 import Loading from "@/components/Loading";
 import NonCompilantData from "@/components/NonCompilantData";
-import RiskFactor from "@/components/RiskFactor";
-import RiskCard from "@/components/v2/RiskCard";
+import Charts from "@/components/v2/Charts";
+import DashboardCardList from "@/components/v2/DashboardCardList";
+import DashboardToolbar from "@/components/v2/DashboardToolbar";
+import DashboardTopCards from "@/components/v2/DashboardTopCards";
 import { useSelectedItem } from "@/hooks/useSelectedItem";
 import { getAllCardDataType, getControlDataType } from "@/lib/types";
-import { cn, formatNumber } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import {
-    Button,
-    ButtonDesign,
     FCLLayout,
     FlexBox,
     FlexibleColumnLayout,
@@ -22,7 +17,7 @@ import {
     ToolbarSpacer,
 } from "@ui5/webcomponents-react";
 import axios from "axios";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 
 type FlexibleColumnTempleteProps = {
     dataCard: getAllCardDataType[];
@@ -75,7 +70,6 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
     };
 
     const nonCompilantDataRes = dasboardData?.violatedData;
-    // const activityCardDataRes = dasboardData?.control_data;
 
     if (error && !isloading) {
         <ErrorComponent />;
@@ -101,158 +95,42 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
                         isTwoColumn && "md:grid-cols-1"
                     )}
                 >
-                    {dataCard?.map((card) => (
-                        <Fragment key={card?.ID}>
-                            <RiskCard
-                                title={card?.CHECK_POINT_NAME}
-                                riskScore={formatNumber(card?.RISK_SCORE)}
-                                desc={card?.CHECK_POINT_DESC}
-                                info={card?.CHECK_POINT_DESC}
-                                onClick={() => handleCardClick(card?.ID)}
-                            />
-                        </Fragment>
-                    ))}
+                    <DashboardCardList
+                        dataCard={dataCard}
+                        isTwoColumn={isTwoColumn}
+                        onClick={handleCardClick}
+                    />
                 </ul>
             }
             midColumn={
                 <div className="m-2">
                     <Toolbar design={ToolbarDesign.Solid}>
                         <ToolbarSpacer />
-                        <Button
-                            icon="decline"
-                            design={ButtonDesign.Transparent}
-                            onClick={() => {
-                                setLayout(FCLLayout.OneColumn);
-                            }}
-                        />
 
-                        {isFullScreen ? (
-                            <Button
-                                icon="exit-full-screen"
-                                design={ButtonDesign.Transparent}
-                                onClick={() => {
-                                    setIsFullScreen(!isFullScreen);
-                                    setLayout(FCLLayout.TwoColumnsMidExpanded);
-                                }}
-                            />
-                        ) : (
-                            <Button
-                                icon="full-screen"
-                                design={ButtonDesign.Transparent}
-                                onClick={() => {
-                                    setIsFullScreen(!isFullScreen);
-                                    setLayout(FCLLayout.MidColumnFullScreen);
-                                }}
-                            />
-                        )}
+                        <DashboardToolbar
+                            isFullScreen={isFullScreen}
+                            setIsFullScreen={setIsFullScreen}
+                            setLayout={setLayout}
+                        />
                     </Toolbar>
-                    <Toolbar
-                        data-name="toolbar-mid"
-                        style={{
-                            height: "300px",
-                            display: "grid",
-                        }}
-                        // className="grid"
-                    >
-                        <FlexBox
-                            direction="Row"
-                            className="gap-x-2"
-                            data-name="DashboardAndRiskContainer"
-                        >
-                            {/* FlexBox for DashboardandActivityCardContainer */}
-                            <FlexBox
-                                style={{ width: "75%" }}
-                                direction="Column"
-                                data-name="DashboardandActivityCardContainer"
-                            >
-                                <FlexBox
-                                    direction="Row"
-                                    style={{ width: "100%" }}
-                                    data-name="ActivityCard"
-                                >
-                                    <ActivityCard
-                                        title={clickedCard?.CHECK_POINT_NAME}
-                                        description={
-                                            clickedCard?.CHECK_POINT_DESC
-                                        }
-                                    />
-                                </FlexBox>
-                                <FlexBox
-                                    data-name="DashboardCards"
-                                    direction="Row"
-                                    className="gap-x-2 overflow-hidden"
-                                >
-                                    <DashboardCards
-                                        header="Base"
-                                        description="Total Number of Rows in Base Data"
-                                        count={
-                                            dasboardData
-                                                ? formatNumber(
-                                                      dasboardData?.base_data_count
-                                                  )
-                                                : 0
-                                        }
-                                    />
-                                    <DashboardCards
-                                        header="Exception"
-                                        description="Number of Exceptions in Report"
-                                        count={
-                                            dasboardData
-                                                ? formatNumber(
-                                                      dasboardData?.exception_count
-                                                  )
-                                                : 0
-                                        }
-                                    />
-                                    <DashboardCards
-                                        header="Deviation"
-                                        description="Deviation Between Total Rows and Exception"
-                                        count={
-                                            dasboardData
-                                                ? formatNumber(
-                                                      dasboardData?.deviation_count
-                                                  )
-                                                : 0
-                                        }
-                                    />
-                                </FlexBox>
-                            </FlexBox>
-                            <FlexBox
-                                className="top-0"
-                                data-name="RiskFactor"
-                                direction="Column"
-                            >
-                                <RiskFactor
-                                    layout={layout}
-                                    value={
-                                        dasboardData
-                                            ? dasboardData?.risk_score
-                                            : 0
-                                    }
-                                />
-                            </FlexBox>
-                        </FlexBox>
-                    </Toolbar>
+
+                    {/* Dashboard top cards */}
+                    <DashboardTopCards
+                        activityCardData={clickedCard}
+                        dashboardCardsData={dasboardData}
+                    />
 
                     <FlexBox direction="Column" data-name="parent">
-                        <FlexBox direction="Column" data-name="top">
-                            <FlexBox
-                                data-name="AnalyticalCards"
-                                className="mt-0 gap-x-2 "
-                            >
-                                <DonutChartCard />
-                                <LineChartCard />
-                            </FlexBox>
-                        </FlexBox>
+                        {/* Charts */}
+                        <Charts />
+
+                        {/* Datatable */}
                         <FlexBox className="mb-3 mt-4">
                             <NonCompilantData
                                 nonCompilantDataRes={nonCompilantDataRes}
                             />
                         </FlexBox>
                     </FlexBox>
-                    <div className="m-0 p-0">
-                        <DashboardLayout layout={layout} />
-                    </div>
                 </div>
             }
         />
