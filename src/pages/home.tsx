@@ -99,8 +99,6 @@ const Home = () => {
                     <FlexibleColumnTemplete dataCard={cardValue} />
                 )}
             </Suspense>
-
-            {/* <RadialChart value={86} /> */}
         </DynamicPage>
     );
 };

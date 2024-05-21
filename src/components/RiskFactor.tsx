@@ -1,22 +1,13 @@
-import { cn, formatNumber } from "@/lib/utils";
-import { Card, FCLLayout } from "@ui5/webcomponents-react";
+import { formatNumber } from "@/lib/utils";
+import { Card } from "@ui5/webcomponents-react";
 import { RadialChart } from "@ui5/webcomponents-react-charts";
 
 type RiskFactorProps = {
-    layout: FCLLayout;
     value: number;
 };
-const RiskFactor = ({ layout, value }: RiskFactorProps) => {
-    const isFullScreen = layout === FCLLayout.MidColumnFullScreen;
-
+const RiskFactor = ({ value }: RiskFactorProps) => {
     return (
-        <Card
-            className={cn(
-                "mt-[0.9rem] h-[16.5rem] w-[25rem]",
-                isFullScreen && "h-[14.8rem] w-[27.7rem]"
-            )}
-            // className="h-min"
-        >
+        <Card className="h-min">
             <RadialChart
                 chartConfig={{
                     endAngle: 0,
