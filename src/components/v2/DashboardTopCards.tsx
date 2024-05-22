@@ -1,6 +1,6 @@
-import ActivityCard from "@/components/ActivityCard";
 import DashboardCards from "@/components/DashboardCards";
 import RiskFactor from "@/components/RiskFactor";
+import ActivityCard from "@/components/v2/ActivityCard";
 import type { getAllCardDataType, getControlDataType } from "@/lib/types";
 import { formatNumber } from "@/lib/utils";
 
@@ -14,12 +14,12 @@ const DashboardTopCards = ({
     dashboardCardsData,
 }: DashboardTopCardsProps) => {
     return (
-        <div className="m-0 grid grid-cols-3 gap-x-2 self-center p-2">
-            <div className="col-span-2 m-0 grid grid-rows-2 gap-y-3 border-2 p-0">
+        <div className="my-2 grid grid-cols-3 gap-x-2 self-center">
+            <div className="col-span-2 m-0 grid grid-rows-2 gap-y-3 p-0">
                 <div>
                     <ActivityCard
                         title={activityCardData?.CHECK_POINT_NAME}
-                        description={activityCardData?.CHECK_POINT_DESC}
+                        desc={activityCardData?.CHECK_POINT_DESC}
                     />
                 </div>
 

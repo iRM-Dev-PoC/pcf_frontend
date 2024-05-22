@@ -4,7 +4,7 @@ import { DonutChart } from "@ui5/webcomponents-react-charts";
 
 const DonutChartCard = () => {
     return (
-        <Card style={{ width: "100%", height: "100%", aspectRatio: "1" }}>
+        <Card>
             <DonutChart
                 centerLabel="Users"
                 chartConfig={{
