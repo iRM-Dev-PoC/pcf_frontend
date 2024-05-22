@@ -75,12 +75,11 @@ const ResetPassword = ({ changePassword }: ResetPasswordProps) => {
             password: data.password,
             repeatPassword: data.repeatPassword,
         };
+        console.log(resetPasswordValues);
+        setError("");
+        setLoading(false);
 
-        const resetPasswordData = await resetPassword({
-            resetPasswordValues,
-            setError,
-            setLoading,
-        });
+        const resetPasswordData = await resetPassword();
 
         if (!resetPasswordData) return;
     };
