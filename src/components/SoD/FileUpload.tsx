@@ -59,6 +59,7 @@ const FileUpload = () => {
                     }
                 };
                 reader.readAsArrayBuffer(uploadedFile);
+            }
         }
     };
 
