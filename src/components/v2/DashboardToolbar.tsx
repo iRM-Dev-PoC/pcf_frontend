@@ -1,16 +1,16 @@
 import { Button, ButtonDesign, FCLLayout } from "@ui5/webcomponents-react";
-import type { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
 
 type DashboardToolbarProps = {
-    isFullScreen: boolean;
+    // isFullScreen: boolean;
     setLayout: Dispatch<SetStateAction<FCLLayout>>;
-    setIsFullScreen: Dispatch<SetStateAction<boolean>>;
+    // setIsFullScreen: Dispatch<SetStateAction<boolean>>;
 };
 
 const DashboardToolbar = ({
-    isFullScreen,
-    setLayout,
-    setIsFullScreen,
+    // isFullScreen,
+    setLayout
+    // setIsFullScreen,
 }: DashboardToolbarProps) => {
     return (
         <>
@@ -22,7 +22,7 @@ const DashboardToolbar = ({
                 }}
             />
 
-            {isFullScreen ? (
+            {/* {isFullScreen ? (
                 <Button
                     icon="exit-full-screen"
                     design={ButtonDesign.Transparent}
@@ -40,7 +40,7 @@ const DashboardToolbar = ({
                         setLayout(FCLLayout.MidColumnFullScreen);
                     }}
                 />
-            )}
+            )} */}
         </>
     );
 };

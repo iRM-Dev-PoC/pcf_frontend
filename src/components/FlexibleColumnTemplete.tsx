@@ -25,7 +25,7 @@ type FlexibleColumnTempleteProps = {
 
 const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
     const [layout, setLayout] = useState<FCLLayout>(FCLLayout.OneColumn);
-    const [isFullScreen, setIsFullScreen] = useState(false);
+    // const [isFullScreen, setIsFullScreen] = useState(false);
     const [error, setError] = useState<string | undefined>(undefined);
     const [isloading, setIsLoading] = useState(false);
     const [dasboardData, setDashboardData] = useState<
@@ -61,7 +61,11 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
     };
 
     const handleCardClick = async (id: number) => {
-        setLayout(FCLLayout.TwoColumnsMidExpanded);
+        //this sets two column mid expanded for the flexible column layout
+        // setLayout(FCLLayout.TwoColumnsMidExpanded);
+
+        //this sets two column mid fullscreen for the flexible column layout
+        setLayout(FCLLayout.MidColumnFullScreen);
         const res = await fetchAllControlData(id);
         const val: getControlDataType = res?.data;
         setDashboardData(val);
@@ -108,8 +112,8 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
                         <ToolbarSpacer />
 
                         <DashboardToolbar
-                            isFullScreen={isFullScreen}
-                            setIsFullScreen={setIsFullScreen}
+                            // isFullScreen={isFullScreen}
+                            // setIsFullScreen={setIsFullScreen}
                             setLayout={setLayout}
                         />
                     </Toolbar>
