@@ -4,7 +4,7 @@ import { LineChart } from "@ui5/webcomponents-react-charts";
 
 const LineChartCard = () => {
     return (
-        <Card style={{ width: "100%", height: "100%", aspectRatio: "1" }}>
+        <Card>
             <LineChart
                 dataset={lineChartData}
                 dimensions={[

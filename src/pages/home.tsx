@@ -3,10 +3,10 @@ import FilterBarComponent from "@/components/FilterBarComponent";
 import FlexibleColumnTemplete from "@/components/FlexibleColumnTemplete";
 import Loading from "@/components/Loading";
 import NoDataComponent from "@/components/NoDataComponent";
+import { DatePickerWithRange } from "@/components/ui/datepicker-with-range";
 import { getAllCardDataType } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";
 import {
-    DatePicker,
     DynamicPage,
     DynamicPageHeader,
     DynamicPageTitle,
@@ -62,24 +62,9 @@ const Home = () => {
                     }
                     header={<Title>Dashboard</Title>}
                     actions={
-                        <>
-                            <DatePicker
-                                onChange={function _a() {}}
-                                onInput={function _a() {}}
-                                onValueStateChange={function _a() {}}
-                                primaryCalendarType="Gregorian"
-                                valueState="None"
-                                placeholder="Start Date"
-                            />
-                            <DatePicker
-                                onChange={function _a() {}}
-                                onInput={function _a() {}}
-                                onValueStateChange={function _a() {}}
-                                primaryCalendarType="Gregorian"
-                                valueState="None"
-                                placeholder="End Date"
-                            />
-                        </>
+                        <div className="mb-2">
+                            <DatePickerWithRange />
+                        </div>
                     }
                 ></DynamicPageTitle>
             }

@@ -25,7 +25,6 @@ type FlexibleColumnTempleteProps = {
 
 const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
     const [layout, setLayout] = useState<FCLLayout>(FCLLayout.OneColumn);
-    // const [isFullScreen, setIsFullScreen] = useState(false);
     const [error, setError] = useState<string | undefined>(undefined);
     const [isloading, setIsLoading] = useState(false);
     const [dasboardData, setDashboardData] = useState<
@@ -54,7 +53,7 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
             }
             return res.data;
         } catch (error) {
-            console.error("[FLEXIBLECOMPONENTERROR]", error);
+            console.error(error);
         } finally {
             setIsLoading(false);
         }
@@ -111,11 +110,7 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
                     <Toolbar design={ToolbarDesign.Solid}>
                         <ToolbarSpacer />
 
-                        <DashboardToolbar
-                            // isFullScreen={isFullScreen}
-                            // setIsFullScreen={setIsFullScreen}
-                            setLayout={setLayout}
-                        />
+                        <DashboardToolbar setLayout={setLayout} />
                     </Toolbar>
 
                     {/* Dashboard top cards */}
