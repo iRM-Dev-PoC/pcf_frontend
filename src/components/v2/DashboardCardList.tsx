@@ -3,7 +3,6 @@ import type { getAllCardDataType } from "@/lib/types";
 import { formatNumber } from "@/lib/utils";
 import { Fragment } from "react";
 type DashboardCardListProps = {
-    isTwoColumn: boolean;
     dataCard: getAllCardDataType[];
     onClick: (id: number) => void;
 };

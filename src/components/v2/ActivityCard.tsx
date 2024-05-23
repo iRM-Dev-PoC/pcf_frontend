@@ -7,18 +7,16 @@ type ActivityCardProps = {
 
 const ActivityCard = ({ title, desc }: ActivityCardProps) => {
     return (
-        <div>
-            <Card className="size-full">
-                <CardHeader className="hover:rounded-md">
-                    <CardTitle className="text-pretty text-xl font-bold">
-                        {title}
-                    </CardTitle>
+        <>
+            <Card className="h-full rounded-2xl">
+                <CardHeader>
+                    <CardTitle>{title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <p className="text-base">{desc}</p>
+                    <p className="text-pretty text-xl font-medium">{desc}</p>
                 </CardContent>
             </Card>
-        </div>
+        </>
     );
 };
 

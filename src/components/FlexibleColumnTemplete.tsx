@@ -7,7 +7,6 @@ import DashboardToolbar from "@/components/v2/DashboardToolbar";
 import DashboardTopCards from "@/components/v2/DashboardTopCards";
 import { useSelectedItem } from "@/hooks/useSelectedItem";
 import { getAllCardDataType, getControlDataType } from "@/lib/types";
-import { cn } from "@/lib/utils";
 import {
     FCLLayout,
     FlexBox,
@@ -27,7 +26,7 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
     const [layout, setLayout] = useState<FCLLayout>(FCLLayout.OneColumn);
     const [error, setError] = useState<string | undefined>(undefined);
     const [isloading, setIsLoading] = useState(false);
-    const [dasboardData, setDashboardData] = useState<
+    const [dashboardData, setDashboardData] = useState<
         getControlDataType | undefined
     >(undefined);
     const [clickedCard, setClickedCard] = useState<
@@ -36,7 +35,6 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
 
     const { selectedItem } = useSelectedItem();
     const hdrId = selectedItem?.ID;
-    const isTwoColumn = layout === "TwoColumnsMidExpanded";
 
     const fetchAllControlData = async (id: number) => {
         const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/dashboard/get-control-data`;
@@ -72,7 +70,7 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
         setClickedCard(dataCard[index]);
     };
 
-    const nonCompilantDataRes = dasboardData?.violatedData;
+    const nonCompilantDataRes = dashboardData?.violatedData;
 
     if (error && !isloading) {
         <ErrorComponent />;
@@ -92,15 +90,9 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
             }}
             layout={layout}
             startColumn={
-                <ul
-                    className={cn(
-                        "grid  grid-cols-1 gap-2 md:grid-cols-3",
-                        isTwoColumn && "md:grid-cols-1"
-                    )}
-                >
+                <ul className="grid  grid-cols-1 gap-2 sm:grid-cols-1 md:grid-cols-3 xl:grid-cols-1 ">
                     <DashboardCardList
                         dataCard={dataCard}
-                        isTwoColumn={isTwoColumn}
                         onClick={handleCardClick}
                     />
                 </ul>
@@ -116,7 +108,7 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
                     {/* Dashboard top cards */}
                     <DashboardTopCards
                         activityCardData={clickedCard}
-                        dashboardCardsData={dasboardData}
+                        dashboardCardsData={dashboardData}
                     />
 
                     <FlexBox direction="Column" data-name="parent">
