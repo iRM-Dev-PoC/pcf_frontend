@@ -85,6 +85,8 @@ const SimulationDetails = () => {
         });
     };
 
+    const rowLength = allHeaderData.length;
+
     return (
         <Card>
             <AnalyticalTable
@@ -190,6 +192,15 @@ const SimulationDetails = () => {
                 selectionMode="None"
                 loading={isFetching}
             />
+            {allHeaderData && (
+                <div className="p-2">
+                    <p className="text-base font-semibold">
+                        Showing{" "}
+                        <span className="text-sky-700">{rowLength}</span>{" "}
+                        record(s).
+                    </p>
+                </div>
+            )}
         </Card>
     );
 };

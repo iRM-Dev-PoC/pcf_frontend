@@ -22,9 +22,7 @@ const RiskCard = ({ title, desc, riskScore, info, onClick }: RiskCardProps) => {
             <CardHeader className="p-4 hover:bg-slate-400/20">
                 <CardTitle className="flex justify-between">
                     <div className="flex items-center gap-x-2 text-lg font-semibold">
-                        <Badge variant="destructive">
-                            {calcRisk(riskScore)}
-                        </Badge>
+                        <Badge variant="high">{calcRisk(riskScore)}</Badge>
                         <div>{title}</div>
                     </div>
                     {info && (
