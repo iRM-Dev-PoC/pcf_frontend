@@ -27,35 +27,35 @@ const RadialChart = ({ value }: RadialChartProps) => {
     const endAngle = 0;
 
     return (
-        <div className="m-0 flex max-w-fit items-center justify-center rounded-md p-0">
-            <RadialBarChart
-                width={350}
-                height={300}
-                innerRadius={150}
-                outerRadius={140}
-                barSize={40}
-                data={data}
-                startAngle={startAngle}
-                endAngle={endAngle}
-            >
-                <PolarAngleAxis
-                    tick={false}
-                    axisLine={false}
-                    type="number"
-                    domain={[0, 100]}
-                    angleAxisId={0}
-                />
-                <RadialBar
-                    cornerRadius={10}
-                    animationBegin={50}
-                    animationDuration={1000}
-                    animationEasing="ease-in"
-                    background
-                    legendType="circle"
-                    dataKey="value"
-                />
-            </RadialBarChart>
-        </div>
+            <div className=" m-0 flex max-w-fit items-center justify-center rounded-md p-0">
+                <RadialBarChart
+                    width={350}
+                    height={300}
+                    innerRadius={150}
+                    outerRadius={140}
+                    barSize={40}
+                    data={data}
+                    startAngle={startAngle}
+                    endAngle={endAngle}
+                >
+                    <PolarAngleAxis
+                        tick={false}
+                        axisLine={false}
+                        type="number"
+                        domain={[0, 100]}
+                        angleAxisId={0}
+                    />
+                    <RadialBar
+                        cornerRadius={10}
+                        animationBegin={50}
+                        animationDuration={1000}
+                        animationEasing="ease-in"
+                        background
+                        legendType="circle"
+                        dataKey="value"
+                    />
+                </RadialBarChart>
+            </div>  
     );
 };
 
