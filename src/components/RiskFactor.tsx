@@ -7,7 +7,7 @@ type RiskFactorProps = {
 };
 const RiskFactor = ({ value }: RiskFactorProps) => {
     return (
-        <Card className="h-min">
+        <Card className="h-full">
             <RadialChart
                 chartConfig={{
                     endAngle: 0,

@@ -12,7 +12,6 @@ import {
     FlexBox,
     FlexibleColumnLayout,
     Toolbar,
-    ToolbarDesign,
     ToolbarSpacer,
 } from "@ui5/webcomponents-react";
 import axios from "axios";
@@ -99,9 +98,8 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
             }
             midColumn={
                 <div className="m-2">
-                    <Toolbar design={ToolbarDesign.Solid}>
+                    <Toolbar>
                         <ToolbarSpacer />
-
                         <DashboardToolbar setLayout={setLayout} />
                     </Toolbar>
 
