@@ -12,7 +12,7 @@ const ActivityCard = ({ title, description }: ActivityCardProps) => {
             header={
                 <CardHeader
                     style={{ fontSize: "2rem" }}
-                    // className="text-2xl"
+                    className="text-2xl "
                     interactive={false}
                     titleText={title}
                 />

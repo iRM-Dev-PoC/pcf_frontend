@@ -6,6 +6,15 @@ type RiskFactorProps = {
     value: number;
 };
 const RiskFactor = ({ value }: RiskFactorProps) => {
+    const getFillColor = (value: number) => {
+        if (value >= 75) {
+            return "#FF8042";
+        } else if (value >= 50) {
+            return "#FFBB28";
+        } else {
+            return "#00C49F";
+        }
+    };
     return (
         <Card className="h-full">
             <RadialChart
@@ -15,7 +24,7 @@ const RiskFactor = ({ value }: RiskFactorProps) => {
                     innerRadius: 200,
                     outerRadius: 140,
                 }}
-                color="#f0ab00"
+                color={getFillColor(value)}
                 displayValue={`${String(formatNumber(value))}%`}
                 value={formatNumber(value)}
             />
