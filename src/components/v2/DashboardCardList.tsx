@@ -15,7 +15,6 @@ const DashboardCardList = ({ dataCard, onClick }: DashboardCardListProps) => {
                         title={card?.CHECK_POINT_NAME}
                         riskScore={formatNumber(card?.RISK_SCORE)}
                         desc={card?.CHECK_POINT_DESC}
-                        info={card?.CHECK_POINT_DESC}
                         onClick={() => onClick(card.ID)}
                     />
                 </Fragment>
