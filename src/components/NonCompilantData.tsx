@@ -2,14 +2,14 @@ import { getAllNonCompilantData } from "@/lib/types";
 import { AnalyticalTable, Card, TextAlign } from "@ui5/webcomponents-react";
 
 type NonCompilantDataProps = {
-    nonCompilantDataRes: getAllNonCompilantData[] | undefined;
+    nonCompilantDataRes: getAllNonCompilantData[];
 };
 
 const NonCompilantData = ({ nonCompilantDataRes }: NonCompilantDataProps) => {
-    if (nonCompilantDataRes === undefined) {
+    if (nonCompilantDataRes?.length === 0) {
         return null;
     }
-    console.log("data length", nonCompilantDataRes.length);
+
     return (
         <>
             <Card>

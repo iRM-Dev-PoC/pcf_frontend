@@ -8,7 +8,6 @@ type ChartsProps = {
 };
 
 const Charts = ({ data }: ChartsProps) => {
-    console.log("ChartsData", data);
     return (
         <>
             <FlexBox direction="Column" data-name="top">
