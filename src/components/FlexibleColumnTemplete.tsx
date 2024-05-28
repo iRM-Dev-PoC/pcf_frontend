@@ -122,7 +122,11 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
                         {/* Datatable */}
                         <FlexBox className="mb-3 mt-4">
                             <NonCompilantData
-                                nonCompilantDataRes={nonCompilantDataRes}
+                                nonCompilantDataRes={
+                                    nonCompilantDataRes
+                                        ? nonCompilantDataRes
+                                        : []
+                                }
                             />
                         </FlexBox>
                     </FlexBox>
