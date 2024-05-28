@@ -527,6 +527,11 @@ type getAllSyncData = {
     SYNC_ID: string;
 };
 
+type donutChartsData = {
+    EMPLOYEE_COUNT: number;
+    FULL_NAME: string;
+};
+
 type getControlDataType = {
     control_data: controlData;
     base_data_count: number;
@@ -535,9 +540,8 @@ type getControlDataType = {
     risk_score: number;
     violatedData: getAllNonCompilantData[];
     getSyncHeaderData: getAllSyncData[];
+    pie_Chart_Data: donutChartsData[];
 };
-
-
 
 export type {
     ApiResponse,
@@ -568,6 +572,7 @@ export type {
     SignInProps,
     SimulationDetailsDataType,
     SoDData,
+    SyncHeaderContextType,
     TotalActiveUsersItem,
     TotalRolesItem,
     TotalUsersItem,
@@ -579,6 +584,7 @@ export type {
     checkUser,
     controlData,
     dataCardType,
+    donutChartsData,
     getAllCardDataType,
     getAllCheckPointData,
     getAllControlFamilyType,
@@ -602,5 +608,4 @@ export type {
     transactionDetailsTypes,
     uploadFileType,
     webComponentsReactProps,
-    SyncHeaderContextType,
 };
