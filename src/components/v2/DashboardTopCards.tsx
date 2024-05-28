@@ -35,7 +35,7 @@ const DashboardTopCards = ({
                                 : 0
                         }
                         desc="Total Number of Rows in Base Data"
-                        variant="low"
+                        variant="Low"
                     />
                     <DashboardCards
                         title="Exception"
@@ -47,7 +47,7 @@ const DashboardTopCards = ({
                                 : 0
                         }
                         desc="Number of Exceptions in Report"
-                        variant="high"
+                        variant="High"
                     />
                     <DashboardCards
                         title="Deviation"
@@ -59,7 +59,7 @@ const DashboardTopCards = ({
                                 : 0
                         }
                         desc="Deviation Between Total Rows and Exception"
-                        variant="mid"
+                        variant="Mid"
                     />
                 </div>
             </div>
