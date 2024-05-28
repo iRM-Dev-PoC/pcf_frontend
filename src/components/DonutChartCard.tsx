@@ -1,8 +1,13 @@
-import { chartData } from "@/lib/donutChartData";
+import type { donutChartsData } from "@/lib/types";
 import { Card } from "@ui5/webcomponents-react";
 import { DonutChart } from "@ui5/webcomponents-react-charts";
 
-const DonutChartCard = () => {
+type DonutChartCardProps = {
+    data: donutChartsData[];
+};
+
+const DonutChartCard = ({ data }: DonutChartCardProps) => {
+    if (!data) return null;
     return (
         <Card>
             <DonutChart
@@ -11,12 +16,12 @@ const DonutChartCard = () => {
                     innerRadius: "20%",
                     outerRadius: "90%",
                 }}
-                dataset={chartData}
+                dataset={data}
                 dimension={{
-                    accessor: "name",
+                    accessor: "FULL_NAME",
                 }}
                 measure={{
-                    accessor: "users",
+                    accessor: "EMPLOYEE_COUNT",
                 }}
             />
         </Card>
