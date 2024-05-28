@@ -50,7 +50,7 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
             if (res?.data.statuscode !== 200) {
                 setError("Something went wrong!");
             }
-            console.log(res.data);
+
             return res.data;
         } catch (error) {
             console.error(error);
@@ -95,7 +95,7 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
             }}
             layout={layout}
             startColumn={
-                <ul className="grid grid-cols-1 gap-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
+                <ul className="grid grid-cols-1 gap-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
                     <DashboardCardList
                         dataCard={dataCard}
                         onClick={handleCardClick}

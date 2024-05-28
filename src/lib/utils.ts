@@ -69,8 +69,8 @@ export const formatDate = (timestamp: string) => {
 
 export const calcRisk = (val: number) => {
     const riskMap = {
-        highMargin: 70,
-        MidMargin: 40,
+        highMargin: 60,
+        MidMargin: 20,
         lowMargin: 0,
     };
 
