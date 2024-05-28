@@ -1,4 +1,3 @@
-import Loading from "@/components/Loading";
 import { useHeaderData } from "@/hooks/useHeaderData";
 import { useSelectedItem } from "@/hooks/useSelectedItem";
 import { getHeaderTypes } from "@/lib/types";
@@ -14,10 +13,21 @@ import {
     Ui5CustomEvent,
 } from "@ui5/webcomponents-react";
 import { ComboBoxSelectionChangeEventDetail } from "@ui5/webcomponents/dist/ComboBox.js";
+import { useEffect, useState } from "react";
 
 const FilterBarComponent = () => {
+    const [selectedText, setSelectedText] = useState<string>("");
     const { data, error, isLoading } = useHeaderData();
-    const { setSelectedItem } = useSelectedItem();
+    const { selectedItem, setSelectedItem } = useSelectedItem();
+
+    useEffect(() => {
+        if (data && data.length > 0) {
+            setSelectedText(data[0].SYNC_ID);
+            setSelectedItem(data[0]);
+        }
+    }, [data]);
+
+    console.log(selectedItem);
 
     const handleSyncComboBoxChange = (
         event: Ui5CustomEvent<
@@ -31,9 +41,9 @@ const FilterBarComponent = () => {
         const selectedItem =
             data?.find((item) => item.ID === selectedItemId) || null;
         setSelectedItem(selectedItem);
+        const selectedText = selectedItem?.SYNC_ID || "";
+        setSelectedText(selectedText);
     };
-
-    if (isLoading && !error) return <Loading />;
 
     return (
         <>
@@ -77,20 +87,24 @@ const FilterBarComponent = () => {
                         <MultiComboBoxItem text="Assign Logic" />
                     </MultiComboBox>
                 </FilterGroupItem>
-                <FilterGroupItem label="SYNC">
-                    <ComboBox
-                        valueState="None"
-                        onSelectionChange={handleSyncComboBoxChange}
-                    >
-                        {data?.map((head: getHeaderTypes) => (
-                            <ComboBoxItem
-                                key={head.SYNC_ID}
-                                text={head.SYNC_ID}
-                                data-key={head.ID}
-                            />
-                        ))}
-                    </ComboBox>
-                </FilterGroupItem>
+                {!error && (
+                    <FilterGroupItem label="SYNC">
+                        <ComboBox
+                            value={selectedText}
+                            valueState="None"
+                            onSelectionChange={handleSyncComboBoxChange}
+                            loading={isLoading}
+                        >
+                            {data?.map((head: getHeaderTypes) => (
+                                <ComboBoxItem
+                                    key={head.SYNC_ID}
+                                    text={head.SYNC_ID}
+                                    data-key={head.ID}
+                                />
+                            ))}
+                        </ComboBox>
+                    </FilterGroupItem>
+                )}
             </FilterBar>
         </>
     );
