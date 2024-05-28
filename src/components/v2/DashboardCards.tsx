@@ -5,7 +5,7 @@ type DashboardCardprops = {
     title: string | undefined;
     desc: string | undefined;
     count: number | undefined;
-    variant: "high" | "low" | "mid";
+    variant: "High" | "Low" | "Mid";
 };
 
 const DashboardCards = ({
