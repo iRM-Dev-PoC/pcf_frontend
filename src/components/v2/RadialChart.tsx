@@ -1,4 +1,9 @@
-import { PolarAngleAxis, RadialBar, RadialBarChart } from "recharts";
+import {
+    PolarAngleAxis,
+    RadialBar,
+    RadialBarChart,
+    ResponsiveContainer,
+} from "recharts";
 
 type RadialChartProps = {
     value: number;
@@ -27,7 +32,8 @@ const RadialChart = ({ value }: RadialChartProps) => {
     const endAngle = 0;
 
     return (
-            <div className=" m-0 flex max-w-fit items-center justify-center rounded-md p-0">
+        <div className=" m-0 flex max-w-fit items-center justify-center rounded-md p-0">
+            <ResponsiveContainer width={"100%"} height={"100%"}>
                 <RadialBarChart
                     width={350}
                     height={300}
@@ -55,7 +61,8 @@ const RadialChart = ({ value }: RadialChartProps) => {
                         dataKey="value"
                     />
                 </RadialBarChart>
-            </div>  
+            </ResponsiveContainer>
+        </div>
     );
 };
 
