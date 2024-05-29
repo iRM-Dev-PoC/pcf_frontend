@@ -532,6 +532,13 @@ type donutChartsData = {
     FULL_NAME: string;
 };
 
+type lineChartData = {
+    COST: number;
+    ITEM_DESCRIPTION: string;
+    NET_VALUE: number;
+    TAX_AMOUNT: number;
+};
+
 type getControlDataType = {
     control_data: controlData;
     base_data_count: number;
@@ -540,7 +547,9 @@ type getControlDataType = {
     risk_score: number;
     violatedData: getAllNonCompilantData[];
     getSyncHeaderData: getAllSyncData[];
-    pie_Chart_Data: donutChartsData[];
+    donutChartData: donutChartsData[];
+    lineChartData: lineChartData[];
+    columnChartData: lineChartData[];
 };
 
 export type {
@@ -601,6 +610,7 @@ export type {
     getHeaderTypes,
     getReportCheckPointMappingType,
     levels,
+    lineChartData,
     logInData,
     logInFuncProps,
     reportDataType,

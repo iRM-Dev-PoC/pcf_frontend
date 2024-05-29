@@ -17,7 +17,7 @@ import {
     ToolbarSpacer,
 } from "@ui5/webcomponents-react";
 import axios from "axios";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 
 type FlexibleColumnTempleteProps = {
     dataCard: getAllCardDataType[];
@@ -39,9 +39,7 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
     const hdrId = selectedItem?.ID;
 
     const fetchAllControlData = async (id: number) => {
-        // const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/dashboard/get-control-data`;
-        const endPoint =
-            "https://iRM_SAP_BTP_BACKEND_POC-timely-gelada-fu.cfapps.us10-001.hana.ondemand.com/dashboard/get-control-data";
+        const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/dashboard/get-control-data`;
 
         try {
             setIsLoading(true);
@@ -53,7 +51,6 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
             if (res?.data.statuscode !== 200) {
                 setError("Something went wrong!");
             }
-
             return res.data;
         } catch (error) {
             console.error(error);
@@ -76,9 +73,9 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
     };
 
     const nonCompilantDataRes = dashboardData?.violatedData;
-    const chartsData = dashboardData?.pie_Chart_Data;
-
-    console.log(chartsData);
+    const donutChartData = dashboardData?.donutChartData;
+    const lineChartData = dashboardData?.lineChartData;
+    const columnChartData = dashboardData?.columnChartData;
 
     if (error && !isloading) {
         <ErrorComponent />;
@@ -125,7 +122,19 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
 
                     <FlexBox direction="Column" data-name="parent">
                         {/* Charts */}
-                        <Charts data={chartsData ? chartsData : []} />
+                        <Suspense fallback={<Loading />}>
+                            <Charts
+                                donutChartsData={
+                                    donutChartData ? donutChartData : []
+                                }
+                                lineChartData={
+                                    lineChartData ? lineChartData : []
+                                }
+                                columnChartData={
+                                    columnChartData ? columnChartData : []
+                                }
+                            />
+                        </Suspense>
 
                         {/* Datatable */}
                         <FlexBox className="mb-3 mt-4">
