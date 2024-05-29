@@ -18,7 +18,7 @@ import { useEffect, useState } from "react";
 const FilterBarComponent = () => {
     const [selectedText, setSelectedText] = useState<string>("");
     const { data, error, isLoading } = useHeaderData();
-    const { selectedItem, setSelectedItem } = useSelectedItem();
+    const { setSelectedItem } = useSelectedItem();
 
     useEffect(() => {
         if (data && data.length > 0) {
@@ -26,8 +26,6 @@ const FilterBarComponent = () => {
             setSelectedItem(data[0]);
         }
     }, [data]);
-
-    console.log(selectedItem);
 
     const handleSyncComboBoxChange = (
         event: Ui5CustomEvent<
