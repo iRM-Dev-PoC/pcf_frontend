@@ -1,26 +1,35 @@
-import { lineChartData } from "@/lib/lineChartData";
+import type { lineChartData } from "@/lib/types";
 import { Card } from "@ui5/webcomponents-react";
 import { LineChart } from "@ui5/webcomponents-react-charts";
 
-const LineChartCard = () => {
+type LineChartCardProps = {
+    lineChartData: lineChartData[];
+};
+
+const LineChartCard = ({ lineChartData }: LineChartCardProps) => {
+    if (lineChartData.length === 0) return null;
     return (
         <Card>
             <LineChart
+                className="size-full"
                 dataset={lineChartData}
                 dimensions={[
                     {
-                        accessor: "name",
+                        accessor: "ITEM_DESCRIPTION",
                     },
                 ]}
                 measures={[
                     {
-                        accessor: "users",
+                        accessor: "COST",
+                        label: "Cost",
                     },
                     {
-                        accessor: "sessions",
+                        accessor: "NET_VALUE",
+                        label: "Net Amount",
                     },
                     {
-                        accessor: "volume",
+                        accessor: "TAX_AMOUNT",
+                        label: "Tax Amount",
                     },
                 ]}
             />

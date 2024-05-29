@@ -3,20 +3,21 @@ import { Card } from "@ui5/webcomponents-react";
 import { DonutChart } from "@ui5/webcomponents-react-charts";
 
 type DonutChartCardProps = {
-    data: donutChartsData[];
+    donutChartData: donutChartsData[];
 };
 
-const DonutChartCard = ({ data }: DonutChartCardProps) => {
-    if (data.length === 0) return null;
+const DonutChartCard = ({ donutChartData }: DonutChartCardProps) => {
+    if (donutChartData.length === 0) return null;
     return (
         <Card>
             <DonutChart
+                className="size-full"
                 centerLabel="Users"
                 chartConfig={{
                     innerRadius: "20%",
                     outerRadius: "90%",
                 }}
-                dataset={data}
+                dataset={donutChartData}
                 dimension={{
                     accessor: "FULL_NAME",
                 }}

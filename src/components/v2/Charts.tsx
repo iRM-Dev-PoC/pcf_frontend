@@ -1,20 +1,32 @@
 import DonutChartCard from "@/components/DonutChartCard";
 import LineChartCard from "@/components/LineChartCard";
-import type { donutChartsData } from "@/lib/types";
+import ColumnChartCard from "@/components/v2/ColumnChartCard";
+import type { donutChartsData, lineChartData } from "@/lib/types";
 import { FlexBox } from "@ui5/webcomponents-react";
 
 type ChartsProps = {
-    data: donutChartsData[];
+    donutChartsData: donutChartsData[];
+    lineChartData: lineChartData[];
+    columnChartData: lineChartData[];
 };
 
-const Charts = ({ data }: ChartsProps) => {
+const Charts = ({
+    donutChartsData,
+    lineChartData,
+    columnChartData,
+}: ChartsProps) => {
     return (
         <>
             <FlexBox direction="Column" data-name="top">
-                <FlexBox data-name="AnalyticalCards" className="mt-0 gap-x-2 ">
-                    <DonutChartCard data={data} />
-                    <LineChartCard />
-                </FlexBox>
+                <div className="4xl:grid-cols-2 grid grid-cols-2 gap-2">
+                    <DonutChartCard donutChartData={donutChartsData} />
+                    <ColumnChartCard columnChartData={columnChartData} />
+                    {lineChartData.length > 0 && (
+                        <div className="col-span-2">
+                            <LineChartCard lineChartData={lineChartData} />
+                        </div>
+                    )}
+                </div>
             </FlexBox>
         </>
     );
