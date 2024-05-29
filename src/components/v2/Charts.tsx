@@ -18,7 +18,7 @@ const Charts = ({
     return (
         <>
             <FlexBox direction="Column" data-name="top">
-                <div className="4xl:grid-cols-2 grid grid-cols-2 gap-2">
+                <div className="4xl:grid-cols-1 grid grid-cols-2 gap-2">
                     <DonutChartCard donutChartData={donutChartsData} />
                     <ColumnChartCard columnChartData={columnChartData} />
                     {lineChartData.length > 0 && (

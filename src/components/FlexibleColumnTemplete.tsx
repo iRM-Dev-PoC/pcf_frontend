@@ -17,7 +17,7 @@ import {
     ToolbarSpacer,
 } from "@ui5/webcomponents-react";
 import axios from "axios";
-import { Suspense, useState } from "react";
+import { useState } from "react";
 
 type FlexibleColumnTempleteProps = {
     dataCard: getAllCardDataType[];
@@ -122,19 +122,16 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
 
                     <FlexBox direction="Column" data-name="parent">
                         {/* Charts */}
-                        <Suspense fallback={<Loading />}>
-                            <Charts
-                                donutChartsData={
-                                    donutChartData ? donutChartData : []
-                                }
-                                lineChartData={
-                                    lineChartData ? lineChartData : []
-                                }
-                                columnChartData={
-                                    columnChartData ? columnChartData : []
-                                }
-                            />
-                        </Suspense>
+
+                        <Charts
+                            donutChartsData={
+                                donutChartData ? donutChartData : []
+                            }
+                            lineChartData={lineChartData ? lineChartData : []}
+                            columnChartData={
+                                columnChartData ? columnChartData : []
+                            }
+                        />
 
                         {/* Datatable */}
                         <FlexBox className="mb-3 mt-4">
