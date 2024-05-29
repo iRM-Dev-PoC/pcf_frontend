@@ -20,7 +20,7 @@ const RiskCard = ({ title, riskScore, desc, onClick }: RiskCardProps) => {
         >
             <CardHeader className="p-4">
                 <CardTitle className="flex justify-between">
-                    <div className="flex items-center gap-x-2 text-lg font-semibold">
+                    <div className="flex items-center gap-x-2 text-lg font-medium">
                         <Badge
                             variant={
                                 calcRisk(riskScore) === "High"
@@ -30,33 +30,35 @@ const RiskCard = ({ title, riskScore, desc, onClick }: RiskCardProps) => {
                                       : "Low"
                             }
                         >
-                            <div className="mr-3">
+                            <div className="mr-1">
                                 {calcRisk(riskScore) === "High" ? (
-                                    <X className="size-8  text-white dark:text-black" />
+                                    <X className="size-6 text-white dark:text-black" />
                                 ) : calcRisk(riskScore) === "Medium" ? (
-                                    <TriangleAlert className="size-8  text-white dark:text-black" />
+                                    <TriangleAlert className="size-6 text-white dark:text-black" />
                                 ) : (
-                                    <Check className="size-8  text-white dark:text-black" />
+                                    <Check className="size-6 text-white dark:text-black" />
                                 )}
                             </div>
-                            <span className="mr-2 text-lg">
+                            <span className="mr-1 text-base">
                                 {calcRisk(riskScore)}:
                             </span>
-                            <div className="text-lg">
+                            <div className="text-base">
                                 {(riskScore * 100) / 100}%
                             </div>
                         </Badge>
                     </div>
 
                     <div>
-                        <span className="sr-only">Info about this card</span>
+                        <span className="sr-only">
+                            Information about this card
+                        </span>
                         <RiskInfoCard desc={desc}>
                             <Info className="text-sky-600 hover:text-sky-900" />
                         </RiskInfoCard>
                     </div>
                 </CardTitle>
             </CardHeader>
-            <CardContent className="m-2 text-xl font-bold ">
+            <CardContent className="m-2 text-lg font-semibold">
                 {title}
             </CardContent>
         </Card>

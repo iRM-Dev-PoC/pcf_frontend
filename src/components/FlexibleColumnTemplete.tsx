@@ -6,7 +6,9 @@ import DashboardCardList from "@/components/v2/DashboardCardList";
 import DashboardToolbar from "@/components/v2/DashboardToolbar";
 import DashboardTopCards from "@/components/v2/DashboardTopCards";
 import { useSelectedItem } from "@/hooks/useSelectedItem";
+import { useSidebar } from "@/hooks/useSidebar";
 import { getAllCardDataType, getControlDataType } from "@/lib/types";
+import { cn } from "@/lib/utils";
 import {
     FCLLayout,
     FlexBox,
@@ -31,6 +33,7 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
     const [clickedCard, setClickedCard] = useState<
         getAllCardDataType | undefined
     >(undefined);
+    const { isSidebarCollapsed } = useSidebar();
 
     const { selectedItem } = useSelectedItem();
     const hdrId = selectedItem?.ID;
@@ -95,7 +98,12 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
             }}
             layout={layout}
             startColumn={
-                <ul className="grid grid-cols-1 gap-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
+                <ul
+                    className={cn(
+                        "grid grid-cols-1 gap-2 transition-all sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4",
+                        !isSidebarCollapsed && "xl:grid-cols-3"
+                    )}
+                >
                     <DashboardCardList
                         dataCard={dataCard}
                         onClick={handleCardClick}
