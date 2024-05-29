@@ -1,6 +1,5 @@
-import ActivityCard from "@/components/v2/ActivityCard";
-// import DashboardCards from "@/components/DashboardCards";
 import RiskFactor from "@/components/RiskFactor";
+import ActivityCard from "@/components/v2/ActivityCard";
 import DashboardCards from "@/components/v2/DashboardCards";
 import type { getAllCardDataType, getControlDataType } from "@/lib/types";
 import { formatNumber } from "@/lib/utils";
@@ -54,7 +53,7 @@ const DashboardTopCards = ({
                         count={
                             dashboardCardsData
                                 ? formatNumber(
-                                      dashboardCardsData?.exception_count
+                                      dashboardCardsData?.deviation_count
                                   )
                                 : 0
                         }
