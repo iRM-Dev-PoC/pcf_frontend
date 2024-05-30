@@ -10,7 +10,7 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover";
-// import { useCurrentTheme } from "@/hooks/useCurrentTheme";
+
 import { cn } from "@/lib/utils";
 
 export function DatePickerWithRange({
@@ -21,8 +21,7 @@ export function DatePickerWithRange({
         to: new Date(),
     });
 
-    // const { currentTheme } = useCurrentTheme();
-    // const isDark = Boolean(currentTheme === "dark");
+
 
     const previousMonth = new Date();
     previousMonth.setMonth(previousMonth.getMonth() - 1);
@@ -54,7 +53,12 @@ export function DatePickerWithRange({
                         )}
                     </Button>
                 </PopoverTrigger>
-                <PopoverContent className={cn("w-auto p-0")} align="start">
+                <PopoverContent
+                    className={cn(
+                        "w-auto p-0"
+                    )}
+                    align="start"
+                >
                     <Calendar
                         initialFocus
                         mode="range"
