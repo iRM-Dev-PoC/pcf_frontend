@@ -88,12 +88,13 @@ const App = () => {
 
                     <FlexBox
                         style={{
-                            height: "91.95vh",
+                            height: "93.3vh",
                             marginTop: "0.50rem",
                             columnGap: "0.50rem",
                             marginRight: "0.50rem",
-                            marginBottom: "0.3rem",
+                            // marginBottom: "0.3rem",
                             borderRadius: "0.5rem",
+                            overflowX: "hidden",
                         }}
                     >
                         {isSoD ? (

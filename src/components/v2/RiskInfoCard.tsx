@@ -3,6 +3,8 @@ import {
     HoverCardContent,
     HoverCardTrigger,
 } from "@/components/ui/hover-card";
+import { useCurrentTheme } from "@/hooks/useCurrentTheme";
+import { cn } from "@/lib/utils";
 import { ReactNode } from "react";
 
 type RiskInfoCardProps = {
@@ -11,10 +13,17 @@ type RiskInfoCardProps = {
 };
 
 const RiskInfoCard = ({ children, desc }: RiskInfoCardProps) => {
+    const { currentTheme } = useCurrentTheme();
+    const isDark = Boolean(currentTheme === "dark");
     return (
         <HoverCard>
             <HoverCardTrigger>{children}</HoverCardTrigger>
-            <HoverCardContent className="w-80 text-base font-medium">
+            <HoverCardContent
+                className={cn(
+                    "w-80 text-base font-medium",
+                    isDark && "bg-[#1d232a] text-white"
+                )}
+            >
                 {desc}
             </HoverCardContent>
         </HoverCard>
