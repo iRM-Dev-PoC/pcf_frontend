@@ -1,8 +1,8 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import RiskInfoCard from "@/components/v2/RiskInfoCard";
-import { calcRisk } from "@/lib/utils";
-
+import { useCurrentTheme } from "@/hooks/useCurrentTheme";
+import { calcRisk, cn } from "@/lib/utils";
 import { Check, Info, TriangleAlert, X } from "lucide-react";
 
 type RiskCardProps = {
@@ -13,9 +13,14 @@ type RiskCardProps = {
 };
 
 const RiskCard = ({ title, riskScore, desc, onClick }: RiskCardProps) => {
+    const { currentTheme } = useCurrentTheme();
+    const isDark = Boolean(currentTheme === "dark");
     return (
         <Card
-            className="mb-3 flex  cursor-pointer flex-col rounded-xl shadow-lg "
+            className={cn(
+                "mb-3 flex  cursor-pointer flex-col rounded-xl shadow-lg ",
+                isDark && "bg-transparent text-white"
+            )}
             onClick={onClick}
         >
             <CardHeader className="p-4">
