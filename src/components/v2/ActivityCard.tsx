@@ -1,4 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useCurrentTheme } from "@/hooks/useCurrentTheme";
+import { cn } from "@/lib/utils";
 
 type ActivityCardProps = {
     title: string | undefined;
@@ -6,9 +8,11 @@ type ActivityCardProps = {
 };
 
 const ActivityCard = ({ title, desc }: ActivityCardProps) => {
+     const { currentTheme } = useCurrentTheme();
+     const isDark = Boolean(currentTheme === "dark");
     return (
         <>
-            <Card className="h-full rounded-2xl">
+            <Card className={cn("h-full rounded-2xl", isDark && "bg-transparent text-white")}>
                 <CardHeader>
                     <CardTitle>{title}</CardTitle>
                 </CardHeader>

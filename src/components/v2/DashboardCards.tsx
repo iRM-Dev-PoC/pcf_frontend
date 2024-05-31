@@ -1,5 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useCurrentTheme } from "@/hooks/useCurrentTheme";
+import { cn } from "@/lib/utils";
 
 type DashboardCardprops = {
     title: string | undefined;
@@ -14,9 +16,11 @@ const DashboardCards = ({
     count,
     variant,
 }: DashboardCardprops) => {
+    const { currentTheme } = useCurrentTheme();
+    const isDark = Boolean(currentTheme === "dark");
     return (
         <>
-            <Card className="h-full rounded-2xl">
+            <Card className={cn("h-full rounded-2xl", isDark && "bg-transparent text-white")}>
                 <CardHeader>
                     <CardTitle className="flex items-center justify-between">
                         {title}
