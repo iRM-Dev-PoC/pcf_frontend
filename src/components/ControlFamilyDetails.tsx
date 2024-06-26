@@ -139,23 +139,19 @@ const ControlFamilyDetails = () => {
             ) : (
                 <FlexibleColumnLayout
                     style={{
-                        height: "100%",
-                        width: "100%",
+                        // height: "100%",
+                        // width: "100%",
                         marginTop: "0.5rem",
                         marginBottom: "0.5rem",
                         fontWeight: "bold",
+                        backgroundColor: "blue",
+                        width: "inherit",
                     }}
                     layout={layout}
                     startColumn={
                         <>
-                            <ShellBar
-                                primaryTitle="Control Family Details"
-                                
-                            />
-                            <List
-                                headerText="Control Family Details"
-                                onItemClick={onStartColumnClick}
-                            >
+                            <ShellBar primaryTitle="Control Family Details" className="mb-2"/>
+                            <List onItemClick={onStartColumnClick} className="w-full">
                                 {allControlFamilyData?.map(
                                     (controlfamily, index) => (
                                         <StandardListItem
