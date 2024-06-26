@@ -19,6 +19,7 @@ const TypeOfControl = () => {
 
     return (
         <DynamicPage
+            className="dynamicPage"
             headerTitle={
                 <DynamicPageTitle
                     header={<Title>Type Of Controls</Title>}

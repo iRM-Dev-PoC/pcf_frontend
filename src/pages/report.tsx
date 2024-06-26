@@ -18,6 +18,7 @@ const Report = () => {
     const closeReportBtnRef = useRef<ButtonDomRef>(null);
     return (
         <DynamicPage
+            className="dynamicPage"
             headerTitle={
                 <DynamicPageTitle
                     header={<Title>Report</Title>}

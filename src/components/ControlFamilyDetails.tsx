@@ -141,17 +141,24 @@ const ControlFamilyDetails = () => {
                     style={{
                         // height: "100%",
                         // width: "100%",
-                        marginTop: "0.5rem",
-                        marginBottom: "0.5rem",
+                        marginTop: "0.1rem",
+                        marginBottom:"0.5rem",
                         fontWeight: "bold",
                         backgroundColor: "blue",
                         width: "inherit",
+                        
                     }}
                     layout={layout}
                     startColumn={
                         <>
-                            <ShellBar primaryTitle="Control Family Details" className="mb-2"/>
-                            <List onItemClick={onStartColumnClick} className="w-full">
+                            <ShellBar
+                                primaryTitle="Control Family Details"
+                                className="mb-2"
+                            />
+                            <List
+                                onItemClick={onStartColumnClick}
+                                className="w-full"
+                            >
                                 {allControlFamilyData?.map(
                                     (controlfamily, index) => (
                                         <StandardListItem

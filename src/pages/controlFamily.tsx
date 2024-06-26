@@ -1,4 +1,5 @@
 import ControlFamilyDetails from "@/components/ControlFamilyDetails";
+import "@/css/dynamicPage.css";
 import { ButtonDomRef, DynamicPage, Modals } from "@ui5/webcomponents-react";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
 import { useRef } from "react";
@@ -9,6 +10,7 @@ const ControlFamily = () => {
 
     return (
         <DynamicPage
+            className="dynamicPage"
             // headerTitle={
             // <DynamicPageTitle
             //     header={<Title>Control Family Details</Title>}
