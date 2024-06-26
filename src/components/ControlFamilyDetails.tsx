@@ -19,6 +19,7 @@ import {
     MessageBoxActions,
     MessageBoxTypes,
     Modals,
+    ShellBar,
     StandardListItem,
     Text,
     Title,
@@ -142,24 +143,36 @@ const ControlFamilyDetails = () => {
                         width: "100%",
                         marginTop: "0.5rem",
                         marginBottom: "0.5rem",
+                        fontWeight: "bold",
                     }}
                     layout={layout}
                     startColumn={
-                        <List onItemClick={onStartColumnClick}>
-                            {allControlFamilyData?.map(
-                                (controlfamily, index) => (
-                                    <StandardListItem
-                                        description={
-                                            controlfamily.CONTROL_FAMILY_DESC
-                                        }
-                                        data-controlFamily-id={controlfamily.ID}
-                                        key={`${controlfamily.ID}-${index}`}
-                                    >
-                                        {controlfamily.CONTROL_FAMILY_NAME}
-                                    </StandardListItem>
-                                )
-                            )}
-                        </List>
+                        <>
+                            <ShellBar
+                                primaryTitle="Control Family Details"
+                                
+                            />
+                            <List
+                                headerText="Control Family Details"
+                                onItemClick={onStartColumnClick}
+                            >
+                                {allControlFamilyData?.map(
+                                    (controlfamily, index) => (
+                                        <StandardListItem
+                                            description={
+                                                controlfamily.CONTROL_FAMILY_DESC
+                                            }
+                                            data-controlFamily-id={
+                                                controlfamily.ID
+                                            }
+                                            key={`${controlfamily.ID}-${index}`}
+                                        >
+                                            {controlfamily.CONTROL_FAMILY_NAME}
+                                        </StandardListItem>
+                                    )
+                                )}
+                            </List>
+                        </>
                     }
                     midColumn={
                         <>
