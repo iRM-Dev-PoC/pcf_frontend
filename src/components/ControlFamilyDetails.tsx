@@ -1,3 +1,4 @@
+import ControlFamilyCreationForm from "@/components/ControlFamilyCreation";
 import ControlFamilyEditForm from "@/components/ControlFamilyEditForm";
 import ErrorComponent from "@/components/ErrorComponent";
 import Loading from "@/components/Loading";
@@ -7,8 +8,10 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
     Avatar,
     AvatarSize,
+    Bar,
     Button,
     ButtonDesign,
+    ButtonDomRef,
     Card,
     FCLLayout,
     FlexBox,
@@ -19,7 +22,6 @@ import {
     MessageBoxActions,
     MessageBoxTypes,
     Modals,
-    ShellBar,
     StandardListItem,
     Text,
     Title,
@@ -28,7 +30,7 @@ import {
     ToolbarSpacer,
 } from "@ui5/webcomponents-react";
 import axios from "axios";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 
 const ControlFamilyDetails = () => {
@@ -41,6 +43,8 @@ const ControlFamilyDetails = () => {
     const [error, setError] = useState(false);
     const showDeleteConfirmation = Modals.useShowMessageBox();
     const queryClient = useQueryClient();
+    const showDialog = Modals.useShowDialog();
+    const closeButtonRoleref = useRef<ButtonDomRef>(null);
 
     const getAllControlFamiliyData = async () => {
         try {
@@ -138,27 +142,65 @@ const ControlFamilyDetails = () => {
                 <NoDataComponent />
             ) : (
                 <FlexibleColumnLayout
-                    style={{
-                        // height: "100%",
-                        // width: "100%",
-                        marginTop: "0.1rem",
-                        marginBottom:"0.5rem",
-                        fontWeight: "bold",
-                        backgroundColor: "blue",
-                        width: "inherit",
-                        
-                    }}
+                    className="rounded-md"
                     layout={layout}
                     startColumn={
                         <>
-                            <ShellBar
-                                primaryTitle="Control Family Details"
-                                className="mb-2"
-                            />
-                            <List
-                                onItemClick={onStartColumnClick}
-                                className="w-full"
-                            >
+                            <Bar
+                                className="mb-2 block h-16 rounded-md"
+                                design="Header"
+                                endContent={
+                                    <div>
+                                        <Button
+                                            design="Emphasized"
+                                            tooltip="Create"
+                                            icon="create"
+                                            onClick={() => {
+                                                const { close } = showDialog({
+                                                    headerText:
+                                                        "User Information",
+                                                    children: (
+                                                        <>
+                                                            <ControlFamilyCreationForm
+                                                                closeButtonref={
+                                                                    closeButtonRoleref
+                                                                }
+                                                            />
+                                                        </>
+                                                    ),
+                                                    footer: (
+                                                        <Bar
+                                                            endContent={
+                                                                <>
+                                                                    <Button
+                                                                        onClick={() =>
+                                                                            close()
+                                                                        }
+                                                                        design="Negative"
+                                                                        ref={
+                                                                            closeButtonRoleref
+                                                                        }
+                                                                    >
+                                                                        Close
+                                                                    </Button>
+                                                                </>
+                                                            }
+                                                        ></Bar>
+                                                    ),
+                                                });
+                                            }}
+                                        >
+                                            Create
+                                        </Button>
+                                    </div>
+                                }
+                                startContent={
+                                    <h1 className="m-3 block text-2xl font-bold">
+                                        Control Family Details
+                                    </h1>
+                                }
+                            ></Bar>
+                            <List onItemClick={onStartColumnClick} className="rounded-md">
                                 {allControlFamilyData?.map(
                                     (controlfamily, index) => (
                                         <StandardListItem
@@ -253,7 +295,7 @@ const ControlFamilyDetails = () => {
                             </Toolbar>
                             <Toolbar
                                 key={selectedControlFamily?.ID}
-                                style={{ height: "200px" }}
+                                style={{ height: "120px" }}
                             >
                                 <Avatar
                                     icon="person-placeholder"
@@ -271,14 +313,6 @@ const ControlFamilyDetails = () => {
                                                 selectedControlFamily?.CONTROL_FAMILY_NAME
                                             }
                                         </Text>
-                                        {/* </FlexBox>
-                                    <FlexBox>
-                                        <Label>Display Name:</Label>
-                                        <Text style={{ marginLeft: "2px" }}>
-                                            {
-                                                selectedControlFamily?.DISPLAY_SUBMODULE_NAME
-                                            }
-                                        </Text> */}
                                     </FlexBox>
                                     <FlexBox>
                                         <Label>Description:</Label>

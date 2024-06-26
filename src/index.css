@@ -11,6 +11,10 @@
     color-scheme: light dark;
 }
 
+body {
+    overflow: hidden;
+}
+
 @layer base {
     :root {
         --background: 0 0% 100%;

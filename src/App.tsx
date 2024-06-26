@@ -89,7 +89,7 @@ const App = () => {
 
                     <FlexBox
                         style={{
-                            height: "93.3vh",
+                            height: "94.3vh",
                             marginTop: "0.50rem",
                             columnGap: "0.50rem",
                             marginRight: "0.50rem",

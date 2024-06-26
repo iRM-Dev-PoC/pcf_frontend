@@ -40,7 +40,7 @@ const SideNavbar = ({ items }: SideNavbarProps) => {
 
     return (
         <SideNavigation
-            className="mb-[0.3rem] h-[93.5vh] rounded-lg pb-2 pl-1"
+            className="mb-[0.3rem] h-[93.9vh] rounded-lg pb-2 pl-1"
             collapsed={isSidebarCollapsed}
         >
             {items.map((item, index) => (
