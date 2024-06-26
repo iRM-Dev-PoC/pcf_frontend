@@ -20,6 +20,7 @@ const DataLoad = () => {
 
     return (
         <DynamicPage
+            className="dynamicPage"
             headerTitle={
                 <DynamicPageTitle
                     header={<Title>Data Synchronization Details</Title>}

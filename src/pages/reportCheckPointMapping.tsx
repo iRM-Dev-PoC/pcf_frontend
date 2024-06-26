@@ -17,6 +17,7 @@ const ReportCheckPointMapping = () => {
     const closeButtonMappingref = useRef<ButtonDomRef>(null);
     return (
         <DynamicPage
+            className="dynamicPage"
             headerTitle={
                 <DynamicPageTitle
                     header={<Title>Report Check-Point Mapping</Title>}

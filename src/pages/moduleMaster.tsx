@@ -18,6 +18,7 @@ const ModuleMaster = () => {
     const closeButtonRoleref = useRef<ButtonDomRef>(null);
     return (
         <DynamicPage
+            className="dynamicPage"
             headerTitle={
                 <DynamicPageTitle
                     header={<Title>Module-Master</Title>}

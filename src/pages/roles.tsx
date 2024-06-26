@@ -18,6 +18,7 @@ const Roles = () => {
     const closeButtonRoleref = useRef<ButtonDomRef>(null);
     return (
         <DynamicPage
+            className="dynamicPage"
             headerTitle={
                 <DynamicPageTitle
                     header={<Title>Roles</Title>}

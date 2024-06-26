@@ -18,6 +18,7 @@ const SubModules = () => {
     const closeButtonRoleref = useRef<ButtonDomRef>(null);
     return (
         <DynamicPage
+            className="dynamicPage"
             headerTitle={
                 <DynamicPageTitle
                     header={<Title>Sub-Module</Title>}

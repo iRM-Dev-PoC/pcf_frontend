@@ -19,6 +19,7 @@ const Users = () => {
 
     return (
         <DynamicPage
+            className="dynamicPage"
             headerTitle={
                 <DynamicPageTitle
                     header={<Title>Users</Title>}

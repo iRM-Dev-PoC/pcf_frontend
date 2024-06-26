@@ -46,6 +46,7 @@ const Home = () => {
 
     return (
         <DynamicPage
+            className="dynamicPage"
             headerContent={
                 <DynamicPageHeader>
                     <FilterBarComponent />
