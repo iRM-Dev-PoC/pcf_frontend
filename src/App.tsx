@@ -92,7 +92,6 @@ const App = () => {
                             marginTop: "0.50rem",
                             columnGap: "0.50rem",
                             marginRight: "0.50rem",
-                            // marginBottom: "0.3rem",
                             borderRadius: "0.5rem",
                             overflowX: "hidden",
                         }}
