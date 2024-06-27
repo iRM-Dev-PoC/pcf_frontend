@@ -1,3 +1,4 @@
+import ControlCreationForm from "@/components/ControlCreationForm";
 import ControlEditForm from "@/components/ControlEditForm";
 import ErrorComponent from "@/components/ErrorComponent";
 import Loading from "@/components/Loading";
@@ -7,8 +8,10 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
     Avatar,
     AvatarSize,
+    Bar,
     Button,
     ButtonDesign,
+    ButtonDomRef,
     Card,
     FCLLayout,
     FlexBox,
@@ -26,9 +29,8 @@ import {
     ToolbarDesign,
     ToolbarSpacer,
 } from "@ui5/webcomponents-react";
-import { ThemingParameters } from "@ui5/webcomponents-react-base";
 import axios from "axios";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 
 const TypeOfControlDetails = () => {
@@ -42,6 +44,8 @@ const TypeOfControlDetails = () => {
     const showDeleteConfirmation = Modals.useShowMessageBox();
     const queryClient = useQueryClient();
 
+        const showDialog = Modals.useShowDialog();
+        const closeButtonRoleref = useRef<ButtonDomRef>(null);
     const getAllControls = async () => {
         try {
             const endPointAllControls = `${import.meta.env.VITE_BACKEND_BASE_URL}/control-master/get-all-controls`;
@@ -134,26 +138,76 @@ const TypeOfControlDetails = () => {
                 <NoDataComponent />
             ) : (
                 <FlexibleColumnLayout
-                    style={{
-                        height: "100%",
-                        marginTop: "0.5rem",
-                        marginBottom: "0.5rem",
-                        borderRadius:
-                            ThemingParameters.sapButton_BorderCornerRadius,
-                    }}
+                    className="rounded-md"
                     layout={layout}
                     startColumn={
-                        <List onItemClick={onStartColumnClick}>
-                            {allControlsData?.map((control, index) => (
-                                <StandardListItem
-                                    description={control.CONTROL_DESC}
-                                    data-control-id={control.ID}
-                                    key={`${control.ID}-${index}`}
-                                >
-                                    {control.CONTROL_NAME}
-                                </StandardListItem>
-                            ))}
-                        </List>
+                        <>
+                            <Bar
+                                design="Header"
+                                className="mb-2 block h-16 rounded-md"
+                                endContent={
+                                    <div>
+                                        <Button
+                                            design="Emphasized"
+                                            tooltip="Create"
+                                            icon="create"
+                                            onClick={() => {
+                                                const { close } = showDialog({
+                                                    headerText:
+                                                        "Type of Controls Details",
+                                                    children: (
+                                                        <>
+                                                            <ControlCreationForm
+                                                                closeButtonref={
+                                                                    closeButtonRoleref
+                                                                }
+                                                            />
+                                                        </>
+                                                    ),
+                                                    footer: (
+                                                        <Bar
+                                                            endContent={
+                                                                <>
+                                                                    <Button
+                                                                        onClick={() =>
+                                                                            close()
+                                                                        }
+                                                                        design="Negative"
+                                                                        ref={
+                                                                            closeButtonRoleref
+                                                                        }
+                                                                    >
+                                                                        Close
+                                                                    </Button>
+                                                                </>
+                                                            }
+                                                        ></Bar>
+                                                    ),
+                                                });
+                                            }}
+                                        >
+                                            Create
+                                        </Button>
+                                    </div>
+                                }
+                                startContent={
+                                    <h1 className="m-3 block text-2xl font-bold">
+                                        Type of Controls Details
+                                    </h1>
+                                }
+                            ></Bar>
+                            <List onItemClick={onStartColumnClick}>
+                                {allControlsData?.map((control, index) => (
+                                    <StandardListItem
+                                        description={control.CONTROL_DESC}
+                                        data-control-id={control.ID}
+                                        key={`${control.ID}-${index}`}
+                                    >
+                                        {control.CONTROL_NAME}
+                                    </StandardListItem>
+                                ))}
+                            </List>
+                        </>
                     }
                     midColumn={
                         <>
@@ -227,7 +281,7 @@ const TypeOfControlDetails = () => {
                             </Toolbar>
                             <Toolbar
                                 key={selectedControl?.ID}
-                                style={{ height: "200px" }}
+                                style={{ height: "130px" }}
                             >
                                 <Avatar
                                     icon="person-placeholder"
