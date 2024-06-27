@@ -1,25 +1,49 @@
-FROM node:20-alpine
+# Stage 1: Build
+FROM node:20-alpine AS build
 
+# Create a non-root user and group
 RUN addgroup app && adduser -S -G app app
 
-USER app
-
+# Set the working directory
 WORKDIR /app
 
+# Copy package files and install dependencies
 COPY package*.json ./
 
-USER root
+# Change ownership to app user
+RUN chown -R app:app /app
 
-RUN chown -R app:app .
-
+# Switch to the non-root user
 USER app
 
+# Install dependencies
 RUN npm install
 
-COPY . .
+# Copy the source code and set ownership
+COPY --chown=app:app . .
 
-COPY .env .env
+# Build the project
+RUN npm run build
 
+# Stage 2: Run
+FROM node:20-alpine
+
+# Create a non-root user and group
+RUN addgroup app && adduser -S -G app app
+
+# Set the working directory
+WORKDIR /app
+
+# Copy only the build artifacts and dependencies from the build stage
+COPY --from=build /app/dist ./dist
+COPY --from=build /app/node_modules ./node_modules
+COPY --from=build /app/package*.json ./
+
+# Expose the necessary port
 EXPOSE 5001
 
+# Switch to the non-root user
+USER app
+
+# Start the application
 CMD ["npm", "run", "start"]
