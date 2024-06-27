@@ -1,5 +1,5 @@
 {
-    "name": "process-control-flow",
+    "name": "pcf_frontend",
     "private": true,
     "version": "1.0.0",
     "type": "module",

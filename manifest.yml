@@ -1,5 +1,5 @@
 applications:
-    - name: process-control-flow
+    - name: pcf_frontend
       instances: 1
       memory: 512M
       docker:
