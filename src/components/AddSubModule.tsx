@@ -1,14 +1,17 @@
 import ErrorComponent from "@/components/ErrorComponent";
 import Loading from "@/components/Loading";
 import NoDataComponent from "@/components/NoDataComponent";
+import SubModuleCreationForm from "@/components/SubModuleCreationForm";
 import SubModuleEditForm from "@/components/SubModuleEditForm";
 import { getAllSubModulesType } from "@/lib/types";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
     Avatar,
     AvatarSize,
+    Bar,
     Button,
     ButtonDesign,
+    ButtonDomRef,
     Card,
     FCLLayout,
     FlexBox,
@@ -27,7 +30,7 @@ import {
     ToolbarSpacer,
 } from "@ui5/webcomponents-react";
 import axios from "axios";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 
 const AddSubModule = () => {
@@ -40,6 +43,9 @@ const AddSubModule = () => {
     const [error, setError] = useState(false);
     const showDeleteConfirmation = Modals.useShowMessageBox();
     const queryClient = useQueryClient();
+
+       const showDialog = Modals.useShowDialog();
+       const closeButtonRoleref = useRef<ButtonDomRef>(null);
 
     const getAllSubModules = async () => {
         try {
@@ -135,25 +141,74 @@ const AddSubModule = () => {
                 <NoDataComponent />
             ) : (
                 <FlexibleColumnLayout
-                    style={{
-                        height: "100%",
-                        width: "100%",
-                        marginTop: "0.5rem",
-                        marginBottom: "0.5rem",
-                    }}
+                    className="rounded-md"
                     layout={layout}
                     startColumn={
-                        <List onItemClick={onStartColumnClick}>
-                            {allSubModuleData?.map((submodule, index) => (
-                                <StandardListItem
-                                    description={submodule.SUBMODULE_DESC}
-                                    data-subModule-id={submodule.ID}
-                                    key={`${submodule.ID}-${index}`}
-                                >
-                                    {submodule.DISPLAY_SUBMODULE_NAME}
-                                </StandardListItem>
-                            ))}
-                        </List>
+                        <>
+                            <Bar
+                                className="mb-2 block h-16 rounded-md"
+                                design="Header"
+                                endContent={
+                                    <div>
+                                        <Button
+                                            design="Emphasized"
+                                            tooltip="Create"
+                                            icon="create"
+                                            onClick={() => {
+                                                const { close } = showDialog({
+                                                    headerText:
+                                                        "Added Role Information",
+                                                    children: (
+                                                        <SubModuleCreationForm
+                                                            closeButtonref={
+                                                                closeButtonRoleref
+                                                            }
+                                                        />
+                                                    ),
+                                                    footer: (
+                                                        <Bar
+                                                            endContent={
+                                                                <>
+                                                                    <Button
+                                                                        onClick={() =>
+                                                                            close()
+                                                                        }
+                                                                        design="Negative"
+                                                                        ref={
+                                                                            closeButtonRoleref
+                                                                        }
+                                                                    >
+                                                                        Close
+                                                                    </Button>
+                                                                </>
+                                                            }
+                                                        ></Bar>
+                                                    ),
+                                                });
+                                            }}
+                                        >
+                                            Create
+                                        </Button>
+                                    </div>
+                                }
+                                startContent={
+                                    <h1 className="m-3 block text-2xl font-bold">
+                                        Sub-Module
+                                    </h1>
+                                }
+                            ></Bar>
+                            <List onItemClick={onStartColumnClick}>
+                                {allSubModuleData?.map((submodule, index) => (
+                                    <StandardListItem
+                                        description={submodule.SUBMODULE_DESC}
+                                        data-subModule-id={submodule.ID}
+                                        key={`${submodule.ID}-${index}`}
+                                    >
+                                        {submodule.DISPLAY_SUBMODULE_NAME}
+                                    </StandardListItem>
+                                ))}
+                            </List>
+                        </>
                     }
                     midColumn={
                         <>
@@ -231,7 +286,7 @@ const AddSubModule = () => {
                             </Toolbar>
                             <Toolbar
                                 key={selectedSubModule?.ID}
-                                style={{ height: "200px" }}
+                                style={{ height: "150px" }}
                             >
                                 <Avatar
                                     icon="person-placeholder"
