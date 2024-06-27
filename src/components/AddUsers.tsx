@@ -2,8 +2,10 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
     Avatar,
     AvatarSize,
+    Bar,
     Button,
     ButtonDesign,
+    ButtonDomRef,
     Card,
     FCLLayout,
     FlexBox,
@@ -23,13 +25,14 @@ import {
 } from "@ui5/webcomponents-react";
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
 import axios from "axios";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { getAllUserData } from "../lib/types";
 import ErrorComponent from "./ErrorComponent";
 import Loading from "./Loading";
 import NoDataComponent from "./NoDataComponent";
 import UserEditForm from "./UserEditForm";
+import UserCreationForm from "@/components/UserCreationForm";
 
 const AddUsers = () => {
     const [layout, setLayout] = useState<FCLLayout>(FCLLayout.OneColumn);
@@ -42,6 +45,9 @@ const AddUsers = () => {
 
     const showDeleteConfirmation = Modals.useShowMessageBox();
     const queryClient = useQueryClient();
+
+        const showDialog = Modals.useShowDialog();
+        const closeButtonref = useRef<ButtonDomRef>(null);
 
     const getAllUsers = async () => {
         try {
@@ -138,17 +144,71 @@ const AddUsers = () => {
                     }}
                     layout={layout}
                     startColumn={
-                        <List onItemClick={onStartColumnClick}>
-                            {allUserData?.map((user, index) => (
-                                <StandardListItem
-                                    description={user.USER_EMAIL}
-                                    data-user-id={user.ID}
-                                    key={`${user.ID}-${index}`}
-                                >
-                                    {user.USER_NAME}
-                                </StandardListItem>
-                            ))}
-                        </List>
+                        <>
+                            <Bar
+                                className="mb-2 block h-16 rounded-md"
+                                design="Header"
+                                endContent={
+                                    <div>
+                                        <Button
+                                            design="Emphasized"
+                                            tooltip="Create"
+                                            icon="create"
+                                            onClick={() => {
+                                                const { close } = showDialog({
+                                                    headerText:
+                                                        "User Information",
+                                                    children: (
+                                                        <UserCreationForm
+                                                            closeButtonref={
+                                                                closeButtonref
+                                                            }
+                                                        />
+                                                    ),
+                                                    footer: (
+                                                        <Bar
+                                                            endContent={
+                                                                <>
+                                                                    <Button
+                                                                        ref={
+                                                                            closeButtonref
+                                                                        }
+                                                                        onClick={() => {
+                                                                            close();
+                                                                        }}
+                                                                        design="Negative"
+                                                                    >
+                                                                        Close
+                                                                    </Button>
+                                                                </>
+                                                            }
+                                                        ></Bar>
+                                                    ),
+                                                });
+                                            }}
+                                        >
+                                            Create
+                                        </Button>
+                                    </div>
+                                }
+                                startContent={
+                                    <h1 className="m-3 block text-2xl font-bold">
+                                        Users
+                                    </h1>
+                                }
+                            ></Bar>
+                            <List onItemClick={onStartColumnClick}>
+                                {allUserData?.map((user, index) => (
+                                    <StandardListItem
+                                        description={user.USER_EMAIL}
+                                        data-user-id={user.ID}
+                                        key={`${user.ID}-${index}`}
+                                    >
+                                        {user.USER_NAME}
+                                    </StandardListItem>
+                                ))}
+                            </List>
+                        </>
                     }
                     midColumn={
                         <>
@@ -224,7 +284,7 @@ const AddUsers = () => {
                             </Toolbar>
                             <Toolbar
                                 key={selectedUser?.ID}
-                                style={{ height: "200px" }}
+                                style={{ height: "150px" }}
                             >
                                 <Avatar
                                     icon="person-placeholder"

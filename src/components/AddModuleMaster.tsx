@@ -1,5 +1,6 @@
 import ErrorComponent from "@/components/ErrorComponent";
 import Loading from "@/components/Loading";
+import ModuleCreationForm from "@/components/ModuleCreationForm";
 import ModuleEditForm from "@/components/ModuleEditForm";
 import NoDataComponent from "@/components/NoDataComponent";
 import { getAllModulesType } from "@/lib/types";
@@ -7,8 +8,10 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
     Avatar,
     AvatarSize,
+    Bar,
     Button,
     ButtonDesign,
+    ButtonDomRef,
     Card,
     FCLLayout,
     FlexBox,
@@ -27,7 +30,7 @@ import {
     ToolbarSpacer,
 } from "@ui5/webcomponents-react";
 import axios from "axios";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 
 const AddModuleMaster = () => {
@@ -40,6 +43,9 @@ const AddModuleMaster = () => {
     const [error, setError] = useState(false);
     const showDeleteConfirmation = Modals.useShowMessageBox();
     const queryClient = useQueryClient();
+
+    const showDialog = Modals.useShowDialog();
+    const closeButtonRoleref = useRef<ButtonDomRef>(null);
 
     const getAllModuleData = async () => {
         try {
@@ -131,25 +137,77 @@ const AddModuleMaster = () => {
                 <NoDataComponent />
             ) : (
                 <FlexibleColumnLayout
-                    style={{
-                        height: "100%",
-                        width: "100%",
-                        marginTop: "0.5rem",
-                        marginBottom: "0.5rem",
-                    }}
+                    className="rounded-md"
                     layout={layout}
                     startColumn={
-                        <List onItemClick={onStartColumnClick}>
-                            {allModuleData?.map((module, index) => (
-                                <StandardListItem
-                                    description={module.MODULE_DESC}
-                                    data-module-id={module.ID}
-                                    key={`${module.ID}-${index}`}
-                                >
-                                    {module.DISPLAY_MODULE_NAME}
-                                </StandardListItem>
-                            ))}
-                        </List>
+                        <>
+                            <Bar
+                                className="mb-2 block h-16 rounded-md"
+                                design="Header"
+                                endContent={
+                                    <div>
+                                        <Button
+                                            design="Emphasized"
+                                            tooltip="Create"
+                                            icon="create"
+                                            onClick={() => {
+                                                const { close } = showDialog({
+                                                    headerText:
+                                                        "Added Module Information",
+                                                    children: (
+                                                        <>
+                                                            <ModuleCreationForm
+                                                                closeButtonref={
+                                                                    closeButtonRoleref
+                                                                }
+                                                            />
+                                                        </>
+                                                    ),
+                                                    footer: (
+                                                        <Bar
+                                                            endContent={
+                                                                <>
+                                                                    <Button
+                                                                        onClick={() =>
+                                                                            close()
+                                                                        }
+                                                                        design="Negative"
+                                                                        ref={
+                                                                            closeButtonRoleref
+                                                                        }
+                                                                    >
+                                                                        Close
+                                                                    </Button>
+                                                                </>
+                                                            }
+                                                        ></Bar>
+                                                    ),
+                                                });
+                                            }}
+                                        >
+                                            Create
+                                        </Button>
+                                    </div>
+                                }
+                                startContent={
+                                    <h1 className="m-3 block text-2xl font-bold">
+                                        Module-Master
+                                    </h1>
+                                }
+                            >
+                            </Bar>
+                            <List onItemClick={onStartColumnClick}>
+                                {allModuleData?.map((module, index) => (
+                                    <StandardListItem
+                                        description={module.MODULE_DESC}
+                                        data-module-id={module.ID}
+                                        key={`${module.ID}-${index}`}
+                                    >
+                                        {module.DISPLAY_MODULE_NAME}
+                                    </StandardListItem>
+                                ))}
+                            </List>
+                        </>
                     }
                     midColumn={
                         <>
@@ -227,7 +285,7 @@ const AddModuleMaster = () => {
 
                             <Toolbar
                                 key={selectedModule?.ID}
-                                style={{ height: "200px" }}
+                                style={{ height: "150px" }}
                             >
                                 <Avatar
                                     icon="person-placeholder"

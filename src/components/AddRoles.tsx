@@ -1,14 +1,17 @@
 import ErrorComponent from "@/components/ErrorComponent";
 import Loading from "@/components/Loading";
 import NoDataComponent from "@/components/NoDataComponent";
+import RoleCreationForm from "@/components/RoleCreationForm";
 import RoleEditForm from "@/components/RoleEditForm";
 import { getAllRoleData } from "@/lib/types";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
     Avatar,
     AvatarSize,
+    Bar,
     Button,
     ButtonDesign,
+    ButtonDomRef,
     Card,
     FCLLayout,
     FlexBox,
@@ -26,9 +29,8 @@ import {
     ToolbarDesign,
     ToolbarSpacer,
 } from "@ui5/webcomponents-react";
-import { ThemingParameters } from "@ui5/webcomponents-react-base";
 import axios from "axios";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 
 const AddRoles = () => {
@@ -42,6 +44,8 @@ const AddRoles = () => {
 
     const showDeleteConfirmation = Modals.useShowMessageBox();
     const queryClient = useQueryClient();
+        const showDialog = Modals.useShowDialog();
+        const closeButtonRoleref = useRef<ButtonDomRef>(null);
 
     const getAllRoles = async () => {
         try {
@@ -131,26 +135,74 @@ const AddRoles = () => {
                 <NoDataComponent />
             ) : (
                 <FlexibleColumnLayout
-                    style={{
-                        height: "100%",
-                        marginTop: "0.5rem",
-                        marginBottom: "0.5rem",
-                        borderRadius:
-                            ThemingParameters.sapButton_BorderCornerRadius,
-                    }}
+                    className="rounded-md"
                     layout={layout}
                     startColumn={
-                        <List onItemClick={onStartColumnClick}>
-                            {allRoleData?.map((role, index) => (
-                                <StandardListItem
-                                    description={role.ROLE_DESC}
-                                    data-role-id={role.ID}
-                                    key={`${role.ID}-${index}`}
-                                >
-                                    {role.ROLE_NAME}
-                                </StandardListItem>
-                            ))}
-                        </List>
+                        <>
+                            <Bar
+                                className="mb-2 block h-16 rounded-md"
+                                design="Header"
+                                endContent={
+                                    <div>
+                                        <Button
+                                            design="Emphasized"
+                                            tooltip="Create"
+                                            icon="create"
+                                            onClick={() => {
+                                                const { close } = showDialog({
+                                                    headerText:
+                                                        "Role Information",
+                                                    children: (
+                                                        <RoleCreationForm
+                                                            closeButtonref={
+                                                                closeButtonRoleref
+                                                            }
+                                                        />
+                                                    ),
+                                                    footer: (
+                                                        <Bar
+                                                            endContent={
+                                                                <>
+                                                                    <Button
+                                                                        ref={
+                                                                            closeButtonRoleref
+                                                                        }
+                                                                        onClick={() => {
+                                                                            close();
+                                                                        }}
+                                                                        design="Negative"
+                                                                    >
+                                                                        Close
+                                                                    </Button>
+                                                                </>
+                                                            }
+                                                        ></Bar>
+                                                    ),
+                                                });
+                                            }}
+                                        >
+                                            Create
+                                        </Button>
+                                    </div>
+                                }
+                                startContent={
+                                    <h1 className="m-3 block text-2xl font-bold">
+                                        Roles
+                                    </h1>
+                                }
+                            ></Bar>
+                            <List onItemClick={onStartColumnClick}>
+                                {allRoleData?.map((role, index) => (
+                                    <StandardListItem
+                                        description={role.ROLE_DESC}
+                                        data-role-id={role.ID}
+                                        key={`${role.ID}-${index}`}
+                                    >
+                                        {role.ROLE_NAME}
+                                    </StandardListItem>
+                                ))}
+                            </List>
+                        </>
                     }
                     midColumn={
                         <>
@@ -224,7 +276,7 @@ const AddRoles = () => {
                             </Toolbar>
                             <Toolbar
                                 key={selectedRole?.ID}
-                                style={{ height: "200px" }}
+                                style={{ height: "150px" }}
                             >
                                 <Avatar
                                     icon="person-placeholder"

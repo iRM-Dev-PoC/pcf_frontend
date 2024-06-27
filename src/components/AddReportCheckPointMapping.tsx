@@ -6,13 +6,17 @@ import {
 } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";
 import {
+    Bar,
+    Button,
+    ButtonDomRef,
     FCLLayout,
     FlexibleColumnLayout,
     List,
+    Modals,
     StandardListItem,
 } from "@ui5/webcomponents-react";
 import axios from "axios";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import ErrorComponent from "@/components/ErrorComponent";
 import NoDataComponent from "@/components/NoDataComponent";
@@ -23,6 +27,9 @@ const AddReportCheckPointMapping = () => {
         getReportCheckPointMappingType | undefined
     >(undefined);
     const [error, setError] = useState(false);
+
+        const showDialog = Modals.useShowDialog();
+        const closeButtonMappingref = useRef<ButtonDomRef>(null);
 
     const getAllMappingData = async () => {
         try {
@@ -91,42 +98,85 @@ const AddReportCheckPointMapping = () => {
                 <NoDataComponent />
             ) : (
                 <FlexibleColumnLayout
-                    style={{
-                        height: "100%",
-                        width: "100%",
-                        marginTop: "0.5rem",
-                        marginBottom: "0.5rem",
-                    }}
+                    className="rounded-md"
                     layout={layout}
                     startColumn={
-                        <List onItemClick={onStartColumnClick}>
-                            {allReportCheckPointMappingData?.map(
-                                (mapping, index) => (
-                                    <StandardListItem
-                                        data-report-id={mapping.ID}
-                                        key={`${mapping.ID}-${index}`}
-                                    >
-                                        <span className="text-nowrap">
-                                            {
-                                                allReportData.find(
-                                                    (report) =>
-                                                        report.ID ===
-                                                        mapping.REPORT_ID
-                                                )?.REPORT_NAME
-                                            }
-                                            {arrow}
-                                            {
-                                                allCheckPointData.find(
-                                                    (checkpoint) =>
-                                                        checkpoint.ID ===
-                                                        mapping.CHECK_POINT_ID
-                                                )?.CHECK_POINT_NAME
-                                            }
-                                        </span>
-                                    </StandardListItem>
-                                )
-                            )}
-                        </List>
+                        <>
+                            <Bar
+                                className="mb-2 block h-16 rounded-md"
+                                design="Header"
+                                endContent={
+                                    <div>
+                                        <Button
+                                            design="Emphasized"
+                                            tooltip="Create"
+                                            icon="create"
+                                            onClick={() => {
+                                                const { close } = showDialog({
+                                                    headerText:
+                                                        "Report Check-Point Mapping Information",
+                                                    children: <div>Hi</div>,
+                                                    footer: (
+                                                        <Bar
+                                                            endContent={
+                                                                <>
+                                                                    <Button
+                                                                        onClick={() =>
+                                                                            close()
+                                                                        }
+                                                                        design="Negative"
+                                                                        ref={
+                                                                            closeButtonMappingref
+                                                                        }
+                                                                    >
+                                                                        Close
+                                                                    </Button>
+                                                                </>
+                                                            }
+                                                        ></Bar>
+                                                    ),
+                                                });
+                                            }}
+                                        >
+                                            Create
+                                        </Button>
+                                    </div>
+                                }
+                                startContent={
+                                    <h1 className="m-3 block text-2xl font-bold">
+                                        Report-Checkpoint Mapping
+                                    </h1>
+                                }
+                            ></Bar>
+                            <List onItemClick={onStartColumnClick}>
+                                {allReportCheckPointMappingData?.map(
+                                    (mapping, index) => (
+                                        <StandardListItem
+                                            data-report-id={mapping.ID}
+                                            key={`${mapping.ID}-${index}`}
+                                        >
+                                            <span className="text-nowrap">
+                                                {
+                                                    allReportData.find(
+                                                        (report) =>
+                                                            report.ID ===
+                                                            mapping.REPORT_ID
+                                                    )?.REPORT_NAME
+                                                }
+                                                {arrow}
+                                                {
+                                                    allCheckPointData.find(
+                                                        (checkpoint) =>
+                                                            checkpoint.ID ===
+                                                            mapping.CHECK_POINT_ID
+                                                    )?.CHECK_POINT_NAME
+                                                }
+                                            </span>
+                                        </StandardListItem>
+                                    )
+                                )}
+                            </List>
+                        </>
                     }
                 />
             )}

@@ -1,14 +1,17 @@
 import ErrorComponent from "@/components/ErrorComponent";
 import Loading from "@/components/Loading";
 import NoDataComponent from "@/components/NoDataComponent";
+import ReportCreationForm from "@/components/ReportCreationForm";
 import ReportEditForm from "@/components/ReportEditForm";
 import { getAllModuleType } from "@/lib/types";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
     Avatar,
     AvatarSize,
+    Bar,
     Button,
     ButtonDesign,
+    ButtonDomRef,
     Card,
     FCLLayout,
     FlexBox,
@@ -27,7 +30,7 @@ import {
     ToolbarSpacer,
 } from "@ui5/webcomponents-react";
 import axios from "axios";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 
 const AddReport = () => {
@@ -40,6 +43,8 @@ const AddReport = () => {
     const [error, setError] = useState(false);
     const showDeleteConfirmation = Modals.useShowMessageBox();
     const queryClient = useQueryClient();
+        const showDialog = Modals.useShowDialog();
+        const closeReportBtnRef = useRef<ButtonDomRef >(null);
 
     const getAllReportData = async () => {
         try {
@@ -130,24 +135,76 @@ const AddReport = () => {
                 <NoDataComponent />
             ) : (
                 <FlexibleColumnLayout
-                    style={{
-                        height: "100%",
-                        width: "100%",
-                        marginTop: "0.5rem",
-                        marginBottom: "0.5rem",
-                    }}
+                    className="rounded-md"
                     layout={layout}
                     startColumn={
-                        <List onItemClick={onStartColumnClick}>
-                            {allReportData?.map((report, index) => (
-                                <StandardListItem
-                                    data-report-id={report.ID}
-                                    key={`${report.ID}-${index}`}
-                                >
-                                    {report.REPORT_NAME}
-                                </StandardListItem>
-                            ))}
-                        </List>
+                        <>
+                            <Bar
+                                className="mb-2 block h-16 rounded-md"
+                                design="Header"
+                                endContent={
+                                    <div>
+                                        <Button
+                                            design="Emphasized"
+                                            tooltip="Create"
+                                            icon="create"
+                                            onClick={() => {
+                                                const { close } = showDialog({
+                                                    headerText:
+                                                        "Report Information",
+                                                    children: (
+                                                        <ReportCreationForm
+                                                            closeButtonref={
+                                                                closeReportBtnRef
+                                                            }
+                                                        />
+                                                    ),
+                                                    footer: (
+                                                        <Bar
+                                                            endContent={
+                                                                <>
+                                                                    <Button
+                                                                        onClick={() =>
+                                                                            close()
+                                                                        }
+                                                                        design="Negative"
+                                                                        ref={
+                                                                            closeReportBtnRef
+                                                                        }
+                                                                    >
+                                                                        Close
+                                                                    </Button>
+                                                                </>
+                                                            }
+                                                        ></Bar>
+                                                    ),
+                                                });
+                                            }}
+                                        >
+                                            Create
+                                        </Button>
+                                    </div>
+                                }
+                                startContent={
+                                    <h1 className="m-3 block text-2xl font-bold">
+                                        Report{" "}
+                                    </h1>
+                                }
+                            ></Bar>
+                            <List
+                                onItemClick={onStartColumnClick}
+                                className="rounded-md"
+                            >
+                                {allReportData?.map((report, index) => (
+                                    <StandardListItem
+                                        data-report-id={report.ID}
+                                        key={`${report.ID}-${index}`}
+                                    >
+                                        {report.REPORT_NAME}
+                                    </StandardListItem>
+                                ))}
+                            </List>
+                        </>
                     }
                     midColumn={
                         <>
@@ -225,7 +282,7 @@ const AddReport = () => {
 
                             <Toolbar
                                 key={selectedReport?.ID}
-                                style={{ height: "200px" }}
+                                style={{ height: "150px" }}
                             >
                                 <Avatar
                                     icon="person-placeholder"
