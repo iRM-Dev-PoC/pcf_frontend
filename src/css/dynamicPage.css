@@ -1,9 +1,8 @@
 .dynamicPage div:nth-child(2) {
-    padding-inline: 5px;
     padding-top: 0;
     margin-top: 0;
 }
 
-.dynamicPage{
+.dynamicPage {
     border-radius: 10px;
 }

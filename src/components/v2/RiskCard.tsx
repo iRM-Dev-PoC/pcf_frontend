@@ -63,7 +63,7 @@ const RiskCard = ({ title, riskScore, desc, onClick }: RiskCardProps) => {
                     </div>
                 </CardTitle>
             </CardHeader>
-            <CardContent className="m-2 text-lg font-semibold">
+            <CardContent className="m-1 p-1 text-lg font-semibold">
                 {title}
             </CardContent>
         </Card>
