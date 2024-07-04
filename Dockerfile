@@ -4,6 +4,9 @@ FROM node:20-alpine AS build
 # Create a non-root user and group
 RUN addgroup app && adduser -S -G app app
 
+# Install pnpm
+RUN npm install -g pnpm
+
 # Set the working directory
 WORKDIR /app
 
@@ -17,19 +20,22 @@ RUN chown -R app:app /app
 USER app
 
 # Install dependencies
-RUN npm install
+RUN pnpm install
 
 # Copy the source code and set ownership
 COPY --chown=app:app . .
 
 # Build the project
-RUN npm run build
+RUN pnpm run build
 
 # Stage 2: Run
 FROM node:20-alpine
 
 # Create a non-root user and group
 RUN addgroup app && adduser -S -G app app
+
+# Install pnpm
+RUN npm install -g pnpm
 
 # Set the working directory
 WORKDIR /app
@@ -46,4 +52,4 @@ EXPOSE 5001
 USER app
 
 # Start the application
-CMD ["npm", "run", "start"]
+CMD ["pnpm", "run", "start"]
