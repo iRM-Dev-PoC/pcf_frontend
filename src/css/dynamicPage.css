@@ -1,6 +1,7 @@
 .dynamicPage div:nth-child(2) {
     padding-top: 0;
     margin-top: 0;
+    padding-inline: 5px;
 }
 
 .dynamicPage {

@@ -14,7 +14,7 @@ const NonCompilantData = ({ nonCompilantDataRes }: NonCompilantDataProps) => {
         <>
             <Card>
                 <h1 className="p-6 text-xl font-semibold">
-                    Non Compilant Data
+                    Non Compliant Data
                 </h1>
                 <AnalyticalTable
                     columns={[
