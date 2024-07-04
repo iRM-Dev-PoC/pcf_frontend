@@ -17,7 +17,7 @@ const ActivityCard = ({ title, desc }: ActivityCardProps) => {
                     <CardTitle>{title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <p className="text-pretty text-xl font-medium">{desc}</p>
+                    <p className="text-pretty text-xl font-medium" >{desc}</p>
                 </CardContent>
             </Card>
         </>

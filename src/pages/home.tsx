@@ -16,6 +16,7 @@ import {
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
 import axios from "axios";
 import { Suspense, useState } from "react";
+import "@/css/dynamicPage.css";
 
 const Home = () => {
     const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/dashboard/control-checkpoints`;
