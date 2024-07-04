@@ -27,7 +27,6 @@ import {
     ShellBarItemPropTypes,
     Ui5CustomEvent,
 } from "@ui5/webcomponents-react";
-import "@ui5/webcomponents-theming/dist/Assets.js";
 import "@ui5/webcomponents/Assets.js";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";

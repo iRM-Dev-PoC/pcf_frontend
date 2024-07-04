@@ -46,7 +46,6 @@ import "@ui5/webcomponents-icons/dist/upload-to-cloud.js";
 import "@ui5/webcomponents-icons/dist/upload.js";
 import "@ui5/webcomponents-icons/dist/wrench.js";
 
-import "@ui5/webcomponents-localization/dist/features/calendar/Gregorian";
 
 import App from "@/App.tsx";
 import ErrorBoundary from "@/components/ErrorBoundary.tsx";
@@ -59,7 +58,6 @@ import { CurrentURLProvider } from "@/context/currentURLContext.tsx";
 import { HeaderDataProvider } from "@/context/headerDataContext.tsx";
 import { ProductSwitchProvider } from "@/context/productSwitchContext.tsx";
 import "@/index.css";
-import "@ui5/webcomponents-localization/dist/features/calendar/Gregorian.js";
 import { ThemeProvider } from "@ui5/webcomponents-react";
 import { StrictMode, Suspense } from "react";
 import ReactDOM from "react-dom/client";
