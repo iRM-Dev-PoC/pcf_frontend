@@ -23,7 +23,7 @@ const DashboardTopCards = ({
                     />
                 </div>
 
-                <div className="grid grid-cols-3 gap-x-2 p-0">
+                <div className="grid grid-cols-3 gap-x-2">
                     <DashboardCards
                         title="Base"
                         count={
