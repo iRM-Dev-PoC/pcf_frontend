@@ -66,6 +66,11 @@ const routes = [
                 icon: "provision",
                 path: "/subModule",
             },
+            {
+                text: "Control KPI",
+                icon: "command-line-interfaces",
+                path: "/controlKPI",
+            },
         ],
     },
 ];

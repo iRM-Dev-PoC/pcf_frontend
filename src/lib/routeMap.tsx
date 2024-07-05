@@ -2,6 +2,7 @@ import AddUsers from "@/components/AddUsers";
 import type { routerMapType } from "@/lib/types";
 import CheckPoint from "@/pages/checkPoint";
 import ControlFamily from "@/pages/controlFamily";
+import ControlKPI from "@/pages/controlKPI";
 import DataLoad from "@/pages/dataLoad";
 import Home from "@/pages/home";
 import ModuleMaster from "@/pages/moduleMaster";
@@ -57,6 +58,10 @@ export const routerMap: routerMapType[] = [
     {
         path: "/pcf/config/moduleMaster",
         element: <ModuleMaster />,
+    },
+    {
+        path: "/pcf/config/controlKPI",
+        element:<ControlKPI/>
     },
     {
         path: "/sod/",
