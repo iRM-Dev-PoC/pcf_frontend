@@ -8,30 +8,17 @@ import Loading from "@/components/Loading";
 import Navbar from "@/components/Navbar";
 import SideNavbar from "@/components/SideNavbar";
 
-import SoDDashboard from "@/pages/SoD/sodDashboard";
-import CheckPoint from "@/pages/checkPoint";
-import ControlFamily from "@/pages/controlFamily";
-import DataLoad from "@/pages/dataLoad";
 import ForgetPassword from "@/pages/forgetPassword";
-import Home from "@/pages/home";
-import ModuleMaster from "@/pages/moduleMaster";
 import ProductSelection from "@/pages/productSelection";
-import Report from "@/pages/report";
-import ReportCheckPointMapping from "@/pages/reportCheckPointMapping";
-import ResetPassword from "@/pages/resetPassword";
-import Role from "@/pages/roles";
 import SignIn from "@/pages/signIn";
-import SubModule from "@/pages/subModule";
-import TypeOfControl from "@/pages/typeOfControl";
-import AddUsers from "@/pages/users";
 
 import companyLogo from "@/assets/images/irm.png";
 
+import "@/css/dynamicPage.css";
 import { useSwitchProduct } from "@/hooks/useSwitchProduct";
+import { routerMap } from "@/lib/routeMap";
 import { routes, sodRoutes } from "@/lib/routedata";
 import { User } from "@/lib/types";
-import "@ui5/webcomponents-icons/dist/AllIcons.js";
-import "@/css/dynamicPage.css";
 
 const App = () => {
     const [, setTheme] = useState("sap_horizon");
@@ -103,72 +90,15 @@ const App = () => {
                             <SideNavbar items={routes} />
                         )}
 
-                        <Suspense fallback={<Loading />}>
-                            <Routes>
-                                <Route path="/" element={<Home />} />
-
-                                {/* Master routes */}
+                        <Routes>
+                            {routerMap.map((route) => (
                                 <Route
-                                    path="/pcf/master/controlFamily"
-                                    element={<ControlFamily />}
+                                    key={route.path}
+                                    path={route.path}
+                                    element={route.element}
                                 />
-                                <Route
-                                    path="/pcf/master/report"
-                                    element={<Report />}
-                                />
-                                <Route
-                                    path="/pcf/master/typeOfControl"
-                                    element={<TypeOfControl />}
-                                />
-                                <Route
-                                    path="/pcf/master/checkpoint"
-                                    element={<CheckPoint />}
-                                />
-                                <Route
-                                    path="/pcf/master/reportCheckpointMapping"
-                                    element={<ReportCheckPointMapping />}
-                                />
-
-                                {/* Dataload routes */}
-                                <Route
-                                    path="/pcf/dataLoad"
-                                    element={<DataLoad />}
-                                />
-
-                                {/* Configuration routes */}
-                                <Route
-                                    path="/pcf/config/roles"
-                                    element={<Role />}
-                                />
-                                <Route
-                                    path="/pcf/config/addUsers"
-                                    element={<AddUsers />}
-                                />
-
-                                <Route
-                                    path="/pcf/config/subModule"
-                                    element={<SubModule />}
-                                />
-
-                                <Route
-                                    path="/pcf/config/moduleMaster"
-                                    element={<ModuleMaster />}
-                                />
-
-                                <Route
-                                    path="/sod/"
-                                    element={<SoDDashboard />}
-                                />
-
-                                <Route
-                                    path="/resetPassword"
-                                    element={
-                                        <ResetPassword changePassword={true} />
-                                    }
-                                />
-                                
-                            </Routes>
-                        </Suspense>
+                            ))}
+                        </Routes>
                     </FlexBox>
                 </Suspense>
             )}

@@ -1,5 +1,7 @@
+import { updateRole } from "@/actions/roles";
+// import type { RoleData } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import ValueState from "@ui5/webcomponents-base/dist/types/ValueState.js";
 import {
     Button,
@@ -14,7 +16,6 @@ import {
     TextArea,
 } from "@ui5/webcomponents-react";
 import "@ui5/webcomponents/dist/features/InputElementsFormSupport.js";
-import axios from "axios";
 import { Dispatch, SetStateAction } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -60,46 +61,28 @@ const RoleEditForm = ({
         resolver: zodResolver(schema),
     });
 
-    const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/role-master/update-role`;
-
-    const updateRole = async (data: RoleData) => {
-        try {
-            const updateData = {
-                id,
-                role_name: data.roleName,
-                role_desc: data.roleDescription,
-                customer_id: 1,
-            };
-            const response = await axios.patch(endPoint, updateData);
-
-            if (response.data?.statuscode !== 200) {
-                throw response.data?.message;
-            }
-
-            return response.data;
-        } catch (error) {
-            console.error(error);
-            throw error;
-        } finally {
+    const updateRoleMutation = useMutation({
+        mutationFn: ({ data, id }: { data: RoleData; id: number }) =>
+            updateRole(data, id),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["allRoleData"] });
             setIsEdit(false);
-        }
-    };
+            setIsFullScreen(false);
+            setLayout(FCLLayout.OneColumn);
+        },
+    });
 
-    const onSubmit = async (data: RoleData) => {
-        await toast.promise(updateRole(data), {
+    const onSubmit = async (data: RoleData, id: number) => {
+        toast.promise(updateRoleMutation.mutateAsync({ data, id }), {
             loading: "Updating role...",
             success: "Role updated successfully!",
             error: (error) => `Failed to update role: ${error.message}`,
         });
-        await queryClient.invalidateQueries({ queryKey: ["allRoleData"] });
-        setIsEdit(false);
-        setIsFullScreen(false);
-        setLayout(FCLLayout.OneColumn);
     };
 
     return (
         <Form
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={handleSubmit((data) => onSubmit(data, id))}
             labelSpanM={4}
             className="flex items-center justify-center"
         >
