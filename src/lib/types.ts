@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, type ReactNode } from "react";
 
 type SidebarContextType = {
     isSidebarCollapsed: boolean;
@@ -552,54 +552,49 @@ type getControlDataType = {
     columnChartData: lineChartData[];
 };
 
+type routerMapType = {
+    path: string;
+    element: ReactNode;
+};
+
+type RoleData = {
+    roleName: string;
+    roleDescription: string;
+};
+
+type RoleDataResponse = {
+    statuscode: number;
+    message: string;
+    data: getAllRoleData[];
+};
+
 export type {
     ApiResponse,
+    candoDataType,
+    canDoDetailsDataApiResponse,
     CanDoSummaryDataApiResponse,
     CanDovsDidDoDataApiResponse,
     ChartDataItem,
-    CompanyCodesItem,
-    CurrentURLType,
-    DialogUsersItem,
-    DrillItem,
-    ERP,
-    EmailInputProps,
-    EmployeesUsersItem,
-    ExDataItem,
-    ExObjItem,
-    LineChartDataItem,
-    MstObjItem,
-    NonDialogUsersItem,
-    OtherUsersItem,
-    OtpInputProps,
-    PathContextType,
-    Permission,
-    ProductSwitchType,
-    ResetPasswordFormData,
-    RoleConflictsItem,
-    SidebarContextType,
-    SignInFormData,
-    SignInProps,
-    SimulationDetailsDataType,
-    SoDData,
-    SyncHeaderContextType,
-    TotalActiveUsersItem,
-    TotalRolesItem,
-    TotalUsersItem,
-    User,
-    UserRole,
-    canDoDetailsDataApiResponse,
-    candoDataType,
     checkPointDatType,
     checkUser,
+    CompanyCodesItem,
     controlData,
+    CurrentURLType,
     dataCardType,
+    DialogUsersItem,
     donutChartsData,
+    DrillItem,
+    EmailInputProps,
+    EmployeesUsersItem,
+    ERP,
+    ExDataItem,
+    ExObjItem,
     getAllCardDataType,
     getAllCheckPointData,
     getAllControlFamilyType,
     getAllControlsType,
-    getAllModuleType,
     getAllModulesType,
+    getAllModuleType,
     getAllNonCompilantData,
     getAllRoleData,
     getAllSubModulesType,
@@ -611,11 +606,35 @@ export type {
     getReportCheckPointMappingType,
     levels,
     lineChartData,
+    LineChartDataItem,
     logInData,
     logInFuncProps,
+    MstObjItem,
+    NonDialogUsersItem,
+    OtherUsersItem,
+    OtpInputProps,
+    PathContextType,
+    Permission,
+    ProductSwitchType,
     reportDataType,
+    ResetPasswordFormData,
     resetPasswordFuncProps,
+    RoleConflictsItem,
+    RoleData,
+    RoleDataResponse,
+    routerMapType,
+    SidebarContextType,
+    SignInFormData,
+    SignInProps,
+    SimulationDetailsDataType,
+    SoDData,
+    SyncHeaderContextType,
+    TotalActiveUsersItem,
+    TotalRolesItem,
+    TotalUsersItem,
     transactionDetailsTypes,
     uploadFileType,
+    User,
+    UserRole,
     webComponentsReactProps,
 };

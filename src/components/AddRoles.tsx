@@ -1,10 +1,11 @@
+import { deleteRole, getAllRoles } from "@/actions/roles";
 import ErrorComponent from "@/components/ErrorComponent";
 import Loading from "@/components/Loading";
 import NoDataComponent from "@/components/NoDataComponent";
 import RoleCreationForm from "@/components/RoleCreationForm";
 import RoleEditForm from "@/components/RoleEditForm";
-import { getAllRoleData } from "@/lib/types";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import type { getAllRoleData, RoleDataResponse } from "@/lib/types";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
     Avatar,
     AvatarSize,
@@ -29,7 +30,6 @@ import {
     ToolbarDesign,
     ToolbarSpacer,
 } from "@ui5/webcomponents-react";
-import axios from "axios";
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -40,69 +40,40 @@ const AddRoles = () => {
     const [selectedRole, setSelectedRole] = useState<
         getAllRoleData | undefined
     >(undefined);
-    const [error, setError] = useState(false);
 
     const showDeleteConfirmation = Modals.useShowMessageBox();
     const queryClient = useQueryClient();
-        const showDialog = Modals.useShowDialog();
-        const closeButtonRoleref = useRef<ButtonDomRef>(null);
+    const showDialog = Modals.useShowDialog();
+    const closeButtonRoleref = useRef<ButtonDomRef>(null);
 
-    const getAllRoles = async () => {
-        try {
-            const endPointAllRoles = `${import.meta.env.VITE_BACKEND_BASE_URL}/role-master/get-all-roles`;
-            const response = await axios.get(endPointAllRoles);
-            if (response.data.statuscode !== 200) {
-                setError(true);
-            }
-            setError(false);
-            return response.data;
-        } catch (error) {
-            console.error(error);
-            setError(true);
-        }
-    };
-
-    const { data, isFetching, isError } = useQuery({
+    const { data, isFetching, isError, error } = useQuery({
         queryKey: ["allRoleData"],
         queryFn: getAllRoles,
         retry: 3,
     });
 
-    const deleteRoleData = async (id: number) => {
-        const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/role-master/delete-role`;
-        try {
-            const data = {
-                id,
-                customer_id: 1,
-            };
-            const response = await axios.patch(endPoint, data);
-            if (response.data?.statuscode !== 200) {
-                setError(true);
-                throw response.data?.message;
-            }
-
-            return response.data;
-        } catch (error) {
-            console.error(error);
-            setError(true);
-            throw error;
-        }
-    };
+    const deleteRoleMutation = useMutation({
+        mutationFn: deleteRole,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["allRoleData"] });
+            setIsEdit(false);
+            setIsFullScreen(false);
+            setLayout(FCLLayout.OneColumn);
+        },
+    });
 
     const handleDeleteRole = async (id: number) => {
-        await toast.promise(deleteRoleData(id), {
+        toast.promise(deleteRoleMutation.mutateAsync(id), {
             loading: "Deleting Role...",
             success: "Role deleted successfully!",
             error: (error) => `Failed to delete role: ${error.message}`,
         });
-        await queryClient.invalidateQueries({ queryKey: ["allRoleData"] });
-        setIsEdit(false);
-        setIsFullScreen(false);
-        setLayout(FCLLayout.OneColumn);
     };
 
-    const roleDataRes = data;
-
+    if (data === undefined) {
+        return <ErrorComponent />;
+    }
+    const roleDataRes: RoleDataResponse = data;
     const allRoleData: getAllRoleData[] = roleDataRes?.data;
 
     if (isError || error) {
@@ -117,21 +88,21 @@ const AddRoles = () => {
         return <ErrorComponent />;
     }
 
-    if (!isFetching && data?.statuscode === 500) {
+    if (!isFetching && error) {
         return <ErrorComponent />;
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onStartColumnClick = (e: any) => {
         const roleId = parseInt(e.detail.item.dataset.roleId);
-        const role = allRoleData.find((role) => Number(role.ID) === roleId);
+        const role = allRoleData?.find((role) => Number(role.ID) === roleId);
         setSelectedRole(role);
         setLayout(FCLLayout.TwoColumnsMidExpanded);
     };
 
     return (
         <>
-            {!isFetching && allRoleData.length === 0 ? (
+            {!isFetching && allRoleData?.length === 0 ? (
                 <NoDataComponent />
             ) : (
                 <FlexibleColumnLayout

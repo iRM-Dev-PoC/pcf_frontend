@@ -1,5 +1,7 @@
+import { createRole } from "@/actions/roles";
+import type { RoleData } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import ValueState from "@ui5/webcomponents-base/dist/types/ValueState.js";
 import {
     Button,
@@ -14,15 +16,9 @@ import {
     TextArea,
 } from "@ui5/webcomponents-react";
 import "@ui5/webcomponents/dist/features/InputElementsFormSupport.js";
-import axios from "axios";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { z } from "zod";
-
-type RoleData = {
-    roleName: string;
-    roleDescription: string;
-};
 
 const schema = z.object({
     roleName: z.string().min(1, { message: "Name is required" }),
@@ -49,31 +45,46 @@ const RoleCreationForm = ({
         resolver: zodResolver(schema),
     });
 
-    const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/role-master/create-role`;
+    // const createRole = async (data: RoleData) => {
+    //     const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/role-master/create-role`;
+    //     try {
+    //         const reqData = {
+    //             role_name: data.roleName,
+    //             role_desc: data.roleDescription,
+    //             customer_id: 1,
+    //         };
+    //         const response = await axios.post(endPoint, reqData);
+    //         return response.data;
+    //     } catch (error) {
+    //         console.error(error);
+    //         throw error;
+    //     }
+    // };
 
-    const createRole = async (data: RoleData) => {
-        try {
-            const reqData = {
-                role_name: data.roleName,
-                role_desc: data.roleDescription,
-                customer_id: 1,
-            };
-            const response = await axios.post(endPoint, reqData);
-            return response.data;
-        } catch (error) {
-            console.error(error);
-            throw error;
-        }
-    };
+    // const onSubmit = async (data: RoleData) => {
+    //     await toast.promise(createRole(data), {
+    //         loading: "Creating role...",
+    //         success: "Role created successfully!",
+    //         error: (error) => `Failed to create role: ${error.message}`,
+    //     });
+    //     await queryClient.invalidateQueries({ queryKey: ["allRoleData"] });
+    //     closeButtonref.current?.click();
+    // };
+
+    const createRoleMutation = useMutation({
+        mutationFn: createRole,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["allRoleData"] });
+            closeButtonref.current?.click();
+        },
+    });
 
     const onSubmit = async (data: RoleData) => {
-        await toast.promise(createRole(data), {
+        toast.promise(createRoleMutation.mutateAsync(data), {
             loading: "Creating role...",
             success: "Role created successfully!",
             error: (error) => `Failed to create role: ${error.message}`,
         });
-        await queryClient.invalidateQueries({ queryKey: ["allRoleData"] });
-        closeButtonref.current?.click();
     };
 
     return (
