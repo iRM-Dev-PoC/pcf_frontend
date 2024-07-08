@@ -25,7 +25,6 @@ import {
     ToolbarDesign,
     ToolbarSpacer,
 } from "@ui5/webcomponents-react";
-import { ThemingParameters } from "@ui5/webcomponents-react-base";
 import axios from "axios";
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
