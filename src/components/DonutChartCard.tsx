@@ -7,6 +7,7 @@ type DonutChartCardProps = {
 };
 
 const DonutChartCard = ({ donutChartData }: DonutChartCardProps) => {
+    console.log(donutChartData);
     if (donutChartData.length === 0) return null;
     return (
         <Card>
