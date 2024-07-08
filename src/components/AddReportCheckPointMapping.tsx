@@ -3,7 +3,7 @@ import {
     checkPointDatType,
     getReportCheckPointMappingType,
     reportDataType,
-} from "@/lib/types";
+} from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import {
     Bar,
@@ -28,8 +28,8 @@ const AddReportCheckPointMapping = () => {
     >(undefined);
     const [error, setError] = useState(false);
 
-        const showDialog = Modals.useShowDialog();
-        const closeButtonMappingref = useRef<ButtonDomRef>(null);
+    const showDialog = Modals.useShowDialog();
+    const closeButtonMappingref = useRef<ButtonDomRef>(null);
 
     const getAllMappingData = async () => {
         try {

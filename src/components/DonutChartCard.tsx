@@ -1,13 +1,12 @@
-import type { donutChartsData } from "@/lib/types";
+import type { donutChartsData } from "@/types";
 import { Card } from "@ui5/webcomponents-react";
 import { DonutChart } from "@ui5/webcomponents-react-charts";
 
-type DonutChartCardProps = {
+const DonutChartCard = ({
+    donutChartData,
+}: {
     donutChartData: donutChartsData[];
-};
-
-const DonutChartCard = ({ donutChartData }: DonutChartCardProps) => {
-    console.log(donutChartData);
+}) => {
     if (donutChartData.length === 0) return null;
     return (
         <Card>

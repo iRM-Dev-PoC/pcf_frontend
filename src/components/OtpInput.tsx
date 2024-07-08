@@ -1,7 +1,7 @@
 import SendEmailToResetPassword from "@/components/SendEmailToResetPassword";
 import { validateOtp } from "@/lib/auth";
-import { OtpInputProps } from "@/lib/types";
 import ResetPassword from "@/pages/resetPassword";
+import { OtpInputProps } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
     Button,

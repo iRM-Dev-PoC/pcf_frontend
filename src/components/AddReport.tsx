@@ -3,7 +3,7 @@ import Loading from "@/components/Loading";
 import NoDataComponent from "@/components/NoDataComponent";
 import ReportCreationForm from "@/components/ReportCreationForm";
 import ReportEditForm from "@/components/ReportEditForm";
-import { getAllModuleType } from "@/lib/types";
+import { getAllModuleType } from "@/types";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
     Avatar,
@@ -43,8 +43,8 @@ const AddReport = () => {
     const [error, setError] = useState(false);
     const showDeleteConfirmation = Modals.useShowMessageBox();
     const queryClient = useQueryClient();
-        const showDialog = Modals.useShowDialog();
-        const closeReportBtnRef = useRef<ButtonDomRef >(null);
+    const showDialog = Modals.useShowDialog();
+    const closeReportBtnRef = useRef<ButtonDomRef>(null);
 
     const getAllReportData = async () => {
         try {

@@ -1,4 +1,4 @@
-import { getAllNonCompilantData } from "@/lib/types";
+import { getAllNonCompilantData } from "@/types";
 import { AnalyticalTable, Card, TextAlign } from "@ui5/webcomponents-react";
 
 type NonCompilantDataProps = {

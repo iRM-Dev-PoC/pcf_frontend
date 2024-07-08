@@ -1,5 +1,5 @@
 import CardHeader from "@/components/SoD/CardHeader";
-import { transactionDetailsTypes } from "@/lib/types";
+import { transactionDetailsTypes } from "@/types";
 import { AnalyticalTable, Card } from "@ui5/webcomponents-react";
 
 type CanDoAnalysisDetailsTableProps = {

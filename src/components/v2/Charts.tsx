@@ -1,7 +1,7 @@
 import DonutChartCard from "@/components/DonutChartCard";
 import LineChartCard from "@/components/LineChartCard";
 import ColumnChartCard from "@/components/v2/ColumnChartCard";
-import type { donutChartsData, lineChartData } from "@/lib/types";
+import type { donutChartsData, lineChartData } from "@/types";
 import { FlexBox } from "@ui5/webcomponents-react";
 
 type ChartsProps = {

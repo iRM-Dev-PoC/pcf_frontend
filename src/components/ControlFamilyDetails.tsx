@@ -1,10 +1,14 @@
+import {
+    deleteControlFamily,
+    getAllControlFamilies,
+} from "@/actions/controlFamiliy";
 import ControlFamilyCreationForm from "@/components/ControlFamilyCreation";
 import ControlFamilyEditForm from "@/components/ControlFamilyEditForm";
 import ErrorComponent from "@/components/ErrorComponent";
 import Loading from "@/components/Loading";
 import NoDataComponent from "@/components/NoDataComponent";
-import { getAllControlFamilyType } from "@/lib/types";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { getAllControlFamilyType } from "@/types";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
     Avatar,
     AvatarSize,
@@ -29,7 +33,6 @@ import {
     ToolbarDesign,
     ToolbarSpacer,
 } from "@ui5/webcomponents-react";
-import axios from "axios";
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -40,73 +43,43 @@ const ControlFamilyDetails = () => {
     const [selectedControlFamily, setSelectedControlFamily] = useState<
         getAllControlFamilyType | undefined
     >(undefined);
-    const [error, setError] = useState(false);
     const showDeleteConfirmation = Modals.useShowMessageBox();
     const queryClient = useQueryClient();
     const showDialog = Modals.useShowDialog();
     const closeButtonRoleref = useRef<ButtonDomRef>(null);
 
-    const getAllControlFamiliyData = async () => {
-        try {
-            const endPointAllControlFamily = `${import.meta.env.VITE_BACKEND_BASE_URL}/control-family-master/get-all-control-family`;
-            const response = await axios.get(endPointAllControlFamily);
-            if (response.data.statuscode !== 200) {
-                setError(true);
-            }
-            setError(false);
-            return response.data;
-        } catch (error) {
-            console.error(error);
-            setError(true);
-        }
-    };
-    const { data, isFetching, isError } = useQuery({
+    const {
+        data: allControlFamilyDataRes,
+        isFetching,
+        isError,
+        error,
+    } = useQuery({
         queryKey: ["allControlFamilyData"],
-        queryFn: getAllControlFamiliyData,
+        queryFn: getAllControlFamilies,
         retry: 3,
     });
 
-    const deleteControlFamilyData = async (id: number) => {
-        const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/control-family-master/delete-control-family`;
-        try {
-            const data = {
-                id,
-                customer_id: 1,
-            };
-
-            const response = await axios.patch(endPoint, data);
-            if (response.data?.statuscode !== 200) {
-                setError(true);
-                throw response.data?.message;
-            }
-
-            return response.data;
-        } catch (error) {
-            console.error(error);
-            setError(true);
-            throw error;
-        }
-    };
+    const deleteControlFamilyMutation = useMutation({
+        mutationFn: deleteControlFamily,
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: ["allControlFamilyData"],
+            });
+            setIsEdit(false);
+            setIsFullScreen(false);
+            setLayout(FCLLayout.OneColumn);
+        },
+    });
 
     const handleDeleteControlFamily = async (id: number) => {
-        await toast.promise(deleteControlFamilyData(id), {
+        toast.promise(deleteControlFamilyMutation.mutateAsync(id), {
             loading: "Deleting Control-Family...",
             success: "Control-Family deleted successfully!",
-            error: (error) =>
-                `Failed to delete control-family: ${error.message}`,
+            error: (error) => `Failed to delete control-family due to ${error}`,
         });
-        await queryClient.invalidateQueries({
-            queryKey: ["allControlFamilyData"],
-        });
-        setIsEdit(false);
-        setIsFullScreen(false);
-        setLayout(FCLLayout.OneColumn);
     };
 
-    const controlFamilyDataRes = data;
-
-    const allControlFamilyData: getAllControlFamilyType[] =
-        controlFamilyDataRes?.data;
+    const allControlFamilyData = allControlFamilyDataRes?.data;
 
     if (isError || error) {
         return <ErrorComponent />;
@@ -120,14 +93,14 @@ const ControlFamilyDetails = () => {
         return <ErrorComponent />;
     }
 
-    if (!isFetching && data?.statuscode !== 200) {
+    if (!isFetching && allControlFamilyDataRes?.statuscode !== 200) {
         return <ErrorComponent />;
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onStartColumnClick = (e: any) => {
         const controlfamilyId = parseInt(e.detail.item.dataset.controlfamilyId);
-        const controlfamily = allControlFamilyData.find(
+        const controlfamily = allControlFamilyData?.find(
             (controlfamily) => Number(controlfamily.ID) === controlfamilyId
         );
 
@@ -138,7 +111,7 @@ const ControlFamilyDetails = () => {
 
     return (
         <>
-            {!isFetching && allControlFamilyData.length === 0 ? (
+            {!isFetching && allControlFamilyData?.length === 0 ? (
                 <NoDataComponent />
             ) : (
                 <FlexibleColumnLayout
@@ -200,7 +173,10 @@ const ControlFamilyDetails = () => {
                                     </h1>
                                 }
                             ></Bar>
-                            <List onItemClick={onStartColumnClick} className="rounded-md">
+                            <List
+                                onItemClick={onStartColumnClick}
+                                className="rounded-md"
+                            >
                                 {allControlFamilyData?.map(
                                     (controlfamily, index) => (
                                         <StandardListItem

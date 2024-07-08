@@ -3,10 +3,10 @@ import FilterBarComponent from "@/components/FilterBarComponent";
 import FlexibleColumnTemplete from "@/components/FlexibleColumnTemplete";
 import Loading from "@/components/Loading";
 import NoDataComponent from "@/components/NoDataComponent";
-import { getAllCardDataType } from "@/lib/types";
+import "@/css/dynamicPage.css";
+import { getAllCardDataType } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import {
-    DateRangePicker,
     DynamicPage,
     DynamicPageHeader,
     DynamicPageTitle,
@@ -16,13 +16,12 @@ import {
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
 import axios from "axios";
 import { Suspense, useState } from "react";
-import "@/css/dynamicPage.css";
 
 const Home = () => {
-    const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/dashboard/control-checkpoints`;
     const [error, setError] = useState(false);
 
     const getAllControlCheckPoint = async () => {
+        const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/dashboard/control-checkpoints`;
         try {
             const res = await axios.get(endPoint);
             if (res.data?.statuscode === 200) {
@@ -37,13 +36,17 @@ const Home = () => {
         }
     };
 
-    const { data, isFetching, isError } = useQuery({
+    const {
+        data: cardData,
+        isFetching,
+        isError,
+    } = useQuery({
         queryKey: ["allcardData"],
         queryFn: getAllControlCheckPoint,
         retry: 3,
     });
 
-    const cardValue: getAllCardDataType[] = data?.data;
+    const cardValue: getAllCardDataType[] = cardData?.data;
 
     return (
         <DynamicPage
@@ -63,12 +66,6 @@ const Home = () => {
                         </MessageStrip>
                     }
                     header={<Title>Dashboard</Title>}
-                    actions={
-                        <div className="m-2">
-                            {/* <DatePickerWithRange /> */}
-                            <DateRangePicker />
-                        </div>
-                    }
                 ></DynamicPageTitle>
             }
             style={{

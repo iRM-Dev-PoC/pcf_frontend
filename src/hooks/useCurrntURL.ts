@@ -1,6 +1,6 @@
-import { useContext } from "react";
 import { CurrentURLContext } from "@/context/currentURLContext";
-import { CurrentURLType } from "@/lib/types";
+import { CurrentURLType } from "@/types";
+import { useContext } from "react";
 
 export const useCurrentURL = (): CurrentURLType => {
     const url = useContext(CurrentURLContext);

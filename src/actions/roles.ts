@@ -1,4 +1,4 @@
-import type { RoleData, RoleDataResponse } from "@/lib/types";
+import type { RoleData, RoleDataResponse } from "@/types";
 import axios from "axios";
 
 // Create a new role.
@@ -11,6 +11,9 @@ export const createRole = async (data: RoleData) => {
             customer_id: 1,
         };
         const response = await axios.post(endPoint, reqData);
+        if (response.data.statuscode !== 201) {
+            throw new Error(response.data?.message);
+        }
         return response.data;
     } catch (error) {
         console.error(error);

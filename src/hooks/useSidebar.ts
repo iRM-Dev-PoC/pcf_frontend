@@ -1,5 +1,5 @@
 import { SidebarContext } from "@/context/SidebarContext";
-import { SidebarContextType } from "@/lib/types";
+import { SidebarContextType } from "@/types";
 import { useContext } from "react";
 
 export const useSidebar = (): SidebarContextType => {

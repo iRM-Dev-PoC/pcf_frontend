@@ -4,7 +4,7 @@
 import CanDoDetailsData from "@/components/SoD/CanDoDetailsData";
 import CanDoSummaryHeader from "@/components/SoD/CanDoSummaryHeader";
 import CardHeader from "@/components/SoD/CardHeader";
-import { candoDataType } from "@/lib/types";
+import { candoDataType } from "@/types";
 import {
     AnalyticalTable,
     Bar,

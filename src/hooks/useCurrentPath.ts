@@ -1,5 +1,5 @@
 import { PathContext } from "@/context/currentPathContext";
-import { PathContextType } from "@/lib/types";
+import { PathContextType } from "@/types";
 import { useContext } from "react";
 
 export const useCurrentPath = (): PathContextType => {
