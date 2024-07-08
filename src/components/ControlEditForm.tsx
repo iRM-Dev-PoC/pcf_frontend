@@ -1,5 +1,6 @@
+import { updateTypeOfControl } from "@/actions/typeOfControl";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import ValueState from "@ui5/webcomponents-base/dist/types/ValueState.js";
 import {
     Button,
@@ -14,13 +15,12 @@ import {
     TextArea,
 } from "@ui5/webcomponents-react";
 import "@ui5/webcomponents/dist/features/InputElementsFormSupport.js";
-import axios from "axios";
 import { Dispatch, SetStateAction } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { z } from "zod";
 
-type ControlsData = {
+export type ControlsData = {
     id: number;
     controlName: string;
     controlDescription: string;
@@ -62,47 +62,29 @@ const ControlEditForm = ({
         resolver: zodResolver(schema),
     });
 
-    const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/control-master/update-control`;
-
-    const updateControl = async (data: ControlsData) => {
-        try {
-            const updateData = {
-                id,
-                control_name: data.controlName,
-                control_desc: data.controlDescription,
-                customer_id: 1,
-            };
-            const response = await axios.patch(endPoint, updateData);
-
-            if (response.data?.statuscode === 400) {
-                throw response.data?.message;
-            }
-            return response.data;
-        } catch (error) {
-            console.error(error);
-            throw error;
-        } finally {
+    const updateControlFamilyMutation = useMutation({
+        mutationFn: ({ data, id }: { data: ControlsData; id: number }) =>
+            updateTypeOfControl(data, id),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["allControlsData"] });
             setIsEdit(false);
-        }
-    };
+            setIsFullScreen(false);
+            setLayout(FCLLayout.OneColumn);
+        },
+    });
 
-    const onSubmit = async (data: ControlsData) => {
-        await toast.promise(updateControl(data), {
-            loading: "Updating control...",
-            success: "Control updated successfully!",
-            error: (error) => `Failed to update control: ${error.message}`,
+    const onSubmit = async (data: ControlsData, id: number) => {
+        toast.promise(updateControlFamilyMutation.mutateAsync({ data, id }), {
+            loading: "Updating type of control...",
+            success: "Type of control updated successfully!",
+            error: (error) =>
+                `Failed to update type of control: ${error.message}`,
         });
-        await queryClient.invalidateQueries({
-            queryKey: ["allControlsData"],
-        });
-        setIsEdit(false);
-        setIsFullScreen(false);
-        setLayout(FCLLayout.OneColumn);
     };
 
     return (
         <Form
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={handleSubmit((data) => onSubmit(data, id))}
             labelSpanM={4}
             className="flex items-center justify-center"
         >

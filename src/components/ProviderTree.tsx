@@ -12,11 +12,7 @@ import { BrowserRouter } from "react-router-dom";
 
 const queryClient = new QueryClient();
 
-interface ProviderTreeProps {
-    children: ReactNode;
-}
-
-const ProviderTree = ({ children }: ProviderTreeProps) => {
+const ProviderTree = ({ children }: { children: ReactNode }) => {
     return (
         <QueryClientProvider client={queryClient}>
             <ThemeProvider>

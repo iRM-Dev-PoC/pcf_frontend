@@ -1,5 +1,6 @@
+import { createTypeOfControl } from "@/actions/typeOfControl";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import ValueState from "@ui5/webcomponents-base/dist/types/ValueState.js";
 import {
     Button,
@@ -16,13 +17,12 @@ import {
     TextArea,
 } from "@ui5/webcomponents-react";
 import "@ui5/webcomponents/dist/features/InputElementsFormSupport.js";
-import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { z } from "zod";
 
-type ControlsData = {
+export type ControlsData = {
     controlValue: string;
     controlName: string;
     controlDescription: string;
@@ -58,45 +58,23 @@ const ControlCreationForm = ({
         resolver: zodResolver(schema),
     });
 
-    const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/control-master/create-control`;
-
-    const createControl = async (data: ControlsData) => {
-        try {
-            let control_id_data: number;
-
-            if (data.controlValue === "Order To Cash") {
-                control_id_data = 1;
-            } else {
-                control_id_data = 2;
-            }
-            const reqData = {
-                control_name: data.controlName,
-                control_desc: data.controlDescription,
-                control_family_id: control_id_data,
-                customer_id: 1,
-            };
-            const response = await axios.post(endPoint, reqData);
-            if (response.data.statuscode === 500) {
-                throw response.data?.message;
-            }
-
-            return response.data;
-        } catch (error) {
-            console.error(error);
-            throw error;
-        }
-    };
+    const createTypeOfControlMutation = useMutation({
+        mutationFn: createTypeOfControl,
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: ["allControlsData"],
+            });
+            closeButtonref.current?.click();
+        },
+    });
 
     const onSubmit = async (data: ControlsData) => {
-        await toast.promise(createControl(data), {
-            loading: "Creating control...",
-            success: "Control created successfully!",
-            error: (error) => `Failed to create control: ${error}`,
+        toast.promise(createTypeOfControlMutation.mutateAsync(data), {
+            loading: "Creating type of control...",
+            success: "Type of control created successfully!",
+            error: (error) =>
+                `Failed to create type of control: ${error.message}`,
         });
-        await queryClient.invalidateQueries({
-            queryKey: ["allControlsData"],
-        });
-        closeButtonref.current?.click();
     };
 
     return (
