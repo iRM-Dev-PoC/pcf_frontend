@@ -1,9 +1,14 @@
 import { getAllControlFamilies } from "@/actions/controlFamiliy";
+import { getAllTypeOfControls } from "@/actions/typeOfControl";
 import ApplyFilterButton from "@/components/v2/ApplyFilterButton";
 import { useHeaderData } from "@/hooks/useHeaderData";
 import { useSelectedItem } from "@/hooks/useSelectedItem";
-import { getCurrentDatetime } from "@/lib/utils";
-import type { getAllControlFamilyType, getHeaderTypes } from "@/types";
+import { getLastWeekDate } from "@/lib/utils";
+import type {
+    getAllControlFamilyType,
+    getAllControlsType,
+    getHeaderTypes,
+} from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import {
     ComboBox,
@@ -14,15 +19,16 @@ import {
     FilterGroupItem,
     Title,
     Ui5CustomEvent,
+    type DateRangePickerDomRef,
 } from "@ui5/webcomponents-react";
 import { ComboBoxSelectionChangeEventDetail } from "@ui5/webcomponents/dist/ComboBox.js";
+import type { DatePickerChangeEventDetail } from "@ui5/webcomponents/dist/DatePicker";
 import { useEffect, useState } from "react";
 
 const FilterBarComponent = () => {
     const [selectedSync, setSelectedSync] = useState("");
     const [selectedControlFamily, setSelectedControlFamily] = useState("");
     const [selectedTypeOfControls, setSelectedTypeOfControls] = useState("");
-    const [selectedDateRange, setSelectedDateRange] = useState("");
     const { data, error, isLoading } = useHeaderData();
     const { setSelectedItem } = useSelectedItem();
 
@@ -30,7 +36,7 @@ const FilterBarComponent = () => {
         syncId: 1,
         controlFamilyId: 1,
         typeOfControlsId: 1,
-        dateRange: getCurrentDatetime(),
+        dateRange: getLastWeekDate(),
     });
 
     const {
@@ -40,6 +46,16 @@ const FilterBarComponent = () => {
     } = useQuery({
         queryKey: ["allControlFamilyData"],
         queryFn: getAllControlFamilies,
+        retry: 3,
+    });
+
+    const {
+        data: allTypeOfControlsDataRes,
+        isFetching: allTypeOfControlsDataResFetching,
+        isError: allTypeOfControlsDataResError,
+    } = useQuery({
+        queryKey: ["allControlsData"],
+        queryFn: getAllTypeOfControls,
         retry: 3,
     });
 
@@ -56,7 +72,15 @@ const FilterBarComponent = () => {
                 allControlFamilyDataRes.data[0].CONTROL_FAMILY_NAME
             );
         }
-    }, [data, allControlFamilyDataRes]);
+        if (
+            allTypeOfControlsDataRes &&
+            allTypeOfControlsDataRes.data.length > 0
+        ) {
+            setSelectedTypeOfControls(
+                allTypeOfControlsDataRes.data[0].CONTROL_NAME
+            );
+        }
+    }, [data, allControlFamilyDataRes, allTypeOfControlsDataRes]);
 
     const handleSyncComboBoxChange = (
         event: Ui5CustomEvent<
@@ -100,7 +124,40 @@ const FilterBarComponent = () => {
         });
     };
 
-    console.log(allFilterValues, "allFilterValues");
+    const handleTypeOfControlsComboBoxChange = (
+        event: Ui5CustomEvent<
+            ComboBoxDomRef,
+            ComboBoxSelectionChangeEventDetail
+        >
+    ) => {
+        const selectedItemId = Number(
+            event.detail?.item?.getAttribute("data-typeofcontrols-id")
+        );
+        const selectedTypeOfControl =
+            allTypeOfControlsDataRes?.data?.find(
+                (item) => item.ID === selectedItemId
+            ) || null;
+        if (selectedTypeOfControl) {
+            setSelectedTypeOfControls(selectedTypeOfControl.CONTROL_NAME);
+        }
+        setAllFilterValues({
+            ...allFilterValues,
+            typeOfControlsId: selectedTypeOfControl?.ID || 0,
+        });
+    };
+
+    const handleDateRangePickerChange = (
+        event: Ui5CustomEvent<
+            DateRangePickerDomRef,
+            DatePickerChangeEventDetail
+        >
+    ) => {
+        const selectedDateRange = event.detail?.value;
+        setAllFilterValues({
+            ...allFilterValues,
+            dateRange: selectedDateRange,
+        });
+    };
 
     return (
         <>
@@ -109,14 +166,31 @@ const FilterBarComponent = () => {
                 header={<Title>Filters</Title>}
                 filterBarCollapsed
             >
-                {/* Type of Controls */}
-                <FilterGroupItem label="Type Of Controls">
-                    <ComboBox valueState="None">
-                        <ComboBoxItem text="Procure To pay" />
-                        <ComboBoxItem text="Finance" />
-                        <ComboBoxItem text="Human Resource management" />
-                    </ComboBox>
-                </FilterGroupItem>
+                {/* Type of Controls for filter bar */}
+                {!allTypeOfControlsDataResError &&
+                    allTypeOfControlsDataRes &&
+                    allTypeOfControlsDataRes.data.length > 0 && (
+                        <FilterGroupItem label="Type Of Controls">
+                            <ComboBox
+                                valueState="None"
+                                value={selectedTypeOfControls}
+                                onSelectionChange={
+                                    handleTypeOfControlsComboBoxChange
+                                }
+                                loading={allTypeOfControlsDataResFetching}
+                            >
+                                {allTypeOfControlsDataRes.data.map(
+                                    (head: getAllControlsType) => (
+                                        <ComboBoxItem
+                                            key={head.ID}
+                                            text={head.CONTROL_NAME}
+                                            data-typeofcontrols-id={head.ID}
+                                        />
+                                    )
+                                )}
+                            </ComboBox>
+                        </FilterGroupItem>
+                    )}
 
                 {/* Control Family for filter bar */}
                 {!allControlFamilyDataResError &&
@@ -164,9 +238,13 @@ const FilterBarComponent = () => {
                     </FilterGroupItem>
                 )}
                 {/* Date Range Picker */}
-                <DateRangePicker />
+                <DateRangePicker
+                    onChange={handleDateRangePickerChange}
+                    maxDate={new Date().toISOString().split("T")[0]}
+                    value={getLastWeekDate()}
+                />
                 {/* Apply Filter Button */}
-                <ApplyFilterButton />
+                <ApplyFilterButton value={allFilterValues} />
             </FilterBar>
         </>
     );
