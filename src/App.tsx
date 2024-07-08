@@ -19,6 +19,9 @@ import { useSwitchProduct } from "@/hooks/useSwitchProduct";
 import { routerMap } from "@/lib/routeMap";
 import { routes, sodRoutes } from "@/lib/routedata";
 import { User } from "@/types";
+import "@ui5/webcomponents-fiori/dist/Assets.js";
+import "@ui5/webcomponents-icons/dist/Assets.js";
+import "@ui5/webcomponents/dist/Assets.js";
 
 const App = () => {
     const [, setTheme] = useState("sap_horizon");

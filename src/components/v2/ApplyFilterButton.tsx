@@ -5,7 +5,8 @@ type ApplyFilterButtonProps = {
         syncId: number;
         controlFamilyId: number;
         typeOfControlsId: number;
-        dateRange: string;
+        startDate: string;
+        endDate: string;
     };
 };
 
