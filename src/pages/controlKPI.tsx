@@ -19,7 +19,14 @@ const controlKPI = () => {
             headerTitle={
                 <DynamicPageTitle
                     header={<Title>KPI - Controls</Title>}
-                    snappedContent={<MessageStrip>xyz</MessageStrip>}
+                    snappedContent={
+                        <MessageStrip>
+                            A Control KPI Module tracks key performance metrics
+                            with real-time data, trend analysis, and reports,
+                            aiding in goal achievement and data-driven
+                            decisions.
+                        </MessageStrip>
+                    }
                 ></DynamicPageTitle>
             }
             style={{

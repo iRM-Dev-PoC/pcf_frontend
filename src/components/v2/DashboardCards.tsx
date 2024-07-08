@@ -3,8 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import DashboardCardTable from "@/components/v2/DashboardCardTable";
 import { useCurrentTheme } from "@/hooks/useCurrentTheme";
 import { cn } from "@/lib/utils";
-import { Button, Modals } from "@ui5/webcomponents-react";
-
+import { Bar, Button, Modals } from "@ui5/webcomponents-react";
 
 type DashboardCardprops = {
     title: string | undefined;
@@ -25,14 +24,17 @@ const DashboardCards = ({
 
     const openModal = () => {
         const { close } = showDialog({
-            headerText: "Base Card Details",
-            children: (
-                <DashboardCardTable/>
-            ),
+            style:{padding:"6px", width:"100%"},
+            headerText: "Card Data",
+            children: <DashboardCardTable />,
             footer: (
-                <div className="flex justify-end">
-                    <Button onClick={() => close()}>Close</Button>
-                </div>
+                <Bar
+                    endContent={
+                        <Button onClick={() => close()} design="Negative">
+                            Close
+                        </Button>
+                    }
+                />
             ),
         });
     };
@@ -66,7 +68,3 @@ const DashboardCards = ({
 };
 
 export default DashboardCards;
-
-
-
-
