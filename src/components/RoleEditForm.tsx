@@ -1,5 +1,5 @@
 import { updateRole } from "@/actions/roles";
-// import type { RoleData } from "@/lib/types";
+// import type { RoleData } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import ValueState from "@ui5/webcomponents-base/dist/types/ValueState.js";

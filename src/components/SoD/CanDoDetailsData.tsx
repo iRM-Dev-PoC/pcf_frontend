@@ -2,8 +2,8 @@
 // @ts-nocheck
 
 import CardHeader from "@/components/SoD/CardHeader";
-import { canDoDetailsDataApiResponse } from "@/lib/types";
 import canDoData from "@/mockSoDData/canDoDetails.json";
+import { canDoDetailsDataApiResponse } from "@/types";
 import { AnalyticalTable, Card } from "@ui5/webcomponents-react";
 import { useEffect, useState } from "react";
 

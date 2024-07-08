@@ -1,6 +1,6 @@
 import OtpInput from "@/components/OtpInput";
 import { resetPassword } from "@/lib/auth";
-import { ResetPasswordFormData } from "@/lib/types";
+import { ResetPasswordFormData } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
     Button,

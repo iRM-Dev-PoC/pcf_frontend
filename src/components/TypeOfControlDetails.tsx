@@ -3,7 +3,7 @@ import ControlEditForm from "@/components/ControlEditForm";
 import ErrorComponent from "@/components/ErrorComponent";
 import Loading from "@/components/Loading";
 import NoDataComponent from "@/components/NoDataComponent";
-import { getAllControlsType } from "@/lib/types";
+import { getAllControlsType } from "@/types";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
     Avatar,
@@ -44,8 +44,8 @@ const TypeOfControlDetails = () => {
     const showDeleteConfirmation = Modals.useShowMessageBox();
     const queryClient = useQueryClient();
 
-        const showDialog = Modals.useShowDialog();
-        const closeButtonRoleref = useRef<ButtonDomRef>(null);
+    const showDialog = Modals.useShowDialog();
+    const closeButtonRoleref = useRef<ButtonDomRef>(null);
     const getAllControls = async () => {
         try {
             const endPointAllControls = `${import.meta.env.VITE_BACKEND_BASE_URL}/control-master/get-all-controls`;

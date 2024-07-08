@@ -1,5 +1,5 @@
 import { createRole } from "@/actions/roles";
-import type { RoleData } from "@/lib/types";
+import type { RoleData } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import ValueState from "@ui5/webcomponents-base/dist/types/ValueState.js";
@@ -44,32 +44,6 @@ const RoleCreationForm = ({
         mode: "onChange",
         resolver: zodResolver(schema),
     });
-
-    // const createRole = async (data: RoleData) => {
-    //     const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/role-master/create-role`;
-    //     try {
-    //         const reqData = {
-    //             role_name: data.roleName,
-    //             role_desc: data.roleDescription,
-    //             customer_id: 1,
-    //         };
-    //         const response = await axios.post(endPoint, reqData);
-    //         return response.data;
-    //     } catch (error) {
-    //         console.error(error);
-    //         throw error;
-    //     }
-    // };
-
-    // const onSubmit = async (data: RoleData) => {
-    //     await toast.promise(createRole(data), {
-    //         loading: "Creating role...",
-    //         success: "Role created successfully!",
-    //         error: (error) => `Failed to create role: ${error.message}`,
-    //     });
-    //     await queryClient.invalidateQueries({ queryKey: ["allRoleData"] });
-    //     closeButtonref.current?.click();
-    // };
 
     const createRoleMutation = useMutation({
         mutationFn: createRole,

@@ -4,7 +4,7 @@ import Loading from "@/components/Loading";
 import NoDataComponent from "@/components/NoDataComponent";
 import RoleCreationForm from "@/components/RoleCreationForm";
 import RoleEditForm from "@/components/RoleEditForm";
-import type { getAllRoleData, RoleDataResponse } from "@/lib/types";
+import type { getAllRoleData, RoleDataResponse } from "@/types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
     Avatar,

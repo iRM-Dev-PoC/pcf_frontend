@@ -1,6 +1,6 @@
 import RiskCard from "@/components/v2/RiskCard";
-import type { getAllCardDataType } from "@/lib/types";
 import { formatNumber } from "@/lib/utils";
+import type { getAllCardDataType } from "@/types";
 import { Fragment } from "react";
 type DashboardCardListProps = {
     dataCard: getAllCardDataType[];

@@ -3,7 +3,7 @@ import Loading from "@/components/Loading";
 import NoDataComponent from "@/components/NoDataComponent";
 import SubModuleCreationForm from "@/components/SubModuleCreationForm";
 import SubModuleEditForm from "@/components/SubModuleEditForm";
-import { getAllSubModulesType } from "@/lib/types";
+import { getAllSubModulesType } from "@/types";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
     Avatar,
@@ -44,8 +44,8 @@ const AddSubModule = () => {
     const showDeleteConfirmation = Modals.useShowMessageBox();
     const queryClient = useQueryClient();
 
-       const showDialog = Modals.useShowDialog();
-       const closeButtonRoleref = useRef<ButtonDomRef>(null);
+    const showDialog = Modals.useShowDialog();
+    const closeButtonRoleref = useRef<ButtonDomRef>(null);
 
     const getAllSubModules = async () => {
         try {

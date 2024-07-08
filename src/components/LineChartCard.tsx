@@ -1,4 +1,4 @@
-import type { lineChartData } from "@/lib/types";
+import type { lineChartData } from "@/types";
 import { Card } from "@ui5/webcomponents-react";
 import { LineChart } from "@ui5/webcomponents-react-charts";
 

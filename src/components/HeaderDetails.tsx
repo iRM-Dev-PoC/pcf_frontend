@@ -1,7 +1,7 @@
 import ErrorComponent from "@/components/ErrorComponent";
 import NoDataComponent from "@/components/NoDataComponent";
-import { getAllSyncDetails } from "@/lib/types";
 import { formatDate } from "@/lib/utils";
+import { getAllSyncDetails } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import { AnalyticalTable, Badge, Card } from "@ui5/webcomponents-react";
 import axios from "axios";

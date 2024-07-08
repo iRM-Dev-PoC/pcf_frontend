@@ -1,4 +1,4 @@
-import { getAllSyncData } from "@/lib/types";
+import { getAllSyncData } from "@/types";
 import { Dispatch, SetStateAction } from "react";
 
 type SyncIDProps = {

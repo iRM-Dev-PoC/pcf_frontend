@@ -3,7 +3,7 @@ import Loading from "@/components/Loading";
 import ModuleCreationForm from "@/components/ModuleCreationForm";
 import ModuleEditForm from "@/components/ModuleEditForm";
 import NoDataComponent from "@/components/NoDataComponent";
-import { getAllModulesType } from "@/lib/types";
+import { getAllModulesType } from "@/types";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
     Avatar,
@@ -194,8 +194,7 @@ const AddModuleMaster = () => {
                                         Module-Master
                                     </h1>
                                 }
-                            >
-                            </Bar>
+                            ></Bar>
                             <List onItemClick={onStartColumnClick}>
                                 {allModuleData?.map((module, index) => (
                                     <StandardListItem

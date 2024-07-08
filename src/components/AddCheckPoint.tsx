@@ -3,7 +3,7 @@ import CheckPointEditForm from "@/components/CheckPointEditForm";
 import ErrorComponent from "@/components/ErrorComponent";
 import Loading from "@/components/Loading";
 import NoDataComponent from "@/components/NoDataComponent";
-import { getAllCheckPointData } from "@/lib/types";
+import { getAllCheckPointData } from "@/types";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
     Avatar,
@@ -44,8 +44,8 @@ const AddCheckPoint = () => {
 
     const showDeleteConfirmation = Modals.useShowMessageBox();
     const queryClient = useQueryClient();
-        const showDialog = Modals.useShowDialog();
-        const closeCheckpointBtnRef = useRef<ButtonDomRef>(null);
+    const showDialog = Modals.useShowDialog();
+    const closeCheckpointBtnRef = useRef<ButtonDomRef>(null);
 
     const getAllCheckPoinData = async () => {
         try {
@@ -196,7 +196,10 @@ const AddCheckPoint = () => {
                                     </h1>
                                 }
                             ></Bar>
-                            <List onItemClick={onStartColumnClick} className="rounded-md">
+                            <List
+                                onItemClick={onStartColumnClick}
+                                className="rounded-md"
+                            >
                                 {allCheckPointData?.map((checkPoint, index) => (
                                     <StandardListItem
                                         description={

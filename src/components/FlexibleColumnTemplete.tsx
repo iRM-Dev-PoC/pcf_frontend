@@ -7,8 +7,8 @@ import DashboardToolbar from "@/components/v2/DashboardToolbar";
 import DashboardTopCards from "@/components/v2/DashboardTopCards";
 import { useSelectedItem } from "@/hooks/useSelectedItem";
 import { useSidebar } from "@/hooks/useSidebar";
-import { getAllCardDataType, getControlDataType } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { getAllCardDataType, getControlDataType } from "@/types";
 import {
     FCLLayout,
     FlexBox,
@@ -19,11 +19,11 @@ import {
 import axios from "axios";
 import { useState } from "react";
 
-type FlexibleColumnTempleteProps = {
+const FlexibleColumnTemplete = ({
+    dataCard,
+}: {
     dataCard: getAllCardDataType[];
-};
-
-const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
+}) => {
     const [layout, setLayout] = useState<FCLLayout>(FCLLayout.OneColumn);
     const [error, setError] = useState<string | undefined>(undefined);
     const [isloading, setIsLoading] = useState(false);
@@ -72,8 +72,6 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
         const index = dataCard.findIndex((data) => data.ID === id);
         setClickedCard(dataCard[index]);
     };
-
-    console.log("dashboardData", dashboardData);
 
     const nonCompilantDataRes = dashboardData?.violatedData;
     const donutChartData = dashboardData?.donutChartData;

@@ -1,5 +1,6 @@
+import { createControlFamiliy } from "@/actions/controlFamiliy";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import ValueState from "@ui5/webcomponents-base/dist/types/ValueState.js";
 import {
     Button,
@@ -14,12 +15,11 @@ import {
     TextArea,
 } from "@ui5/webcomponents-react";
 import "@ui5/webcomponents/dist/features/InputElementsFormSupport.js";
-import axios from "axios";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { z } from "zod";
 
-type ControlsData = {
+export type ControlsData = {
     controlFamilyName: string;
     controlFamilyDescription: string;
 };
@@ -51,37 +51,23 @@ const ControlFamilyCreationForm = ({
         resolver: zodResolver(schema),
     });
 
-    const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/control-family-master/create-control-family`;
-
-    const createControlFamiliy = async (data: ControlsData) => {
-        try {
-            const reqData = {
-                control_family_name: data.controlFamilyName,
-                control_family_desc: data.controlFamilyDescription,
-                customer_id: 1,
-            };
-            const response = await axios.post(endPoint, reqData);
-            if (response.data.statuscode === 500) {
-                throw new Error(response.data?.message);
-            }
-
-            return response.data;
-        } catch (error) {
-            console.error(error);
-            throw error;
-        }
-    };
+    const createControlFamiliyMutation = useMutation({
+        mutationFn: createControlFamiliy,
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: ["allControlFamilyData"],
+            });
+            closeButtonref.current?.click();
+        },
+    });
 
     const onSubmit = async (data: ControlsData) => {
-        await toast.promise(createControlFamiliy(data), {
+        toast.promise(createControlFamiliyMutation.mutateAsync(data), {
             loading: "Creating control family...",
             success: "Control-Family created successfully!",
-            error: (error) => `Failed to create control-family: ${error}`,
+            error: (error) =>
+                `Failed to create control-family: ${error.message}`,
         });
-        await queryClient.invalidateQueries({
-            queryKey: ["allControlFamilyData"],
-        });
-        closeButtonref.current?.click();
     };
 
     return (
