@@ -1,7 +1,10 @@
+import { getAllControlFamilies } from "@/actions/controlFamiliy";
 import ApplyFilterButton from "@/components/v2/ApplyFilterButton";
 import { useHeaderData } from "@/hooks/useHeaderData";
 import { useSelectedItem } from "@/hooks/useSelectedItem";
-import type { getHeaderTypes } from "@/types";
+import { getCurrentDatetime } from "@/lib/utils";
+import type { getAllControlFamilyType, getHeaderTypes } from "@/types";
+import { useQuery } from "@tanstack/react-query";
 import {
     ComboBox,
     ComboBoxDomRef,
@@ -16,16 +19,44 @@ import { ComboBoxSelectionChangeEventDetail } from "@ui5/webcomponents/dist/Comb
 import { useEffect, useState } from "react";
 
 const FilterBarComponent = () => {
-    const [selectedText, setSelectedText] = useState("");
+    const [selectedSync, setSelectedSync] = useState("");
+    const [selectedControlFamily, setSelectedControlFamily] = useState("");
+    const [selectedTypeOfControls, setSelectedTypeOfControls] = useState("");
+    const [selectedDateRange, setSelectedDateRange] = useState("");
     const { data, error, isLoading } = useHeaderData();
     const { setSelectedItem } = useSelectedItem();
 
+    const [allFilterValues, setAllFilterValues] = useState({
+        syncId: 1,
+        controlFamilyId: 1,
+        typeOfControlsId: 1,
+        dateRange: getCurrentDatetime(),
+    });
+
+    const {
+        data: allControlFamilyDataRes,
+        isFetching: allControlFamilyDataResFetching,
+        error: allControlFamilyDataResError,
+    } = useQuery({
+        queryKey: ["allControlFamilyData"],
+        queryFn: getAllControlFamilies,
+        retry: 3,
+    });
+
     useEffect(() => {
         if (data && data.length > 0) {
-            setSelectedText(data[0].SYNC_ID);
+            setSelectedSync(data[0].SYNC_ID);
             setSelectedItem(data[0]);
         }
-    }, [data]);
+        if (
+            allControlFamilyDataRes &&
+            allControlFamilyDataRes.data.length > 0
+        ) {
+            setSelectedControlFamily(
+                allControlFamilyDataRes.data[0].CONTROL_FAMILY_NAME
+            );
+        }
+    }, [data, allControlFamilyDataRes]);
 
     const handleSyncComboBoxChange = (
         event: Ui5CustomEvent<
@@ -34,14 +65,42 @@ const FilterBarComponent = () => {
         >
     ) => {
         const selectedItemId = Number(
-            event.detail?.item?.getAttribute("data-key")
+            event.detail?.item?.getAttribute("data-sync-id")
         );
         const selectedItem =
             data?.find((item) => item.ID === selectedItemId) || null;
         setSelectedItem(selectedItem);
-        const selectedText = selectedItem?.SYNC_ID || "";
-        setSelectedText(selectedText);
+        const selectedSync = selectedItem?.SYNC_ID || "";
+        setSelectedSync(selectedSync);
+        setAllFilterValues({
+            ...allFilterValues,
+            syncId: selectedItemId || 0,
+        });
     };
+
+    const handleControlFamilyComboBoxChange = (
+        event: Ui5CustomEvent<
+            ComboBoxDomRef,
+            ComboBoxSelectionChangeEventDetail
+        >
+    ) => {
+        const selectedItemId = Number(
+            event.detail?.item?.getAttribute("data-controlfamily-id")
+        );
+        const selectedControlFamily =
+            allControlFamilyDataRes?.data?.find(
+                (item) => item.ID === selectedItemId
+            ) || null;
+        if (selectedControlFamily) {
+            setSelectedControlFamily(selectedControlFamily.CONTROL_FAMILY_NAME);
+        }
+        setAllFilterValues({
+            ...allFilterValues,
+            controlFamilyId: selectedControlFamily?.ID || 0,
+        });
+    };
+
+    console.log(allFilterValues, "allFilterValues");
 
     return (
         <>
@@ -59,18 +118,37 @@ const FilterBarComponent = () => {
                     </ComboBox>
                 </FilterGroupItem>
 
-                {/* Control Family */}
-                <FilterGroupItem label="Control Family">
-                    <ComboBox valueState="None">
-                        <ComboBoxItem text="Control Family Name" />
-                    </ComboBox>
-                </FilterGroupItem>
+                {/* Control Family for filter bar */}
+                {!allControlFamilyDataResError &&
+                    allControlFamilyDataRes &&
+                    allControlFamilyDataRes.data.length > 0 && (
+                        <FilterGroupItem label="Control Family">
+                            <ComboBox
+                                valueState="None"
+                                value={selectedControlFamily}
+                                onSelectionChange={
+                                    handleControlFamilyComboBoxChange
+                                }
+                                loading={allControlFamilyDataResFetching}
+                            >
+                                {allControlFamilyDataRes.data.map(
+                                    (head: getAllControlFamilyType) => (
+                                        <ComboBoxItem
+                                            key={head.ID}
+                                            text={head.CONTROL_FAMILY_NAME}
+                                            data-controlfamily-id={head.ID}
+                                        />
+                                    )
+                                )}
+                            </ComboBox>
+                        </FilterGroupItem>
+                    )}
 
                 {/* Sync ID for filter bar */}
                 {!error && data && data.length > 0 && (
                     <FilterGroupItem label="SYNC">
                         <ComboBox
-                            value={selectedText}
+                            value={selectedSync}
                             valueState="None"
                             onSelectionChange={handleSyncComboBoxChange}
                             loading={isLoading}
@@ -79,16 +157,14 @@ const FilterBarComponent = () => {
                                 <ComboBoxItem
                                     key={head.SYNC_ID}
                                     text={head.SYNC_ID}
-                                    data-key={head.ID}
+                                    data-sync-id={head.ID}
                                 />
                             ))}
                         </ComboBox>
                     </FilterGroupItem>
                 )}
-
                 {/* Date Range Picker */}
                 <DateRangePicker />
-
                 {/* Apply Filter Button */}
                 <ApplyFilterButton />
             </FilterBar>

@@ -1,10 +1,14 @@
+import {
+    deleteTypeOfControl,
+    getAllTypeOfControls,
+} from "@/actions/typeOfControl";
 import ControlCreationForm from "@/components/ControlCreationForm";
 import ControlEditForm from "@/components/ControlEditForm";
 import ErrorComponent from "@/components/ErrorComponent";
 import Loading from "@/components/Loading";
 import NoDataComponent from "@/components/NoDataComponent";
 import { getAllControlsType } from "@/types";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
     Avatar,
     AvatarSize,
@@ -29,7 +33,6 @@ import {
     ToolbarDesign,
     ToolbarSpacer,
 } from "@ui5/webcomponents-react";
-import axios from "axios";
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -40,71 +43,46 @@ const TypeOfControlDetails = () => {
     const [selectedControl, setSelectedControl] = useState<
         getAllControlsType | undefined
     >(undefined);
-    const [error, setError] = useState(false);
     const showDeleteConfirmation = Modals.useShowMessageBox();
     const queryClient = useQueryClient();
 
     const showDialog = Modals.useShowDialog();
     const closeButtonRoleref = useRef<ButtonDomRef>(null);
-    const getAllControls = async () => {
-        try {
-            const endPointAllControls = `${import.meta.env.VITE_BACKEND_BASE_URL}/control-master/get-all-controls`;
-            const response = await axios.get(endPointAllControls);
-            if (response.data.statuscode !== 200) {
-                setError(true);
-            }
-            setError(false);
-            return response.data;
-        } catch (error) {
-            console.error(error);
-            setError(true);
-        }
-    };
 
-    const { data, isFetching, isError } = useQuery({
+    const {
+        data: allTypeOfControlsData,
+        isFetching,
+        isError,
+    } = useQuery({
         queryKey: ["allControlsData"],
-        queryFn: getAllControls,
+        queryFn: getAllTypeOfControls,
         retry: 3,
     });
 
-    const deleteControlData = async (id: number) => {
-        const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/control-master/delete-control`;
-        try {
-            const data = {
-                id,
-                customer_id: 1,
-            };
-            const response = await axios.patch(endPoint, data);
-            if (response.data?.statuscode !== 200) {
-                setError(true);
-                throw response.data?.message;
-            }
+    const deleteTypeOfControlMutation = useMutation({
+        mutationFn: deleteTypeOfControl,
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: ["allControlsData"],
+            });
+            setIsEdit(false);
+            setIsFullScreen(false);
+            setLayout(FCLLayout.OneColumn);
+        },
+    });
 
-            return response.data;
-        } catch (error) {
-            console.error(error);
-            setError(true);
-            throw error;
-        }
-    };
-
-    const handleDeleteControls = async (id: number) => {
-        await toast.promise(deleteControlData(id), {
-            loading: "Deleting Control...",
-            success: "Control deleted successfully!",
-            error: (error) => `Failed to delete control: ${error.message}`,
+    const handleDeleteTypeOfControl = async (id: number) => {
+        toast.promise(deleteTypeOfControlMutation.mutateAsync(id), {
+            loading: "Deleting Type of Control...",
+            success: "Type of Control deleted successfully!",
+            error: (error) =>
+                `Failed to delete Type of Control due to ${error}`,
         });
-        await queryClient.invalidateQueries({ queryKey: ["allControlsData"] });
-        setIsEdit(false);
-        setIsFullScreen(false);
-        setLayout(FCLLayout.OneColumn);
     };
 
-    const controlDataRes = data;
+    const allControlsData = allTypeOfControlsData?.data;
 
-    const allControlsData: getAllControlsType[] = controlDataRes?.data;
-
-    if (isError || error) {
+    if (isError) {
         return <ErrorComponent />;
     }
 
@@ -116,7 +94,7 @@ const TypeOfControlDetails = () => {
         return <ErrorComponent />;
     }
 
-    if (!isFetching && data?.statuscode === 500) {
+    if (!isFetching && allTypeOfControlsData?.statuscode === 500) {
         return <ErrorComponent />;
     }
 
@@ -125,7 +103,7 @@ const TypeOfControlDetails = () => {
         e: any
     ) => {
         const controlId = parseInt(e.detail.item.dataset.controlId);
-        const control = allControlsData.find(
+        const control = allControlsData?.find(
             (control) => Number(control.ID) === controlId
         );
         setSelectedControl(control);
@@ -134,7 +112,7 @@ const TypeOfControlDetails = () => {
 
     return (
         <>
-            {!isFetching && allControlsData.length === 0 ? (
+            {!isFetching && allControlsData?.length === 0 ? (
                 <NoDataComponent />
             ) : (
                 <FlexibleColumnLayout
@@ -247,7 +225,7 @@ const TypeOfControlDetails = () => {
                                                     event.detail.action ===
                                                     "Delete"
                                                 ) {
-                                                    handleDeleteControls(
+                                                    handleDeleteTypeOfControl(
                                                         selectedControl?.ID ?? 0
                                                     );
                                                 }

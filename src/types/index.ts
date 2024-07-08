@@ -577,6 +577,12 @@ type ControlFamilyResponse = {
     data: getAllControlFamilyType[];
 };
 
+type TypeOfControlResponse = {
+    statuscode: number;
+    message: string;
+    data: getAllControlsType[];
+};
+
 type ControlFamilyData = {
     controlFamilyName: string;
     controlFamilyDescription: string;
@@ -592,6 +598,7 @@ export type {
     checkPointDatType,
     checkUser,
     CompanyCodesItem,
+    TypeOfControlResponse,
     controlData,
     ControlFamilyResponse,
     CurrentURLType,
