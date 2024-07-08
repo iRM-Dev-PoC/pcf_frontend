@@ -40,7 +40,6 @@ const FlexibleColumnTemplete = ({
 
     const fetchAllControlData = async (id: number) => {
         const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/dashboard/get-control-data`;
-
         try {
             setIsLoading(true);
             const reqBody = {
@@ -51,7 +50,6 @@ const FlexibleColumnTemplete = ({
             if (res?.data.statuscode !== 200) {
                 setError("Something went wrong!");
             }
-            console.log("res", res.data);
             return res.data;
         } catch (error) {
             console.error(error);
@@ -123,7 +121,6 @@ const FlexibleColumnTemplete = ({
 
                     <FlexBox direction="Column" data-name="parent">
                         {/* Charts */}
-
                         <Charts
                             donutChartsData={
                                 donutChartData ? donutChartData : []

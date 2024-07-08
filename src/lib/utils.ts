@@ -82,3 +82,10 @@ export const calcRisk = (val: number) => {
         return "Low";
     }
 };
+
+export const getLastWeekDate = () => {
+    const endDate = new Date();
+    const startDate = new Date();
+    startDate.setDate(endDate.getDate() - 7);
+    return `${startDate.toISOString().split("T")[0]} - ${endDate.toISOString().split("T")[0]}`;
+};
