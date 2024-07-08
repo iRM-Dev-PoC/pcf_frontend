@@ -51,6 +51,7 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
             if (res?.data.statuscode !== 200) {
                 setError("Something went wrong!");
             }
+            console.log("res", res.data);
             return res.data;
         } catch (error) {
             console.error(error);
@@ -71,6 +72,8 @@ const FlexibleColumnTemplete = ({ dataCard }: FlexibleColumnTempleteProps) => {
         const index = dataCard.findIndex((data) => data.ID === id);
         setClickedCard(dataCard[index]);
     };
+
+    console.log("dashboardData", dashboardData);
 
     const nonCompilantDataRes = dashboardData?.violatedData;
     const donutChartData = dashboardData?.donutChartData;

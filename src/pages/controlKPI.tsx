@@ -1,3 +1,5 @@
+import SQLCodeEditor from "@/components/v2/SQLCodeEditor";
+import SQLRunner from "@/components/v2/SQLRunner";
 import "@/css/dynamicPage.css";
 import {
     DynamicPage,
@@ -7,8 +9,10 @@ import {
 } from "@ui5/webcomponents-react";
 
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
+import { useState } from "react";
 
 const controlKPI = () => {
+    const [sql, setSql] = useState("");
     return (
         <DynamicPage
             className="dynamicPage"
@@ -23,9 +27,11 @@ const controlKPI = () => {
             }}
             showHideHeaderButton={false}
             headerContentPinnable={false}
-        ></DynamicPage>
+        >
+            <SQLRunner sql={sql} />
+            <SQLCodeEditor setSql={setSql} sql={sql} />
+        </DynamicPage>
     );
 };
 
 export default controlKPI;
-
