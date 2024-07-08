@@ -9,7 +9,7 @@ import {
     Modals,
 } from "@ui5/webcomponents-react";
 import { useEffect, useState } from "react";
-import { CanDovsDidDoDataApiResponse, SoDData } from "../../lib/types";
+import { CanDovsDidDoDataApiResponse, SoDData } from "../@/types";
 
 const CanDovsDidDoAnalysis = () => {
     const [chartDataSoD, setChartDataSoD] = useState();

@@ -1,3 +1,5 @@
+import UserCreationForm from "@/components/UserCreationForm";
+import { getAllUserData } from "@/types";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
     Avatar,
@@ -27,12 +29,10 @@ import { ThemingParameters } from "@ui5/webcomponents-react-base";
 import axios from "axios";
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
-import { getAllUserData } from "../lib/types";
 import ErrorComponent from "./ErrorComponent";
 import Loading from "./Loading";
 import NoDataComponent from "./NoDataComponent";
 import UserEditForm from "./UserEditForm";
-import UserCreationForm from "@/components/UserCreationForm";
 
 const AddUsers = () => {
     const [layout, setLayout] = useState<FCLLayout>(FCLLayout.OneColumn);
@@ -46,8 +46,8 @@ const AddUsers = () => {
     const showDeleteConfirmation = Modals.useShowMessageBox();
     const queryClient = useQueryClient();
 
-        const showDialog = Modals.useShowDialog();
-        const closeButtonref = useRef<ButtonDomRef>(null);
+    const showDialog = Modals.useShowDialog();
+    const closeButtonref = useRef<ButtonDomRef>(null);
 
     const getAllUsers = async () => {
         try {
@@ -135,13 +135,7 @@ const AddUsers = () => {
                 <NoDataComponent />
             ) : (
                 <FlexibleColumnLayout
-                    style={{
-                        height: "100%",
-                        marginTop: "0.5rem",
-                        marginBottom: "0.5rem",
-                        borderRadius:
-                            ThemingParameters.sapButton_BorderCornerRadius,
-                    }}
+                    className="rounded-md w-full"
                     layout={layout}
                     startColumn={
                         <>
