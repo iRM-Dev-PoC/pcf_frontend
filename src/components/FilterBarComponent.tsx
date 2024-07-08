@@ -25,6 +25,13 @@ import { ComboBoxSelectionChangeEventDetail } from "@ui5/webcomponents/dist/Comb
 import type { DatePickerChangeEventDetail } from "@ui5/webcomponents/dist/DatePicker";
 import { useEffect, useState } from "react";
 
+const formatDate = (date: Date) => {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
+    return `${year}/${month}/${day}`;
+};
+
 const FilterBarComponent = () => {
     const [selectedSync, setSelectedSync] = useState("");
     const [selectedControlFamily, setSelectedControlFamily] = useState("");
@@ -32,11 +39,16 @@ const FilterBarComponent = () => {
     const { data, error, isLoading } = useHeaderData();
     const { setSelectedItem } = useSelectedItem();
 
+    const today = new Date();
+    const startDate = new Date(today);
+    startDate.setDate(today.getDate() - 7);
+
     const [allFilterValues, setAllFilterValues] = useState({
         syncId: 1,
         controlFamilyId: 1,
         typeOfControlsId: 1,
-        dateRange: getLastWeekDate(),
+        startDate: startDate.toISOString().split("T")[0],
+        endDate: today.toISOString().split("T")[0],
     });
 
     const {
@@ -153,9 +165,16 @@ const FilterBarComponent = () => {
         >
     ) => {
         const selectedDateRange = event.detail?.value;
+        console.log(selectedDateRange);
+        const [startDateStr, endDateStr] = selectedDateRange
+            .split(" - ")
+            .map((dateStr) => dateStr.trim());
+        const startDate = new Date(startDateStr);
+        const endDate = new Date(endDateStr);
         setAllFilterValues({
             ...allFilterValues,
-            dateRange: selectedDateRange,
+            startDate: formatDate(startDate),
+            endDate: formatDate(endDate),
         });
     };
 
@@ -242,6 +261,7 @@ const FilterBarComponent = () => {
                     onChange={handleDateRangePickerChange}
                     maxDate={new Date().toISOString().split("T")[0]}
                     value={getLastWeekDate()}
+                    formatPattern="yyyy/MM/dd"
                 />
                 {/* Apply Filter Button */}
                 <ApplyFilterButton value={allFilterValues} />
