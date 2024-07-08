@@ -16,8 +16,6 @@
         "cf:push": "docker build -t trpsuman/pcf_frontend:latest . && docker push trpsuman/pcf_frontend:latest && cf push -f manifest.yml"
     },
     "dependencies": {
-        "@codemirror/lang-javascript": "^6.2.2",
-        "@codemirror/lang-sql": "^6.7.0",
         "@hookform/resolvers": "^3.7.0",
         "@monaco-editor/react": "^4.6.0",
         "@radix-ui/react-dialog": "^1.1.1",
@@ -38,7 +36,6 @@
         "@ui5/webcomponents-react": "^1.29.3",
         "@ui5/webcomponents-react-base": "^1.29.3",
         "@ui5/webcomponents-react-charts": "^1.29.3",
-        "@uiw/react-codemirror": "^4.23.0",
         "axios": "^1.7.2",
         "class-variance-authority": "^0.7.0",
         "clsx": "^2.1.1",
