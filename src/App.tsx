@@ -18,7 +18,7 @@ import "@/css/dynamicPage.css";
 import { useSwitchProduct } from "@/hooks/useSwitchProduct";
 import { routerMap } from "@/lib/routeMap";
 import { routes, sodRoutes } from "@/lib/routedata";
-import { User } from "@/lib/types";
+import { User } from "@/types";
 
 const App = () => {
     const [, setTheme] = useState("sap_horizon");

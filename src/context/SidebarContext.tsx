@@ -1,4 +1,4 @@
-import { SidebarContextType } from "@/lib/types";
+import { SidebarContextType } from "@/types";
 import { ReactNode, createContext, useState } from "react";
 
 export const SidebarContext = createContext<SidebarContextType | undefined>(

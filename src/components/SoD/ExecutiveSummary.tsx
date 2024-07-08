@@ -1,9 +1,9 @@
 import DataCard from "@/components/SoD/DataCard";
 import DataTable from "@/components/SoD/DataTable";
 import TableHeader from "@/components/SoD/TableHeader";
-import { ApiResponse } from "@/lib/types";
 import { calcPercentage } from "@/lib/utils";
 import executiveSoDData from "@/mockSoDData/executiveData.json";
+import { ApiResponse } from "@/types";
 import { Card, FlexBox } from "@ui5/webcomponents-react";
 import { useEffect, useState } from "react";
 

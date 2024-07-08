@@ -1,4 +1,4 @@
-import { ApiResponse } from "@/lib/types";
+import { ApiResponse } from "@/types";
 import {
     Card,
     Label,

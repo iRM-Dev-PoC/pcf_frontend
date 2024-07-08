@@ -1,6 +1,6 @@
 import { useSwitchProduct } from "@/hooks/useSwitchProduct";
 import { logIn } from "@/lib/auth";
-import { SignInFormData, SignInProps } from "@/lib/types";
+import { SignInFormData, SignInProps } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
     Button,

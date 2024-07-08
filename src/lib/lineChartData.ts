@@ -1,4 +1,4 @@
-import { LineChartDataItem } from "@/lib/types";
+import { LineChartDataItem } from "@/types";
 
 export const lineChartData: LineChartDataItem[] = [
     {

@@ -2,12 +2,12 @@ import ErrorComponent from "@/components/ErrorComponent";
 import HeaderDetails from "@/components/HeaderDetails";
 import NoDataComponent from "@/components/NoDataComponent";
 import { useHeaderData } from "@/hooks/useHeaderData";
+import { formatDate } from "@/lib/utils";
 import {
     SimulationDetailsDataType,
     getHeaderTypes,
     webComponentsReactProps,
-} from "@/lib/types";
-import { formatDate } from "@/lib/utils";
+} from "@/types";
 import {
     AnalyticalTable,
     Badge,
