@@ -14,6 +14,7 @@ import {
     List,
     Modals,
     StandardListItem,
+    Title,
 } from "@ui5/webcomponents-react";
 import axios from "axios";
 import { useRef, useState } from "react";
@@ -143,9 +144,9 @@ const AddReportCheckPointMapping = () => {
                                     </div>
                                 }
                                 startContent={
-                                    <h1 className="m-3 block text-2xl font-bold">
+                                    <Title className="m-3 block text-2xl font-bold">
                                         Report-Checkpoint Mapping
-                                    </h1>
+                                    </Title>
                                 }
                             ></Bar>
                             <List onItemClick={onStartColumnClick}>

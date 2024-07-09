@@ -190,9 +190,9 @@ const AddModuleMaster = () => {
                                     </div>
                                 }
                                 startContent={
-                                    <h1 className="m-3 block text-2xl font-bold">
+                                    <Title className="m-3 block text-2xl font-bold">
                                         Module-Master
-                                    </h1>
+                                    </Title>
                                 }
                             ></Bar>
                             <List onItemClick={onStartColumnClick}>

@@ -9,7 +9,9 @@ const DonutChartCard = ({
 }) => {
     if (donutChartData.length === 0) return null;
     return (
-        <Card>
+        <Card
+            header={<div className="p-8 text-xl font-bold">Employee Count</div>}
+        >
             <DonutChart
                 className="size-full"
                 centerLabel="Users"
