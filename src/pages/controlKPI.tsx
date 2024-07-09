@@ -1,12 +1,7 @@
 import SQLCodeEditor from "@/components/v2/SQLCodeEditor";
 import SQLRunner from "@/components/v2/SQLRunner";
 import "@/css/dynamicPage.css";
-import {
-    DynamicPage,
-    DynamicPageTitle,
-    MessageStrip,
-    Title,
-} from "@ui5/webcomponents-react";
+import { Bar, Button, DynamicPage, Title } from "@ui5/webcomponents-react";
 
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
 import { useState } from "react";
@@ -17,17 +12,29 @@ const controlKPI = () => {
         <DynamicPage
             className="dynamicPage"
             headerTitle={
-                <DynamicPageTitle
-                    header={<Title>KPI - Controls</Title>}
-                    snappedContent={
-                        <MessageStrip>
-                            A Control KPI Module tracks key performance metrics
-                            with real-time data, trend analysis, and reports,
-                            aiding in goal achievement and data-driven
-                            decisions.
-                        </MessageStrip>
+                <Bar
+                    design="Header"
+                    className="block h-16 rounded-md"
+                    endContent={
+                        <div>
+                            <Button
+                                design="Emphasized"
+                                tooltip="Create"
+                                icon="create"
+                                onClick={() => {
+                                    alert("Create");
+                                }}
+                            >
+                                Create
+                            </Button>
+                        </div>
                     }
-                ></DynamicPageTitle>
+                    startContent={
+                        <Title className="m-3 block text-2xl font-bold">
+                            KPI - Controls
+                        </Title>
+                    }
+                ></Bar>
             }
             style={{
                 borderRadius: ThemingParameters.sapButton_BorderCornerRadius,
