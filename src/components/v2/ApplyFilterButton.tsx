@@ -3,7 +3,6 @@ import { Button } from "@ui5/webcomponents-react";
 type ApplyFilterButtonProps = {
     value: {
         syncId: number;
-        controlFamilyId: number;
         typeOfControlsId: number;
         startDate: string;
         endDate: string;

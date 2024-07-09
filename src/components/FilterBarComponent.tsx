@@ -1,14 +1,9 @@
-import { getAllControlFamilies } from "@/actions/controlFamiliy";
 import { getAllTypeOfControls } from "@/actions/typeOfControl";
 import ApplyFilterButton from "@/components/v2/ApplyFilterButton";
 import { useHeaderData } from "@/hooks/useHeaderData";
 import { useSelectedItem } from "@/hooks/useSelectedItem";
 import { getLastWeekDate } from "@/lib/utils";
-import type {
-    getAllControlFamilyType,
-    getAllControlsType,
-    getHeaderTypes,
-} from "@/types";
+import type { getAllControlsType, getHeaderTypes } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import {
     ComboBox,
@@ -34,7 +29,6 @@ const formatDate = (date: Date) => {
 
 const FilterBarComponent = () => {
     const [selectedSync, setSelectedSync] = useState("");
-    const [selectedControlFamily, setSelectedControlFamily] = useState("");
     const [selectedTypeOfControls, setSelectedTypeOfControls] = useState("");
     const { data, error, isLoading } = useHeaderData();
     const { setSelectedItem } = useSelectedItem();
@@ -45,20 +39,9 @@ const FilterBarComponent = () => {
 
     const [allFilterValues, setAllFilterValues] = useState({
         syncId: 1,
-        controlFamilyId: 1,
         typeOfControlsId: 1,
         startDate: startDate.toISOString().split("T")[0],
         endDate: today.toISOString().split("T")[0],
-    });
-
-    const {
-        data: allControlFamilyDataRes,
-        isFetching: allControlFamilyDataResFetching,
-        error: allControlFamilyDataResError,
-    } = useQuery({
-        queryKey: ["allControlFamilyData"],
-        queryFn: getAllControlFamilies,
-        retry: 3,
     });
 
     const {
@@ -76,14 +59,7 @@ const FilterBarComponent = () => {
             setSelectedSync(data[0].SYNC_ID);
             setSelectedItem(data[0]);
         }
-        if (
-            allControlFamilyDataRes &&
-            allControlFamilyDataRes.data.length > 0
-        ) {
-            setSelectedControlFamily(
-                allControlFamilyDataRes.data[0].CONTROL_FAMILY_NAME
-            );
-        }
+
         if (
             allTypeOfControlsDataRes &&
             allTypeOfControlsDataRes.data.length > 0
@@ -92,7 +68,7 @@ const FilterBarComponent = () => {
                 allTypeOfControlsDataRes.data[0].CONTROL_NAME
             );
         }
-    }, [data, allControlFamilyDataRes, allTypeOfControlsDataRes]);
+    }, [data, allTypeOfControlsDataRes]);
 
     const handleSyncComboBoxChange = (
         event: Ui5CustomEvent<
@@ -111,28 +87,6 @@ const FilterBarComponent = () => {
         setAllFilterValues({
             ...allFilterValues,
             syncId: selectedItemId || 0,
-        });
-    };
-
-    const handleControlFamilyComboBoxChange = (
-        event: Ui5CustomEvent<
-            ComboBoxDomRef,
-            ComboBoxSelectionChangeEventDetail
-        >
-    ) => {
-        const selectedItemId = Number(
-            event.detail?.item?.getAttribute("data-controlfamily-id")
-        );
-        const selectedControlFamily =
-            allControlFamilyDataRes?.data?.find(
-                (item) => item.ID === selectedItemId
-            ) || null;
-        if (selectedControlFamily) {
-            setSelectedControlFamily(selectedControlFamily.CONTROL_FAMILY_NAME);
-        }
-        setAllFilterValues({
-            ...allFilterValues,
-            controlFamilyId: selectedControlFamily?.ID || 0,
         });
     };
 
@@ -204,32 +158,6 @@ const FilterBarComponent = () => {
                                             key={head.ID}
                                             text={head.CONTROL_NAME}
                                             data-typeofcontrols-id={head.ID}
-                                        />
-                                    )
-                                )}
-                            </ComboBox>
-                        </FilterGroupItem>
-                    )}
-
-                {/* Control Family for filter bar */}
-                {!allControlFamilyDataResError &&
-                    allControlFamilyDataRes &&
-                    allControlFamilyDataRes.data.length > 0 && (
-                        <FilterGroupItem label="Control Family">
-                            <ComboBox
-                                valueState="None"
-                                value={selectedControlFamily}
-                                onSelectionChange={
-                                    handleControlFamilyComboBoxChange
-                                }
-                                loading={allControlFamilyDataResFetching}
-                            >
-                                {allControlFamilyDataRes.data.map(
-                                    (head: getAllControlFamilyType) => (
-                                        <ComboBoxItem
-                                            key={head.ID}
-                                            text={head.CONTROL_FAMILY_NAME}
-                                            data-controlfamily-id={head.ID}
                                         />
                                     )
                                 )}
