@@ -1,13 +1,23 @@
+import ControlKPICreationForm from "@/components/v2/ControlKPICreationForm";
 import SQLCodeEditor from "@/components/v2/SQLCodeEditor";
 import SQLRunner from "@/components/v2/SQLRunner";
 import "@/css/dynamicPage.css";
-import { Bar, Button, DynamicPage, Title } from "@ui5/webcomponents-react";
+import {
+    Bar,
+    Button,
+    DynamicPage,
+    Modals,
+    Title,
+    type ButtonDomRef,
+} from "@ui5/webcomponents-react";
 
 import { ThemingParameters } from "@ui5/webcomponents-react-base";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const controlKPI = () => {
     const [sql, setSql] = useState("");
+    const showDialog = Modals.useShowDialog();
+    const closeButtonRoleref = useRef<ButtonDomRef>(null);
     return (
         <DynamicPage
             className="dynamicPage"
@@ -22,7 +32,33 @@ const controlKPI = () => {
                                 tooltip="Create"
                                 icon="create"
                                 onClick={() => {
-                                    alert("Create");
+                                    const { close } = showDialog({
+                                        headerText: "KPI - Controls Creation",
+                                        children: (
+                                            <>
+                                                <ControlKPICreationForm />
+                                            </>
+                                        ),
+                                        footer: (
+                                            <Bar
+                                                endContent={
+                                                    <>
+                                                        <Button
+                                                            onClick={() =>
+                                                                close()
+                                                            }
+                                                            design="Negative"
+                                                            ref={
+                                                                closeButtonRoleref
+                                                            }
+                                                        >
+                                                            Close
+                                                        </Button>
+                                                    </>
+                                                }
+                                            ></Bar>
+                                        ),
+                                    });
                                 }}
                             >
                                 Create

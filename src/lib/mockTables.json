@@ -1,0 +1,57 @@
+{
+    "tables": [
+        {
+            "tableName": "users",
+            "columns": [
+                {
+                    "value": "name",
+                    "label": "Name"
+                },
+                {
+                    "value": "email",
+                    "label": "Email"
+                },
+                {
+                    "value": "phone",
+                    "label": "Phone"
+                },
+                {
+                    "value": "address",
+                    "label": "Address"
+                },
+                {
+                    "value": "created_at",
+                    "label": "Created At"
+                }
+            ]
+        },
+        {
+            "tableName": "products",
+            "columns": [
+                "name",
+                "description",
+                "price",
+                "stock",
+                "created_at"
+            ]
+        },
+        {
+            "tableName": "orders",
+            "columns": [
+                "user_id",
+                "total_price",
+                "status",
+                "created_at"
+            ]
+        },
+        {
+            "tableName": "order_items",
+            "columns": [
+                "order_id",
+                "product_id",
+                "quantity",
+                "price"
+            ]
+        }
+    ]
+}
