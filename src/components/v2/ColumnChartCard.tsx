@@ -9,7 +9,7 @@ type ColumnChartCardProps = {
 const ColumnChartCard = ({ columnChartData }: ColumnChartCardProps) => {
     if (columnChartData.length === 0) return null;
     return (
-        <Card>
+        <Card header={<div className="p-8 text-xl font-bold">Market Valuation</div>}>
             <ColumnChart
                 dataset={columnChartData}
                 dimensions={[

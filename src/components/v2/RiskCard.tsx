@@ -16,7 +16,7 @@ const RiskCard = ({ title, riskScore, desc, onClick }: RiskCardProps) => {
     const { currentTheme } = useCurrentTheme();
     const isDark = Boolean(currentTheme === "dark");
     return (
-        <Card
+        <Card 
             className={cn(
                 "mb-3 flex  cursor-pointer flex-col rounded-xl shadow-lg ",
                 isDark && "bg-transparent text-white"

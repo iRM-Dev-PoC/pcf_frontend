@@ -9,7 +9,9 @@ type LineChartCardProps = {
 const LineChartCard = ({ lineChartData }: LineChartCardProps) => {
     if (lineChartData.length === 0) return null;
     return (
-        <Card>
+        <Card
+            header={<div className="p-8 text-xl font-bold">Market Valuation</div>}
+        >
             <LineChart
                 className="size-full"
                 dataset={lineChartData}

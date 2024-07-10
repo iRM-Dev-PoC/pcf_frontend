@@ -1,3 +1,4 @@
+import { Card } from "@ui5/webcomponents-react";
 import {
     PolarAngleAxis,
     RadialBar,
@@ -32,7 +33,7 @@ const RadialChart = ({ value }: RadialChartProps) => {
     const endAngle = 0;
 
     return (
-        <div className=" m-0 flex max-w-fit items-center justify-center rounded-md p-0">
+        <Card className=" m-0 flex max-w-fit items-center justify-center rounded-md p-0">
             <ResponsiveContainer width={"100%"} height={"100%"}>
                 <RadialBarChart
                     width={350}
@@ -62,7 +63,7 @@ const RadialChart = ({ value }: RadialChartProps) => {
                     />
                 </RadialBarChart>
             </ResponsiveContainer>
-        </div>
+        </Card>
     );
 };
 

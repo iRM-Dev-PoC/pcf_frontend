@@ -168,9 +168,9 @@ const ControlFamilyDetails = () => {
                                     </div>
                                 }
                                 startContent={
-                                    <h1 className="m-3 block text-2xl font-bold">
+                                    <Title className="m-3 block text-2xl font-bold">
                                         Control Family Details
-                                    </h1>
+                                    </Title>
                                 }
                             ></Bar>
                             <List
