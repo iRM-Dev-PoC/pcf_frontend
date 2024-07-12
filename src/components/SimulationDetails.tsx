@@ -1,6 +1,4 @@
-import ErrorComponent from "@/components/ErrorComponent";
 import HeaderDetails from "@/components/HeaderDetails";
-import NoDataComponent from "@/components/NoDataComponent";
 import { useHeaderData } from "@/hooks/useHeaderData";
 import { formatDate } from "@/lib/utils";
 import {
@@ -33,17 +31,21 @@ const SimulationDetails = () => {
 
     const allHeaderData: getHeaderTypes[] = data ? data : [];
 
-    if (!isFetching && isError) {
-        return <ErrorComponent />;
-    }
+    // commented by Prity Singh
+    // if (!isFetching && isError) {
+    //     console.log("after line 36");
+    //     return <ErrorComponent />;
+    // }
 
-    if (!isFetching && error) {
-        return <ErrorComponent />;
-    }
+    // if (!isFetching && error) {
+    //     console.log(isFetching, error);
+    //     console.log("after line 40");
+    //     return <ErrorComponent />;
+    // }
 
-    if (!isFetching && allHeaderData.length === 0) {
-        return <NoDataComponent />;
-    }
+    // if (!isFetching && allHeaderData.length === 0) {
+    //     return <NoDataComponent />;
+    // }
 
     const showModal = ({ value }: { value: number }) => {
         const { close } = showDialog({
@@ -64,9 +66,10 @@ const SimulationDetails = () => {
             };
 
             const res = await axios.post(simulateEndPoint, body);
-            if (res.data?.statuscode !== 200) {
-                throw "Failed to simulate data!";
-            }
+            // commented now by Prity Singh
+            // if (res.data?.statuscode !== 200) {
+            //     throw "Failed to simulate data!";
+            // }
             return true;
         } catch (error) {
             console.error(error);
@@ -83,6 +86,9 @@ const SimulationDetails = () => {
             success: "Data simulated successfully!",
             error: (error) => `Failed to simulate data: ${error.message}`,
         });
+
+        // location.reload();
+        window.location.reload();
     };
 
     const rowLength = allHeaderData.length;

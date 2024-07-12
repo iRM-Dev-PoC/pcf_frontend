@@ -24,34 +24,6 @@
                     "label": "Created At"
                 }
             ]
-        },
-        {
-            "tableName": "products",
-            "columns": [
-                "name",
-                "description",
-                "price",
-                "stock",
-                "created_at"
-            ]
-        },
-        {
-            "tableName": "orders",
-            "columns": [
-                "user_id",
-                "total_price",
-                "status",
-                "created_at"
-            ]
-        },
-        {
-            "tableName": "order_items",
-            "columns": [
-                "order_id",
-                "product_id",
-                "quantity",
-                "price"
-            ]
         }
     ]
 }
