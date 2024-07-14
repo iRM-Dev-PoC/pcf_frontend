@@ -113,7 +113,7 @@ const Home = () => {
     const getAllControlCheckPoint = async () => {
         const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/dashboard/control-checkpoints`;
         try {
-            const res = await axios.get(endPoint);
+            const res = await axios.post(endPoint);
             if (res.data?.statuscode === 200) {
                 setError(false);
             } else {
