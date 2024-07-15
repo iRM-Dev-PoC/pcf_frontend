@@ -10,6 +10,8 @@ type DashboardCardprops = {
     desc: string | undefined;
     count: number | undefined;
     variant: "High" | "Low" | "Mid";
+    exceptionData : any;
+    baseAllData : any
 };
 
 const DashboardCards = ({
@@ -17,6 +19,8 @@ const DashboardCards = ({
     desc,
     count,
     variant,
+    exceptionData,
+    baseAllData
 }: DashboardCardprops) => {
     const { currentTheme } = useCurrentTheme();
     const isDark = Boolean(currentTheme === "dark");
@@ -26,7 +30,7 @@ const DashboardCards = ({
         const { close } = showDialog({
             style:{padding:"6px", width:"100%"},
             headerText: "Card Data",
-            children: <DashboardCardTable />,
+            children: <DashboardCardTable modalData={title == "Base" ? baseAllData : exceptionData}/>,
             footer: (
                 <Bar
                     endContent={
@@ -46,7 +50,7 @@ const DashboardCards = ({
                     "h-full cursor-pointer rounded-2xl",
                     isDark && "bg-transparent text-white"
                 )}
-                onClick={openModal}
+                onClick={title == "Base" || title == 'Exception' ? openModal : () => console.log('1234')}
             >
                 <CardHeader>
                     <CardTitle className="flex items-center justify-between">

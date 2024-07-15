@@ -495,21 +495,19 @@ type getAllNonCompilantData = {
     ID: number;
     SYNC_HEADER_ID: string;
     CUSTOMER_ID: number;
-    BILLING_DOCUMENT: string;
-    BILLING_INVOICE_NET_VALUE: string;
-    SALES_ORDER_NET_VALUE: string;
-    PERSONNEL_NUMBER: string | null;
-    EMPLOYEE_NAME: string;
-    CREAETD_ON: string | null;
-    BILLING_TAX_AMOUNT: number;
-    BILLING_COST: string;
-    SALES_PERSONNEL_NUMBER: string;
-    SOLD_TO_PARTY_NAME: string;
-    ITEM_DESCRIPTION: string;
-    PAYER_DESCRIPTION: string;
-    SALES_ORDER_CREATED_ON: string;
-    BILLING_CREATED_ON: string;
-    SALES_DOCUMENT: string;
+};
+
+type getALLBaseData = {
+    ID: number;
+    SYNC_HEADER_ID: number;
+    CUSTOMER_ID: number;
+    PURCHASING_DOCUMENT: string;
+    MATERIAL: string;
+    COMPANY_CODE: string;
+    PLANT: string;
+    STORAGE_LOCATION: number;
+    MATERIAL_GROUP: string;
+    PURCHASE_REQUISITION: string;
 };
 
 type controlData = {
@@ -553,6 +551,7 @@ type getControlDataType = {
     donutChartData: donutChartsData[];
     lineChartData: lineChartData[];
     columnChartData: lineChartData[];
+    baseAllData: any;
 };
 
 type routerMapType = {
@@ -598,12 +597,11 @@ export type {
     checkPointDatType,
     checkUser,
     CompanyCodesItem,
-    TypeOfControlResponse,
     controlData,
+    ControlFamilyData,
     ControlFamilyResponse,
     CurrentURLType,
     dataCardType,
-    ControlFamilyData,
     DialogUsersItem,
     donutChartsData,
     DrillItem,
@@ -612,6 +610,7 @@ export type {
     ERP,
     ExDataItem,
     ExObjItem,
+    getALLBaseData,
     getAllCardDataType,
     getAllCheckPointData,
     getAllControlFamilyType,
@@ -656,6 +655,7 @@ export type {
     TotalRolesItem,
     TotalUsersItem,
     transactionDetailsTypes,
+    TypeOfControlResponse,
     uploadFileType,
     User,
     UserRole,
