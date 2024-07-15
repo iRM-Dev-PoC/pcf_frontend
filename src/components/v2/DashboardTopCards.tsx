@@ -2,16 +2,20 @@ import RiskFactor from "@/components/RiskFactor";
 import ActivityCard from "@/components/v2/ActivityCard";
 import DashboardCards from "@/components/v2/DashboardCards";
 import { formatNumber } from "@/lib/utils";
-import type { getAllCardDataType, getControlDataType } from "@/types";
+import type { getALLBaseData, getAllCardDataType, getControlDataType } from "@/types";
 
 type DashboardTopCardsProps = {
     activityCardData: getAllCardDataType | undefined;
     dashboardCardsData: getControlDataType | undefined;
+    baseAllData: any;
+    exceptionData : any
 };
 
 const DashboardTopCards = ({
     activityCardData,
     dashboardCardsData,
+    baseAllData,
+    exceptionData
 }: DashboardTopCardsProps) => {
     return (
         <div className="my-2 grid grid-cols-3 gap-x-2 self-center">
@@ -35,6 +39,8 @@ const DashboardTopCards = ({
                         }
                         desc="Total Number of Rows in Base Data"
                         variant="Low"
+                        exceptionData={exceptionData}
+                        baseAllData={baseAllData}
                     />
                     <DashboardCards
                         title="Exception"
@@ -47,6 +53,8 @@ const DashboardTopCards = ({
                         }
                         desc="Number of Exceptions in Report"
                         variant="High"
+                        exceptionData={exceptionData}
+                        baseAllData={baseAllData}
                     />
                     <DashboardCards
                         title="Deviation"
@@ -59,6 +67,8 @@ const DashboardTopCards = ({
                         }
                         desc="Deviation Between Total Rows and Exception"
                         variant="Mid"
+                        exceptionData={exceptionData}
+                        baseAllData={baseAllData}
                     />
                 </div>
             </div>

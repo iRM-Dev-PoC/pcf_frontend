@@ -227,6 +227,7 @@ const FlexibleColumnTemplete = ({
     const donutChartData = dashboardData?.donutChartData;
     const lineChartData = dashboardData?.lineChartData;
     const columnChartData = dashboardData?.columnChartData;
+    const baseAllDataRes = dashboardData?.baseAllData;
 
     if (error && !isloading) {
         <ErrorComponent />;
@@ -269,6 +270,8 @@ const FlexibleColumnTemplete = ({
                     <DashboardTopCards
                         activityCardData={clickedCard}
                         dashboardCardsData={dashboardData}
+                        baseAllData={dashboardData?.baseAllData}
+                        exceptionData={dashboardData?.violatedData}
                     />
 
                     <FlexBox direction="Column" data-name="parent">
