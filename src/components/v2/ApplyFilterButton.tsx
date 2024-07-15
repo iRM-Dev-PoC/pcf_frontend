@@ -35,8 +35,8 @@ type ApplyFilterButtonProps = {
     value: {
         syncId: number;
         typeOfControlsId: number;
-        startDate: string;
-        endDate: string;
+        // startDate: string;
+        // endDate: string;
     };
     setFilterData: any;
 };
@@ -51,6 +51,7 @@ const ApplyFilterButton = ({
         try {
             const reqData = {
                 typeOfControlsId: value.typeOfControlsId,
+                hdrId: value.syncId
             };
             const response = await axios.post(endPoint, reqData);
             console.log("response", response);
