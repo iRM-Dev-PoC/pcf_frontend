@@ -203,30 +203,30 @@ import { getAllTypeOfControls } from "@/actions/typeOfControl";
 import ApplyFilterButton from "@/components/v2/ApplyFilterButton";
 import { useHeaderData } from "@/hooks/useHeaderData";
 import { useSelectedItem } from "@/hooks/useSelectedItem";
-import { getLastWeekDate } from "@/lib/utils";
+// import { getLastWeekDate } from "@/lib/utils";
 import type { getAllControlsType, getHeaderTypes } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import {
     ComboBox,
     ComboBoxDomRef,
     ComboBoxItem,
-    DateRangePicker,
+    // DateRangePicker,
     FilterBar,
     FilterGroupItem,
     Title,
     Ui5CustomEvent,
-    type DateRangePickerDomRef,
+    // type DateRangePickerDomRef,
 } from "@ui5/webcomponents-react";
 import { ComboBoxSelectionChangeEventDetail } from "@ui5/webcomponents/dist/ComboBox.js";
-import type { DatePickerChangeEventDetail } from "@ui5/webcomponents/dist/DatePicker";
+// import type { DatePickerChangeEventDetail } from "@ui5/webcomponents/dist/DatePicker";
 import { useEffect, useState } from "react";
 
-const formatDate = (date: Date) => {
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, "0");
-    const day = date.getDate().toString().padStart(2, "0");
-    return `${year}/${month}/${day}`;
-};
+// const formatDate = (date: Date) => {
+//     const year = date.getFullYear();
+//     const month = (date.getMonth() + 1).toString().padStart(2, "0");
+//     const day = date.getDate().toString().padStart(2, "0");
+//     return `${year}/${month}/${day}`;
+// };
 
 const FilterBarComponent = ({ setFilterData }: any) => {
     const [selectedSync, setSelectedSync] = useState("");
@@ -313,25 +313,25 @@ const FilterBarComponent = ({ setFilterData }: any) => {
         });
     };
 
-    const handleDateRangePickerChange = (
-        event: Ui5CustomEvent<
-            DateRangePickerDomRef,
-            DatePickerChangeEventDetail
-        >
-    ) => {
-        const selectedDateRange = event.detail?.value;
-        console.log(selectedDateRange);
-        const [startDateStr, endDateStr] = selectedDateRange
-            .split(" - ")
-            .map((dateStr) => dateStr.trim());
-        const startDate = new Date(startDateStr);
-        const endDate = new Date(endDateStr);
-        setAllFilterValues({
-            ...allFilterValues,
-            startDate: formatDate(startDate),
-            endDate: formatDate(endDate),
-        });
-    };
+    // const handleDateRangePickerChange = (
+    //     event: Ui5CustomEvent<
+    //         DateRangePickerDomRef,
+    //         DatePickerChangeEventDetail
+    //     >
+    // ) => {
+    //     const selectedDateRange = event.detail?.value;
+    //     console.log(selectedDateRange);
+    //     const [startDateStr, endDateStr] = selectedDateRange
+    //         .split(" - ")
+    //         .map((dateStr) => dateStr.trim());
+    //     const startDate = new Date(startDateStr);
+    //     const endDate = new Date(endDateStr);
+    //     setAllFilterValues({
+    //         ...allFilterValues,
+    //         startDate: formatDate(startDate),
+    //         endDate: formatDate(endDate),
+    //     });
+    // };
 
     return (
         <>

@@ -21,9 +21,12 @@
 
 // const FlexibleColumnTemplete = ({
 //     dataCard,
+//     filterData,
 // }: {
 //     dataCard: getAllCardDataType[];
+//     filterData: any;
 // }) => {
+//     console.log("filterDataComponenet", filterData);
 //     const [layout, setLayout] = useState<FCLLayout>(FCLLayout.OneColumn);
 //     const [error, setError] = useState<string | undefined>(undefined);
 //     const [isloading, setIsLoading] = useState(false);
@@ -101,7 +104,7 @@
 //                     )}
 //                 >
 //                     <DashboardCardList
-//                         dataCard={dataCard}
+//                         dataCard={filterData}
 //                         onClick={handleCardClick}
 //                     />
 //                 </ul>
@@ -149,9 +152,6 @@
 // };
 
 // export default FlexibleColumnTemplete;
-// commented by prity for future changes
-
-
 import ErrorComponent from "@/components/ErrorComponent";
 import Loading from "@/components/Loading";
 import NonCompilantData from "@/components/NonCompilantData";
@@ -180,7 +180,6 @@ const FlexibleColumnTemplete = ({
     dataCard: getAllCardDataType[];
     filterData: any;
 }) => {
-    console.log("filterDataComponenet", filterData);
     const [layout, setLayout] = useState<FCLLayout>(FCLLayout.OneColumn);
     const [error, setError] = useState<string | undefined>(undefined);
     const [isloading, setIsLoading] = useState(false);
@@ -216,10 +215,6 @@ const FlexibleColumnTemplete = ({
     };
 
     const handleCardClick = async (id: number) => {
-        //this sets two column mid expanded for the flexible column layout
-        // setLayout(FCLLayout.TwoColumnsMidExpanded);
-
-        //this sets two column mid fullscreen for the flexible column layout
         setLayout(FCLLayout.MidColumnFullScreen);
         const res = await fetchAllControlData(id);
         const val: getControlDataType = res?.data;
