@@ -234,15 +234,15 @@ const FilterBarComponent = ({ setFilterData }: any) => {
     const { data, error, isLoading } = useHeaderData();
     const { setSelectedItem } = useSelectedItem();
 
-    const today = new Date();
-    const startDate = new Date(today);
-    startDate.setDate(today.getDate() - 7);
+    // const today = new Date();
+    // const startDate = new Date(today);
+    // startDate.setDate(today.getDate() - 7);
 
     const [allFilterValues, setAllFilterValues] = useState({
         syncId: 1,
         typeOfControlsId: 1,
-        startDate: startDate.toISOString().split("T")[0],
-        endDate: today.toISOString().split("T")[0],
+        // startDate: startDate.toISOString().split("T")[0],
+        // endDate: today.toISOString().split("T")[0],
     });
 
     const {
