@@ -551,7 +551,7 @@ type getControlDataType = {
     donutChartData: donutChartsData[];
     lineChartData: lineChartData[];
     columnChartData: lineChartData[];
-    baseAllData: any;
+    baseAllData:getALLBaseData;
 };
 
 type routerMapType = {

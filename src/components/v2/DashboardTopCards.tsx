@@ -7,8 +7,8 @@ import type { getALLBaseData, getAllCardDataType, getControlDataType } from "@/t
 type DashboardTopCardsProps = {
     activityCardData: getAllCardDataType | undefined;
     dashboardCardsData: getControlDataType | undefined;
-    baseAllData: any;
-    exceptionData : any
+    baseAllData: getALLBaseData |undefined;
+    exceptionData : any;
 };
 
 const DashboardTopCards = ({
