@@ -17,6 +17,7 @@ const RiskFactor = ({ value }: RiskFactorProps) => {
     };
     return (
         <Card className="h-full">
+            <h1 className="p-8 text-xl font-bold">Risk Score</h1>
             <RadialChart
                 chartConfig={{
                     endAngle: 0,

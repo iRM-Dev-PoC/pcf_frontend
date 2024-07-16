@@ -116,7 +116,7 @@ const AddReportCheckPointMapping = () => {
                                                 const { close } = showDialog({
                                                     headerText:
                                                         "Report Check-Point Mapping Information",
-                                                    children: <div>Hi</div>,
+                                                    children: <></>,
                                                     footer: (
                                                         <Bar
                                                             endContent={
