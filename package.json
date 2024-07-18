@@ -10,10 +10,10 @@
         "lint:fix": "eslint ./src --fix",
         "preview": "vite preview --port 5001 --strictPort --host",
         "start": "vite preview --port 5001 --strictPort --host",
-        "docker:build": "docker build -t trpsuman/pcf_frontend:latest .",
-        "docker:run": "docker run -p 5001:5001 trpsuman/pcf_frontend:latest",
-        "docker:push": "docker build -t trpsuman/pcf_frontend:latest . && docker push trpsuman/pcf_frontend:latest",
-        "cf:push": "docker build -t trpsuman/pcf_frontend:latest . && docker push trpsuman/pcf_frontend:latest && cf push -f manifest.yml"
+        "docker:build": "docker build -t trppritysingh/pcf_frontend:latest .",
+        "docker:run": "docker run -p 5001:5001 trppritysingh/pcf_frontend:latest",
+        "docker:push": "docker build -t trppritysingh/pcf_frontend:latest . && docker push trppritysingh/pcf_frontend:latest",
+        "cf:push": "docker build -t trppritysingh/pcf_frontend:latest . && docker push trppritysingh/pcf_frontend:latest && cf push -f manifest.yml"
     },
     "dependencies": {
         "@hookform/resolvers": "^3.7.0",
