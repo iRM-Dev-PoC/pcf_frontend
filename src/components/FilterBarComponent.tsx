@@ -2,30 +2,20 @@ import { getAllTypeOfControls } from "@/actions/typeOfControl";
 import ApplyFilterButton from "@/components/v2/ApplyFilterButton";
 import { useHeaderData } from "@/hooks/useHeaderData";
 import { useSelectedItem } from "@/hooks/useSelectedItem";
-// import { getLastWeekDate } from "@/lib/utils";
 import type { getAllControlsType, getHeaderTypes } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import {
     ComboBox,
     ComboBoxDomRef,
     ComboBoxItem,
-    // DateRangePicker,
     FilterBar,
     FilterGroupItem,
     Title,
     Ui5CustomEvent,
-    // type DateRangePickerDomRef,
 } from "@ui5/webcomponents-react";
 import { ComboBoxSelectionChangeEventDetail } from "@ui5/webcomponents/dist/ComboBox.js";
-// import type { DatePickerChangeEventDetail } from "@ui5/webcomponents/dist/DatePicker";
 import { useEffect, useState } from "react";
 
-// const formatDate = (date: Date) => {
-//     const year = date.getFullYear();
-//     const month = (date.getMonth() + 1).toString().padStart(2, "0");
-//     const day = date.getDate().toString().padStart(2, "0");
-//     return `${year}/${month}/${day}`;
-// };
 
 const FilterBarComponent = ({ setFilterData }: any) => {
     const [selectedSync, setSelectedSync] = useState("");
@@ -33,15 +23,10 @@ const FilterBarComponent = ({ setFilterData }: any) => {
     const { data, error, isLoading } = useHeaderData();
     const { setSelectedItem } = useSelectedItem();
 
-    // const today = new Date();
-    // const startDate = new Date(today);
-    // startDate.setDate(today.getDate() - 7);
 
     const [allFilterValues, setAllFilterValues] = useState({
         syncId: 1,
         typeOfControlsId: 1,
-        // startDate: startDate.toISOString().split("T")[0],
-        // endDate: today.toISOString().split("T")[0],
     });
 
     const {
@@ -111,27 +96,6 @@ const FilterBarComponent = ({ setFilterData }: any) => {
             typeOfControlsId: selectedTypeOfControl?.ID || 0,
         });
     };
-
-    // const handleDateRangePickerChange = (
-    //     event: Ui5CustomEvent<
-    //         DateRangePickerDomRef,
-    //         DatePickerChangeEventDetail
-    //     >
-    // ) => {
-    //     const selectedDateRange = event.detail?.value;
-    //     console.log(selectedDateRange);
-    //     const [startDateStr, endDateStr] = selectedDateRange
-    //         .split(" - ")
-    //         .map((dateStr) => dateStr.trim());
-    //     const startDate = new Date(startDateStr);
-    //     const endDate = new Date(endDateStr);
-    //     setAllFilterValues({
-    //         ...allFilterValues,
-    //         startDate: formatDate(startDate),
-    //         endDate: formatDate(endDate),
-    //     });
-    // };
-
     return (
         <>
             <FilterBar
@@ -184,13 +148,6 @@ const FilterBarComponent = ({ setFilterData }: any) => {
                         </ComboBox>
                     </FilterGroupItem>
                 )}
-                {/* Date Range Picker
-                <DateRangePicker
-                    onChange={handleDateRangePickerChange}
-                    maxDate={new Date().toISOString().split("T")[0]}
-                    value={getLastWeekDate()}
-                    formatPattern="yyyy/MM/dd"
-                /> */}
                 {/* Apply Filter Button */}
                 <ApplyFilterButton
                     value={allFilterValues}

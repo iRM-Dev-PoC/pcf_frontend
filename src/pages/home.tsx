@@ -164,7 +164,7 @@ const Home = () => {
     }, []);
 
     const cardValue: getAllCardDataType[] = cardData?.data;
-    // console.log("cardValue", cardValue);
+    
     return (
         <DynamicPage
             className="dynamicPage"

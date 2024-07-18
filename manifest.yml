@@ -3,5 +3,5 @@ applications:
       instances: 1
       memory: 512M
       docker:
-          image: trpsuman/pcf_frontend:latest
-          username: trpsuman
+          image: trppritysingh/pcf_frontend:latest
+          username: trppritysingh
