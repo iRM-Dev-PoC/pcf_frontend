@@ -46,7 +46,7 @@ const CanDovsDidDoAnalysis = () => {
     const columns = [
         {
             Header: "Level",
-            accessor: "Level",
+            accessor: "Level", 
             headerTooltip: "Level",
             disableDragAndDrop: true,
         },

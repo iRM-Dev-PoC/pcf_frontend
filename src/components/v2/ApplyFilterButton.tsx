@@ -35,14 +35,25 @@ const ApplyFilterButton = ({
         }
     };
     return (
-        <Button
+        <>
+        {/* <Button
             onClick={handleFilterButtonClick}
             className="ml-2 p-2"
             tooltip="Apply Filters"
             design="Emphasized"
         >
             Apply Filter
+        </Button> */}
+
+        <Button 
+        onClick={handleFilterButtonClick}
+        className="bg-cyan-700 text-l font-extrabold text-white"
+        >
+            Apply Filter
         </Button>
+
+        </>
+
     );
 };
 

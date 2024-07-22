@@ -12,7 +12,7 @@ const DashboardCardTable: React.FC<{ modalData: any[] }> = ({
             if (data.length === 0) return [];
 
             const headers = Object.keys(data[0]);
-            return headers.map((header) => ({
+            return headers.slice(3).map((header) => ({
                 Header: header,
                 accessor: header,
                 autoResizable: true,
@@ -44,4 +44,3 @@ const DashboardCardTable: React.FC<{ modalData: any[] }> = ({
 };
 
 export default DashboardCardTable;
-
