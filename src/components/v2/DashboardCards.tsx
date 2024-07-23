@@ -159,6 +159,8 @@ type DashboardCardProps = {
     variant: "High" | "Low" | "Mid";
     exceptionData: any;
     baseAllData: any;
+    baseAllData1:any;
+    baseAllData2:any;
 };
 
 const DashboardCards = ({
@@ -168,6 +170,8 @@ const DashboardCards = ({
     variant,
     exceptionData,
     baseAllData,
+    baseAllData1,
+    baseAllData2,
 }: DashboardCardProps) => {
     const { currentTheme } = useCurrentTheme();
     const isDark = currentTheme === "dark";
@@ -176,15 +180,15 @@ const DashboardCards = ({
     const openModal = () => {
         const headerText = title === "Base" ? "Base Data" : "Exception Data";
         const modalData = title === "Base" ? baseAllData : exceptionData;
+        const modalData1 = title === "Base" ? baseAllData1: exceptionData;
+        const modalData2 = title === "Base" ? baseAllData2 : exceptionData;
         const isBaseCard = title === "Base";
         
-        // Define NO_COLUMNS based on title or other condition
-        const NO_COLUMNS = title === "Base" ? 2 : 1; // Example logic, change as needed
 
         const { close } = showDialog({
             style: { padding: "6px", width: "100%" },
             headerText,
-            children: <DashboardCardTable modalData={modalData} isBaseCard={isBaseCard} NO_COLUMNS={NO_COLUMNS} />,
+            children: <DashboardCardTable modalData={modalData} modalData1={modalData1} modalData2={modalData2} isBaseCard={isBaseCard} />,
             footer: (
                 <Bar
                     endContent={
