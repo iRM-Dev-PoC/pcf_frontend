@@ -510,6 +510,54 @@ type getALLBaseData = {
     PURCHASE_REQUISITION: string;
 };
 
+type getALLBaseData1 ={
+    ID: number,
+    SYNC_HEADER_ID: number,
+    CUSTOMER_ID: number,
+    SALES_ORDER_ID: string,
+    SALES_ORDER_DATE:string,
+    SALES_ORDER_DESC:string,
+    SALES_ORDER_ITEM:string,
+    SALES_ORDER_UNIT:string,
+    SALES_ORDER_COST:string,
+    SALES_DOCUMENT: string,
+    DOCUMENT_DATE: string,
+    TIME:string,
+    SOLD_TO_PARTY:string,
+    NET_VALUE:string,
+    SOLD_TO_PARTY_NAME: string,
+    SALES_DOCUMENT_ITEM:string
+    MATERIAL_DESCRIPTION:string,
+    PERSONAL_NUMBER:string,
+    IS_ACTIVE:string,
+    CREATED_BY:string,
+    CREATED_ON:string,
+    SCHEDULE_LINE_NUMBER:string
+};
+
+type getALLBaseData2 = {
+    ID: number,
+    SYNC_HEADER_ID: number,
+    CUSTOMER_ID: number,
+    EMP_ID: string,
+    EMP_NAME: string,
+    EMP_ADDRESS: string,
+    CLIENT:string,
+    PERSONAL_NUMBER:string,
+    END_DATE:string,
+    START_DATE:string,
+    IS_ACTIVE: string,
+    FIRST_NAME:string,
+    LAST_NAME:string,
+    MIDDLE_NAME:string,
+    DATE_OF_BIRTH:string,
+    ID_NUMBER: string,
+    CREATED_BY:string,
+    CREATED_ON:string,
+
+    
+};
+
 type controlData = {
     ID: number;
     CHECK_POINT_NAME: string;
@@ -552,6 +600,9 @@ type getControlDataType = {
     lineChartData: lineChartData[];
     columnChartData: lineChartData[];
     baseAllData:getALLBaseData;
+    baseAllData1:getALLBaseData1;
+    baseAllData2:getALLBaseData2;
+
 };
 
 type routerMapType = {
@@ -660,4 +711,6 @@ export type {
     User,
     UserRole,
     webComponentsReactProps,
+    getALLBaseData1,
+    getALLBaseData2,
 };

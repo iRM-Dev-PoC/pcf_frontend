@@ -202,14 +202,24 @@ const FilterBarComponent: React.FC<FilterBarComponentProps> = ({ setFilterData }
         retry: 3,
     });
 
+    // useEffect(() => {
+    //     if (data && data.length > 0) {
+    //         const lastItem = data[data.length - 1];
+    //         setSelectedSync(lastItem.SYNC_ID);
+    //         setSelectedItem(lastItem);
+    //         setAllFilterValues((prevValues) => ({
+    //             ...prevValues,
+    //             syncId: lastItem.ID, // Ensure this is the correct field for syncId
+    //         }));
+    //     }
+
     useEffect(() => {
         if (data && data.length > 0) {
-            const lastItem = data[data.length - 1];
-            setSelectedSync(lastItem.SYNC_ID);
-            setSelectedItem(lastItem);
+            setSelectedSync(data[0].SYNC_ID);
+            setSelectedItem(data[0]);
             setAllFilterValues((prevValues) => ({
                 ...prevValues,
-                syncId: lastItem.ID, // Ensure this is the correct field for syncId
+                syncId: data[0].ID,
             }));
         }
 

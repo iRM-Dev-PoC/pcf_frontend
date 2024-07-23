@@ -263,8 +263,20 @@ const Home = () => {
     const fetchCardsData = async (syncId?: number) => {
         const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/dashboard/control-checkpoints`;
         try {
+            let syncId;
+            const lastSyncId = async () => {
+                const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/data-sync/get-all-headers`;
+                const res = await axios.get(endPoint);
+                if (res.data?.statuscode === 200) {
+                   syncId = res.data.data[0].ID;
+                } else {
+                    throw new Error("Error fetching data");
+                }
+            };
+            await lastSyncId();
             const reqData = {
                 typeOfControlsId: 0,
+                hdrId: syncId,
             };
 
             if (syncId) {
