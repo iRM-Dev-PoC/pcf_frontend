@@ -82,6 +82,7 @@ const DashboardCardTable: React.FC<{ modalData: any[], modalData1: any[], modalD
                                 padding: "8px",
                                 borderRadius: "15px",
                                 color: isHighlighted ? "white" : "inherit",
+                                width:"100%",
                             }}
                         >
                             {props.value}
