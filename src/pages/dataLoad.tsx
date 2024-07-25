@@ -1,5 +1,7 @@
 import FileUploaderComponent from "@/components/FileUploader";
 import SimulationDetails from "@/components/SimulationDetails";
+import BoxPlotChart from "@/components/v2/BoxPlotChart";
+import HorizontalBoxPlotChart from "@/components/v2/HorizontalBoxPlotChart";
 import "@ui5/webcomponents-fiori/dist/illustrations/UploadToCloud.js";
 import {
     Bar,
@@ -74,6 +76,8 @@ const DataLoad = () => {
             headerContentPinnable={false}
         >
             <SimulationDetails />
+            {/* <BoxPlotChart/>
+            <HorizontalBoxPlotChart/> */}
         </DynamicPage>
     );
 };
