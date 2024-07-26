@@ -7,10 +7,11 @@ import type { getALLBaseData, getAllCardDataType, getControlDataType } from "@/t
 type DashboardTopCardsProps = {
     activityCardData: getAllCardDataType | undefined;
     dashboardCardsData: getControlDataType | undefined;
-    baseAllData: getALLBaseData |undefined;
+    baseAllData: getALLBaseData | undefined;
     baseAllData1: any;
     baseAllData2: any;
-    exceptionData : any;
+    exceptionData: any;
+    boxPloting: any; 
 };
 
 const DashboardTopCards = ({
@@ -19,7 +20,8 @@ const DashboardTopCards = ({
     baseAllData,
     exceptionData,
     baseAllData1,
-    baseAllData2
+    baseAllData2,
+    boxPloting,
 }: DashboardTopCardsProps) => {
     return (
         <div className="my-2 grid grid-cols-3 gap-x-2 self-center">
@@ -47,6 +49,7 @@ const DashboardTopCards = ({
                         baseAllData={baseAllData}
                         baseAllData1={baseAllData1}
                         baseAllData2={baseAllData2}
+                        boxPloting={boxPloting} 
                     />
                     <DashboardCards
                         title="Exception"
@@ -63,6 +66,7 @@ const DashboardTopCards = ({
                         baseAllData={baseAllData}
                         baseAllData1={baseAllData1}
                         baseAllData2={baseAllData2}
+                        boxPloting={boxPloting} 
                     />
                     <DashboardCards
                         title="Deviation"
@@ -79,6 +83,7 @@ const DashboardTopCards = ({
                         baseAllData={baseAllData}
                         baseAllData1={baseAllData1}
                         baseAllData2={baseAllData2}
+                        boxPloting={boxPloting} 
                     />
                 </div>
             </div>

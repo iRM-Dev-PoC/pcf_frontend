@@ -120,7 +120,7 @@ const FlexibleColumnTemplete = ({
                         exceptionData={dashboardData?.violatedData}
                         baseAllData1={dashboardData?.baseAllData1}
                         baseAllData2={dashboardData?.baseAllData2}
-
+                        boxPloting={dashboardData?.boxPloting}
                     />
 
                     <FlexBox direction="Column" data-name="parent">

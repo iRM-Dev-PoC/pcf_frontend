@@ -554,8 +554,11 @@ type getALLBaseData2 = {
     ID_NUMBER: string,
     CREATED_BY:string,
     CREATED_ON:string,
-
     
+};
+type getAllboxPlotingData = {
+    categories:string[],
+    data:number[],
 };
 
 type controlData = {
@@ -602,7 +605,7 @@ type getControlDataType = {
     baseAllData:getALLBaseData;
     baseAllData1:getALLBaseData1;
     baseAllData2:getALLBaseData2;
-
+    boxPloting:getAllboxPlotingData[];
 };
 
 type routerMapType = {
@@ -713,4 +716,5 @@ export type {
     webComponentsReactProps,
     getALLBaseData1,
     getALLBaseData2,
+    getAllboxPlotingData,
 };
