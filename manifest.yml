@@ -2,6 +2,7 @@ applications:
     - name: pcf_frontend
       instances: 1
       memory: 512M
+      disk: 2048M
       docker:
           image: trppritysingh/pcf_frontend:latest
           username: trppritysingh
