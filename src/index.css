@@ -1,3 +1,5 @@
+/* @import 'react-pivottable/pivottable.css'; */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -120,4 +122,10 @@ body {
 
 .tableHeader::part(column) {
     text-align: center;
+}
+
+
+[data-component-name="ToolbarChildContainer"]:nth-child(4) {
+    background-color: red;
+    display: none;
 }
