@@ -5,6 +5,7 @@ import ControlKPI from "@/pages/controlKPI";
 import DataLoad from "@/pages/dataLoad";
 import Home from "@/pages/home";
 import ModuleMaster from "@/pages/moduleMaster";
+import PivotTable from "@/pages/pivotTable";
 import Report from "@/pages/report";
 import ReportCheckPointMapping from "@/pages/reportCheckPointMapping";
 import ResetPassword from "@/pages/resetPassword";
@@ -70,5 +71,10 @@ export const routerMap: routerMapType[] = [
     {
         path: "/resetPassword",
         element: <ResetPassword changePassword={true} />,
+    },
+    {
+        path: "/pcf/config/pivotTable",
+        element: <PivotTable/>,
+
     },
 ];

@@ -77,7 +77,7 @@ const DataLoad = () => {
             headerContentPinnable={false}
         >
             <SimulationDetails />
-           <BoxChartExample/>
+           {/* <BoxChartExample/> */}
         </DynamicPage>
     );
 };
