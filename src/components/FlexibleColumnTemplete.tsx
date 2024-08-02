@@ -18,6 +18,7 @@ import {
 } from "@ui5/webcomponents-react";
 import axios from "axios";
 import { useState } from "react";
+import PivotTable from "./v2/PivotTable";
 
 const FlexibleColumnTemplete = ({
     dataCard,
@@ -73,6 +74,7 @@ const FlexibleColumnTemplete = ({
     const donutChartData = dashboardData?.donutChartData;
     const lineChartData = dashboardData?.lineChartData;
     const columnChartData = dashboardData?.columnChartData;
+    // const pivotDataRes = dashboardData?.pivotData;
     // const baseAllDataRes = dashboardData?.baseAllData;
 
     if (error && !isloading) {
@@ -122,6 +124,7 @@ const FlexibleColumnTemplete = ({
                         baseAllData2={dashboardData?.baseAllData2}
                         boxPloting={dashboardData?.boxPloting}
                     />
+                    {/* {dashboardData && <PivotTable pivotData={dashboardData?.pivotData}/>} */}
 
                     <FlexBox direction="Column" data-name="parent">
                         {/* Charts */}
@@ -137,13 +140,15 @@ const FlexibleColumnTemplete = ({
 
                         {/* Datatable */}
                         <FlexBox className="mb-3 mt-4">
-                            <NonCompilantData
+                            {/* <NonCompilantData
                                 nonCompilantDataRes={
                                     nonCompilantDataRes
                                         ? nonCompilantDataRes
                                         : []
                                 }
-                            />
+                            /> */}
+
+                             {dashboardData && <PivotTable pivotData={dashboardData?.pivotData}/>}
                         </FlexBox>
                     </FlexBox>
                 </div>

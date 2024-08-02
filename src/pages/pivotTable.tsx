@@ -1,4 +1,5 @@
-import PivotTableTest from "@/components/v2/PivotTableTest";
+import BoxChart from "@/components/v2/BoxChart";
+import PivotTableExample from "@/components/v2/PivotTableExample";
 import "@/css/dynamicPage.css";
 import {
     Bar,
@@ -76,7 +77,11 @@ const pivotTable = () => {
             showHideHeaderButton={false}
             headerContentPinnable={false}
         >
-            <PivotTableTest/>
+            <BoxChart boxPloting={{
+                categories: [],
+                data: []
+            }}/>
+            <PivotTableExample/>
         </DynamicPage>
     );
 };

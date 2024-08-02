@@ -1,8 +1,21 @@
 export const pivotData = [
-    { Year: '2020', Quarter: 'Q1', Country: 'USA', Products: 'Laptop', Amount: 1000, Sold: 10 },
-    { Year: '2020', Quarter: 'Q2', Country: 'USA', Products: 'Laptop', Amount: 1500, Sold: 15 },
-    { Year: '2021', Quarter: 'Q1', Country: 'Canada', Products: 'Phone', Amount: 800, Sold: 8 },
-    { Year: '2021', Quarter: 'Q2', Country: 'Canada', Products: 'Phone', Amount: 1200, Sold: 12 },
-    // Add more data here
-  ];
+  {
+      
+      "NET_VALUE": 1524,
+      "TAX_AMOUNT": 76.2,
+      "COST": 993.25
+  },
+  {
+      
+      "NET_VALUE": 1834.25,
+      "TAX_AMOUNT": 91.71,
+      "COST": 1269.39
+  },
+  {
+
+      "NET_VALUE": 2213.75,
+      "TAX_AMOUNT": 110.68,
+      "COST": 1532.02
+  }
+];
   
