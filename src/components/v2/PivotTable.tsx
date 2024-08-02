@@ -1,28 +1,3 @@
-// import React, { useState } from 'react';
-// import PivotTableUI from 'react-pivottable/PivotTableUI';
-// import 'react-pivottable/pivottable.css';
-// import { pivotData } from '@/lib/pivotData';
-// import { Card } from '@ui5/webcomponents-react';
-
-// const PivotTable: React.FC = () => {
-//   const [state, setState] = useState({ data: pivotData });
-
-//   return (
-//     <div>
-//     <Card>
-//       <PivotTableUI
-//       style ={{Width:"100%"}}
-//         tableData={pivotData}
-//         onChange={s => setState(s)}
-//         {...state}
-//       />
-//     </Card>
-//     </div>
-//   );
-// };
-
-// export default PivotTable;
-
 import React, { useState, useEffect } from 'react';
 import PivotTableUI from 'react-pivottable/PivotTableUI';
 import 'react-pivottable/pivottable.css';
@@ -41,7 +16,6 @@ const isValidPivotData = (data: any) => {
     return Array.isArray(data[0]) || typeof data[0] === 'object';
   }
   return false;
-  // return true;
 };
 
 const PivotTable: React.FC<PivotTableProps> = ({ pivotData }) => {
@@ -59,9 +33,10 @@ const PivotTable: React.FC<PivotTableProps> = ({ pivotData }) => {
 
   return (
     <div>
-      <Card className='h-full'>
+      <Card>
         <PivotTableUI
           style={{ width: "100%" }}
+          // data={state.data}
           onChange={s => setState(s)}
           {...state}
         />

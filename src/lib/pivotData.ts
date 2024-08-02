@@ -11,11 +11,6 @@ export const pivotData = [
       "TAX_AMOUNT": 91.71,
       "COST": 1269.39
   },
-  {
-
-      "NET_VALUE": 2213.75,
-      "TAX_AMOUNT": 110.68,
-      "COST": 1532.02
-  }
+  
 ];
   
