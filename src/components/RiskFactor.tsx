@@ -50,7 +50,7 @@ import { Card } from "@ui5/webcomponents-react";
 import RiskInfoCard from "./v2/RiskInfoCard";
 import { Info } from "lucide-react";
 
-// Initialize Highcharts with the More module
+
 HighchartsMore(Highcharts);
 
 type RiskFactorProps = {
@@ -73,6 +73,9 @@ const RiskFactor = ({ value }: RiskFactorProps) => {
             type: 'gauge',
             height: '400px'
         },
+        title: {
+            text: ''
+        },
         pane: {
             startAngle: -150,
             endAngle: 150,
@@ -87,7 +90,6 @@ const RiskFactor = ({ value }: RiskFactorProps) => {
             min: 0,
             max: 100,
             tickAmount: 3, // Adjust the number of ticks
-            title: {},
             labels: {
                 formatter: function () {
                     const value = this.value as number; // Explicitly cast to number

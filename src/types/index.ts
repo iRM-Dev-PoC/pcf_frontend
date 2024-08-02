@@ -560,6 +560,15 @@ type getAllboxPlotingData = {
     categories:string[],
     data:number[],
 };
+type PivotHeader = {
+    name: string, 
+    type: string | number, 
+};
+type getAllPivotData ={
+    headers:PivotHeader[],
+    data:any,
+    // data:object[],
+};
 
 type controlData = {
     ID: number;
@@ -606,6 +615,7 @@ type getControlDataType = {
     baseAllData1:getALLBaseData1;
     baseAllData2:getALLBaseData2;
     boxPloting:getAllboxPlotingData[];
+    pivotData:getAllPivotData;
 };
 
 type routerMapType = {
@@ -717,4 +727,6 @@ export type {
     getALLBaseData1,
     getALLBaseData2,
     getAllboxPlotingData,
+    getAllPivotData,
+    PivotHeader,
 };

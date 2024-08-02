@@ -4,7 +4,9 @@ import 'react-pivottable/pivottable.css';
 import { pivotData } from '@/lib/pivotData';
 import { Card } from '@ui5/webcomponents-react';
 
-const PivotTable: React.FC = () => {
+
+
+const PivotTableExample: React.FC = () => {
   const [state, setState] = useState({ data: pivotData });
 
   return (
@@ -21,4 +23,4 @@ const PivotTable: React.FC = () => {
   );
 };
 
-export default PivotTable;
+export default PivotTableExample;
