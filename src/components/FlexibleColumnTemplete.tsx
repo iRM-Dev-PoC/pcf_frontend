@@ -1,6 +1,6 @@
 import ErrorComponent from "@/components/ErrorComponent";
 import Loading from "@/components/Loading";
-import NonCompilantData from "@/components/NonCompilantData";
+// import NonCompilantData from "@/components/NonCompilantData";
 import Charts from "@/components/v2/Charts";
 import DashboardCardList from "@/components/v2/DashboardCardList";
 import DashboardToolbar from "@/components/v2/DashboardToolbar";
@@ -10,6 +10,7 @@ import { useSidebar } from "@/hooks/useSidebar";
 import { cn } from "@/lib/utils";
 import { getAllCardDataType, getControlDataType } from "@/types";
 import {
+    Card,
     FCLLayout,
     FlexBox,
     FlexibleColumnLayout,
@@ -17,10 +18,10 @@ import {
     ToolbarSpacer,
 } from "@ui5/webcomponents-react";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PivotTable from "./v2/PivotTable";
 
-const FlexibleColumnTemplete = ({
+const FlexibleColumnTemplate = ({
     dataCard,
     filterData,
 }: {
@@ -29,7 +30,7 @@ const FlexibleColumnTemplete = ({
 }) => {
     const [layout, setLayout] = useState<FCLLayout>(FCLLayout.OneColumn);
     const [error, setError] = useState<string | undefined>(undefined);
-    const [isloading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false); // Changed isloading to isLoading
     const [dashboardData, setDashboardData] = useState<
         getControlDataType | undefined
     >(undefined);
@@ -44,7 +45,7 @@ const FlexibleColumnTemplete = ({
     const fetchAllControlData = async (id: number) => {
         const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/dashboard/get-control-data`;
         try {
-            setIsLoading(true);
+            setIsLoading(true); // Changed isloading to isLoading
             const reqBody = {
                 id,
                 hdrId,
@@ -56,33 +57,42 @@ const FlexibleColumnTemplete = ({
             return res.data;
         } catch (error) {
             console.error(error);
+            setError("Error fetching data"); // Set error in case of exception
         } finally {
-            setIsLoading(false);
+            setIsLoading(false); // Changed isloading to isLoading
         }
     };
 
     const handleCardClick = async (id: number) => {
         setLayout(FCLLayout.MidColumnFullScreen);
+        setDashboardData(undefined); // Clear previous data
+        setClickedCard(undefined); // Clear previous clicked card
         const res = await fetchAllControlData(id);
-        const val: getControlDataType = res?.data;
-        setDashboardData(val);
-        const index = dataCard.findIndex((data) => data.ID === id);
-        setClickedCard(dataCard[index]);
+        if (res?.data) { // Check if res.data is available
+            const val: getControlDataType = res.data;
+            setDashboardData(val);
+            const index = dataCard.findIndex((data) => data.ID === id);
+            setClickedCard(dataCard[index]);
+        }
     };
 
-    const nonCompilantDataRes = dashboardData?.violatedData;
+    useEffect(() => {
+        if (clickedCard) {
+            fetchAllControlData(clickedCard.ID);
+        }
+    }, [clickedCard]);
+
+    const nonCompliantDataRes = dashboardData?.violatedData; // Corrected spelling error
     const donutChartData = dashboardData?.donutChartData;
     const lineChartData = dashboardData?.lineChartData;
     const columnChartData = dashboardData?.columnChartData;
-    // const pivotDataRes = dashboardData?.pivotData;
-    // const baseAllDataRes = dashboardData?.baseAllData;
 
-    if (error && !isloading) {
-        <ErrorComponent />;
+    if (error && !isLoading) { // Updated condition to return component
+        return <ErrorComponent />;
     }
 
-    if (isloading && !error) {
-        <Loading />;
+    if (isLoading && !error) { // Updated condition to return component
+        return <Loading />;
     }
 
     return (
@@ -92,6 +102,7 @@ const FlexibleColumnTemplete = ({
                 height: "100%",
                 marginTop: "0.5rem",
                 marginBottom: "0.5rem",
+                transition: "all 0.3s ease-in-out"
             }}
             layout={layout}
             startColumn={
@@ -124,7 +135,6 @@ const FlexibleColumnTemplete = ({
                         baseAllData2={dashboardData?.baseAllData2}
                         boxPloting={dashboardData?.boxPloting}
                     />
-                    {/* {dashboardData && <PivotTable pivotData={dashboardData?.pivotData}/>} */}
 
                     <FlexBox direction="Column" data-name="parent">
                         {/* Charts */}
@@ -139,17 +149,23 @@ const FlexibleColumnTemplete = ({
                         />
 
                         {/* Datatable */}
-                        <FlexBox className="mb-3 mt-4">
-                            {/* <NonCompilantData
-                                nonCompilantDataRes={
-                                    nonCompilantDataRes
-                                        ? nonCompilantDataRes
+                        {/* <FlexBox className="mb-3 mt-4 p-72">
+                            <NonCompilantData
+                                nonCompliantDataRes={
+                                    nonCompliantDataRes
+                                        ? nonCompliantDataRes
                                         : []
                                 }
-                            /> */}
-
-                             {dashboardData && <PivotTable pivotData={dashboardData?.pivotData}/>}
-                        </FlexBox>
+                            />
+                            {dashboardData && (
+                                <PivotTable pivotData={dashboardData?.pivotData} />
+                            )}
+                        </FlexBox> */}
+                        <Card className="p-98">
+                        {dashboardData && (
+                                <PivotTable pivotData={dashboardData?.pivotData} />
+                            )} 
+                        </Card>
                     </FlexBox>
                 </div>
             }
@@ -157,4 +173,4 @@ const FlexibleColumnTemplete = ({
     );
 };
 
-export default FlexibleColumnTemplete;
+export default FlexibleColumnTemplate;
