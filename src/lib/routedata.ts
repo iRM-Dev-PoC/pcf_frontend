@@ -93,4 +93,47 @@ const sodRoutes = [
     },
 ];
 
-export { routes, sodRoutes };
+const lORoutes = [
+   { text : "Home",
+    icon:"home",
+    path: "/lO",
+   },
+   {
+    text: "Sync",
+    icon: "synchronize",
+    path: "/lO/sync",
+    subItems:[
+        {
+            text: "Report",
+            icon: "manager-insight",
+            path: "/reportLO",
+        },
+        {
+            text: "User Report",
+            icon: "trip-report",
+            path: "/userReport",
+        },
+        {
+            text: "User-Drill-Down",
+            icon: "person-placeholder",
+            path: "/userDrillDown",
+        },
+        {
+            text: "Active /Inactive Reports",
+            icon: "status-inactive",
+            path: "/activeInactiveReport",
+        },
+    ]
+   },
+   {
+    text: "Configuration",
+    icon: "feed",
+    path: "/lO/test",
+    subItems:[
+        
+    ]
+   },
+
+]
+
+export { routes, sodRoutes,lORoutes };

@@ -48,6 +48,10 @@ body {
         --ring: 222.2 84% 4.9%;
 
         --radius: 0.5rem;
+
+        /* --sapFontHeader6Size : 2rem; */
+
+        /* --_ui5-v1-24-7_card_header_title_font_size: var(--sapFontHeader6Size); */
     }
 
     .dark {
@@ -133,3 +137,12 @@ body {
 .highcharts-credits {
     display: none;
 }
+ .highcharts-no-tooltip {
+    display:none
+ }
+ .highcharts-root{
+    padding :30px
+ }
+ /* .ui5-card-header-title{font-size: larger;} */
+
+ /* .ui5-card-header .ui5-card-header-text .ui5-card-header-title {font-size: larger;} */
