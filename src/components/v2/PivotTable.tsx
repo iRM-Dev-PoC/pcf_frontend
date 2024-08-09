@@ -24,7 +24,8 @@ const PivotTable: React.FC<PivotTableProps> = ({ pivotData }) => {
   useEffect(() => {
     if (isValidPivotData(pivotData)) {
       setState({ data: pivotData });
-    } else {
+    } 
+    else {
       console.error('Invalid pivot data format:', pivotData);
     }
   }, [pivotData]);

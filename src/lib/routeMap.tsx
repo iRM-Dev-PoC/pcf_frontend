@@ -4,6 +4,13 @@ import ControlFamily from "@/pages/controlFamily";
 import ControlKPI from "@/pages/controlKPI";
 import DataLoad from "@/pages/dataLoad";
 import Home from "@/pages/home";
+//LO imports
+import LODashboard from "@/pages/LO/lODashboard";
+import ReportLO from "@/pages/LO/reportLO";
+import UserDrillDown from "@/pages/LO/userDrillDown";
+import UserReport from "@/pages/LO/userReport";
+import ActiveInactiveReport from "@/pages/LO/activeInactiveReport";
+
 import ModuleMaster from "@/pages/moduleMaster";
 import PivotTable from "@/pages/pivotTable";
 import Report from "@/pages/report";
@@ -68,6 +75,29 @@ export const routerMap: routerMapType[] = [
         path: "/sod/",
         element: <SoDDashboard />,
     },
+    // Lo Routes
+    {
+        path:"/lO",
+        element: <LODashboard/>
+    },
+    //Sync Routes LO
+    {
+        path:"/lO/sync/reportLO",
+        element: <ReportLO/>
+    },
+    {
+        path:"/lO/sync/userReport",
+        element: <UserReport/>
+    },
+    {
+        path:"/lO/sync/activeInactiveReport",
+        element: <ActiveInactiveReport/>
+    },
+    {
+        path:"/lO/sync/userDrillDown",
+        element: <UserDrillDown/>
+    },
+
     {
         path: "/resetPassword",
         element: <ResetPassword changePassword={true} />,

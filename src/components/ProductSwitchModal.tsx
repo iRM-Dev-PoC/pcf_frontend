@@ -29,9 +29,9 @@ const ProductSwitchModal = () => {
                     />
                     <ProductSwitchItem
                         className="gap-3"
-                        icon="contacts"
-                        subtitleText="Ariba"
-                        titleText="Catalog"
+                        icon="address-book"
+                        titleText="License Optimization"
+                        targetSrc="/lO/"
                     />
                     <ProductSwitchItem
                         className="gap-3"
