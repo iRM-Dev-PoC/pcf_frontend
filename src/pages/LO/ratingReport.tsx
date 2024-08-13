@@ -1,9 +1,8 @@
+import RatingReportTable from '@/components/LO/Tables/RatingReportTable'
 import { DynamicPage, DynamicPageHeader, DynamicPageTitle, MessageStrip, Title } from '@ui5/webcomponents-react'
 import { ThemingParameters } from '@ui5/webcomponents-react-base'
-import UserTable from '@/components/LO/Tables/UserTable'
-import ActiveInactiveReportTable from '@/components/LO/Tables/ActiveInactiveReportTable'
 
-const ActiveInactiveReport = () => {
+const RatingReport = () => {
   return (
     <DynamicPage
     className="dynamicPage"
@@ -19,7 +18,7 @@ const ActiveInactiveReport = () => {
                     and recommends actions for efficiency and cost savings.
                 </MessageStrip>
             }
-            header={<Title className="text-2xl font-bold"> Active/Inactive - Report</Title>}
+            header={<Title className="text-2xl font-bold"> Rating Report</Title>}
         ></DynamicPageTitle>
     }
     style={{
@@ -28,9 +27,10 @@ const ActiveInactiveReport = () => {
     showHideHeaderButton={false}
     headerContentPinnable={false}
 >
-  <ActiveInactiveReportTable/>
+    <RatingReportTable/>
 </DynamicPage>
   )
 }
 
-export default ActiveInactiveReport
+export default RatingReport
+

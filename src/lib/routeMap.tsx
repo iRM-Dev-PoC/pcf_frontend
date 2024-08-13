@@ -21,6 +21,12 @@ import SoDDashboard from "@/pages/SoD/sodDashboard";
 import SubModules from "@/pages/subModule";
 import TypeOfControl from "@/pages/typeOfControl";
 import type { routerMapType } from "@/types";
+import SubscriptionType from "@/pages/LO/subscriptionType";
+import ServicePricing from "@/pages/LO/servicePricing";
+import Client from "@/pages/LO/client";
+import CostConversionRate from "@/pages/LO/costConversionRate";
+import RatingReport from "@/pages/LO/ratingReport";
+import FusionCloudServices from "@/pages/LO/fusionServices";
 
 export const routerMap: routerMapType[] = [
     {
@@ -82,20 +88,46 @@ export const routerMap: routerMapType[] = [
     },
     //Sync Routes LO
     {
-        path:"/lO/sync/reportLO",
+        path:"/license/sync/reportLO",
         element: <ReportLO/>
     },
     {
-        path:"/lO/sync/userReport",
+        path:"/license/sync/userReport",
         element: <UserReport/>
     },
     {
-        path:"/lO/sync/activeInactiveReport",
+        path:"/license/sync/activeInactiveReport",
         element: <ActiveInactiveReport/>
     },
     {
-        path:"/lO/sync/userDrillDown",
+        path:"/license/sync/userDrillDown",
         element: <UserDrillDown/>
+    },
+
+    //Configuration Routes LO
+   {
+        path:"/lO/configuration/subsctiptionType",
+        element: <SubscriptionType/>
+    },
+    {
+        path:"/lO/configuration/servicePricing",
+        element: <ServicePricing/>
+    },
+    {
+        path:"/lO/configuration/client",
+        element:<Client/>
+    },
+    {
+        path:"/lO/configuration/costConversionRate",
+        element:<CostConversionRate/>
+    },
+    {
+        path:"/lO/configuration/ratingReport",
+        element:<RatingReport/>
+    },
+    {
+        path:"/lO/configuration/fusionCloudServices",
+        element:<FusionCloudServices/>
     },
 
     {

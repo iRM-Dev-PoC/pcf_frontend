@@ -101,7 +101,7 @@ const lORoutes = [
    {
     text: "Sync",
     icon: "synchronize",
-    path: "/lO/sync",
+    path: "/license/sync",
     subItems:[
         {
             text: "Report",
@@ -127,10 +127,40 @@ const lORoutes = [
    },
    {
     text: "Configuration",
-    icon: "feed",
-    path: "/lO/test",
+    icon: "wrench",
+    path: "/lO/configuration",
     subItems:[
-        
+
+        {
+            text: "Subscription Type",
+            icon: "opportunities",
+            path: "/subsctiptionType",
+        },
+        {
+            text: "Service Pricing",
+            icon: "official-service",
+            path: "/servicePricing",
+        },
+        {
+            text: "Client",
+            icon: "Netweaver-business-client",
+            path: "/client",
+        },
+        {
+            text: "Cost Conversion Rate",
+            icon: "measure",
+            path: "/costConversionRate",
+        },
+        {
+            text: "Rating Report",
+            icon: "measurement-document",
+            path: "/ratingReport",
+        },
+        {
+            text: "Fusion Cloud Services",
+            icon: "cloud",
+            path: "/fusionCloudServices",
+        },   
     ]
    },
 

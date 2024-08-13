@@ -1,6 +1,4 @@
-import FilterBarReport from "@/components/LO/FilterBars/FilterBarReport"
 import UserDrillDownTemplate from "@/components/LO/Tables/UserDrillDownTemplate"
-import UserDrill from "@/components/LO/Tables/xyz"
 import { DynamicPage, DynamicPageHeader, DynamicPageTitle, MessageStrip, Title } from "@ui5/webcomponents-react"
 import { ThemingParameters } from "@ui5/webcomponents-react-base"
 
