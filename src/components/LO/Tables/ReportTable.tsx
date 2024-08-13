@@ -1,6 +1,6 @@
 import { AnalyticalTable, Button, Card, Bar } from '@ui5/webcomponents-react';
 import { Modals } from '@ui5/webcomponents-react';
-import RecalculateModal from '../RecalculateModal';
+import RecalculateModal from '../Forms/RecalculateModal';
 import { Badge } from '../../ui/badge';
 
 const MyAnalyticalTable = () => {
@@ -103,7 +103,7 @@ const MyAnalyticalTable = () => {
         login: 'jennie.molina'
       },
       status: {
-        rating: 'B'
+        rating: '! Low'
       },
       service: {
         name: 'Service 2'

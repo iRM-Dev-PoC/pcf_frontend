@@ -1,37 +1,10 @@
 import { Card, ComboBox, ComboBoxItem,TextArea } from '@ui5/webcomponents-react'
 
-const RecalculateModal = () => {
+const ClientLinkForm = () => {
   return (
     <Card className='grid-flow-col space-y-5'>
-        <TextArea
-          placeholder='User Login'
-          onChange={function _a(){}}
-          onInput={function _a(){}}
-          onScroll={function _a(){}}
-          onSelect={function _a(){}}
-          valueState="None"
-        />
-       
-        <TextArea
-          placeholder='Total Price'
-          onChange={function _a(){}}
-          onInput={function _a(){}}
-          onScroll={function _a(){}}
-          onSelect={function _a(){}}
-          valueState="None"
-        />
-        
-        <TextArea
-          placeholder='Service Names'
-          onChange={function _a(){}}
-          onInput={function _a(){}}
-          onScroll={function _a(){}}
-          onSelect={function _a(){}}
-          valueState="None"
-        />
-        
-        <ComboBox
-          placeholder='Role Code'
+          <ComboBox
+          placeholder='Select Client'
           onChange={function _a(){}}
           onInput={function _a(){}}
           onSelectionChange={function _a(){}}
@@ -43,9 +16,38 @@ const RecalculateModal = () => {
          <ComboBoxItem text="ComboBox Entry 4" />
          <ComboBoxItem text="ComboBox Entry 5" />
         </ComboBox>
+
+        <TextArea
+          placeholder='Enter Username'
+          onChange={function _a(){}}
+          onInput={function _a(){}}
+          onScroll={function _a(){}}
+          onSelect={function _a(){}}
+          valueState="None"
+        />
+
+        <TextArea
+          placeholder='Enter Password'
+          onChange={function _a(){}}
+          onInput={function _a(){}}
+          onScroll={function _a(){}}
+          onSelect={function _a(){}}
+          valueState="None"
+        />
+        
+        <ComboBox
+          placeholder='Select Auth Type'
+          onChange={function _a(){}}
+          onInput={function _a(){}}
+          onSelectionChange={function _a(){}}
+          valueState="None"
+        >
+         <ComboBoxItem text="Monthly" />
+         <ComboBoxItem text="Annual" />
+        </ComboBox>
         
         <TextArea
-          placeholder='Recalculated Price'
+          placeholder='Enter Url'
           onChange={function _a(){}}
           onInput={function _a(){}}
           onScroll={function _a(){}}
@@ -56,4 +58,4 @@ const RecalculateModal = () => {
   )
 }
 
-export default RecalculateModal
+export default ClientLinkForm

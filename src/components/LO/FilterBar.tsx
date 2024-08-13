@@ -1,6 +1,5 @@
 import { Title, FilterBar, FilterGroupItem, ComboBox, ComboBoxItem, DateRangePicker, Button } from '@ui5/webcomponents-react';
 import "@/css/dynamicPage.css";
-import SetFilterButton from './SetFilterButton';
 
 const CustomFilterBar = () => {
   return (
@@ -12,28 +11,27 @@ const CustomFilterBar = () => {
       <FilterGroupItem label="Client Name">
         <ComboBox 
         placeholder='Select Client'>
-          <ComboBoxItem text="ComboBoxItem 1" />
-          <ComboBoxItem text="ComboBoxItem 2" />
-          <ComboBoxItem text="ComboBoxItem 3" />
-          <ComboBoxItem text="ComboBoxItem 4" />
+          <ComboBoxItem text="Test 1" />
+          <ComboBoxItem text="test 2" />
         </ComboBox>
       </FilterGroupItem>
       <FilterGroupItem label="Sync">
         <ComboBox
         placeholder='Select Sync'
         >
-          <ComboBoxItem text="ComboBoxItem 6" />
-          <ComboBoxItem text="ComboBoxItem 9" />
-          <ComboBoxItem text="ComboBoxItem 8" />
-          <ComboBoxItem text="ComboBoxItem 7" />
+          <ComboBoxItem text="Sync 1" />
+          <ComboBoxItem text="Sync 2" />
+          <ComboBoxItem text="Sync 3" />
+          <ComboBoxItem text="Sync 4" />
+          <ComboBoxItem text="Sync 5" />
+          <ComboBoxItem text="Sync 6" />
+          <ComboBoxItem text="Sync 7" />
+          <ComboBoxItem text="Sync 8" />
         </ComboBox>
       </FilterGroupItem>
       <FilterGroupItem label="Business Unit">
         <ComboBox>
-          <ComboBoxItem text="ComboBoxItem 6" />
-          <ComboBoxItem text="ComboBoxItem 9" />
-          <ComboBoxItem text="ComboBoxItem 8" />
-          <ComboBoxItem text="ComboBoxItem 7" />
+          <ComboBoxItem text="Accounting UK" />
         </ComboBox>
       </FilterGroupItem>
       <FilterGroupItem label="Sync Duration">
@@ -46,9 +44,6 @@ const CustomFilterBar = () => {
           />
       </FilterGroupItem>
       <FilterGroupItem>
-      {/* <Button className="bg-cyan-700 text-l font-extrabold text-white">
-            Apply Filter
-        </Button> */}
         <Button className="bg-cyan-700 text-l font-extrabold text-white m-6">
           Apply Filter
         </Button>

@@ -11,40 +11,45 @@ const FilterBarReport = () => {
     <FilterGroupItem label="Sync">
       <ComboBox 
       placeholder='Select Sync'>
-        <ComboBoxItem text="ComboBoxItem 1" />
-        <ComboBoxItem text="ComboBoxItem 2" />
-        <ComboBoxItem text="ComboBoxItem 3" />
-        <ComboBoxItem text="ComboBoxItem 4" />
+        <ComboBoxItem text="Sync 1" />
+        <ComboBoxItem text="Sync 2" />
+        <ComboBoxItem text="Sync 3" />
+        <ComboBoxItem text="Sync 4" />
       </ComboBox>
     </FilterGroupItem>
     <FilterGroupItem label="Service Name">
       <ComboBox
       placeholder='Select Service'
       >
-        <ComboBoxItem text="ComboBoxItem 6" />
-        <ComboBoxItem text="ComboBoxItem 9" />
-        <ComboBoxItem text="ComboBoxItem 8" />
-        <ComboBoxItem text="ComboBoxItem 7" />
+        <ComboBoxItem text="Oracle Fusion Supply Chain Management Limited Cloud Service - Hosted Named Users" />
+        <ComboBoxItem text="Enterprise Resource Planning Cloud Service - Hosted Named Users" />
+        <ComboBoxItem text="Oracle Fusion Supply Chain Collaboration Cloud Service - Hosted Named Users" />
+        <ComboBoxItem text="Enterprise Resource Planning Cloud for Midsize Cloud Service - Hosted Named Users" />
+        <ComboBoxItem text="Innovation Management Cloud Service - Hosted Named Users" />
+        <ComboBoxItem text="Goal Management Cloud Service - Hosted Named Users"/>
+        <ComboBoxItem text="Oracle Fusion Product Management Cloud Service - Hosted Named Users" />
+        <ComboBoxItem text="Oracle Fusion Supply Planning Cloud Service - Hosted Named Users" />
+        <ComboBoxItem text="Oracle Fusion Sales and Operations Planning Cloud Service - Hosted Named Users"/>
       </ComboBox>
     </FilterGroupItem>
     <FilterGroupItem label="User">
       <ComboBox
       placeholder='Select User'
       >
-        <ComboBoxItem text="ComboBoxItem 6" />
-        <ComboBoxItem text="ComboBoxItem 9" />
-        <ComboBoxItem text="ComboBoxItem 8" />
-        <ComboBoxItem text="ComboBoxItem 7" />
+        <ComboBoxItem text="BALA.GUPTA" />
+        <ComboBoxItem text="CASEY.BROWN" />
+        <ComboBoxItem text="MANDY.STEWARD"/>
+        <ComboBoxItem text="SCM24.STUDENT"/>
+        <ComboBoxItem text="SIMON.WATTS"/>
       </ComboBox>
     </FilterGroupItem>
     <FilterGroupItem label="Rating">
       <ComboBox
       placeholder='Select Rating'
       >
-        <ComboBoxItem text="ComboBoxItem 6" />
-        <ComboBoxItem text="ComboBoxItem 9" />
-        <ComboBoxItem text="ComboBoxItem 8" />
-        <ComboBoxItem text="ComboBoxItem 7" />
+        <ComboBoxItem text="Low"/>
+        <ComboBoxItem text="Medium"/>
+        <ComboBoxItem text="High"/>
       </ComboBox>
     </FilterGroupItem>
     <FilterGroupItem>
