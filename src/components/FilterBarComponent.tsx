@@ -1,4 +1,4 @@
-// import { getAllTypeOfControls } from "@/actions/typeOfControl";
+//  import { getAllTypeOfControls } from "@/actions/typeOfControl";
 // import ApplyFilterButton from "@/components/v2/ApplyFilterButton";
 // import { useHeaderData } from "@/hooks/useHeaderData";
 // import { useSelectedItem } from "@/hooks/useSelectedItem";
@@ -16,13 +16,15 @@
 // import { ComboBoxSelectionChangeEventDetail } from "@ui5/webcomponents/dist/ComboBox.js";
 // import { useEffect, useState } from "react";
 
+// interface FilterBarComponentProps {
+//     setFilterData: (data: any) => void;
+// }
 
-// const FilterBarComponent = ({ setFilterData }: any) => {
-//     const [selectedSync, setSelectedSync] = useState("");
-//     const [selectedTypeOfControls, setSelectedTypeOfControls] = useState("");
+// const FilterBarComponent: React.FC<FilterBarComponentProps> = ({ setFilterData }) => {
+//     const [selectedSync, setSelectedSync] = useState<string>("");
+//     const [selectedTypeOfControls, setSelectedTypeOfControls] = useState<string>("");
 //     const { data, error, isLoading } = useHeaderData();
 //     const { setSelectedItem } = useSelectedItem();
-
 
 //     const [allFilterValues, setAllFilterValues] = useState({
 //         syncId: 1,
@@ -39,10 +41,25 @@
 //         retry: 3,
 //     });
 
+//     // useEffect(() => {
+//     //     if (data && data.length > 0) {
+//     //         const lastItem = data[data.length - 1];
+//     //         setSelectedSync(lastItem.SYNC_ID);
+//     //         setSelectedItem(lastItem);
+//     //         setAllFilterValues((prevValues) => ({
+//     //             ...prevValues,
+//     //             syncId: lastItem.ID, // Ensure this is the correct field for syncId
+//     //         }));
+//     //     }
+
 //     useEffect(() => {
 //         if (data && data.length > 0) {
 //             setSelectedSync(data[0].SYNC_ID);
 //             setSelectedItem(data[0]);
+//             setAllFilterValues((prevValues) => ({
+//                 ...prevValues,
+//                 syncId: data[0].ID,
+//             }));
 //         }
 
 //         if (
@@ -96,69 +113,64 @@
 //             typeOfControlsId: selectedTypeOfControl?.ID || 0,
 //         });
 //     };
-//     return (
-//         <>
-//             <FilterBar
-//                 filterContainerWidth="13.125rem"
-//                 header={<Title>Filters</Title>}
-//                 filterBarCollapsed
-//             >
-//                 {/* Type of Controls for filter bar */}
-//                 {!allTypeOfControlsDataResError &&
-//                     allTypeOfControlsDataRes &&
-//                     allTypeOfControlsDataRes.data.length > 0 && (
-//                         <FilterGroupItem label="Type Of Controls">
-//                             <ComboBox
-//                                 valueState="None"
-//                                 value={selectedTypeOfControls}
-//                                 onSelectionChange={
-//                                     handleTypeOfControlsComboBoxChange
-//                                 }
-//                                 loading={allTypeOfControlsDataResFetching}
-//                             >
-//                                 {allTypeOfControlsDataRes.data.map(
-//                                     (head: getAllControlsType) => (
-//                                         <ComboBoxItem
-//                                             key={head.ID}
-//                                             text={head.CONTROL_NAME}
-//                                             data-typeofcontrols-id={head.ID}
-//                                         />
-//                                     )
-//                                 )}
-//                             </ComboBox>
-//                         </FilterGroupItem>
-//                     )}
 
-//                 {/* Sync ID for filter bar */}
-//                 {!error && data && data.length > 0 && (
-//                     <FilterGroupItem label="SYNC">
+//     return (
+//         <FilterBar
+//             filterContainerWidth="13.125rem"
+//             header={<Title>Filters</Title>}
+//             filterBarCollapsed
+//         >
+//             {!allTypeOfControlsDataResError &&
+//                 allTypeOfControlsDataRes &&
+//                 allTypeOfControlsDataRes.data.length > 0 && (
+//                     <FilterGroupItem label="Type Of Controls">
 //                         <ComboBox
-//                             value={selectedSync}
 //                             valueState="None"
-//                             onSelectionChange={handleSyncComboBoxChange}
-//                             loading={isLoading}
+//                             value={selectedTypeOfControls}
+//                             onSelectionChange={handleTypeOfControlsComboBoxChange}
+//                             loading={allTypeOfControlsDataResFetching}
 //                         >
-//                             {data?.map((head: getHeaderTypes) => (
+//                             {allTypeOfControlsDataRes.data.map((head: getAllControlsType) => (
 //                                 <ComboBoxItem
-//                                     key={head.SYNC_ID}
-//                                     text={head.SYNC_ID}
-//                                     data-sync-id={head.ID}
+//                                     key={head.ID}
+//                                     text={head.CONTROL_NAME}
+//                                     data-typeofcontrols-id={head.ID}
 //                                 />
 //                             ))}
 //                         </ComboBox>
 //                     </FilterGroupItem>
 //                 )}
-//                 {/* Apply Filter Button */}
-//                 <ApplyFilterButton
-//                     value={allFilterValues}
-//                     setFilterData={setFilterData}
-//                 />
-//             </FilterBar>
-//         </>
+
+//             {!error && data && data.length > 0 && (
+//                 <FilterGroupItem label="SYNC">
+//                     <ComboBox
+//                         value={selectedSync}
+//                         valueState="None"
+//                         onSelectionChange={handleSyncComboBoxChange}
+//                         loading={isLoading}
+//                     >
+//                         {data?.map((head: getHeaderTypes) => (
+//                             <ComboBoxItem
+//                                 key={head.SYNC_ID}
+//                                 text={head.SYNC_ID}
+//                                 data-sync-id={head.ID}
+//                             />
+//                         ))}
+//                     </ComboBox>
+//                 </FilterGroupItem>
+//             )}
+
+//             <ApplyFilterButton
+//                 value={allFilterValues}
+//                 setFilterData={setFilterData}
+//             />
+//         </FilterBar>
 //     );
 // };
+
 // export default FilterBarComponent;
- 
+
+
 import { getAllTypeOfControls } from "@/actions/typeOfControl";
 import ApplyFilterButton from "@/components/v2/ApplyFilterButton";
 import { useHeaderData } from "@/hooks/useHeaderData";
@@ -179,9 +191,10 @@ import { useEffect, useState } from "react";
 
 interface FilterBarComponentProps {
     setFilterData: (data: any) => void;
+    resetFilters: () => void; // Add this prop
 }
 
-const FilterBarComponent: React.FC<FilterBarComponentProps> = ({ setFilterData }) => {
+const FilterBarComponent: React.FC<FilterBarComponentProps> = ({ setFilterData, resetFilters }) => {
     const [selectedSync, setSelectedSync] = useState<string>("");
     const [selectedTypeOfControls, setSelectedTypeOfControls] = useState<string>("");
     const { data, error, isLoading } = useHeaderData();
@@ -201,17 +214,6 @@ const FilterBarComponent: React.FC<FilterBarComponentProps> = ({ setFilterData }
         queryFn: getAllTypeOfControls,
         retry: 3,
     });
-
-    // useEffect(() => {
-    //     if (data && data.length > 0) {
-    //         const lastItem = data[data.length - 1];
-    //         setSelectedSync(lastItem.SYNC_ID);
-    //         setSelectedItem(lastItem);
-    //         setAllFilterValues((prevValues) => ({
-    //             ...prevValues,
-    //             syncId: lastItem.ID, // Ensure this is the correct field for syncId
-    //         }));
-    //     }
 
     useEffect(() => {
         if (data && data.length > 0) {
@@ -312,7 +314,7 @@ const FilterBarComponent: React.FC<FilterBarComponentProps> = ({ setFilterData }
                     >
                         {data?.map((head: getHeaderTypes) => (
                             <ComboBoxItem
-                                key={head.SYNC_ID}
+                                key={head.ID}
                                 text={head.SYNC_ID}
                                 data-sync-id={head.ID}
                             />
@@ -320,10 +322,10 @@ const FilterBarComponent: React.FC<FilterBarComponentProps> = ({ setFilterData }
                     </ComboBox>
                 </FilterGroupItem>
             )}
-
             <ApplyFilterButton
-                value={allFilterValues}
+                allFilterValues={allFilterValues}
                 setFilterData={setFilterData}
+                resetFilters={resetFilters} // Pass resetFilters to ApplyFilterButton
             />
         </FilterBar>
     );
