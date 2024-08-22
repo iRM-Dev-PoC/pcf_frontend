@@ -71,11 +71,6 @@ const routes = [
                 icon: "command-line-interfaces",
                 path: "/controlKPI",
             },
-            {
-                text: "Pivot Table",
-                icon: "",
-                path: "/pivotTable",
-            }
         ],
     },
 ];
