@@ -134,9 +134,4 @@ export const routerMap: routerMapType[] = [
         path: "/resetPassword",
         element: <ResetPassword changePassword={true} />,
     },
-    {
-        path: "/pcf/config/pivotTable",
-        element: <PivotTable/>,
-
-    },
 ];
