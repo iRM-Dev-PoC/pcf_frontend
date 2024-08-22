@@ -157,9 +157,6 @@ const FlexibleColumnTemplate = ({
                                         : []
                                 }
                             />
-                            {dashboardData && (
-                                <PivotTable pivotData={dashboardData?.pivotData} />
-                            )}
                         </FlexBox> */}
                         <Card className="p-98">
                         {dashboardData && (
