@@ -17,10 +17,10 @@
 // import { useEffect, useState } from "react";
 
 // interface FilterBarComponentProps {
-//     setFilterData: (data: any) => void;
+//     setFilterData: (data: any) => void; 
 // }
 
-// const FilterBarComponent: React.FC<FilterBarComponentProps> = ({ setFilterData }) => {
+// const FilterBarComponent: React.FC<FilterBarComponentProps> = ({ setFilterData}) => {
 //     const [selectedSync, setSelectedSync] = useState<string>("");
 //     const [selectedTypeOfControls, setSelectedTypeOfControls] = useState<string>("");
 //     const { data, error, isLoading } = useHeaderData();
@@ -162,13 +162,16 @@
 
 //             <ApplyFilterButton
 //                 value={allFilterValues}
-//                 setFilterData={setFilterData}
-//             />
+//                 setFilterData={setFilterData} 
+//                 resetFilters={undefined}       
+//              />
 //         </FilterBar>
 //     );
 // };
 
 // export default FilterBarComponent;
+
+
 
 
 import { getAllTypeOfControls } from "@/actions/typeOfControl";
@@ -187,23 +190,26 @@ import {
     Ui5CustomEvent,
 } from "@ui5/webcomponents-react";
 import { ComboBoxSelectionChangeEventDetail } from "@ui5/webcomponents/dist/ComboBox.js";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface FilterBarComponentProps {
     setFilterData: (data: any) => void;
-    resetFilters: () => void; // Add this prop
 }
 
-const FilterBarComponent: React.FC<FilterBarComponentProps> = ({ setFilterData, resetFilters }) => {
+const FilterBarComponent: React.FC<FilterBarComponentProps> = ({ setFilterData }) => {
     const [selectedSync, setSelectedSync] = useState<string>("");
     const [selectedTypeOfControls, setSelectedTypeOfControls] = useState<string>("");
+
     const { data, error, isLoading } = useHeaderData();
     const { setSelectedItem } = useSelectedItem();
 
-    const [allFilterValues, setAllFilterValues] = useState({
+    // Add a ref to store initial filter values
+    const initialFilterValuesRef = useRef({
         syncId: 1,
         typeOfControlsId: 1,
     });
+
+    const [allFilterValues, setAllFilterValues] = useState(initialFilterValuesRef.current);
 
     const {
         data: allTypeOfControlsDataRes,
@@ -218,7 +224,7 @@ const FilterBarComponent: React.FC<FilterBarComponentProps> = ({ setFilterData, 
     useEffect(() => {
         if (data && data.length > 0) {
             setSelectedSync(data[0].SYNC_ID);
-            setSelectedItem(data[0]);
+            setSelectedItem(data[0] || null);
             setAllFilterValues((prevValues) => ({
                 ...prevValues,
                 syncId: data[0].ID,
@@ -246,7 +252,7 @@ const FilterBarComponent: React.FC<FilterBarComponentProps> = ({ setFilterData, 
         );
         const selectedItem =
             data?.find((item) => item.ID === selectedItemId) || null;
-        setSelectedItem(selectedItem);
+        setSelectedItem(selectedItem || null);
         const selectedSync = selectedItem?.SYNC_ID || "";
         setSelectedSync(selectedSync);
         setAllFilterValues({
@@ -276,6 +282,15 @@ const FilterBarComponent: React.FC<FilterBarComponentProps> = ({ setFilterData, 
             typeOfControlsId: selectedTypeOfControl?.ID || 0,
         });
     };
+
+    // Reset Filters to Initial Values
+    const resetFilters = () => {
+        setAllFilterValues(initialFilterValuesRef.current); // Reset to initial values
+        setSelectedSync(data?.[0]?.SYNC_ID || ""); // Reset ComboBox values
+        setSelectedTypeOfControls(allTypeOfControlsDataRes?.data?.[0]?.CONTROL_NAME || "");
+        setSelectedItem(data?.[0] || null);
+    };
+    
 
     return (
         <FilterBar
@@ -314,7 +329,7 @@ const FilterBarComponent: React.FC<FilterBarComponentProps> = ({ setFilterData, 
                     >
                         {data?.map((head: getHeaderTypes) => (
                             <ComboBoxItem
-                                key={head.ID}
+                                key={head.SYNC_ID}
                                 text={head.SYNC_ID}
                                 data-sync-id={head.ID}
                             />
@@ -322,10 +337,11 @@ const FilterBarComponent: React.FC<FilterBarComponentProps> = ({ setFilterData, 
                     </ComboBox>
                 </FilterGroupItem>
             )}
+
             <ApplyFilterButton
-                allFilterValues={allFilterValues}
+                value={allFilterValues}
                 setFilterData={setFilterData}
-                resetFilters={resetFilters} // Pass resetFilters to ApplyFilterButton
+                resetFilters={resetFilters} // Pass resetFilters
             />
         </FilterBar>
     );

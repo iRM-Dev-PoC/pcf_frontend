@@ -91,7 +91,7 @@ const sodRoutes = [
 const lORoutes = [
    { text : "Home",
     icon:"home",
-    path: "/lO",
+    path: "/lO/",
    },
    {
     text: "Sync",
@@ -132,6 +132,11 @@ const lORoutes = [
             path: "/subsctiptionType",
         },
         {
+            text: "SAP Cloud Services",
+            icon: "cloud",
+            path: "/SapCloudServices",
+        },  
+        {
             text: "Service Pricing",
             icon: "official-service",
             path: "/servicePricing",
@@ -150,12 +155,7 @@ const lORoutes = [
             text: "Rating Report",
             icon: "measurement-document",
             path: "/ratingReport",
-        },
-        {
-            text: "Fusion Cloud Services",
-            icon: "cloud",
-            path: "/fusionCloudServices",
-        },   
+        }, 
     ]
    },
 

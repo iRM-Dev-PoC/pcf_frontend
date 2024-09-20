@@ -1,27 +1,28 @@
 import { Button } from "@ui5/webcomponents-react";
 import axios from "axios";
 
-interface ApplyFilterButtonProps {
-    allFilterValues: {
+type ApplyFilterButtonProps = {
+    value: {
         syncId: number;
         typeOfControlsId: number;
     };
     setFilterData: (data: any) => void;
-    resetFilters: () => void; // Add this prop
-}
+    resetFilters: () => void;
+};
 
-const ApplyFilterButton: React.FC<ApplyFilterButtonProps> = ({
-    allFilterValues,
+const ApplyFilterButton = ({
+    value,
     setFilterData,
-    resetFilters, // Destructure resetFilters
-}) => {
-    const handleApplyFilterClick = async () => {
+    resetFilters,
+}: ApplyFilterButtonProps) => {
+    const handleFilterButtonClick = async () => {
+        const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/dashboard/control-checkpoints`;
         try {
-            const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/dashboard/control-checkpoints`;
-            const response = await axios.post(endPoint, {
-                ...allFilterValues,
-            });
-
+            const reqData = {
+                typeOfControlsId: value.typeOfControlsId,
+                hdrId: value.syncId,
+            };
+            const response = await axios.post(endPoint, reqData);
             if (response.data.statuscode !== 201) {
                 setFilterData(response);
             }
@@ -30,21 +31,21 @@ const ApplyFilterButton: React.FC<ApplyFilterButtonProps> = ({
         }
     };
 
-    const handleResetFilterClick = () => {
-        resetFilters(); // Invoke resetFilters on button click
+    const handleResetFilterButtonClick = () => {
+        resetFilters(); // Reset filters and trigger a fresh data fetch if necessary
     };
 
     return (
-        <div className="grid grid-cols-2 gap-5">
-            <Button 
-                onClick={handleApplyFilterClick}
+        <div className="grid grid-cols-3 gap-5">
+            <Button
+                onClick={handleFilterButtonClick}
                 className="bg-cyan-700 text-l font-extrabold text-white"
             >
                 Apply Filter
             </Button>
 
-            <Button 
-                onClick={handleResetFilterClick} 
+            <Button
+                onClick={handleResetFilterButtonClick}
                 className="bg-cyan-700 text-l font-extrabold text-white"
             >
                 Reset Filter

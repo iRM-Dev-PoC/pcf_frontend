@@ -1,14 +1,14 @@
 import { AnalyticalTable, Button, Card, Bar, ExpandableText } from '@ui5/webcomponents-react';
 import { Modals } from '@ui5/webcomponents-react';
-import FusionServiceEditForm from '../Forms/FusionServiceEditForm';
+import SapServiceEditForm from '../Forms/SapServiceEditForm';
 
-const FusionServiceTable = () => {
+const SapServiceTable = () => {
   const showDialog = Modals.useShowDialog();
 
   const handleButtonClick = () => {
     const { close } = showDialog({
       headerText: 'Edit Fusion Service',
-      children: <FusionServiceEditForm/>,
+      children: <SapServiceEditForm/>,
       footer: (
         <Bar
           startContent={
@@ -179,6 +179,6 @@ const FusionServiceTable = () => {
   );
 };
 
-export default FusionServiceTable;
+export default SapServiceTable;
 
 

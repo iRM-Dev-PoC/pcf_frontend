@@ -168,7 +168,7 @@ const App = () => {
         if (path.includes("/sod")) {
             setIsSoD(true);
             setProduct("Segregation of Duties");
-        } else if (path.includes("/lO")) {
+        } else if (path.includes("/lO/")) {
             setIsLO(true);
             setProduct("License Optimization");
         } else {

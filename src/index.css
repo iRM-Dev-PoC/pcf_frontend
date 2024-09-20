@@ -143,6 +143,15 @@ body {
  .highcharts-root{
     padding :30px
  }
+ .pvtUi {
+    width:100%;
+ }
+ .pvtVals{
+    position: absolute;
+ }
+ .pvtOutput{
+    background-color: aliceblue;
+ }
  /* .ui5-card-header-title{font-size: larger;} */
 
  /* .ui5-card-header .ui5-card-header-text .ui5-card-header-title {font-size: larger;} */
