@@ -1,8 +1,8 @@
-import FusionServiceTable from '@/components/LO/Tables/FusionServiceTable'
+import SapServiceTable from '@/components/LO/Tables/SapServiceTable'
 import { DynamicPage, DynamicPageHeader, DynamicPageTitle, MessageStrip, Title } from '@ui5/webcomponents-react'
 import { ThemingParameters } from '@ui5/webcomponents-react-base'
 
-const FusionServices = () => {
+const SapServices = () => {
   return (
     <DynamicPage
     className="dynamicPage"
@@ -18,7 +18,7 @@ const FusionServices = () => {
                     and recommends actions for efficiency and cost savings.
                 </MessageStrip>
             }
-            header={<Title className="text-2xl font-bold"> Fusion Cloud Services</Title>}
+            header={<Title className="text-2xl font-bold"> SAP Cloud Services</Title>}
         ></DynamicPageTitle>
     }
     style={{
@@ -27,10 +27,10 @@ const FusionServices = () => {
     showHideHeaderButton={false}
     headerContentPinnable={false}
 >
-    <FusionServiceTable/>
+    <SapServiceTable/>
 </DynamicPage>
   )
 }
 
-export default FusionServices
+export default SapServices
 

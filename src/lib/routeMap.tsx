@@ -12,7 +12,6 @@ import UserReport from "@/pages/LO/userReport";
 import ActiveInactiveReport from "@/pages/LO/activeInactiveReport";
 
 import ModuleMaster from "@/pages/moduleMaster";
-import PivotTable from "@/pages/pivotTable";
 import Report from "@/pages/report";
 import ReportCheckPointMapping from "@/pages/reportCheckPointMapping";
 import ResetPassword from "@/pages/resetPassword";
@@ -26,7 +25,7 @@ import ServicePricing from "@/pages/LO/servicePricing";
 import Client from "@/pages/LO/client";
 import CostConversionRate from "@/pages/LO/costConversionRate";
 import RatingReport from "@/pages/LO/ratingReport";
-import FusionCloudServices from "@/pages/LO/fusionServices";
+import  SapServices from "@/pages/LO/sapServices";
 
 export const routerMap: routerMapType[] = [
     {
@@ -83,7 +82,7 @@ export const routerMap: routerMapType[] = [
     },
     // Lo Routes
     {
-        path:"/lO",
+        path:"/lO/",
         element: <LODashboard/>
     },
     //Sync Routes LO
@@ -126,8 +125,8 @@ export const routerMap: routerMapType[] = [
         element:<RatingReport/>
     },
     {
-        path:"/lO/configuration/fusionCloudServices",
-        element:<FusionCloudServices/>
+        path:"/lO/configuration/sapCloudServices",
+        element:<SapServices/>
     },
 
     {

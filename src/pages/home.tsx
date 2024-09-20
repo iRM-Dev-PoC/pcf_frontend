@@ -1,4 +1,4 @@
-import FilterBarComponent from "@/components/FilterBarComponent";
+ import FilterBarComponent from "@/components/FilterBarComponent";
 import FlexibleColumnTemplete from "@/components/FlexibleColumnTemplete";
 import "@/css/dynamicPage.css";
 import { getAllCardDataType } from "@/types";
@@ -17,8 +17,8 @@ import { useEffect, useState } from "react";
 const Home = () => {
     const [error, setError] = useState(false);
     const [filterData, setFilterData] = useState<any>([]);
-    const [resetKey, setResetKey] = useState(0); // Add a state to force a reset
-
+    const [resetfilterData, resertsetFiltersData] = useState<any>([]);
+    console.log("ResponsefilterData", filterData?.data?.data);
     const getAllControlCheckPoint = async () => {
         const endPoint = `${import.meta.env.VITE_BACKEND_BASE_URL}/dashboard/control-checkpoints`;
         try {
@@ -79,14 +79,10 @@ const Home = () => {
         }
     };
 
-    const resetFilters = () => {
-        setResetKey(prevKey => prevKey + 1); // Increment the reset key to force component reset
-        setFilterData([]); // Clear filter data
-    };
-
     useEffect(() => {
+        // Fetch data for all syncs initially
         fetchCardsData();
-    }, [resetKey]); // Re-fetch data on reset
+    }, []);
 
     const cardValue: getAllCardDataType[] = cardData?.data;
 
@@ -95,10 +91,7 @@ const Home = () => {
             className="dynamicPage"
             headerContent={
                 <DynamicPageHeader>
-                    <FilterBarComponent 
-                        setFilterData={setFilterData} 
-                        resetFilters={resetFilters} 
-                    />
+                    <FilterBarComponent setFilterData={setFilterData} />
                 </DynamicPageHeader>
             }
             headerTitle={

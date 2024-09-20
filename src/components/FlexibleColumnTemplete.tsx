@@ -83,7 +83,7 @@ const FlexibleColumnTemplate = ({
     }, [clickedCard]);
 
     // const nonCompliantDataRes = dashboardData?.violatedData; // Corrected spelling error
-    const donutChartData = dashboardData?.donutChartData;
+    const donutChartData = dashboardData?.donutChartData; 
     const lineChartData = dashboardData?.lineChartData;
     const columnChartData = dashboardData?.columnChartData;
 

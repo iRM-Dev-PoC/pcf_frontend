@@ -1,6 +1,6 @@
 import { Card, ComboBox, ComboBoxItem,TextArea } from '@ui5/webcomponents-react'
 
-const FusionServiceEditForm = () => {
+const SapServiceEditForm = () => {
   return (
     <Card className='grid-flow-col space-y-5'>
          <TextArea
@@ -32,4 +32,4 @@ const FusionServiceEditForm = () => {
   )
 }
 
-export default FusionServiceEditForm
+export default SapServiceEditForm

@@ -34,10 +34,11 @@ const PivotTable: React.FC<PivotTableProps> = ({ pivotData }) => {
 
   return (
     <div>
-      <Card>
+      <h1 className='p-5 text-lg font-semibold'>Pivot Table</h1>
+      <Card className='p-4'>
         <PivotTableUI
           style={{ width: "100%" }}
-          // data={state.data}
+          data={state.data}
           onChange={s => setState(s)}
           {...state}
         />
