@@ -48,7 +48,7 @@ const PieChart = ({ data, title }) => {
     title: {
       text: null,
     },
-    colors: ['#FF5733', '#33FF57', '#3357FF', '#FF33A5', '#A533FF'], // Custom colors array
+    colors: ['#f0e68c','#add8e6','#20b2aa','#778899','#4682b4','#e0ffff','#9370db','#8fbc8f','#00bfff'],
     plotOptions: {
       pie: {
         depth: 45,
@@ -65,7 +65,7 @@ const PieChart = ({ data, title }) => {
         name: 'Roles',
         data: transformedData.map((item, index) => ({
           ...item,
-          color: ['#FF5733', '#33FF57', '#3357FF', '#FF33A5', '#A533FF','#00FFFF','#F0FFFF','#7FFFD4'][index % 8] // Assign color by index
+          color: ['#f0e68c','#add8e6','#20b2aa','#778899','#4682b4','#e0ffff','#9370db','#8fbc8f','#00bfff'][index % 9] 
         }))
       },
     ],
@@ -76,7 +76,6 @@ const PieChart = ({ data, title }) => {
     <Card
       header={
         <CardHeader
-        // className='p-6'
         style={{ padding: '6px' }}
           titleText={title}
         />
@@ -91,6 +90,11 @@ const PieChart = ({ data, title }) => {
 };
 
 export default PieChart;
+
+
+
+
+
 
 
 // import Highcharts from 'highcharts';
