@@ -99,6 +99,11 @@ const lORoutes = [
     path: "/license/sync",
     subItems:[
         {
+            text: "Cost Report",
+            icon: "expense-report",
+            path: "/costReport",
+        },
+        {
             text: "Report",
             icon: "manager-insight",
             path: "/reportLO",
@@ -117,6 +122,11 @@ const lORoutes = [
             text: "Active /Inactive Reports",
             icon: "status-inactive",
             path: "/activeInactiveReport",
+        },
+        {
+            text: "Role Revocation",
+            icon: "undo",
+            path: "/roleRevocation",
         },
     ]
    },

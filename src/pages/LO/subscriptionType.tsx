@@ -1,8 +1,12 @@
+import SubscriptionCreationForm from '@/components/LO/Forms/SubscriptionCreationForm';
 import SubscriptionTypeTable from '@/components/LO/Tables/SubscriptionTypeTable'
-import { DynamicPage, DynamicPageHeader, DynamicPageTitle, MessageStrip, Title } from '@ui5/webcomponents-react'
+import { Bar, Button, ButtonDomRef, DynamicPage, DynamicPageHeader, DynamicPageTitle, MessageStrip, Modals, Title } from '@ui5/webcomponents-react'
 import { ThemingParameters } from '@ui5/webcomponents-react-base'
+import { useRef } from 'react';
 
 const SubscriptionType = () => {
+    const showDialog = Modals.useShowDialog();
+    const closeButtonref = useRef<ButtonDomRef>(null);
   return (
     <DynamicPage
     className="dynamicPage"
@@ -19,6 +23,42 @@ const SubscriptionType = () => {
                 </MessageStrip>
             }
             header={<Title className="text-2xl font-bold">Subscription Type</Title>}
+            actions={
+                <Button
+                    design="Emphasized"
+                    tooltip="Upload"
+                    icon="create-session"
+                    onClick={() => {
+                        const { close } = showDialog({
+                            headerText: "Create Subscription",
+                            children:<SubscriptionCreationForm/>,
+                            footer: (
+                                <Bar
+                                startContent={<> 
+                                <Button
+                                    design="Positive"
+                                > 
+                                Create
+                                </Button></>}
+                                    endContent={
+                                        <>
+                                            <Button
+                                                ref={closeButtonref}
+                                                onClick={() => close()}
+                                                design="Negative"
+                                            >
+                                                Close
+                                            </Button>
+                                        </>
+                                    }
+                                ></Bar>
+                            ),
+                        });
+                    }}
+                >
+                    Create
+                </Button>
+            }
         ></DynamicPageTitle>
     }
     style={{
