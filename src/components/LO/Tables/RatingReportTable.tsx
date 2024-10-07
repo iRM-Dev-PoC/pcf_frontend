@@ -1,3 +1,4 @@
+import { Badge } from '@/components/ui/badge';
 import { AnalyticalTable,Card} from '@ui5/webcomponents-react';
 
 const RatingReportTable = () => {
@@ -14,7 +15,15 @@ const RatingReportTable = () => {
       {
         Header: 'Ratings',
         accessor: 'rating.name',
-        autoResizable: true
+        autoResizable: true,
+        Cell: ({ cell }) => {
+          const badgeColor = cell.value === 'Highly Critical' ? 'red' :
+                             cell.value === 'Critical' ? 'orange' :
+                             cell.value === 'Low' ? '#ecdb10' :
+                             'green';
+          return <Badge style={{ backgroundColor: badgeColor, width: "100px"}}>{cell.value}</Badge>;
+        }
+        
       },
   ];
 

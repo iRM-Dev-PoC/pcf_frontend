@@ -26,6 +26,9 @@ import Client from "@/pages/LO/client";
 import CostConversionRate from "@/pages/LO/costConversionRate";
 import RatingReport from "@/pages/LO/ratingReport";
 import  SapServices from "@/pages/LO/sapServices";
+import SyncUserData from "@/pages/LO/syncUserData";
+import CostReport from "@/pages/LO/costReport";
+import RoleRevocation from "@/pages/LO/roleRevocation";
 
 export const routerMap: routerMapType[] = [
     {
@@ -86,6 +89,13 @@ export const routerMap: routerMapType[] = [
         element: <LODashboard/>
     },
     //Sync Routes LO
+    {   path:"/license/sync",
+        element: <SyncUserData/>
+    },
+    {
+        path:"/license/sync/costReport",
+        element: <CostReport/>
+    },
     {
         path:"/license/sync/reportLO",
         element: <ReportLO/>
@@ -101,6 +111,10 @@ export const routerMap: routerMapType[] = [
     {
         path:"/license/sync/userDrillDown",
         element: <UserDrillDown/>
+    },
+    {
+        path:"/license/sync/roleRevocation",
+        element: <RoleRevocation/>
     },
 
     //Configuration Routes LO
