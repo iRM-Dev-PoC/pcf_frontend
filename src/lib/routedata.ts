@@ -109,9 +109,9 @@ const lORoutes = [
             path: "/reportLO",
         },
         {
-            text: "User Report",
+            text: "User Status",
             icon: "trip-report",
-            path: "/userReport",
+            path: "/userStatus",
         },
         {
             text: "User-Drill-Down",

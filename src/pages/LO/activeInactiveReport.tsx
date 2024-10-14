@@ -1,6 +1,6 @@
 import { DynamicPage, DynamicPageHeader, DynamicPageTitle, MessageStrip, Title } from '@ui5/webcomponents-react'
 import { ThemingParameters } from '@ui5/webcomponents-react-base'
-import UserTable from '@/components/LO/Tables/UserTable'
+import UserTable from '@/components/LO/Tables/UserStatusTable'
 import ActiveInactiveReportTable from '@/components/LO/Tables/ActiveInactiveReportTable'
 
 const ActiveInactiveReport = () => {

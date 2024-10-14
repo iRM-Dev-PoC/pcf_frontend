@@ -8,7 +8,7 @@ import Home from "@/pages/home";
 import LODashboard from "@/pages/LO/lODashboard";
 import ReportLO from "@/pages/LO/reportLO";
 import UserDrillDown from "@/pages/LO/userDrillDown";
-import UserReport from "@/pages/LO/userReport";
+import UserStatus from "@/pages/LO/userStatus";
 import ActiveInactiveReport from "@/pages/LO/activeInactiveReport";
 
 import ModuleMaster from "@/pages/moduleMaster";
@@ -101,8 +101,8 @@ export const routerMap: routerMapType[] = [
         element: <ReportLO/>
     },
     {
-        path:"/license/sync/userReport",
-        element: <UserReport/>
+        path:"/license/sync/userStatus",
+        element: <UserStatus/>
     },
     {
         path:"/license/sync/activeInactiveReport",
