@@ -366,14 +366,6 @@ const SubscriptionTypeTable = () => {
         groupable
         infiniteScroll
         onAutoResize={() => {}}
-        onColumnsReorder={() => {}}
-        onGroup={() => {}}
-        onLoadMore={() => {}}
-        onRowClick={() => {}}
-        onRowExpandChange={() => {}}
-        onRowSelect={() => {}}
-        onSort={() => {}}
-        onTableScroll={() => {}}
       />
       <FlexBox justifyContent="SpaceBetween" alignItems="Center" style={{ marginTop: '1rem' }}>
         <Button onClick={handlePrevPage} disabled={currentPage === 0}>Previous</Button>

@@ -204,7 +204,7 @@ const UserStatusTable = () => {
         generateColumns(response.data.data.activeUsers); 
       } else {
         console.error("Unexpected API response format");
-      }
+      } 
     } catch (error) {
       console.error("Error fetching user status data:", error);
       setError(true);
@@ -236,7 +236,7 @@ const UserStatusTable = () => {
   return (
     <Card>
       <TabContainer
-        contentBackgroundDesign="Solid"
+       contentBackgroundDesign="Solid"
         headerBackgroundDesign="Solid"
         onTabSelect={handleTabSelect}
       >

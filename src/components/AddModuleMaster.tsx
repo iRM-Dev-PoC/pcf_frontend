@@ -601,7 +601,7 @@ const AddModuleMaster = () => {
                                         }}
                                     />
                                 )}
-                                {/* <Button
+                                <Button
                                     icon="delete"
                                     design={ButtonDesign.Transparent}
                                     onClick={() => {
@@ -628,7 +628,7 @@ const AddModuleMaster = () => {
                                                 "Are sure you want to delete this module?",
                                         });
                                     }}
-                                /> */}
+                                />
                                 <Button
                                   icon="delete"
                                   design={ButtonDesign.Transparent}

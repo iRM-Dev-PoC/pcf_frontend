@@ -1,4 +1,4 @@
-export const UserCountPrivilegeData = {
+export const ActiveUserRoleCountData = {
     "series": [
       {
         "name": "Manage Aggregation Schedules",

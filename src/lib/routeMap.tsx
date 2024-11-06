@@ -10,6 +10,15 @@ import ReportLO from "@/pages/LO/reportLO";
 import UserDrillDown from "@/pages/LO/userDrillDown";
 import UserStatus from "@/pages/LO/userStatus";
 import ActiveInactiveReport from "@/pages/LO/activeInactiveReport";
+import SubscriptionType from "@/pages/LO/subscriptionType";
+import ServicePricing from "@/pages/LO/servicePricing";
+import Client from "@/pages/LO/client";
+import RatingReport from "@/pages/LO/ratingReport";
+import  SapServices from "@/pages/LO/sapServices";
+import SyncUserData from "@/pages/LO/syncUserData";
+import CostReport from "@/pages/LO/costReport";
+import RoleRevocation from "@/pages/LO/roleRevocation";
+import ActiveUserRoleCount from "@/pages/LO/activeUserRoleCount";
 
 import ModuleMaster from "@/pages/moduleMaster";
 import Report from "@/pages/report";
@@ -20,15 +29,6 @@ import SoDDashboard from "@/pages/SoD/sodDashboard";
 import SubModules from "@/pages/subModule";
 import TypeOfControl from "@/pages/typeOfControl";
 import type { routerMapType } from "@/types";
-import SubscriptionType from "@/pages/LO/subscriptionType";
-import ServicePricing from "@/pages/LO/servicePricing";
-import Client from "@/pages/LO/client";
-import CostConversionRate from "@/pages/LO/costConversionRate";
-import RatingReport from "@/pages/LO/ratingReport";
-import  SapServices from "@/pages/LO/sapServices";
-import SyncUserData from "@/pages/LO/syncUserData";
-import CostReport from "@/pages/LO/costReport";
-import RoleRevocation from "@/pages/LO/roleRevocation";
 
 export const routerMap: routerMapType[] = [
     {
@@ -131,8 +131,8 @@ export const routerMap: routerMapType[] = [
         element:<Client/>
     },
     {
-        path:"/lO/configuration/costConversionRate",
-        element:<CostConversionRate/>
+        path:"/lO/configuration/ActiveUserRoleCount",
+        element:<ActiveUserRoleCount/>
     },
     {
         path:"/lO/configuration/ratingReport",
