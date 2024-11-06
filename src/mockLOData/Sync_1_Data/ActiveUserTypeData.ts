@@ -1,4 +1,4 @@
-export const UserCountRoleData = {
+export const ActiveUserTypeData = {
   "series": [
     {
       "name": "Application Implementation Consultant",

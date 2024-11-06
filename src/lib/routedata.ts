@@ -157,9 +157,9 @@ const lORoutes = [
             path: "/client",
         },
         {
-            text: "Cost Conversion Rate",
+            text: "Active User Role Count",
             icon: "measure",
-            path: "/costConversionRate",
+            path: "/ActiveUserRoleCount",
         },
         {
             text: "Rating Report",

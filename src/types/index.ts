@@ -567,7 +567,6 @@ type PivotHeader = {
 type getAllPivotData ={
     headers:PivotHeader[],
     data:any,
-    // data:object[],
 };
 
 type controlData = {
@@ -617,6 +616,27 @@ type getControlDataType = {
     boxPloting:getAllboxPlotingData[];
     pivotData:getAllPivotData;
 };
+
+// type getactiveUserTypeData = {
+//     series: [
+//                 {
+//                     name: string,
+//                     items: [
+//                         {
+//                             id: number,
+//                             value: number,
+//                             labelDisplay:string,
+//                             name: string,
+//                         }
+//                     ]
+//                 },
+//             ]
+// }
+
+// type getDashboardData ={
+//     activeUserData = getactiveUserTypeData[];
+
+// }
 
 type routerMapType = {
     path: string;
@@ -729,4 +749,6 @@ export type {
     getAllboxPlotingData,
     getAllPivotData,
     PivotHeader,
+    // getactiveUserTypeData,
+    // getDashboardData
 };
