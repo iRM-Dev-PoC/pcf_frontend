@@ -1,32 +1,96 @@
-// import BarChart from "@/components/LO/Charts/BarChart";
+// import { useEffect, useState } from 'react';
+// import axios from 'axios';
 // import PieChart from "@/components/LO/Charts/PieChart";
-// import StackedBarChart from "@/components/LO/Charts/StackedBarChart";
-// import { PrivelegeService } from "@/mockLOData/Sync_1_Data/PrivelegeCountServiceData";
-// import { RecalculatedPriceData } from "@/mockLOData/Sync_1_Data/RecalculatedPriceData";
-// import { UserCountServiceData } from '@/mockLOData/Sync_1_Data/UserCountServiceData';
-// import { categories, seriesData } from '@/mockLOData/Sync_1_Data/ExpensesData';
-// import TrendAnalysisChart from "./Charts/TrendAnalysisChart";
-// import { ActiveUserTypeData } from "@/mockLOData/Sync_1_Data/ActiveUserTypeData";
-// import { ActiveUserRoleCountData } from "@/mockLOData/Sync_1_Data/ActiveUserRoleCountData";
-
-
+// import TopUsersTable from './Tables/TopUsersTable';
+// import BarChart from './Charts/BarChart';
+// import HorizontalBarChart from './Charts/HorizontalBarChart';
+// import UserBarChart from './Charts/UserBarChart';
 
 // const DashboardTemplate = () => {
+//   const dashboardChartEndpoint = `${import.meta.env.VITE_LO_BACKEND_BASE_URL}/lo/dashboard/get-dashboard-data`;
+
+//   const [activeUserTypeData, setActiveUserTypeData] = useState(null);
+//   const [activeUserRoleCountData, setActiveUserRoleCountData] = useState(null);
+//   const [topRolesData, setTopRolesData] = useState(null);
+//   const [topTransactionsData, setTopTransactionsData] = useState(null);
+//   const [barChartTopRolesByActiveUserCountData, setbarChartTopRolesByActiveUserCountData] = useState(null);
+//   const [barChartTopTransactionsByActiveUsersData, setbarChartTopTransactionsByActiveUsersData] = useState(null);
+//   const [isFetching, setIsFetching] = useState(false);
+//   const [error, setError] = useState(false);
+
+//   useEffect(() => {
+//     fetchData();
+//   }, []);
+
+//   const fetchData = async () => {
+//     setIsFetching(true);
+//     try {
+//       const response = await axios.post(dashboardChartEndpoint, {
+//         customer_id: 1,
+//         hdrId: 2
+//       });
+//       console.log("API Response:", response.data);
+//       console.log("ipsita",barChartTopTransactionsByActiveUsersData)
+
+//       if (response.data?.statuscode === 200) {
+//         setActiveUserTypeData(response.data.data.activeUserType);
+//         setActiveUserRoleCountData(response.data.data.activeUserRoleCount);
+//         setTopRolesData(response.data.data.topRolesByActiveUserCount);
+//         setTopTransactionsData(response.data.data.topTransactionsByActiveUsers);
+//         setbarChartTopRolesByActiveUserCountData(response.data.data.barChartTopRolesByActiveUserCountData);
+//         setbarChartTopTransactionsByActiveUsersData(response.data.data.barChartTopTransactionsByActiveUsersData);
+
+//       } else {
+//         console.error("Unexpected API response format");
+//       }
+//     } catch (error) {
+//       console.error("Error fetching data:", error);
+//       setError(true);
+//     } finally {
+//       setIsFetching(false);
+//     }
+//   };
+
 //   return (
 //     <div className="grid grid-cols-2 gap-5">
-//       <PieChart data={ActiveUserTypeData} title={"Active User Type"}/>
-//       <BarChart data={UserCountServiceData} title={"User Count Services"}/>
-//       <StackedBarChart data={seriesData} categories={categories} title={"Over Expenses(In USD) Vs User Count By Subscription Type"}/>
-//       <PieChart data={ActiveUserRoleCountData} title={"Active User Role Count"}/>
-//       <BarChart data={PrivelegeService} title={"Privelege Count By Service"}/>
-//       <BarChart data={RecalculatedPriceData} title={"Recalculated Service"}/>
-//       <TrendAnalysisChart/>
+//       {error ? (
+//         <div className="p-4 text-red-600">
+//           <p>Failed to load data. Please try again later.</p>
+//         </div>
+//       ) : isFetching ? (
+//         <div className="p-4">
+//           <p>Loading...</p>
+//         </div>
+//       ) : (
+//         <>
+//           {activeUserTypeData && (
+//             <PieChart data={activeUserTypeData} title="Active User Type" />
+//           )}
+//           {activeUserRoleCountData && (
+//             <PieChart data={activeUserRoleCountData} title="Active User Role Count" />
+//           )}
+//           {topRolesData && (    
+//             <TopUsersTable data={topRolesData} title="Top Roles by Active User Count" />
+//           )}
+//           {topTransactionsData && (
+//             <TopUsersTable data={topTransactionsData} title="Top Roles by Active User Count" />
+//           )}
+//           {barChartTopRolesByActiveUserCountData &&(
+//             <BarChart data={barChartTopRolesByActiveUserCountData} title="Top Roles by" />
+//           )}
+//           {barChartTopTransactionsByActiveUsersData && (
+//              <HorizontalBarChart  data={barChartTopTransactionsByActiveUsersData}  title="Top Transactions by Active Users" />
+//           )}
+//           {barChartTopRolesByActiveUserCountData &&(
+//             <UserBarChart data={barChartTopRolesByActiveUserCountData} title="Top Roles by" categories={[]} />
+//           )}
+//         </>
+//       )}
 //     </div>
-//   )
-// }
+//   );
+// };
 
 // export default DashboardTemplate;
-
 
 
 
@@ -34,12 +98,37 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import PieChart from "@/components/LO/Charts/PieChart";
 import TopUsersTable from './Tables/TopUsersTable';
+import HorizontalBarChart from './Charts/HorizontalBarChart';
+import UserBarChart from './Charts/UserBarChart';
+import VerticalBarChart from './Charts/VerticalBarChart';
+
+interface BarChartRoleData {
+  name: string;
+  value: number;
+}
+interface BarChartTransactionData {
+  name: string;
+  value: number;
+}
+
+interface DashboardData {
+  activeUserType: any; 
+  activeUserRoleCount: any; 
+  topRolesByActiveUserCount: any[]; 
+  topTransactionsByActiveUsers: any[]; 
+  barChartTopRolesByActiveUserCount: { items: BarChartRoleData[] }[]; 
+  barChartTopTransactionsByActiveUsers: { items: BarChartTransactionData[] }[];
+}
 
 const DashboardTemplate = () => {
   const dashboardChartEndpoint = `${import.meta.env.VITE_LO_BACKEND_BASE_URL}/lo/dashboard/get-dashboard-data`;
 
-  const [activeUserTypeData, setActiveUserTypeData] = useState(null);
-  const [activeUserRoleCountData, setActiveUserRoleCountData] = useState(null);
+  const [activeUserTypeData, setActiveUserTypeData] = useState<any>(null);
+  const [activeUserRoleCountData, setActiveUserRoleCountData] = useState<any>(null);
+  const [topRolesData, setTopRolesData] = useState<any[]>([]);
+  const [topTransactionsData, setTopTransactionsData] = useState<any[]>([]);
+  const [barChartTopRolesByActiveUserCountData, setBarChartTopRolesByActiveUserCountData] = useState<BarChartRoleData[] | null>(null);
+  const [barChartTopTransactionsData, setBarChartTopTransactionsData] = useState<BarChartTransactionData[]>([]);
   const [isFetching, setIsFetching] = useState(false);
   const [error, setError] = useState(false);
 
@@ -57,8 +146,14 @@ const DashboardTemplate = () => {
       console.log("API Response:", response.data);
 
       if (response.data?.statuscode === 200) {
-        setActiveUserTypeData(response.data.data.activeUserType);
-        setActiveUserRoleCountData(response.data.data.activeUserRoleCount);
+        const data: DashboardData = response.data.data;
+        setActiveUserTypeData(data.activeUserType);
+        setActiveUserRoleCountData(data.activeUserRoleCount);
+        setTopRolesData(data.topRolesByActiveUserCount);
+        setTopTransactionsData(data.topTransactionsByActiveUsers);
+        setBarChartTopRolesByActiveUserCountData(data.barChartTopRolesByActiveUserCount[0]?.items || []);
+        setBarChartTopTransactionsData(data.barChartTopTransactionsByActiveUsers[0]?.items || []);
+       
       } else {
         console.error("Unexpected API response format");
       }
@@ -69,6 +164,15 @@ const DashboardTemplate = () => {
       setIsFetching(false);
     }
   };
+
+  const barChartCategories = barChartTopRolesByActiveUserCountData?.map(item => item.name) || [];
+  const barChartData = barChartTopRolesByActiveUserCountData?.map(item => item.value) || [];
+
+  const barChartCategories1 = barChartTopTransactionsData.map(item => item.name);
+  const barChartData1 = barChartTopTransactionsData.map(item => item.value);
+
+  console.log("ipsoit",barChartData1)
+
 
   return (
     <div className="grid grid-cols-2 gap-5">
@@ -88,9 +192,24 @@ const DashboardTemplate = () => {
           {activeUserRoleCountData && (
             <PieChart data={activeUserRoleCountData} title="Active User Role Count" />
           )}
+          {topRolesData.length > 0 && (
+            <TopUsersTable data={topRolesData} title="Top Roles by Active User Count" />
+          )}
+          {topTransactionsData.length > 0 && (
+            <TopUsersTable data={topTransactionsData} title="Top Transactions by Active Users" />
+          )}
+          {barChartTopRolesByActiveUserCountData && barChartTopRolesByActiveUserCountData.length > 0 && (
+            <UserBarChart categories={barChartCategories} data={barChartData} title="Top Roles by Active User Count" />
+          )}
+          {barChartTopTransactionsData.length > 0 && (
+            <HorizontalBarChart
+              categories={barChartCategories1}
+              data={barChartData1}
+              title="Top Transactions by Active Users"
+            />
+          )}
         </>
       )}
-      <TopUsersTable/>
     </div>
   );
 };

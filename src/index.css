@@ -155,3 +155,21 @@ body {
  /* .ui5-card-header-title{font-size: larger;} */
 
  /* .ui5-card-header .ui5-card-header-text .ui5-card-header-title {font-size: larger;} */
+
+ ui5-title{
+    font-size:large;
+    padding: 10px;
+    font-weight: bolder;
+ }
+ /* .ui5-card-header-first-line {
+    font-size:100px !important;
+ } */
+ .ui5-card-header-title{
+    font-size:100px !important;
+    color: brown;
+ }
+ ui5-card-header >title-text{
+    font-size:10px;
+    color: brown;
+ }
+
