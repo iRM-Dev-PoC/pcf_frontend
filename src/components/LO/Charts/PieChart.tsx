@@ -12,30 +12,6 @@ const PieChart = ({ data, title }) => {
     y: item.items[0].value
   })); 
 
-  // const options = {
-  //   chart: {
-  //     type: 'pie',
-  //     options3d: {
-  //       enabled: true,
-  //       alpha: 45,
-  //       beta: 0
-  //     }
-  //   },
-  //   title: {
-  //     text: null, 
-  //   },
-  //   plotOptions: {
-  //     pie: {
-  //       depth: 45
-  //     }
-  //   },
-  //   series: [
-  //     {
-  //       name: 'Roles',
-  //       data: transformedData,
-  //     },
-  //   ],
-  // };
   const options = {
     chart: {
       type: 'pie',
@@ -76,7 +52,7 @@ const PieChart = ({ data, title }) => {
     <Card
       header={
         <CardHeader
-        style={{ padding: '6px' }}
+        style={{ padding: '6px'}}
           titleText={title}
         />
       }
