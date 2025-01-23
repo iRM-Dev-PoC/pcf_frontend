@@ -235,6 +235,7 @@ const AddReport = () => {
                                         }}
                                     />
                                 )}
+                                <p></p>
                                 <Button
                                     icon="delete"
                                     design={ButtonDesign.Transparent}

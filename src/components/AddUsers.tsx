@@ -231,6 +231,7 @@ const AddUsers = () => {
                                         }}
                                     />
                                 )}
+                                <p></p>
                                 <Button
                                     icon="delete"
                                     design={ButtonDesign.Transparent}

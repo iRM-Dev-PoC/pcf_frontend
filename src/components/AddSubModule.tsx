@@ -240,6 +240,7 @@ const AddSubModule = () => {
                                         }}
                                     />
                                 )}
+                                <p></p>
                                 <Button
                                     icon="delete"
                                     design={ButtonDesign.Transparent}

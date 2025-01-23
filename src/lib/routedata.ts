@@ -98,11 +98,11 @@ const lORoutes = [
     icon: "synchronize",
     path: "/license/sync",
     subItems:[
-        {
-            text: "Cost Report",
-            icon: "expense-report",
-            path: "/costReport",
-        },
+        // {
+        //     text: "Cost Report",
+        //     icon: "expense-report",
+        //     path: "/costReport",
+        // },
         {
             text: "Report",
             icon: "manager-insight",
@@ -113,21 +113,21 @@ const lORoutes = [
             icon: "trip-report",
             path: "/userStatus",
         },
-        {
-            text: "User-Drill-Down",
-            icon: "person-placeholder",
-            path: "/userDrillDown",
-        },
-        {
-            text: "Active /Inactive Reports",
-            icon: "status-inactive",
-            path: "/activeInactiveReport",
-        },
-        {
-            text: "Role Revocation",
-            icon: "undo",
-            path: "/roleRevocation",
-        },
+        // {
+        //     text: "User-Drill-Down",
+        //     icon: "person-placeholder",
+        //     path: "/userDrillDown",
+        // },
+        // {
+        //     text: "Active /Inactive Reports",
+        //     icon: "status-inactive",
+        //     path: "/activeInactiveReport",
+        // },
+        // {
+        //     text: "Role Revocation",
+        //     icon: "undo",
+        //     path: "/roleRevocation",
+        // },
     ]
    },
    {

@@ -25,12 +25,12 @@ const BarChart = ({ data = [], title }: { data: DataItem[]; title: string }) => 
     xAxis: {
       categories: data.map(item => item.name),
       title: {
-        text: 'Service',
+        text: 'Transactions',
       },
     },
     yAxis: {
       title: {
-        text: 'User Count',
+        text: 'Executed Count',
       },
       min: 0,
     },

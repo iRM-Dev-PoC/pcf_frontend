@@ -225,6 +225,7 @@ const ControlFamilyDetails = () => {
                                         }}
                                     />
                                 )}
+                                <p></p>
                                 <Button
                                     icon="delete"
                                     design={ButtonDesign.Transparent}

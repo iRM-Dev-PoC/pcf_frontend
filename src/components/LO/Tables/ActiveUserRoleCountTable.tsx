@@ -80,7 +80,7 @@ const ActiveUserRoleCountTable = () => {
                     />
                     <Bar
                         design={BarDesign.Header}
-                        startContent={<Title className="text-xl">User IDs</Title>}
+                        startContent={<Title className="text-xl">User Name</Title>}
                     />
                     {error ? (
                         <div className="p-4 text-red-600">Failed to load data.</div>
@@ -117,8 +117,9 @@ const ActiveUserRoleCountTable = () => {
                         <>
                             <List onItemClick={onMiddleColumnClick}>
                                 <StandardListItem>ANAME: {selectedUser.userDetails.ANAME}</StandardListItem>
-                                <StandardListItem>CLASS: {selectedUser.userDetails.CLASS}</StandardListItem>
+                                {/* <StandardListItem>CLASS: {selectedUser.userDetails.CLASS}</StandardListItem> */}
                                 <StandardListItem>USTYP: {selectedUser.userDetails.USTYP}</StandardListItem>
+                                {/* <StandardListItem>DEPARTMENT:{selectedUser.userDetails.DEPARTMENT}</StandardListItem> */}
                             </List>
                             <h3 className="mt-4">Transactions</h3>
                             <List>
