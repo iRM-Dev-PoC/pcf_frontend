@@ -215,6 +215,8 @@ const TypeOfControlDetails = () => {
                                         }}
                                     />
                                 )}
+                                
+                                <p></p>
                                 <Button
                                     icon="delete"
                                     design={ButtonDesign.Transparent}

@@ -1,3 +1,5 @@
+import ChartsRotatedLabels from "@/components/LO/Charts/ChartsRotatedLabels";
+import DrillDownBarChart from "@/components/LO/Charts/DrillDownBarChart";
 import HorizontalBarChart from "@/components/LO/Charts/HorizontalBarChart";
 import StackedBarChart from "@/components/LO/Charts/StackedBarChart";
 import TrendAnalysisChart from "@/components/LO/Charts/TrendAnalysisChart";
@@ -66,8 +68,10 @@ const syncUserData = () => {
             <div className="grid grid-cols-2 gap-5">
                 <StackedBarChart data={seriesData} categories={categories} title={"Over Expenses(In USD) Vs User Count By Subscription Type"} />
                 <TrendAnalysisChart />
-                <HorizontalBarChart/>
+                {/* <HorizontalBarChart/> */}
                 <VerticalBarChart/>
+                <ChartsRotatedLabels/>
+                <DrillDownBarChart/>
             </div>    
         </DynamicPage>
     );
